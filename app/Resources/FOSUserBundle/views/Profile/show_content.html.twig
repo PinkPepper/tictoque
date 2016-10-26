@@ -1,6 +1,41 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-<div class="fos_user_user_show">
+<header>
+	<img src="{{ asset('img/logo_CMS.png') }}">
+	<div>
+			<img src="">
+
+			<span>{{ user.username }}</span>
+			<span>Administrateur</span>
+ 	</div>
+
+ 	<ul>
+		<li><img src="{{ asset('img/information-ico.svg') }}" type="svg"></li>
+		<li><img src="{{ asset('img/notification-ico.svg') }}" type="svg"></li>
+		<li><a href="{{ path('fos_user_security_logout') }}"><img src="{{ asset('img/deconnexion-ico.svg') }}" type="svg"></a></li>
+	</ul>
+</header>
+
+<!-- <div class="fos_user_user_show">
     <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
     <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
-</div>
+</div> -->
+
+<!-- <header>
+		<img src="img/logo_CMS.png">
+
+		<div>
+			<img src="">
+
+			<span>SUPERUSERS</span>
+			<span>Administrateur</span>
+		</div>
+		
+		<ul>
+			<li><img src="img/information-ico.svg" type="svg"></li>
+			<li><img src="img/notification-ico.svg" type="svg"></li>
+			<li><img src="img/deconnexion-ico.svg" type="svg"></li>
+		</ul>
+
+		
+	</header> -->
