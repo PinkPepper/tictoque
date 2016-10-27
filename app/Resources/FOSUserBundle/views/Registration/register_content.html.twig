@@ -14,6 +14,9 @@
         {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Password_confirmation'|trans } }) }}
         {{ form_errors(form.plainPassword.second) }}
 
+        {{ form_widget(form.prenom, { 'attr': {'class': 'form-control', 'placeholder': 'Prenom'|trans } }) }}
+        {{ form_errors(form.prenom) }}
+
     <div>
         <input type="submit" value="{{ 'registration.submit'|trans }}" />
     </div>
