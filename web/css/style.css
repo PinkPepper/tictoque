@@ -15,15 +15,27 @@ header {
     float: right;
     display: inline-flex;
     margin-top: 10px; }
-  header ul img {
-    width: 22px;
-    height: 22px; }
-  header ul li:first-child {
-    margin-right: 30px; }
-  header ul li:nth-child(2) {
-    margin-right: 30px; }
-  header ul li:nth-child(3) {
-    margin-right: 25px; }
+    header ul img {
+      width: 22px;
+      height: 22px; }
+    header ul li:first-child, header ul li:nth-child(2) {
+      margin-right: 30px; }
+    header ul li:nth-child(3) {
+      margin-right: 25px; }
+    header ul li:nth-child(2):hover .submenu {
+      position: absolute;
+      display: block;
+      background-color: #242424;
+      width: 240px;
+      height: 168px;
+      color: white;
+      padding: 14px 22px;
+      margin-top: 12px; }
+    header ul li:hover {
+      border-bottom: 4px solid #48d6cc;
+      padding-bottom: 8px; }
+  header .submenu {
+    display: none; }
   header div {
     float: right;
     width: 200px;
@@ -108,9 +120,47 @@ aside {
     aside li a {
       color: #909090; }
     aside li a:hover {
-      color: #48d6cc; }
-  aside li
-  li:hover {
+      color: #48d6cc;
+      cursor: hand; }
+  aside li:hover {
     background-color: #242424; }
 
+
+  .inscription{
+    text-align: center;
+    background-color: #ffffff;
+    padding: 30px 40px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    width: 300px; }
+#login h1 {
+  font-size: 30px;
+  color: #909090; }
+#login input {
+  width: 100%;
+  background-color: #f7f8fa;
+  border: 1px solid #909090; }
+#login label {
+  font-size: 14px;
+  font-weight: bold;
+  color: #909090;
+  text-align: inherit !important; }
+#login div:nth-child(2) {
+  margin-top: 30px; }
+#login button {
+  background-color: #e3004f;
+  border: none;
+  color: white;
+  height: 3rem;
+  width: 100%; }
+#login button:hover {
+  background-color: #aa003b; }
+#login .error {
+  width: 100%;
+  word-wrap: break-word;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  display: none;
+  }
 /*# sourceMappingURL=style.css.map */
