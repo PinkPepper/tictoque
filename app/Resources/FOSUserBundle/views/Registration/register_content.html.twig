@@ -5,17 +5,25 @@
         {{ form_widget(form.email, { 'attr': {'class': 'form-control', 'placeholder': 'Email'|trans } }) }}
         {{ form_errors(form.email) }}
 
-        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Username'|trans }}) }}
+        {{ form_widget(form.username, { 'attr': {'class': 'form-control', 'placeholder': 'Nom d\'utilisateur'|trans }}) }}
         {{ form_errors(form.username) }}
 
-        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Password'|trans } }) }}
-        {{ form_errors(form.plainPassword.first) }}
-
-        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Password_confirmation'|trans } }) }}
-        {{ form_errors(form.plainPassword.second) }}
+        {{ form_widget(form.nom, { 'attr': {'class': 'form-control', 'placeholder': 'Nom'|trans } }) }}
+        {{ form_errors(form.nom) }}
 
         {{ form_widget(form.prenom, { 'attr': {'class': 'form-control', 'placeholder': 'Prenom'|trans } }) }}
         {{ form_errors(form.prenom) }}
+
+        {{ form_widget(form.telephone, { 'attr': {'class': 'form-control', 'placeholder': 'Téléphone'|trans } }) }}
+        {{ form_errors(form.telephone) }}
+
+        {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'|trans } }) }}
+        {{ form_errors(form.plainPassword.first) }}
+
+        {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control', 'placeholder': 'Confirmation du mot de passe'|trans } }) }}
+        {{ form_errors(form.plainPassword.second) }}
+
+
 
     <div>
         <input type="submit" value="{{ 'registration.submit'|trans }}" />
