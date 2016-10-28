@@ -58,6 +58,10 @@ class User extends BaseUser
      */
     private $telephone;
 
+    /**
+     * bloqué ou non
+     */
+    protected $enabled;
 
     /**
      * Get id
@@ -187,6 +191,22 @@ class User extends BaseUser
     public function getTelephone()
     {
         return $this->telephone;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param mixed $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
     }
 }
 
