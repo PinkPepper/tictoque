@@ -88,6 +88,9 @@ class AdminController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $userManager = $this->container->get('fos_user.user_manager');
+            $userManager->updatePassword($user);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
