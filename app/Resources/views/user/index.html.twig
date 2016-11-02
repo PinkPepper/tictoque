@@ -1,47 +1,102 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User list</h1>
+    <header>
+        <img src="{{ asset('img/logo_CMS.png') }}">
+        <div>
+                <img src="">
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Prenom</th>
-                <th>Cb</th>
-                <th>Image</th>
-                <th>Telephone</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr>
-                <td><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></td>
-                <td>{{ user.nom }}</td>
-                <td>{{ user.prenom }}</td>
-                <td>{{ user.cb }}</td>
-                <td>{{ user.image }}</td>
-                <td>{{ user.telephone }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('user_show', { 'id': user.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('user_edit', { 'id': user.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            
+                <span>Administrateur</span>
+        </div>
 
+        <ul>
+            <li><img src="{{ asset('img/information-ico.svg') }}" type="svg"></li>
+            <li><img src="{{ asset('img/notification-ico.svg') }}" type="svg"></li>
+            <li><a href="{{ path('fos_user_security_logout') }}"><img src="{{ asset('img/deconnexion-ico.svg') }}" type="svg"></a></li>
+        </ul>
+    </header>
+
+<aside>
+        
     <ul>
-        <li>
-            <a href="{{ path('user_new') }}">Create a new entry</a>
-        </li>
+        <li><a>Tableau de board</a></li>
+        <li><a>Categories</a></li>
+        <li><a>Produits</a></li>
+        <li><a>Boutiques</a></li>
+        <li><a>Offres promo</a></li>
+        <li><a>Articles</a></li>
+        <li><a>Commandes du site</a></li>
+        <li><a>Stock</a></li>
+        <li><a>Livraison</a></li>
+        <li><a>Préférences système</a></li>
+
+
     </ul>
+</aside>
+
+    <section class="user_content">
+        
+        <content>
+
+        <div class="nav_pos">
+            <h1>Utilisateurs</h1> 
+            <p>(4)</p>
+        </div>
+
+        <div class="user_interact">
+            <a href="{{ path('user_new') }}"><button class="button_p">Ajouter<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>
+
+            <input type="text" name="search" placeholder="Search..."></input>
+
+        </div>
+            
+        </content>
+
+        <table>
+            
+            <tr>
+                <th class="user_check"><input type="checkbox" name="checkbox"></input></th>
+                <th>ID</th>
+                <th>Utilisateurs</th>
+                <th>Rôle</th>
+                <th>Date de creation</th>
+                <th>Voir le profil</th>
+            </tr>
+            {% for user in users %}
+            <tr>
+                
+                <th class="user_check"><input type="checkbox" name="checkbox"></input></th>
+                <th class="info"><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></th>
+                <th>
+                    {{ user.nom }}
+                    <div>
+                        <a href="{{ path('user_edit' ,{ 'id': user.id }) }}" class="user_modif">Modifier</a>
+                        <a href="{{ path('user_delete' ,{ 'id': user.id }) }}" class="user_delete">Supprimer</a>
+                        <a href="{{ path('user_show' ,{ 'id': user.id }) }}" class="user_show">Afficher</a>
+                    </div>
+                </th>
+                <th class="info">Admin</th>
+                <th class="info">25/10/2016</th>
+                <th class="info"><a href="{{ path('user_show', { 'id': user.id }) }}" class="user_show">Afficher<a></th>
+
+
+            </tr>
+            {% endfor %}
+
+            <tr class="user_pagination">
+                <th>
+                    <ul class="pagination">
+                        <li><a class="user_page">1</a></li>
+                        <li><a class="user_page">2</a></li>
+                        <li><a class="user_page">3</a></li>
+                        <li><a class="user_page">4</a></li>
+                    </ul>
+                </th>
+            </tr>
+
+        </table>
+
+
+    </section>
 {% endblock %}
