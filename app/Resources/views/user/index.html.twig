@@ -6,8 +6,13 @@
         <div>
                 <img src="">
 
-            
-                <span>Administrateur</span>
+                <span>{{ app.user.username }}</span><br>
+                <span>{% if app.user.roles.0=="ROLE_ADMIN" %}
+                        Administrateur
+                        {% else %}
+                        Utilisateur
+                        {% endif %}
+                </span>
         </div>
 
         <ul>
@@ -36,12 +41,13 @@
 </aside>
 
     <section class="user_content">
-        
+        <p></p>
         <content>
 
         <div class="nav_pos">
             <h1>Utilisateurs</h1> 
-            <p>(4)</p>
+            <p>({{ users|length }})</p>
+            <p>
         </div>
 
         <div class="user_interact">
@@ -52,6 +58,8 @@
         </div>
             
         </content>
+
+
 
         <table>
             
@@ -76,8 +84,8 @@
                         <a href="{{ path('user_show' ,{ 'id': user.id }) }}" class="user_show">Afficher</a>
                     </div>
                 </th>
-                <th class="info">Admin</th>
-                <th class="info">25/10/2016</th>
+                <th class="info">{{ user.roles.0 }}</th>
+                <th class="info">{{ user.lastLogin.date|date('d/m/Y') }}</th>
                 <th class="info"><a href="{{ path('user_show', { 'id': user.id }) }}" class="user_show">Afficher<a></th>
 
 

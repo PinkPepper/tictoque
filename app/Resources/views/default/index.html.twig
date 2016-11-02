@@ -2,7 +2,9 @@
 
 {% block body %}
 
-	<h1> Bienvenue :) </h1>
+	<a href="{{ path('fos_user_security_login') }}"><h2>Login</h2></a><br>
+	<a href="{{ path('fos_user_registration_register') }}"><h2>S'inscrire</h2>
+	<a href="{{ relative_path('/admin') }}"><h2>Admin backoffice</h2>
 
 
 {% endblock %}

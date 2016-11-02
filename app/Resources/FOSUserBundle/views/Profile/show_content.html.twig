@@ -6,8 +6,13 @@
 	<div>
 			<img src="">
 
-			<span>{{ user.username }}</span>
-			<span>Administrateur</span>
+			<span>{{ user.username }}</span><br>
+			<span>{% if app.user.roles.0=="ROLE_ADMIN" %}
+                        Administrateur
+                        {% else %}
+                        Utilisateur
+                        {% endif %}
+                </span>
  	</div>
 
  	<ul>
