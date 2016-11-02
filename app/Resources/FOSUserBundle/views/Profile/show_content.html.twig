@@ -4,7 +4,7 @@
 <header>
 	<img src="{{ asset('img/logo_CMS.png') }}">
 	<div>
-			<img src="">
+			<img src="{{ asset('img/'~app.user.image) }}">
 
 			<span>{{ user.username }}</span><br>
 			<span>{% if app.user.roles.0=="ROLE_ADMIN" %}

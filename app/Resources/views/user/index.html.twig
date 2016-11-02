@@ -4,7 +4,7 @@
     <header>
         <img src="{{ asset('img/logo_CMS.png') }}">
         <div>
-                <img src="">
+                <img src="{{ asset('img/'~app.user.image) }}">
 
                 <span>{{ app.user.username }}</span><br>
                 <span>{% if app.user.roles.0=="ROLE_ADMIN" %}
@@ -39,7 +39,6 @@
 
     </ul>
 </aside>
-
     <section class="user_content">
         <p></p>
         <content>
@@ -77,15 +76,21 @@
                 <th class="user_check"><input type="checkbox" name="checkbox"></input></th>
                 <th class="info"><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></th>
                 <th>
-                    {{ user.nom }}
+                    {{ user.username }}
                     <div>
                         <a href="{{ path('user_edit' ,{ 'id': user.id }) }}" class="user_modif">Modifier</a>
                         <a href="{{ path('user_delete' ,{ 'id': user.id }) }}" class="user_delete">Supprimer</a>
-                        <a href="{{ path('user_show' ,{ 'id': user.id }) }}" class="user_show">Afficher</a>
                     </div>
                 </th>
-                <th class="info">{{ user.roles.0 }}</th>
-                <th class="info">{{ user.lastLogin.date|date('d/m/Y') }}</th>
+                <th class="info">{% if user.roles.0=="ROLE_ADMIN" %}
+                        Administrateur
+                        {% else %}
+                        Utilisateur
+                        {% endif %}</th>
+                <th class="info">{% if user.lastLogin!=null %}{{ user.lastLogin.date|date('d/m/Y') }}
+                {% else %}
+                Jamais connecté
+                {% endif %}</th>
                 <th class="info"><a href="{{ path('user_show', { 'id': user.id }) }}" class="user_show">Afficher<a></th>
 
 
