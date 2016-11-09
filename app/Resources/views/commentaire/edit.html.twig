@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Article edit</h1>
+    <h1>Commentaire edit</h1>
 
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
@@ -10,11 +10,11 @@
 
     <ul>
         <li>
-            <a href="{{ path('article_show', {'id': article.id, 'titre': article.slug }) }}">Retour à l'article</a>
+            <a href="{{ path('article_show', {'id': commentaire.article.id, 'titre': commentaire.article.slug}) }}">Retour à l'article</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete" onclick="return confirm('Voulez-vous vraiment supprimer cet article ?')">
+                <input type="submit" value="Delete" onclick="return confirm('Voulez-vous vraiment supprimer ce commentaire ?')">
             {{ form_end(delete_form) }}
         </li>
     </ul>

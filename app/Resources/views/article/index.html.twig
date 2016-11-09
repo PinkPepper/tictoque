@@ -20,7 +20,7 @@
         <tbody>
         {% for article in articles %}
             <tr>
-                <td><a href="{{ path('article_show', { 'id': article.id }) }}">{{ article.id }}</a></td>
+                <td>{{ article.id }}</td>
                 <td>{{ article.titre }}</td>
                 <td>{{ article.contenu }}</td>
                 <td>{{ article.slug }}</td>
@@ -31,10 +31,12 @@
                 <td>
                     <ul>
                         <li>
-                            <a href="{{ path('article_show', { 'id': article.id }) }}">show</a>
+                            <a href="{{ path('article_show', { 'id': article.id, 'titre': article.slug }) }}">show</a>
                         </li>
                         <li>
+                            {% if app.user is not null %}
                             {% if app.user.email == article.auteur.email or is_granted("ROLE_ADMIN") %}<a href="{{ path('article_edit', { 'id': article.id }) }}">edit</a>{% endif %}
+                            {% endif %}
                         </li>
                     </ul>
                 </td>

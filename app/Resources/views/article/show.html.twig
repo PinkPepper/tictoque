@@ -40,13 +40,30 @@
         <li>
             <a href="{{ path('blog_index') }}">Back to the list</a>
         </li>
+        {% if app.user is not null and ( is_granted('ROLE_ADMIN') or app.user.email == article.auteur.email ) %}
         <li>
             <a href="{{ path('article_edit', { 'id': article.id }) }}">Edit</a>
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
+        {% endif %}
     </ul>
+
+    <h3>Liste des commentaires</h3>
+    <ul>
+    {% for com in article.commentaires %}
+       <li>
+            <p>{{ com.contenu }} | {{ com.auteur }}
+                {% if app.user is not null and ( is_granted('ROLE_ADMIN') or app.user.email == com.auteur.email ) %}
+                | <a href="{{ path('commentaire_edit', { 'id': com.id }) }}">edit</a>
+                {% endif %}
+            </p>
+
+       </li>
+    {% endfor %}
+    </ul>
+
+    {% if app.user is not null %}
+        <a href="{{ path('commentaire_new', {'id': article.id}) }}">Ajouter un commentaire</a>
+    {% else %}
+        <p>Vous devez vous connecter pour commenter.</p>
+    {% endif %}
 {% endblock %}

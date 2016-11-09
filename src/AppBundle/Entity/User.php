@@ -64,10 +64,16 @@ class User extends BaseUser
     protected $enabled;
 
     /**
-     * @ORM\OneToMany(targetEntity="Article", mappedBy="auteur")
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="auteur", cascade={"remove"})
      *
      */
     protected $articles;
+
+    /**
+     * @var int
+     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="auteur", cascade={"remove"})
+     */
+    private $commentaires;
 
     /**
      * Get id
@@ -213,6 +219,22 @@ class User extends BaseUser
     public function setEnabled($enabled)
     {
         $this->enabled = $enabled;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
+
+    /**
+     * @param int $commentaires
+     */
+    public function setCommentaires($commentaires)
+    {
+        $this->commentaires = $commentaires;
     }
 }
 

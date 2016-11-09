@@ -12,7 +12,7 @@ use AppBundle\Form\ArticleType;
 /**
  * Blog controller.
  *
- * @Route("/blog/article")
+ * @Route("/blog")
  */
 class BlogController extends Controller
 {
@@ -52,7 +52,7 @@ class BlogController extends Controller
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('article_show', array('id' => $article->getId()));
+            return $this->redirectToRoute('article_show', array('id' => $article->getId(), 'titre' => $article->getSlug()));
         }
 
         return $this->render('article/new.html.twig', array(
@@ -64,7 +64,7 @@ class BlogController extends Controller
     /**
      * Finds and displays a Article entity.
      *
-     * @Route("/{id}", name="article_show")
+     * @Route("/{id}/{titre}", name="article_show")
      * @Method("GET")
      */
     public function showAction(Article $article)
@@ -80,7 +80,7 @@ class BlogController extends Controller
     /**
      * Displays a form to edit an existing Article entity.
      *
-     * @Route("/{id}/edit", name="article_edit")
+     * @Route("/{id}/article/edit", name="article_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Article $article)
@@ -121,7 +121,7 @@ class BlogController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('article_index');
+        return $this->redirectToRoute('blog_index');
     }
 
     /**
@@ -139,4 +139,5 @@ class BlogController extends Controller
             ->getForm()
         ;
     }
+
 }

@@ -46,6 +46,12 @@ class Article
     private $auteur;
 
     /**
+     * @var int
+     * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="article", cascade={"remove"})
+     */
+    private $commentaires;
+
+    /**
      * Pour obtenir un titre "je suis un titre" en "je-suis-un-titre"
      * Utile pour le référencement, dans l'url
      *
@@ -188,6 +194,22 @@ class Article
     public function setContentChanged($contentChanged)
     {
         $this->contentChanged = $contentChanged;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCommentaires()
+    {
+        return $this->commentaires;
+    }
+
+    /**
+     * @param int $commentaires
+     */
+    public function setCommentaires($commentaires)
+    {
+        $this->commentaires = $commentaires;
     }
 }
 
