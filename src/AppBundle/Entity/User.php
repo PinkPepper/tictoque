@@ -64,6 +64,12 @@ class User extends BaseUser
     protected $enabled;
 
     /**
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="auteur")
+     *
+     */
+    protected $articles;
+
+    /**
      * Get id
      *
      * @return int
