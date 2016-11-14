@@ -4,13 +4,18 @@ body {
   font-family: roboto; }
   body article, body aside, body details, body figcaption, body figure, body footer, body header, body hgroup, body main, body menu, body nav, body section, body summary {
     display: inline-block; }
+  body h1, body h2, body h3 {
+    color: #909090; }
+  body h2 {
+    font-size: 24px; }
 
 /****************************INDIQUE OU SE SITUE L'UTILISATEUR******************************/
 .nav_pos {
   display: inline-flex; }
   .nav_pos h1 {
     font-size: 30px;
-    margin: 0; }
+    margin: 0;
+    margin-bottom: 10px; }
   .nav_pos p {
     padding-top: 5px;
     font-size: 10px;
@@ -21,7 +26,6 @@ body {
   position: absolute;
   padding: 20px 25px;
   width: 60%; }
-  
   .user_content input {
     background-color: white;
     padding-left: 10px; }
@@ -68,6 +72,89 @@ body {
       .user_content table tbody > tr > th:nth-child(3) div a:nth-child(2) {
         color: red; }
 
+/*************************************POFIL UTILISATEUR*************************************/
+container .user_tab {
+  clear: both;
+  width: 600px;
+  box-shadow: 0 0 5px;
+  margin-top: 25px;
+  padding: 25px;
+  font-size: 14px;
+  float: left; }
+  container .user_tab .user_pic {
+    width: 120px !important;
+    height: 120px !important;
+    float: left;
+    background-color: #aa003b;
+    margin: 0 !important;
+    margin-right: 20px !important; }
+container .user_order h2 {
+  clear: both;
+  padding-top: 32px;
+  margin-bottom: 5px; }
+container .user_order table tbody tr + tr:hover {
+  background-color: #383838; }
+  container .user_order table tbody tr + tr:hover th, container .user_order table tbody tr + tr:hover a {
+    color: white; }
+  container .user_order table tbody tr + tr:hover a {
+    text-decoration: underline; }
+container .user_tab_menu {
+  width: 450px;
+  box-shadow: 0 0 5px;
+  margin-top: 25px;
+  padding: 25px;
+  font-size: 14px;
+  margin-left: 10px;
+  font-size: 11px; }
+  container .user_tab_menu .user_menu {
+    margin-left: 15px;
+    float: left; }
+  container .user_tab_menu div:nth-child(3) {
+    clear: both;
+    float: left; }
+  container .user_tab_menu .user_menu_list {
+    margin-left: 300px; }
+    container .user_tab_menu .user_menu_list ul {
+      display: table-caption; }
+      container .user_tab_menu .user_menu_list ul div {
+        margin-bottom: 3px; }
+      container .user_tab_menu .user_menu_list ul #ig1 {
+        margin-left: 34px;
+        position: absolute; }
+      container .user_tab_menu .user_menu_list ul #ig2 {
+        margin-left: 34px;
+        position: absolute;
+        padding-top: 30px; }
+      container .user_tab_menu .user_menu_list ul #ig3 {
+        margin-left: 34px;
+        position: absolute;
+        padding-top: 58px; }
+    container .user_tab_menu .user_menu_list ul > li {
+      float: right; }
+  container .user_tab_menu .user_pic_menu_list {
+    float: left;
+    width: 25px;
+    height: 25px;
+    background-color: #aa003b; }
+container div:nth-child(2) {
+  float: left; }
+  container div:nth-child(2) .user_pic_menu {
+    width: 130px;
+    height: 130px;
+    background-color: #aa003b;
+    float: left;
+    margin-bottom: 10px; }
+container aside {
+  display: block;
+  float: right; }
+container .user_info ul {
+  display: table-cell; }
+container .user_pagination th {
+  width: 143px; }
+
+#user_profile {
+  width: 83%; }
+
 /**************************BOUTON AJOUT UTILISATEUR / SEARCH BAR***************************/
 .user_interact button {
   height: 2rem;
@@ -79,21 +166,20 @@ body {
     margin: 0;
     padding-top: 2px; }
 .user_interact input {
-  border: 1px solid #909090 !important;
+  border: 1px solid #909090 ;
   float: right;
-  height: 2rem !important;
-  background-color: white !important;
-  width: 210px !important;
-  padding-left: 10px !important; }
+  height: 2rem ;
+  background-color: white ;
+  width: 210px ;
+  padding-left: 10px ; }
 
 .button_p {
-  border: none;
-  color: white;
-  background-color: #e3004f;
-  border: none;
-  color: white;
-  height: 3rem;
-  width: 100%; }
+  border: none ;
+  background-color: #e3004f ;
+  border: none ; 
+  color: white ;
+  height: 3rem ;
+  width: 100% ; }
 
 .button_p:hover {
   background-color: #aa003b; }
@@ -101,7 +187,67 @@ body {
 .user_content {
   margin-top: 0; }
 
+/*************************MODIF UTILISATEUR******************************/
+.user_form {
+  width: 650px;
+  margin-top: 50px;
+  background-color: white;
+  box-shadow: 0px 0px 4px;
+  border-spacing: 10px;
+  padding: 15px; }
+  .user_form label {
+    color: #909090;
+    font-weight: 700; }
+  .user_form input {
+    border: 1px solid #909090 !important;
+    height: 2rem !important; }
+  .user_form #user_fl input:first-child {
+    margin-right: 44px; }
+  .user_form #user_fl input {
+    width: 188px !important; }
+  .user_form #user_mail input {
+    width: 425px !important;
+  }
+  .user_form #user_adress input {
+    width: 425px !important; }
+  .user_form #user_role input {
+    width: 425px !important; }
+  .user_form #user_tel input {
+    width: 425px !important; }
+  .user_form #user_password input {
+    width: 425px !important; }
+  .user_form #user_lastname {
+    float: right;
+    margin-right: 341px; }
+  .user_form button {
+    height: 2rem;
+    width: 40%; }
+  .user_form .select {
+    display: inherit;
+    width: 427px !important;
+    border: 1px solid #909090 !important;
+    height: 2.2rem !important;
+    border-radius: 0;
+    color: rgba(128, 128, 128, 0.72);
+    margin-bottom: 20px; }
+
+    .button_m {
+    margin-top: 20px;
+    border: none !important;
+    background-color: #e3004f !important;
+    border: none !important; 
+    color: white !important;
+    height: 3rem !important;
+    width: 50% !important; 
+  }
+
+  .button_m:hover {
+  background-color: #aa003b !important; }
+
 /******************************BLOCS LOGIN******************************/
+#user_login {
+  display: block; }
+
 section {
   width: 100%;
   margin: 0 auto;
@@ -125,8 +271,7 @@ section {
   margin-bottom: 30px;
   width: 300px; }
   #login h1 {
-    font-size: 30px;
-    color: #909090; }
+    font-size: 30px; }
   #login input {
     width: 100%;
     background-color: #f7f8fa;
@@ -203,7 +348,7 @@ header {
 /******************************PAGE MENU - MENU GAUCHE******************************/
 aside {
   width: 210px;
-  height: 100vh;
+  height: 800px;
   background-color: #383838; }
   aside ul {
     margin: 0; }

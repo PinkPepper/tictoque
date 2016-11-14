@@ -1,17 +1,116 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>User creation</h1>
+    <header>
+        <img src="{{ asset('img/logo_CMS.png') }}">
+        <div>
+                <img src="{{ asset('img/'~app.user.image) }}">
 
+                <span>{{ app.user.username }}</span><br>
+                <span>{% if app.user.roles.0=="ROLE_ADMIN" %}
+                        Administrateur
+                        {% else %}
+                        Utilisateur
+                        {% endif %}
+                </span>
+        </div>
+
+        <ul>
+            <li><img src="{{ asset('img/information-ico.svg') }}" type="svg"></li>
+            <li><img src="{{ asset('img/notification-ico.svg') }}" type="svg"></li>
+            <li><a href="{{ path('fos_user_security_logout') }}"><img src="{{ asset('img/deconnexion-ico.svg') }}" type="svg"></a></li>
+        </ul>
+    </header>
+
+    <aside>
+        <ul>
+            <li><a>Tableau de board</a></li>
+            <li><a>Categories</a></li>
+            <li><a>Produits</a></li>
+            <li><a>Boutiques</a></li>
+            <li><a>Offres promo</a></li>
+            <li><a>Articles</a></li>
+            <li><a>Commandes du site</a></li>
+            <li><a>Stock</a></li>
+            <li><a>Livraison</a></li>
+            <li><a>Préférences système</a></li>
+
+
+        </ul>
+    </aside>
+    <section class="user_content" id="user_profile">
+        
+        <content>
+
+        <div class="nav_pos">
+            <h1>Ajouter un utilisateur</h1> 
+            <!--<p>(4)</p>-->
+        </div>
+
+        <div class="user_interact">
+            <a href="{{ path('admin_index') }}" ><button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>
+
+            <!--<input type="text" name="search" placeholder="Search..."></input>-->
+
+        </div>
+            
+        </content>
+    <container>
+    <div class="user_form">
     {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
-    {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_index') }}">Back to the list</a>
-        </li>
-    </ul>
+        <label>Nom</label>
+        <label id="user_lastname">Prénom</label>
+        <div id="user_fl">                  
+            {{ form_widget(form.nom) }}
+            {{ form_errors(form.nom) }}
+
+            {{ form_widget(form.prenom) }}
+            {{ form_errors(form.prenom) }}
+        </div>
+        
+        <label>Username</label>
+        <div id="user_mail">
+            {{ form_widget(form.username, {'id':'user_mail'}) }}
+            {{ form_errors(form.username) }}   
+        </div>
+
+        <label>Image</label>
+        <div id="user_adress">
+            {{ form_widget(form.image) }}
+            {{ form_errors(form.image) }}
+        </div>
+        
+        <label>Email</label>
+        <div id="user_mail">
+            {{ form_widget(form.email) }}
+            {{ form_errors(form.email) }}
+        </div>
+
+        <label>Téléphone</label>
+        <div id="user_tel">
+            {{ form_widget(form.telephone) }}
+            {{ form_errors(form.telephone) }}
+        </div>
+
+        <label>Mot de passe</label>
+        <div id="user_password">
+            {{ form_widget(form.plainPassword.first) }}
+            {{ form_errors(form.plainPassword.first) }}
+        </div>
+
+        <label>Retapez votre mot de passe</label>
+        <div id="user_password">
+            {{ form_widget(form.plainPassword.second) }}
+            {{ form_errors(form.plainPassword.second) }}
+        </div>
+        
+
+        <input class="button_m" type="submit" value="Ajouter l'utilisateur" />
+    {{ form_end(form) }}
+    <div>
+    </container>
+
+    </section>
 
 {% endblock %}
