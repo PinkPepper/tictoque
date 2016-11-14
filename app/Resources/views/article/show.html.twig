@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Article</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article.id }}</td>
+            </tr>
+            <tr>
+                <th>Titre</th>
+                <td>{{ article.titre }}</td>
+            </tr>
+            <tr>
+                <th>Contenu</th>
+                <td>{{ article.contenu }}</td>
+            </tr>
+            <tr>
+                <th>Slug</th>
+                <td>{{ article.slug }}</td>
+            </tr>
+            <tr>
+                <th>Contentchanged</th>
+                <td>{% if article.contentChanged %}{{ article.contentChanged|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Createdat</th>
+                <td>{% if article.createdAt %}{{ article.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Updatedat</th>
+                <td>{% if article.updatedAt %}{{ article.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('blog_index') }}">Back to the list</a>
+        </li>
+        {% if app.user is not null and ( is_granted('ROLE_ADMIN') or app.user.email == article.auteur.email ) %}
+        <li>
+            <a href="{{ path('article_edit', { 'id': article.id }) }}">Edit</a>
+        </li>
+        {% endif %}
+    </ul>
+
+    <h3>Liste des commentaires</h3>
+    <ul>
+    {% for com in article.commentaires %}
+       <li>
+            <p>{{ com.contenu }} | {{ com.auteur }}
+                {% if app.user is not null and ( is_granted('ROLE_ADMIN') or app.user.email == com.auteur.email ) %}
+                | <a href="{{ path('commentaire_edit', { 'id': com.id }) }}">edit</a>
+                {% endif %}
+            </p>
+
+       </li>
+    {% endfor %}
+    </ul>
+
+    {% if app.user is not null %}
+        <a href="{{ path('commentaire_new', {'id': article.id}) }}">Ajouter un commentaire</a>
+    {% else %}
+        <p>Vous devez vous connecter pour commenter.</p>
+    {% endif %}
+{% endblock %}
