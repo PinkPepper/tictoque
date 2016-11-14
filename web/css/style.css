@@ -203,7 +203,7 @@ header {
 /******************************PAGE MENU - MENU GAUCHE******************************/
 aside {
   width: 210px;
-  height: 600px;
+  height: 100vh;
   background-color: #383838; }
   aside ul {
     margin: 0; }

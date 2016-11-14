@@ -23,9 +23,10 @@ class UserType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
+            ->add('email')
             ->add('image')
             ->add('telephone')
-            ->add('enabled', CheckboxType::class, array("label"=>"Bloqué ?"))
+            ->add('username')
             ->add('plainPassword',
                 RepeatedType::class,  array(
                     'type' => PasswordType::class,
