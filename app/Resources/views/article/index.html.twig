@@ -35,7 +35,7 @@
                         </li>
                         <li>
                             {% if app.user is not null %}
-                            {% if app.user.email == article.auteur.email or is_granted("ROLE_ADMIN") %}<a href="{{ path('article_edit', { 'id': article.id }) }}">edit</a>{% endif %}
+                            {% if is_granted("ROLE_ADMIN") %}<a href="{{ path('article_edit', { 'id': article.id }) }}">edit</a>{% endif %}
                             {% endif %}
                         </li>
                     </ul>
@@ -47,10 +47,8 @@
 
     <ul>
         <li>
-            {% if is_granted("ROLE_ADMIN") or is_granted("ROLE_USER") %}
+            {% if is_granted("ROLE_ADMIN")%}
                 <a href="{{ path('article_new') }}">Créer un nouvel article</a>
-            {% else %}
-                <p>Vous devez être connecté pour pouvoir poster un article</p>
             {% endif %}
         </li>
     </ul>

@@ -30,6 +30,6 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/blog/article/new, role: ROLE_USER}
-        - { path: ^/blog/article/edit, role: ROLE_USER}
+        - { path: ^/blog/new, role: ROLE_ADMIN }
+        - { path: ^/blog/edit, role: ROLE_ADMIN }
 
