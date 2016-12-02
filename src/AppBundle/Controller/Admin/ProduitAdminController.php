@@ -115,7 +115,7 @@ class ProduitAdminController extends Controller
             $em->flush($produit);
         }
 
-        return $this->redirectToRoute('produit_index');
+        return $this->redirectToRoute('produit_index_admin');
     }
 
     /**

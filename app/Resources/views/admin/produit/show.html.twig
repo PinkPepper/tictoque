@@ -22,6 +22,10 @@
                 <td>{{ produit.allergenes }}</td>
             </tr>
             <tr>
+                <th>Type</th>
+                <td>{{ produit.type }}</td>
+            </tr>
+            <tr>
                 <th>Dateperemption</th>
                 <td>{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</td>
             </tr>

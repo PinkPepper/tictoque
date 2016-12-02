@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -20,6 +21,16 @@ class ProduitType extends AbstractType
             ->add('nom')
             ->add('description', TextareaType::class)
             ->add('allergenes')
+            ->add('type', ChoiceType::class,
+                array(
+                    'choices'  =>
+                        array(
+                                'Entrée' => 'entree',
+                                'Plat' => 'plat',
+                                'Dessert' => 'dessert',
+                        )
+                    )
+                )
             ->add('datePeremption', DateType::class)
             ->add('prix')
             ->add('quantite')

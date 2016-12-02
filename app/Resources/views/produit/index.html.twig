@@ -8,11 +8,8 @@
         <tr>
             <th>Id</th>
             <th>Nom</th>
-            <th>Description</th>
             <th>Allergenes</th>
-            <th>Dateperemption</th>
             <th>Prix</th>
-            <th>Quantite</th>
             <th>Image</th>
             <th>Actions</th>
         </tr>
@@ -22,9 +19,7 @@
             <tr>
                 <td><a href="{{ path('produit_show', { 'id': produit.id }) }}">{{ produit.id }}</a></td>
                 <td>{{ produit.nom }}</td>
-                <td>{{ produit.description }}</td>
                 <td>{{ produit.allergenes }}</td>
-                <td>{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</td>
                 <td>{{ produit.prix }}</td>
                 <td>{{ produit.quantite }}</td>
                 <td>{{ produit.image }}</td>
