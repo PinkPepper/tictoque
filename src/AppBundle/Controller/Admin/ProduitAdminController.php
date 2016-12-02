@@ -48,7 +48,7 @@ class ProduitAdminController extends Controller
             $em->persist($produit);
             $em->flush($produit);
 
-            return $this->redirectToRoute('produit_show', array('id' => $produit->getId()));
+            return $this->redirectToRoute('produit_show_admin', array('id' => $produit->getId()));
         }
 
         return $this->render('admin/produit/new.html.twig', array(
@@ -60,7 +60,7 @@ class ProduitAdminController extends Controller
     /**
      * Finds and displays a produit entity.
      *
-     * @Route("/{id}", name="produit_show")
+     * @Route("/{id}", name="produit_show_admin")
      * @Method("GET")
      */
     public function showAction(Produit $produit)

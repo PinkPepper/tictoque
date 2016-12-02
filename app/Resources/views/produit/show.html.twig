@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Produit</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ produit.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ produit.nom }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ produit.description }}</td>
+        </tr>
+        <tr>
+            <th>Allergenes</th>
+            <td>{{ produit.allergenes }}</td>
+        </tr>
+        <tr>
+            <th>Dateperemption</th>
+            <td>{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ produit.prix }}</td>
+        </tr>
+        <tr>
+            <th>Quantite</th>
+            <td>{{ produit.quantite }}</td>
+        </tr>
+        <tr>
+            <th>Image</th>
+            <td>{{ produit.image }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('produit_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="">Ajouter au panier</a>
+        </li>
+    </ul>
+{% endblock %}

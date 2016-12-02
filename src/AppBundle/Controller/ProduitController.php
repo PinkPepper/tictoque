@@ -32,5 +32,16 @@ class ProduitController extends Controller
         ));
     }
 
-
+    /**
+     * Finds and displays a produit entity.
+     *
+     * @Route("/{id}", name="produit_show")
+     * @Method("GET")
+     */
+    public function showAction(Produit $produit)
+    {
+        return $this->render('produit/show.html.twig', array(
+            'produit' => $produit
+        ));
+    }
 }
