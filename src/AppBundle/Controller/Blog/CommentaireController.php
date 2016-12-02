@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Blog;
 
 use AppBundle\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
