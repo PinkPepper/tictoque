@@ -33,12 +33,16 @@
             <th>Quantite</th>
             <td>{{ produit.quantite }}</td>
         </tr>
-        <tr>
-            <th>Image</th>
-            <td>{{ produit.image }}</td>
-        </tr>
+
         </tbody>
     </table>
+
+    <p>Image</p>
+    {% if produit.image == "" %}
+        <p>Aucune image</p>
+    {% else %}
+        <img src=" {{ asset('produits/' ~ produit.image ) }} " style="width: 10%; height: auto"></img>
+    {% endif %}
 
     <ul>
         <li>

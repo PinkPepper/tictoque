@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Traits\TraitUploadImage;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -9,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Produit
  *
  * @ORM\Table(name="produit")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProduitRepository")
  */
 class Produit
@@ -77,6 +79,12 @@ class Produit
      */
     private $image;
 
+
+    use TraitUploadImage;
+    public function getUploadDir()
+    {
+        return 'produits/';
+    }
 
     /**
      * Get id

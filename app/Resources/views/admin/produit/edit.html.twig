@@ -3,10 +3,38 @@
 {% block body %}
     <h1>Produit edit</h1>
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+    {{ form_start(form, { 'attr': {'class': 'form-group' } }) }}
+        <label>Nom</label>
+        {{ form_widget(form.nom) }}
+        {{  form_errors(form.nom) }}
+
+        <label>Description</label>
+        {{ form_widget(form.description) }}
+        {{  form_errors(form.description) }}
+
+        <label>Allergenes</label>
+        {{ form_widget(form.allergenes) }}
+        {{  form_errors(form.allergenes) }}
+
+        <label>DatePeremption</label>
+        {{ form_widget(form.datePeremption) }}
+        {{  form_errors(form.datePeremption) }}
+
+        <label>Prix</label>
+        {{ form_widget(form.prix) }}
+        {{  form_errors(form.prix) }}
+
+        <label>Quantité</label>
+        {{ form_widget(form.quantite) }}
+        {{  form_errors(form.quantite) }}
+
+        <label>Image</label>
+        {{ form_widget(form.file) }}
+        {{  form_errors(form.file) }}
+
+        <input type="submit" value="Modification" />
+
+    {{ form_end(form) }}
 
     <ul>
         <li>

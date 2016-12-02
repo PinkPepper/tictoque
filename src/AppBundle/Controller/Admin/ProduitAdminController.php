@@ -93,7 +93,7 @@ class ProduitAdminController extends Controller
 
         return $this->render('admin/produit/edit.html.twig', array(
             'produit' => $produit,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
