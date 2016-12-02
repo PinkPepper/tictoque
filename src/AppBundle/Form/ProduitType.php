@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\AbstractType;
@@ -20,7 +21,16 @@ class ProduitType extends AbstractType
         $builder
             ->add('nom')
             ->add('description', TextareaType::class)
-            ->add('allergenes')
+           /* ->add('allergenes', EntityType::class, array(
+                // query choices from this entity
+                'class' => 'AppBundle:Allergene',
+
+                // use the User.username property as the visible option string
+                'choice_label' => 'nom',
+
+            // used to render a select box, check boxes or radios
+                'multiple' => true))*/
+           ->add('allergenes')
             ->add('type', ChoiceType::class,
                 array(
                     'choices'  =>
