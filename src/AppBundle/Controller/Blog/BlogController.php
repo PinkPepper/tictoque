@@ -28,7 +28,7 @@ class BlogController extends Controller
 
         $articles = $em->getRepository('AppBundle:Article')->findAll();
 
-        return $this->render('article/index.html.twig', array(
+        return $this->render('blog/article/index.html.twig', array(
             'articles' => $articles,
         ));
     }
@@ -55,7 +55,7 @@ class BlogController extends Controller
             return $this->redirectToRoute('article_show', array('id' => $article->getId(), 'titre' => $article->getSlug()));
         }
 
-        return $this->render('article/new.html.twig', array(
+        return $this->render('blog/article/new.html.twig', array(
             'article' => $article,
             'form' => $form->createView(),
         ));
@@ -71,7 +71,7 @@ class BlogController extends Controller
     {
         $deleteForm = $this->createDeleteForm($article);
 
-        return $this->render('article/show.html.twig', array(
+        return $this->render('blog/article/show.html.twig', array(
             'article' => $article,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -97,7 +97,7 @@ class BlogController extends Controller
             return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
         }
 
-        return $this->render('article/edit.html.twig', array(
+        return $this->render('blog/article/edit.html.twig', array(
             'article' => $article,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

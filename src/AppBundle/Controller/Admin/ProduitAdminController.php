@@ -17,7 +17,7 @@ class ProduitAdminController extends Controller
     /**
      * Lists all produit entities.
      *
-     * @Route("/", name="produit_index")
+     * @Route("/", name="produit_index_admin")
      * @Method("GET")
      */
     public function indexAction()
@@ -26,7 +26,7 @@ class ProduitAdminController extends Controller
 
         $produits = $em->getRepository('AppBundle:Produit')->findAll();
 
-        return $this->render('produit/index.html.twig', array(
+        return $this->render('admin/produit/index.html.twig', array(
             'produits' => $produits,
         ));
     }
@@ -51,7 +51,7 @@ class ProduitAdminController extends Controller
             return $this->redirectToRoute('produit_show', array('id' => $produit->getId()));
         }
 
-        return $this->render('produit/new.html.twig', array(
+        return $this->render('admin/produit/new.html.twig', array(
             'produit' => $produit,
             'form' => $form->createView(),
         ));
@@ -67,7 +67,7 @@ class ProduitAdminController extends Controller
     {
         $deleteForm = $this->createDeleteForm($produit);
 
-        return $this->render('produit/show.html.twig', array(
+        return $this->render('admin/produit/show.html.twig', array(
             'produit' => $produit,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -91,7 +91,7 @@ class ProduitAdminController extends Controller
             return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
         }
 
-        return $this->render('produit/edit.html.twig', array(
+        return $this->render('admin/produit/edit.html.twig', array(
             'produit' => $produit,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
