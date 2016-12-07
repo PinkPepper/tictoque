@@ -103,7 +103,7 @@ class ProduitAdminController extends Controller
                 $produit->setAllergenes(array());
             }
 
-            $produit->setAllergenes(array_merge(array($allergeneForm->getData()['nom']), $produit->getAllergenes())); //TODO
+            $produit->setAllergenes(array_unique(array_merge(array($allergeneForm->getData()['nom']), $produit->getAllergenes())));
 
             $this->getDoctrine()->getManager()->flush();
 
@@ -118,6 +118,23 @@ class ProduitAdminController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+
+    /**
+     * @param Produit $produit
+     * @param $allergene
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     * @Route("/{id}/{allergene}", name="produit_delete_allergene")
+     */
+    public function deleteAllergene(Produit $produit, $allergene)
+    {
+        $diff = array_diff($produit->getAllergenes(), array($allergene));
+
+        $produit->setAllergenes($diff);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
+    }
+
 
     /**
      * Deletes a produit entity.

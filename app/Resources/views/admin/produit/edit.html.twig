@@ -11,11 +11,7 @@
         <label>Description</label>
         {{ form_widget(form.description) }}
         {{  form_errors(form.description) }}
-{#
-        <label>Allergenes</label>
-        {{ form_widget(form.allergenes) }}
-        {{  form_errors(form.allergenes) }}
-#}
+
         <label>Type</label>
         {{ form_widget(form.type) }}
         {{ form_errors(form.type) }}
@@ -39,6 +35,16 @@
         <input type="submit" value="Modification" />
 
     {{ form_end(form) }}
+
+    <h2>Les allergènes</h2>
+
+    {% for all in produit.allergenes %}
+        <ul>
+            <li>
+                {{ all }} <a href="{{ path('produit_delete_allergene', { 'id': produit.id, 'allergene': all }) }}">Supprimer</a>
+            </li>
+        </ul>
+    {% endfor %}
 
     {{ form_start(allergeneForm) }}
         {{ form_widget(allergeneForm) }}
