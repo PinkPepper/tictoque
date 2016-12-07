@@ -41,9 +41,8 @@ class Produit
     private $description;
 
     /**
-     * @var string
      *
-     * @ORM\Column(name="allergenes", type="string", length=255, nullable=true)
+     * @ORM\Column(name="allergenes", type="array", nullable=true)
      *
      */
     private $allergenes;

@@ -6,9 +6,7 @@
     <table>
         <thead>
         <tr>
-            <th>Id</th>
             <th>Nom</th>
-            <th>Allergenes</th>
             <th>Prix</th>
             <th>Image</th>
             <th>Actions</th>
@@ -17,12 +15,14 @@
         <tbody>
         {% for produit in produits %}
             <tr>
-                <td><a href="{{ path('produit_show', { 'id': produit.id }) }}">{{ produit.id }}</a></td>
                 <td>{{ produit.nom }}</td>
-                <td>{{ produit.allergenes }}</td>
                 <td>{{ produit.prix }}</td>
-                <td>{{ produit.quantite }}</td>
-                <td>{{ produit.image }}</td>
+                <td> {% if produit.image == "" %}
+                        Aucune image
+                    {% else %}
+                        <img src=" {{ asset('produits/' ~ produit.image ) }} " style="width: 10%; height: auto"></img>
+                    {% endif %}
+                </td>
                 <td>
                     <ul>
                         <li>

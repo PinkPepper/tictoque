@@ -30,7 +30,7 @@ class ProduitType extends AbstractType
 
             // used to render a select box, check boxes or radios
                 'multiple' => true))*/
-           ->add('allergenes')
+          // ->add('allergenes')
             ->add('type', ChoiceType::class,
                 array(
                     'choices'  =>

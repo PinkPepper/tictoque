@@ -45,6 +45,8 @@ class ProduitAdminController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $produit->setAllergenes(null);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush($produit);
@@ -92,8 +94,26 @@ class ProduitAdminController extends Controller
             return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
         }
 
+        $allergeneForm = $this->createForm('AppBundle\Form\AllergeneType');
+        $allergeneForm->handleRequest($request);
+
+        if ($allergeneForm->isSubmitted() && $allergeneForm->isValid()) {
+            if($produit->getAllergenes() === null )
+            {
+                $produit->setAllergenes(array());
+            }
+
+            $produit->setAllergenes(array_merge(array($allergeneForm->getData()['nom']), $produit->getAllergenes())); //TODO
+
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
+        }
+
+
         return $this->render('admin/produit/edit.html.twig', array(
             'produit' => $produit,
+            'allergeneForm'=>$allergeneForm->createView(),
             'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));

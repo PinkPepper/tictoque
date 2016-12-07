@@ -18,10 +18,6 @@
                 <td>{{ produit.description | raw }}</td>
             </tr>
             <tr>
-                <th>Allergenes</th>
-                <td>{{ produit.allergenes }}</td>
-            </tr>
-            <tr>
                 <th>Type</th>
                 <td>{{ produit.type }}</td>
             </tr>
@@ -46,6 +42,15 @@
     {% else %}
         <img src=" {{ asset('produits/' ~ produit.image ) }} " style="width: 10%; height: auto"></img>
     {% endif %}
+
+    <h2>Allergenes</h2>
+    {% for all in produit.allergenes %}
+        <ul>
+            <li>
+                {{ all }}
+            </li>
+        </ul>
+    {% endfor %}
 
     <ul>
         <li>
