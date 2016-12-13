@@ -1,48 +1,64 @@
 {% extends 'menuAdmin.html.twig' %}
 
 {% block body %}
+    <section class="user_content">
 
-    <h1>Produits list</h1>
+    <content>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Dateperemption</th>
-                <th>Prix</th>
-                <th>Quantite</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for produit in produits %}
-            <tr>
-                <td><a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">{{ produit.id }}</a></td>
-                <td>{{ produit.nom }}</td>
-                <td>{{ produit.description }}</td>
-                <td>{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</td>
-                <td>{{ produit.prix }}</td>
-                <td>{{ produit.quantite }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('produit_edit', { 'id': produit.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="nav_pos">
+            <h1>Produits</h1> 
+            <p>({{ produits|length }})</p>
+        </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('produit_new') }}">Create a new produit</a>
-        </li>
-    </ul>
+        <div class="user_interact">
+            <button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button>
+            <button path="{{ path('produit_new') }}" class="button_p add_product">Ajouter un produit<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button>
+            
+        </div>
+            
+    </content>
+
+    <div class="gestion_tab">
+        <table class="tab_user">
+                <tr>
+                    <th>Id</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                    <th>Dateperemption</th>
+                    <th>Prix</th>
+                    <th>Quantite</th>
+                    <th>Actions</th>
+                </tr>
+            <tbody>
+            {% for produit in produits %}
+                <tr>
+                    <th class="user_check">
+                        <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">{{ produit.id }}</a>
+                    </th>
+                    <th class="produit_nom">{{ produit.nom }}</th>
+                    <th>{{ produit.description }}</th>
+                    <th class="produit_date">{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</th>
+                    <th>{{ produit.prix }}</th>
+                    <th class="produit_qt">{{ produit.quantite }}</th>
+                    <th>
+                        <ul>
+                            <li>
+                                <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a class="produit_edit" href="{{ path('produit_edit', { 'id': produit.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </th>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <ul class="pagination">
+            <li><a class="user_page">1</a></li>
+            <li><a class="user_page">2</a></li>
+            <li><a class="user_page">3</a></li>
+            <li><a class="user_page">4</a></li>
+        </ul>
 {% endblock %}

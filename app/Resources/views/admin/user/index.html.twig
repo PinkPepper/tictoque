@@ -2,76 +2,67 @@
 
 {% block body %}
 
-    <section class="user_content">
-        <p></p>
-        <content>
+	<section class="user_content">
+		<content>
 
-        <div class="nav_pos">
-            <h1>Utilisateurs</h1> 
-            <p>({{ users|length }})</p>
-            <p>
-        </div>
+		<div class="nav_pos">
+			<h1>Utilisateurs</h1> 
+			<p>({{ users|length }})</p>
+			<p>
+		</div>
 
-        <div class="user_interact">
-            <a href="{{ path('user_new') }}"><button class="button_p">Ajouter<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>
+		<div class="user_interact">
+			<a href="{{ path('user_new') }}"><button class="button_p">Ajouter<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>
 
-            <input type="text" name="search" placeholder="Search..."></input>
+			<input type="text" name="search" placeholder="Search..."></input>
 
-        </div>
-            
-        </content>
+		</div>
+			
+		</content>
 
-
-
-        <table>
-            
-            <tr>
-                <th class="user_check"><input type="checkbox" name="checkbox"></input></th>
-                <th>ID</th>
-                <th>Utilisateurs</th>
-                <th>Rôle</th>
-                <th>Date de creation</th>
-                <th>Voir le profil</th>
-            </tr>
-            {% for user in users %}
-            <tr>
-                
-                <th class="user_check"><input type="checkbox" name="checkbox"></input></th>
-                <th class="info"><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></th>
-                <th>
-                    {{ user.username }}
-                    <div>
-                        <a href="{{ path('user_edit' ,{ 'id': user.id }) }}" class="user_modif">Modifier</a>
-                    </div>
-                </th>
-                <th class="info">{% if user.roles.0=="ROLE_ADMIN" %}
-                        Administrateur
-                        {% else %}
-                        Utilisateur
-                        {% endif %}</th>
-                <th class="info">{% if user.lastLogin!=null %}{{ user.lastLogin.date|date('d/m/Y') }}
-                {% else %}
-                Jamais connecté
-                {% endif %}</th>
-                <th class="info"><a href="{{ path('user_show', { 'id': user.id }) }}" class="user_show">Afficher<a></th>
+		<div class="gestion_tab">
+			<table class="tab_user">
+				<div class="user_pic"></div>	
+				<div class="user_info">
+				<tr>
+					<th>ID</th>
+					<th>Utilisateurs</th>
+					<th>Rôle</th>
+					<th>Date de creation</th>
+					<th>Voir le profil</th>
+				</tr>
+				{% for user in users %}
+				<tr>
+					<th class="info"><a href="{{ path('user_show', { 'id': user.id }) }}">{{ user.id }}</a></th>
+					<th>
+						{{ user.username }}
+						<div>
+							<a href="{{ path('user_edit' ,{ 'id': user.id }) }}" class="user_modif">Modifier</a>
+						</div>
+					</th>
+					<th class="info">{% if user.roles.0=="ROLE_ADMIN" %}
+							Administrateur
+							{% else %}
+							Utilisateur
+							{% endif %}</th>
+					<th class="info">{% if user.lastLogin!=null %}{{ user.lastLogin.date|date('d/m/Y') }}
+					{% else %}
+					Jamais connecté
+					{% endif %}</th>
+					<th class="info"><a href="{{ path('user_show', { 'id': user.id }) }}" class="user_show">Afficher<a></th>
 
 
-            </tr>
-            {% endfor %}
-
-            <tr class="user_pagination">
-                <th>
-                    <ul class="pagination">
-                        <li><a class="user_page">1</a></li>
-                        <li><a class="user_page">2</a></li>
-                        <li><a class="user_page">3</a></li>
-                        <li><a class="user_page">4</a></li>
-                    </ul>
-                </th>
-            </tr>
-
-        </table>
+				</tr>
+				{% endfor %}
+			</table>
+			<ul class="pagination">
+				<li><a class="user_page">1</a></li>
+				<li><a class="user_page">2</a></li>
+				<li><a class="user_page">3</a></li>
+				<li><a class="user_page">4</a></li>
+			</ul>
+		</content>
 
 
-    </section>
+	</section>
 {% endblock %}
