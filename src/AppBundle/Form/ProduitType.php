@@ -21,16 +21,6 @@ class ProduitType extends AbstractType
         $builder
             ->add('nom')
             ->add('description', TextareaType::class)
-           /* ->add('allergenes', EntityType::class, array(
-                // query choices from this entity
-                'class' => 'AppBundle:Allergene',
-
-                // use the User.username property as the visible option string
-                'choice_label' => 'nom',
-
-            // used to render a select box, check boxes or radios
-                'multiple' => true))*/
-          // ->add('allergenes')
             ->add('type', ChoiceType::class,
                 array(
                     'choices'  =>
@@ -38,6 +28,7 @@ class ProduitType extends AbstractType
                                 'Entrée' => 'entree',
                                 'Plat' => 'plat',
                                 'Dessert' => 'dessert',
+                                'Boisson' => 'boisson',
                         )
                     )
                 )
