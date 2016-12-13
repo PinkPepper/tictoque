@@ -14,13 +14,12 @@
             <a href="{{ path('admin_index') }}" ><button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>
 
             <!--<input type="text" name="search" placeholder="Search..."></input>-->
-
         </div>
             
         </content>
     <container>
     <div class="user_form">
-    {{ form_start(form) }}
+    {{ form_start(form, { 'attr': {'class': 'form-group' } }) }}
 
         <label>Nom</label>
         <label id="user_lastname">Prénom</label>
@@ -70,8 +69,9 @@
         
 
         <input class="button_m" type="submit" value="Ajouter l'utilisateur" />
+
     {{ form_end(form) }}
-    <div>
+    </div>
     </container>
 
     </section>

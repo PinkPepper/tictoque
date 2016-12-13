@@ -1,50 +1,68 @@
 {% extends 'menuAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Produit creation</h1>
+    <section class="user_content" >
+    <container>
+        <div class="user_form">
+            <h1>Ajouter un produit</h1>
 
-    {{ form_start(form, { 'attr': {'class': 'form-group' } }) }}
-        <label>Nom</label>
-        {{ form_widget(form.nom) }}
-        {{  form_errors(form.nom) }}
+            <a href="{{ path('produit_index_admin') }}"><button class="button_p add_product">Retour<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>   
 
-        <label>Description</label>
-        {{ form_widget(form.description) }}
-        {{  form_errors(form.description) }}
-{#
-        <label>Allergenes</label>
-        {{ form_widget(form.allergenes) }}
-        {{  form_errors(form.allergenes) }}
-#}
-        <label>Type</label>
-    <div class="input-field">
-        {{ form_widget(form.type) }}
-        {{  form_errors(form.type) }}
+            {{ form_start(form, { 'attr': {'class': 'form-group' } }) }}
+                <label>Nom</label>
+                <div>
+                {{ form_widget(form.nom) }}
+                {{  form_errors(form.nom) }}
+                </div>
+
+                <label>Description</label>
+                <div>
+                {{ form_widget(form.description) }}
+                {{  form_errors(form.description) }}
+                </div>
+
+                <label>Type</label>
+                <div>
+                <div class="input-field">
+                {{ form_widget(form.type) }}
+                {{  form_errors(form.type) }}
+                </div>
+
+                <label>DatePeremption</label>
+                <div>
+                {{ form_widget(form.datePeremption) }}
+                {{  form_errors(form.datePeremption) }}
+                </div>
+
+                <label>Prix</label>
+                <div>
+                {{ form_widget(form.prix) }}
+                {{  form_errors(form.prix) }}
+                </div>
+
+                <label>Quantité</label>
+                <div>
+                {{ form_widget(form.quantite) }}
+                {{  form_errors(form.quantite) }}
+                </div>
+
+                <label>Image</label>
+                <div>
+                {{ form_widget(form.file) }}
+                {{  form_errors(form.file) }}
+                </div>
+
+            <input class="button_m" type="submit" value="Ajouter l'utilisateur" />
+
+            {{ form_end(form) }}
+
+
+            <ul>
+                <li>
+                    <a href="{{ path('produit_index_admin') }}">Back to the list</a>
+                </li>
+            </ul>
         </div>
-
-        <label>DatePeremption</label>
-        {{ form_widget(form.datePeremption) }}
-        {{  form_errors(form.datePeremption) }}
-
-        <label>Prix</label>
-        {{ form_widget(form.prix) }}
-        {{  form_errors(form.prix) }}
-
-        <label>Quantité</label>
-        {{ form_widget(form.quantite) }}
-        {{  form_errors(form.quantite) }}
-
-        <label>Image</label>
-        {{ form_widget(form.file) }}
-        {{  form_errors(form.file) }}
-
-    <input type="submit" value="Créer" />
-
-    {{ form_end(form) }}
-
-    <ul>
-        <li>
-            <a href="{{ path('produit_index_admin') }}">Back to the list</a>
-        </li>
-    </ul>
+    </container>
+    </section>
 {% endblock %}
