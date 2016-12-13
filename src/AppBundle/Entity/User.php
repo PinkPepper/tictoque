@@ -6,6 +6,8 @@ namespace AppBundle\Entity;
 use AppBundle\Entity\Traits\TraitUploadImage;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -13,6 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @UniqueEntity(fields={"telephone", "email"})
  */
 class User extends BaseUser
 {
@@ -29,6 +32,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="nom", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $nom;
 
@@ -36,6 +40,7 @@ class User extends BaseUser
      * @var string
      *
      * @ORM\Column(name="prenom", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $prenom;
 
@@ -56,9 +61,16 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
+     * @ORM\Column(name="telephone", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $telephone;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     */
+    protected $email;
 
     /**
      * bloqué ou non
