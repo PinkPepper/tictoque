@@ -84,6 +84,10 @@ class Produit
      */
     private $image;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie")
+     */
+    private $categories;
 
     use TraitUploadImage;
     public function getUploadDir()
@@ -283,6 +287,22 @@ class Produit
     public function setType($type)
     {
         $this->type = $type;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategories()
+    {
+        return $this->categories;
+    }
+
+    /**
+     * @param mixed $categories
+     */
+    public function setCategories($categories)
+    {
+        $this->categories = $categories;
     }
 }
 
