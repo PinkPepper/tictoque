@@ -51,6 +51,20 @@
         <input type="submit" value="Ajout d'un allergene" />
     {{ form_end(allergeneForm) }}
 
+    <h2>Les catégories</h2>
+
+    <h3>Ajouter une catégorie</h3>
+    {% for all in categories %}
+        {% if all not in produit.categories %}
+            {{ all.nom }} <a href="{{ path('ajout_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">ajouter</a>
+        {% endif %}
+    {% endfor %}
+
+    <h3>Supprimer une catégorie</h3>
+    {% for all in produit.categories %}
+        {{ all.nom }} <a href="{{ path('supprimer_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">enlever</a>
+    {% endfor %}
+
 
     <ul>
         <li>

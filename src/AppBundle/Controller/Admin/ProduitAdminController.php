@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Produit;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -110,13 +111,45 @@ class ProduitAdminController extends Controller
             return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
         }
 
+        $em = $this->getDoctrine()->getEntityManager();
+        $categories = $em->getRepository('AppBundle\Entity\Categorie')->findAll();
 
         return $this->render('admin/produit/edit.html.twig', array(
+            'categories' => $categories,
             'produit' => $produit,
             'allergeneForm'=>$allergeneForm->createView(),
             'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
+    }
+
+
+    /**
+     * @Route("/ajout/{produit}/{categorie}", name="ajout_categorie_produit")
+     */
+    public function ajouterCategorie(Request $request, Produit $produit, Categorie $categorie)
+    {
+        $produit->addCategorie($categorie);
+        $categorie->addProduit($produit);
+
+        $this->getDoctrine()->getEntityManager()->persist($categorie);
+        $this->getDoctrine()->getEntityManager()->flush();
+
+       return $this->redirectToRoute('produit_edit', array('id'=>$produit->getId()));
+    }
+
+    /**
+     * @Route("/supprimer/{produit}/{categorie}", name="supprimer_categorie_produit")
+     */
+    public function supprimerCategorie(Request $request, Produit $produit, Categorie $categorie)
+    {
+        $produit->removeCategorie($categorie);
+        $categorie->removeProduit($produit);
+        
+        $this->getDoctrine()->getEntityManager()->flush();
+
+        return $this->redirectToRoute('produit_edit', array('id'=>$produit->getId()));
+
     }
 
     /**

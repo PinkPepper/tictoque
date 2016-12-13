@@ -38,12 +38,38 @@ class Categorie
     private $description;
 
     /**
-     *  @ORM\ManyToMany(targetEntity="produit", inversedBy="categories")
+     *
+     *  @ORM\ManyToMany(targetEntity="Produit", inversedBy="categories")
      *  @ORM\JoinTable(name="RelationProduitCategorie",
      *  joinColumns={@ORM\JoinColumn(name="categorie_id", referencedColumnName="id")},
      *  inverseJoinColumns={@ORM\JoinColumn(name="produit_id", referencedColumnName="id")})
      */
     private $produits;
+
+
+    /**
+     * Add produit
+     *
+     * @param \AppBundle\Entity\Produit produit
+     *
+     * @return Categorie
+     */
+    public function addProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produits[] = $produit;
+
+        return $this;
+    }
+
+    /**
+     * Remove produit
+     *
+     * @param \AppBundle\Entity\Produit $produit
+     */
+    public function removeProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produits->removeElement($produit);
+    }
 
     /**
      * Get id
@@ -118,5 +144,14 @@ class Categorie
     {
         $this->produits = $produits;
     }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 }
 

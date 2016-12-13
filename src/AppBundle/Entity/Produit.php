@@ -96,6 +96,31 @@ class Produit
     }
 
     /**
+     * Add categorie
+     *
+     * @param \AppBundle\Entity\Categorie $categorie
+     *
+     * @return Produit
+     */
+    public function addCategorie(\AppBundle\Entity\Categorie $categorie)
+    {
+        $this->categories[] = $categorie;
+
+        return $this;
+    }
+
+    /**
+     * Remove categorie
+     *
+     * @param \AppBundle\Entity\Categorie $categorie
+     */
+    public function removeCategorie(\AppBundle\Entity\Categorie $categorie)
+    {
+        $this->categories->removeElement($categorie);
+    }
+
+
+    /**
      * Get id
      *
      * @return int
@@ -303,6 +328,14 @@ class Produit
     public function setCategories($categories)
     {
         $this->categories = $categories;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }
 
