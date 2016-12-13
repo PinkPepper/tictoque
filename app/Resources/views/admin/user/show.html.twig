@@ -13,7 +13,8 @@
 
         <container>
             <div class="user_tab">
-                <div class="user_pic"><img src="{{ asset('img/userdefault.svg')}}"></div>    
+                <div class="user_pic"><img src=" {{ asset('users/' ~ user.image ) }} " style="height: 120px; width: 120px"></div>
+
                 <div class="user_info">
                     <ul>
                         <li>ID : {{user.id}}</li>

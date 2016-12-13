@@ -28,7 +28,7 @@
    <a href="{{ path("homepage") }}" ><img src="{{ asset('img/logo_CMS.png') }}"></a>
     {% if app.user is not  null %}
         <div>
-            <img src="{{ asset('img/'~app.user.image) }}">
+            <img src="{{ asset('users/' ~ app.user.image) }}">
 
 
             <span>{{ app.user.username }}</span><br>
