@@ -3,6 +3,16 @@ body {
   background-color: #f7f8fa;
   font-family: roboto;
   margin: 0; }
+  body header {
+    position: fixed;
+    z-index: 9990; }
+  body aside {
+    position: fixed;
+    bottom: 0;
+    padding-top: 60px; }
+  body .user_content {
+    margin-left: 220px;
+    margin-top: 80px; }
   body select {
     display: inherit !important; }
   body article, body aside, body details, body figcaption, body figure, body footer, body header, body hgroup, body main, body menu, body nav, body section, body summary {
@@ -91,6 +101,15 @@ body {
       font-weight: 400; }
     .user_content table tbody > tr > th:nth-child(3) div a:nth-child(2) {
       color: red; }
+
+/*************************************AJOUT PRODUIT*****************************************/
+.user_form.product_form .product_name {
+  float: none; }
+.user_form.product_form input {
+  width: 200px; }
+.user_form.product_form .product_pic input {
+  border: none !important;
+  width: 350px; }
 
 /*************************************POFIL UTILISATEUR*************************************/
 container .user_tab {
