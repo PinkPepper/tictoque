@@ -3,6 +3,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Traits\TraitUploadImage;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -74,6 +75,14 @@ class User extends BaseUser
      * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="auteur", cascade={"remove"})
      */
     private $commentaires;
+
+
+    use TraitUploadImage;
+    public function getUploadDir()
+    {
+        return 'users/';
+    }
+
 
     /**
      * Get id
