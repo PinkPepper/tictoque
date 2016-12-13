@@ -12,8 +12,7 @@
 
         <div class="user_interact">
             <button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button>
-            <button path="{{ path('produit_new') }}" class="button_p add_product">Ajouter un produit<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button>
-            
+            <a href="{{ path('produit_new') }}"><button class="button_p add_product">Ajouter un produit<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>   
         </div>
             
     </content>
@@ -29,8 +28,7 @@
                     <th>Quantite</th>
                     <th>Actions</th>
                 </tr>
-            <tbody>
-            {% for produit in produits %}
+                {% for produit in produits %}
                 <tr>
                     <th class="user_check">
                         <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">{{ produit.id }}</a>
@@ -43,16 +41,15 @@
                     <th>
                         <ul>
                             <li>
-                                <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">show</a>
+                                <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">Voir</a>
                             </li>
                             <li>
-                                <a class="produit_edit" href="{{ path('produit_edit', { 'id': produit.id }) }}">edit</a>
+                                <a class="produit_edit" href="{{ path('produit_edit', { 'id': produit.id }) }}">Modifier</a>
                             </li>
                         </ul>
                     </th>
                 </tr>
-            {% endfor %}
-            </tbody>
+            {% endfor %}    
         </table>
 
         <ul class="pagination">
