@@ -1,48 +1,71 @@
 {% extends 'menuAdmin.html.twig' %}
 
 {% block body %}
-    <h1>User</h1>
+    <section class="user_content" id="user_profile">
+        <content>
+            <div class="nav_pos">
+                <h1>{{user.username}}</h1> 
+            </div>
+            <div class="user_interact">
+                <a href="{{path('admin_index')}}"><button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>
+            </div>
+        </content>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ user.nom }}</td>
-            </tr>
-            <tr>
-                <th>Prenom</th>
-                <td>{{ user.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Cb</th>
-                <td>{{ user.cb }}</td>
-            </tr>
-            <tr>
-                <th>Image</th>
-                <td>{{ user.image }}</td>
-            </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ user.telephone }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <container>
+            <div class="user_tab">
+                <div class="user_pic"><img src="{{ asset('img/userdefault.svg')}}"></div>    
+                <div class="user_info">
+                    <ul>
+                        <li>ID : {{user.id}}</li>
+                        <li>{% if user.roles.0=="ROLE_ADMIN" %}
+                            Administrateur
+                            {% else %}
+                            Utilisateur
+                            {% endif %}</li>
+                        <li>Nom, prénom :{{user.prenom}} {{user.prenom}}</li>
+                        <li>Mail : {{user.email}}</li>
+                        <li>Tél. {{user.telephone}}</li>
+                        <li>Adresses : ???</li>
+                    </ul>
+                </div>
+                <div class="user_order">
+                    <h2>Historique des commandes</h2>
+                    <!--- Historique des commandes à integrer -->
+                </div>
+            </div>
+            <div class="user_tab_menu">
+                <div class="user_pic_menu"></div>   
+                <div class="user_menu">
+                    <ul>
+                        <li>Menu vegetarien</li>
+                        <li>Qte : 1</li>
+                        <li>id : 10</li>
+                        <li>prix : 12€50</li>
+                    </ul>
+                </div>
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('user_edit', { 'id': user.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                <div class="user_pic_menu"></div>   
+                <div class="user_menu">
+                    <ul>
+                        <li>Soupe aux trois légumes</li>
+                        <li>Qte : 2</li>
+                        <li>id : 8</li>
+                        <li>prix : 13€50</li>
+                    </ul>
+                </div>
+
+                <div class="user_menu_list">
+                    <ul>
+                        <div class="user_pic_menu_list"></div>
+                        <li class="ig1">Bruchetta</li>
+                        <div class="user_pic_menu_list"></div>
+                        <li class="ig2">Soupe poireaux</li>
+                        <div class="user_pic_menu_list"></div>
+                        <li class="ig3">Gâteau chocolat</li>
+                    </ul>
+                </div> 
+        </div>
+        </container>
+    </section>
+    
 {% endblock %}
