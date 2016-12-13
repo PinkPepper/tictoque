@@ -145,7 +145,7 @@ class ProduitAdminController extends Controller
     {
         $produit->removeCategorie($categorie);
         $categorie->removeProduit($produit);
-        
+
         $this->getDoctrine()->getEntityManager()->flush();
 
         return $this->redirectToRoute('produit_edit', array('id'=>$produit->getId()));
