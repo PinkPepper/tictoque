@@ -1,79 +1,100 @@
 {% extends 'menuAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Produit edit</h1>
+    <section class="user_content">
+    <content>
+        <div class="nav_pos">
+            <h1>Modifier un produit</h1> 
+        </div>
+        <div class="user_interact">
+            <a href="{{path('produit_index_admin')}}"><button class="button_p">Retour<img type="svg" src="{{asset('img/puce-right.svg')}}"></button></a>
+        </div>
+    </content>
 
-    {{ form_start(form, { 'attr': {'class': 'form-group' } }) }}
-        <label>Nom</label>
-        {{ form_widget(form.nom) }}
-        {{  form_errors(form.nom) }}
+    <container>
+        <div class="user_form product_form">  
 
-        <label>Description</label>
-        {{ form_widget(form.description, { 'attr': { 'class': 'tiny'}}) }}
-        {{  form_errors(form.description) }}
+            {{ form_start(form) }}
 
-        <label>Type</label>
-        {{ form_widget(form.type) }}
-        {{ form_errors(form.type) }}
+                <label>Nom</label>
+                <div class="product_name">
+                {{ form_widget(form.nom) }}
+                {{ form_errors(form.nom) }}
+                </div>
 
-        <label>DatePeremption</label>
-        {{ form_widget(form.datePeremption) }}
-        {{  form_errors(form.datePeremption) }}
-
-        <label>Prix</label>
-        {{ form_widget(form.prix) }}
-        {{  form_errors(form.prix) }}
-
-        <label>Quantité</label>
-        {{ form_widget(form.quantite) }}
-        {{  form_errors(form.quantite) }}
-
-        <label>Image</label>
-        {{ form_widget(form.file) }}
-        {{  form_errors(form.file) }}
-
-        <input type="submit" value="Modification" />
-
-    {{ form_end(form) }}
-
-    <h2>Les allergènes</h2>
-
-    {% for all in produit.allergenes %}
-        <ul>
-            <li>
-                {{ all }} <a href="{{ path('produit_delete_allergene', { 'id': produit.id, 'allergene': all }) }}">Supprimer</a>
-            </li>
-        </ul>
-    {% endfor %}
-
-    {{ form_start(allergeneForm) }}
-        {{ form_widget(allergeneForm) }}
-        <input type="submit" value="Ajout d'un allergene" />
-    {{ form_end(allergeneForm) }}
-
-    <h2>Les catégories</h2>
-
-    <h3>Ajouter une catégorie</h3>
-    {% for all in categories %}
-        {% if all not in produit.categories %}
-            {{ all.nom }} <a href="{{ path('ajout_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">ajouter</a>
-        {% endif %}
-    {% endfor %}
-
-    <h3>Supprimer une catégorie</h3>
-    {% for all in produit.categories %}
-        {{ all.nom }} <a href="{{ path('supprimer_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">enlever</a>
-    {% endfor %}
+                <label>Description</label>
+                <div class="product_desc">
+                {{ form_widget(form.description, { 'attr': { 'class': 'tiny'}}) }}
+                {{ form_errors(form.description) }}
+                </div>
 
 
-    <ul>
-        <li>
-            <a href="{{ path('produit_index_admin') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+                <label>Type</label>
+                <div class="product_type">
+                {{ form_widget(form.type) }}
+                {{  form_errors(form.type) }}
+                </div>
+
+                <label>DatePeremption</label>
+                <div class="product_per">
+                {{ form_widget(form.datePeremption) }}
+                {{  form_errors(form.datePeremption) }}
+                </div>
+
+                <label>Prix</label>
+                <div class="product_price"> 
+                {{ form_widget(form.prix) }}
+                {{  form_errors(form.prix) }}
+                </div>
+
+                <label>Quantité</label>
+                <div class="product_qt">
+                {{ form_widget(form.quantite) }}
+                {{  form_errors(form.quantite) }}
+                </div>
+
+                <label>Image</label>
+                <div  class="product_pic">
+                {{ form_widget(form.file) }}
+                {{  form_errors(form.file) }}
+                </div>
+
+                 <h2>Les allergènes</h2>
+
+                {% for all in produit.allergenes %}
+                    <ul>
+                        <li>
+                            {{ all }} <a href="{{ path('produit_delete_allergene', { 'id': produit.id, 'allergene': all }) }}">Supprimer</a>
+                        </li>
+                    </ul>
+                {% endfor %}
+
+                {{ form_start(allergeneForm) }}
+                    {{ form_widget(allergeneForm) }}
+                    <input type="submit" value="Ajout d'un allergene" />
+                {{ form_end(allergeneForm) }}
+
+                <h2>Les catégories</h2>
+
+                <h3>Ajouter une catégorie</h3>
+                {% for all in categories %}
+                    {% if all not in produit.categories %}
+                        <p>{{ all.nom }}<a href="{{ path('ajout_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">ajouter</a></p>
+                    {% endif %}
+                {% endfor %}
+
+                <h3>Supprimer une catégorie</h3>
+                {% for all in produit.categories %}
+                    <p>{{ all.nom }} <a href="{{ path('supprimer_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">enlever</a></p>
+                {% endfor %}
+
+
+
+                <button class="button_p" type="submit">Modifier le produit</button>
+
+            {{ form_end(form) }}
+
+        </div>
+    </container>
+    </section>
 {% endblock %}
