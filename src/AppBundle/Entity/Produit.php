@@ -89,6 +89,8 @@ class Produit
      */
     private $categories;
 
+    private $cat;
+
     use TraitUploadImage;
     public function getUploadDir()
     {
@@ -336,6 +338,22 @@ class Produit
     public function __construct()
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCat()
+    {
+        return $this->cat;
+    }
+
+    /**
+     * @param mixed $cat
+     */
+    public function setCat($cat)
+    {
+        $this->cat = $cat;
     }
 }
 

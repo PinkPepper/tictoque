@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Admin;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Produit;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -42,11 +43,26 @@ class ProduitAdminController extends Controller
     public function newAction(Request $request)
     {
         $produit = new Produit();
-        $form = $this->createForm('AppBundle\Form\ProduitType', $produit);
+        $form = $this->createForm('AppBundle\Form\ProduitCreationType', $produit);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             $produit->setAllergenes(null);
+
+            //$tmp = new Entity();
+            //$tmp = $form->getData();
+            $tmp = $form["cat"]->getData();
+            for ($i=0; $i< sizeof($tmp); $i++)
+            {
+                $produit->addCategorie($tmp[$i]);
+                $tmp[$i]->addProduit($produit);
+            }
+
+            //$b = $tmp[0];
+            //var_dump($b);
+
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
