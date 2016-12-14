@@ -25,10 +25,10 @@
 <body>
 
 <header>
-    <img src="{{ asset('img/logo_CMS.png') }}">
+   <a href="{{ path("homepage") }}" ><img src="{{ asset('img/logo_CMS.png') }}"></a>
     {% if app.user is not  null %}
         <div>
-            <img src="{{ asset('img/'~app.user.image) }}">
+            <img src="{{ asset('users/' ~ app.user.image) }}">
 
 
             <span>{{ app.user.username }}</span><br>
@@ -41,6 +41,7 @@
         </div>
 
         <ul>
+            <li><a href="{{ path('blog_index') }}">Blog</a></li>
             <li><img src="{{ asset('img/information-ico.svg') }}" type="svg"></li>
             <li><img src="{{ asset('img/notification-ico.svg') }}" type="svg"></li>
             <li><a href="{{ path('fos_user_security_logout') }}"><img src="{{ asset('img/deconnexion-ico.svg') }}" type="svg"></a></li>
@@ -56,11 +57,13 @@
     {% endif %}
 
 </header>
+
 {% block menuAdmin %}{% endblock %}
 {% block body %}{% endblock %}
+
 {% block javascripts %}
     <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
-    <script>tinymce.init({ selector:'textarea' });</script>
+    <script>tinymce.init({ selector:'.tiny' });</script>
 {% endblock %}
 </body>
 </html>

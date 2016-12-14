@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Produit</h1>
+
+    <table>
+        <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ produit.id }}</td>
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{{ produit.nom }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ produit.description | raw }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ produit.type }}</td>
+        </tr>
+        <tr>
+            <th>Prix</th>
+            <td>{{ produit.prix }}</td>
+        </tr>
+        <tr>
+            <th>Quantite</th>
+            <td>{{ produit.quantite }}</td>
+        </tr>
+
+        </tbody>
+    </table>
+
+    <p>Image</p>
+    {% if produit.image == "" %}
+        <p>Aucune image</p>
+    {% else %}
+        <img src=" {{ asset('produits/' ~ produit.image ) }} " style="width: 10%; height: auto"></img>
+    {% endif %}
+
+    <h2>Allergenes</h2>
+    {% for all in produit.allergenes %}
+        <ul>
+            <li>
+                {{ all }}
+            </li>
+        </ul>
+    {% endfor %}
+
+    <ul>
+        <li>
+            <a href="{{ path('produit_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="">Ajouter au panier</a>
+        </li>
+    </ul>
+{% endblock %}

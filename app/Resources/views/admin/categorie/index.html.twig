@@ -1,0 +1,57 @@
+{% extends 'menuAdmin.html.twig' %}
+
+{% block body %}
+    <section class="user_content">
+
+        <content>
+            <div class="nav_pos">
+                <h1>Catégories</h1>
+            </div>
+            <div class="user_interact">
+                <button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg')}}"></button>
+            </div>
+        </content>
+
+        {{ form_start(form) }}
+        <div class="categories_menu">
+            <label>Nom de la catégorie</label>
+            <div>
+                {{ form_widget(form.nom) }}
+                {{ form_errors(form.nom) }}
+            </div>
+
+            <label>Description</label>
+            <div>
+                {{ form_widget(form.description,{ 'attr': {'class': 'categories_desc'}}) }}
+                {{ form_errors(form.description) }}
+            </div>
+            <button class="button_p" type="submit">Ajouter la catégorie</button>
+        </div>
+        {{ form_end(form) }}
+
+        <div class="categories_tab">
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Decription</th>
+                    <th>Action</th>
+                </tr>
+                {% for categorie in categories %}
+                    <tr>
+                        <th class="info">{{categorie.id}}</th>
+                        <th>{{categorie.nom}}</th>
+                        <th class="info"> {{ categorie.description|length > 20 ? categorie.description|slice(0, 20) ~ '...' : categorie.description  }}</th>
+                        <th class="info">
+                            <a href="{{ path('admin_categorie_edit',{'id': categorie.id})}}" class="">Modifier</a>
+                            |
+                            <a href="{{ path('admin_categorie_show',{'id': categorie.id})}}" class="">Voir</a>
+                        </th>
+
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </section>
+{% endblock %}
+

@@ -1,13 +1,57 @@
 @import url("https://fonts.googleapis.com/css?family=Open+Sans");
 body {
   background-color: #f7f8fa;
-  font-family: roboto; }
+  font-family: roboto;
+  margin: 0; }
+  body header {
+    position: fixed;
+    z-index: 9990; }
+  body aside {
+    position: fixed;
+    bottom: 0;
+    padding-top: 60px; }
+  body .user_content {
+    margin-left: 220px;
+    margin-top: 80px; }
+  body select {
+    display: inherit !important; }
   body article, body aside, body details, body figcaption, body figure, body footer, body header, body hgroup, body main, body menu, body nav, body section, body summary {
     display: inline-block; }
+  body .validation_bloc {
+    display: block; }
   body h1, body h2, body h3 {
     color: #909090; }
   body h2 {
     font-size: 24px; }
+  body [type="checkbox"] {
+    display: none; }
+  body table {
+    font-size: 14px; }
+
+.pagination {
+  margin: 10px; }
+  .pagination li {
+    background-color: #909090 !important;
+    width: 25px !important;
+    height: 25px !important;
+    padding-top: 2px !important; }
+    .pagination li a {
+      text-decoration: none !important;
+      color: white !important;
+      line-height: 22px !important;
+      width: 25px !important;
+      font-size: 1em !important;
+      padding-left: 8px !important; }
+  .pagination li:hover {
+    background-color: #242424 !important;
+    cursor: pointer; }
+
+.gestion_tab {
+  background-color: white;
+  box-shadow: 0px 0px 4px;
+  border-spacing: 10px;
+  margin-top: 50px;
+  height: 380px; }
 
 /****************************INDIQUE OU SE SITUE L'UTILISATEUR******************************/
 .nav_pos {
@@ -28,52 +72,44 @@ body {
   width: 60%; }
   .user_content .tab_user {
     float: none;
-    width: 100%; }
+    width: 92%;
+    margin: 0 auto; }
   .user_content input {
     background-color: white;
     padding-left: 10px; }
-  .user_content table {
-    background-color: white;
-    box-shadow: 0px 0px 4px;
-    border-spacing: 10px; }
-    .user_content table tbody a {
-      padding: 0; }
-    .user_content table tbody a:hover {
-      text-decoration: none;
-      cursor: pointer; }
-    .user_content table tbody .info {
+  .user_content table tbody a {
+    padding: 0; }
+  .user_content table tbody a:hover {
+    text-decoration: none;
+    cursor: pointer; }
+  .user_content table tbody .info {
+    font-weight: 400; }
+  .user_content table tbody tr:first-child {
+    border-bottom: 1px black solid;
+    color: #909090; }
+  .user_content table tbody > tr > th:first-child input {
+    position: relative;
+    left: 0;
+    opacity: 1; }
+  .user_content table tbody > tr > th:nth-child(2), .user_content table tbody > tr > th:nth-child(4), .user_content table tbody > tr > th:nth-child(5), .user_content table tbody > tr > th:nth-child(6) {
+    color: #909090; }
+  .user_content table tbody > tr > th:nth-child(3) div {
+    font-size: 11px;
+    padding-top: 3px; }
+    .user_content table tbody > tr > th:nth-child(3) div a {
+      color: #909090;
       font-weight: 400; }
-    .user_content table tbody .pagination {
-      margin: 10px; }
-      .user_content table tbody .pagination li {
-        background-color: #909090;
-        width: 25px;
-        height: 25px;
-        padding-top: 2px; }
-        .user_content table tbody .pagination li a {
-          color: white;
-          line-height: 22px;
-          width: 25px;
-          font-size: 1em; }
-      .user_content table tbody .pagination li:hover {
-        background-color: #242424; }
-    .user_content table tbody tr:first-child {
-      border-bottom: 1px black solid;
-      color: #909090; }
-    .user_content table tbody > tr > th:first-child input {
-      position: relative;
-      left: 0;
-      opacity: 1; }
-    .user_content table tbody > tr > th:nth-child(2), .user_content table tbody > tr > th:nth-child(4), .user_content table tbody > tr > th:nth-child(5), .user_content table tbody > tr > th:nth-child(6) {
-      color: #909090; }
-    .user_content table tbody > tr > th:nth-child(3) div {
-      font-size: 11px;
-      padding-top: 3px; }
-      .user_content table tbody > tr > th:nth-child(3) div a {
-        color: #909090;
-        font-weight: 400; }
-      .user_content table tbody > tr > th:nth-child(3) div a:nth-child(2) {
-        color: red; }
+    .user_content table tbody > tr > th:nth-child(3) div a:nth-child(2) {
+      color: red; }
+
+/*************************************AJOUT PRODUIT*****************************************/
+.user_form.product_form .product_name {
+  float: none; }
+.user_form.product_form input {
+  width: 200px; }
+.user_form.product_form .product_pic input {
+  border: none !important;
+  width: 350px; }
 
 /*************************************POFIL UTILISATEUR*************************************/
 container .user_tab {
@@ -227,6 +263,18 @@ container .user_pagination th {
     margin-bottom: 20px; }
 
 /*********************************CATEGORIES*****************************/
+.categories_tab {
+  float: right;
+  clear: both;
+  width: 566px;
+  margin-top: 20px;
+  background-color: white;
+  box-shadow: 0px 0px 4px;
+  border-spacing: 10px;
+  height: 392px; }
+  .categories_tab table {
+    margin: 0 auto; }
+
 .categories_menu {
   background-color: white;
   box-shadow: 0px 0px 4px;
@@ -236,7 +284,7 @@ container .user_pagination th {
   clear: both;
   position: absolute;
   margin-top: 51px;
-  height: 370px;
+  height: 392px;
   padding: 15px; }
   .categories_menu .select {
     display: inherit;
@@ -264,10 +312,14 @@ container .user_pagination th {
 .user_content {
   width: 75%; }
   .user_content table {
-    float: right;
     clear: both;
-    width: 566px;
+    width: 500px;
     margin-top: 20px; }
+
+/*************************GESTION PRODUITS******************************/
+.button_p.add_product {
+  margin-left: 20px;
+  width: 160px; }
 
 /******************************BLOCS LOGIN******************************/
 .user_login {
@@ -373,26 +425,26 @@ header {
 /******************************PAGE MENU - MENU GAUCHE******************************/
 aside {
   width: 210px;
-  height: 800px;
+  height: 100vh;
   background-color: #383838; }
   aside ul {
     margin: 0; }
+    aside ul a {
+      color: #909090 !important; }
+    aside ul a:hover {
+      color: #48d6cc !important;
+      cursor: hand; }
+    aside ul a:nth-child(6) li {
+      margin-bottom: 40px; }
+    aside ul a:nth-child(9) li {
+      margin-bottom: 40px; }
   aside li:first-child {
     padding-right: 10px; }
-  aside li:nth-child(6) {
-    margin-bottom: 40px; }
-  aside li:nth-child(9) {
-    margin-bottom: 40px; }
   aside li {
-    padding-bottom: 20px;
+    /*padding-bottom: 20px;*/
     padding-left: 25px;
     height: 32px;
     padding-top: 5px; }
-    aside li a {
-      color: #909090; }
-    aside li a:hover {
-      color: #48d6cc;
-      cursor: hand; }
   aside li:hover {
     background-color: #242424; }
 

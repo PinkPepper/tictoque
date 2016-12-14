@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Blog;
 
 use AppBundle\Entity\Article;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +41,7 @@ class CommentaireController extends Controller
             return $this->redirectToRoute('commentaire_show', array('id' => $commentaire->getId()));
         }
 
-        return $this->render('commentaire/new.html.twig', array(
+        return $this->render('blog/commentaire/new.html.twig', array(
             'commentaire' => $commentaire,
             'form' => $form->createView(),
             'article' => $article
@@ -58,7 +58,7 @@ class CommentaireController extends Controller
     {
         $deleteForm = $this->createDeleteForm($commentaire);
 
-        return $this->render('commentaire/show.html.twig', array(
+        return $this->render('blog/commentaire/show.html.twig', array(
             'commentaire' => $commentaire,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -84,7 +84,7 @@ class CommentaireController extends Controller
             return $this->redirectToRoute('commentaire_edit', array('id' => $commentaire->getId()));
         }
 
-        return $this->render('commentaire/edit.html.twig', array(
+        return $this->render('blog/commentaire/edit.html.twig', array(
             'commentaire' => $commentaire,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
