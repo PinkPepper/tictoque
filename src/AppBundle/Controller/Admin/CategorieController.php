@@ -14,20 +14,49 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class CategorieController extends Controller
 {
+//    /**
+//     * Lists all categorie entities.
+//     *
+//     * @Route("/", name="admin_categorie_index")
+//     * @Method("GET")
+//     */
+//    public function indexAction()
+//    {
+//        $em = $this->getDoctrine()->getManager();
+//
+//        $categories = $em->getRepository('AppBundle:Categorie')->findAll();
+//
+//        return $this->render('admin/categorie/index.html.twig', array(
+//            'categories' => $categories,
+//        ));
+//    }
+
     /**
      * Lists all categorie entities.
      *
      * @Route("/", name="admin_categorie_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $categorie = new Categorie();
+        $form = $this->createForm('AppBundle\Form\CategorieType', $categorie);
+        $form->handleRequest($request);
 
+        $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository('AppBundle:Categorie')->findAll();
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($categorie);
+            $em->flush($categorie);
+
+            return $this->redirectToRoute('admin_categorie_show', array('id' => $categorie->getId()));
+        }
 
         return $this->render('admin/categorie/index.html.twig', array(
             'categories' => $categories,
+            'form' => $form->createView(),
         ));
     }
 

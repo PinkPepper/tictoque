@@ -138,6 +138,8 @@ class ProduitAdminController extends Controller
        return $this->redirectToRoute('produit_edit', array('id'=>$produit->getId()));
     }
 
+
+
     /**
      * @Route("/supprimer/{produit}/{categorie}", name="supprimer_categorie_produit")
      */
