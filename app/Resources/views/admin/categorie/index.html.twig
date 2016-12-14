@@ -42,7 +42,12 @@
                         <th class="info">{{categorie.id}}</th>
                         <th>{{categorie.nom}}</th>
                         <th class="info"> {{ categorie.description|length > 20 ? categorie.description|slice(0, 20) ~ '...' : categorie.description  }}</th>
-                        <th class="info"><a href="{{ path('admin_categorie_edit',{'id': categorie.id})}}" class="">Modifier</a></th>
+                        <th class="info">
+                            <a href="{{ path('admin_categorie_edit',{'id': categorie.id})}}" class="">Modifier</a>
+                            |
+                            <a href="{{ path('admin_categorie_show',{'id': categorie.id})}}" class="">Voir</a>
+                        </th>
+
                     </tr>
                 {% endfor %}
             </table>
