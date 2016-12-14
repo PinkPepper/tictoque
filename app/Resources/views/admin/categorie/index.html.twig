@@ -41,7 +41,7 @@
                     <tr>
                         <th class="info">{{categorie.id}}</th>
                         <th>{{categorie.nom}}</th>
-                        <th class="info">{{categorie.description}}</th>
+                        <th class="info"> {{ categorie.description|length > 20 ? categorie.description|slice(0, 20) ~ '...' : categorie.description  }}</th>
                         <th class="info"><a href="{{ path('admin_categorie_edit',{'id': categorie.id})}}" class="">Modifier</a></th>
                     </tr>
                 {% endfor %}
@@ -50,51 +50,3 @@
     </section>
 {% endblock %}
 
-
-
-{#
-
-{% extends 'menuAdmin.html.twig' %}
-
-{% block body %}
-    <h1>Categories list</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>Description</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for categorie in categories %}
-            <tr>
-                <td><a href="{{ path('admin_categorie_show', { 'id': categorie.id }) }}">{{ categorie.id }}</a></td>
-                <td>{{ categorie.nom }}</td>
-                <td>{{ categorie.description }}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('admin_categorie_show', { 'id': categorie.id }) }}">show</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('admin_categorie_edit', { 'id': categorie.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-    <ul>
-        <li>
-            <a href="{{ path('admin_categorie_new') }}">Create a new categorie</a>
-        </li>
-    </ul>
-{% endblock %}
-
-
-#}

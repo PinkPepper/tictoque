@@ -9,7 +9,7 @@
         {{  form_errors(form.nom) }}
 
         <label>Description</label>
-        {{ form_widget(form.description) }}
+        {{ form_widget(form.description, { 'attr': { 'class': 'tiny'}}) }}
         {{  form_errors(form.description) }}
 
         <label>Type</label>

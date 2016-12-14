@@ -14,22 +14,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component
  */
 class CategorieController extends Controller
 {
-//    /**
-//     * Lists all categorie entities.
-//     *
-//     * @Route("/", name="admin_categorie_index")
-//     * @Method("GET")
-//     */
-//    public function indexAction()
-//    {
-//        $em = $this->getDoctrine()->getManager();
-//
-//        $categories = $em->getRepository('AppBundle:Categorie')->findAll();
-//
-//        return $this->render('admin/categorie/index.html.twig', array(
-//            'categories' => $categories,
-//        ));
-//    }
 
     /**
      * Lists all categorie entities.
