@@ -123,10 +123,39 @@ class CategorieController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            $produits = $categorie->getProduits();
+
+            foreach($produits as $produit)
+            {
+                $categorie->removeProduit($produit);
+                $produit->removeCategorie($categorie);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->remove($categorie);
             $em->flush($categorie);
         }
+
+        return $this->redirectToRoute('admin_categorie_index');
+    }
+
+    /**
+     * @Route("/delete/delete/{id}", name="admin_categorie_delete_index")
+     */
+    public function deleteIndexAction(Categorie $categorie)
+    {
+        $produits = $categorie->getProduits();
+
+        foreach($produits as $produit)
+        {
+            $categorie->removeProduit($produit);
+            $produit->removeCategorie($categorie);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($categorie);
+        $em->flush($categorie);
 
         return $this->redirectToRoute('admin_categorie_index');
     }

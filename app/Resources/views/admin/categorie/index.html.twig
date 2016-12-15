@@ -26,6 +26,9 @@
                                 <li>
                                     <a href="{{ path('admin_categorie_show',{'id': categorie.id})}}">Voir</a>
                                 </li>
+                                <li>
+                                    <a href="{{ path('admin_categorie_delete_index',{'id': categorie.id})}}" onclick="return confirm('Voulez-vous vraiment supprimer cette catégorie ? (Les produits associés ne seront pas supprimés.)')">Supprimer</a>
+                                </li>
                             </ul>
                         </td>
                     </tr>
