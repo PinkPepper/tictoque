@@ -94,7 +94,7 @@ class Produit
     use TraitUploadImage;
     public function getUploadDir()
     {
-        return 'produits/';
+        return 'produits';
     }
 
     /**

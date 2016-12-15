@@ -32,6 +32,9 @@
                                     <li>
                                         <a href="{{ path('produit_edit', { 'id': produit.id }) }}">Modifier</a>
                                     </li>
+                                    <li>
+                                        <a href="{{ path('produit_delete_index', { 'id': produit.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</a>
+                                    </li>
                                 </ul>
                             </td>
                         </tr>

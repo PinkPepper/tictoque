@@ -178,11 +178,14 @@ class ProduitAdminController extends Controller
      */
     public function deleteAllergene(Produit $produit, $allergene)
     {
-        $diff = array_diff($produit->getAllergenes(), array($allergene));
 
-        $produit->setAllergenes($diff);
-        $this->getDoctrine()->getManager()->flush();
+        if ($produit->getAllergenes() != null)
+        {
+            $diff = array_diff($produit->getAllergenes(), array($allergene));
 
+            $produit->setAllergenes($diff);
+            $this->getDoctrine()->getManager()->flush();
+        }
         return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
     }
 
@@ -203,6 +206,22 @@ class ProduitAdminController extends Controller
             $em->remove($produit);
             $em->flush($produit);
         }
+
+        return $this->redirectToRoute('produit_index_admin');
+    }
+
+    /**
+     * @Route("/delete/delete/{id}", name="produit_delete_index")
+     */
+    public function deleteIndexAction(Request $request, Produit $produit)
+    {
+       // $produit = new Produit();
+
+       // var_dump($produit);
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($produit);
+        $em->flush($produit);
 
         return $this->redirectToRoute('produit_index_admin');
     }
