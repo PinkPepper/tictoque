@@ -63,7 +63,11 @@
 
 {% block javascripts %}
     <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
-    <script>tinymce.init({ selector:'.tiny' });</script>
+    <script>tinymce.init({ selector:'.tiny',setup: function (editor) {
+        editor.on('change', function () {
+            editor.save();
+        });
+    }});</script>
 {% endblock %}
 </body>
 </html>
