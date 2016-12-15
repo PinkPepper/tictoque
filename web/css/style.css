@@ -3,57 +3,57 @@ body {
   background-color: #f7f8fa;
   font-family: "Roboto", sans-serif;
   margin: 0; }
-body header {
-  position: fixed;
-  z-index: 9990; }
-body a, body p, body h1, body h2, body h3, body h4, body h5, body h6, body label, body input, body section {
-  font-family: "Roboto", sans-serif; }
-body aside {
-  position: fixed;
-  bottom: 0;
-  padding-top: 60px; }
-body .user_content {
-  margin-left: 220px;
-  margin-top: 80px; }
-body select {
-  display: inherit !important; }
-body article, body aside, body details, body figcaption, body figure, body footer, body header, body hgroup, body main, body menu, body nav, body section, body summary {
-  display: inline-block; }
-body .validation_bloc {
-  display: block; }
-body h1, body h2, body h3 {
-  color: #909090; }
-body h2 {
-  font-size: 24px; }
-body [type="checkbox"] {
-  display: none; }
-body table {
-  font-size: 14px; }
-body li {
-  list-style: none; }
-body ul {
-  margin: 0px;
-  padding: 0px; }
-body a {
-  text-decoration: none; }
+  body header {
+    position: fixed;
+    z-index: 9990; }
+  body a, body p, body h1, body h2, body h3, body h4, body h5, body h6, body label, body input, body section {
+    font-family: "Roboto", sans-serif; }
+  body aside {
+    position: fixed;
+    bottom: 0;
+    padding-top: 60px; }
+  body .user_content {
+    margin-left: 220px;
+    margin-top: 80px; }
+  body select {
+    display: inherit !important; }
+  body article, body aside, body details, body figcaption, body figure, body footer, body header, body hgroup, body main, body menu, body nav, body section, body summary {
+    display: inline-block; }
+  body .validation_bloc {
+    display: block; }
+  body h1, body h2, body h3 {
+    color: #909090; }
+  body h2 {
+    font-size: 24px; }
+  body [type="checkbox"] {
+    display: none; }
+  body table {
+    font-size: 14px; }
+  body li {
+    list-style: none; }
+  body ul {
+    margin: 0px;
+    padding: 0px; }
+  body a {
+    text-decoration: none; }
 
 .pagination {
   margin: 10px; }
-.pagination li {
-  background-color: #909090 !important;
-  width: 25px !important;
-  height: 25px !important;
-  padding-top: 2px !important; }
-.pagination li a {
-  text-decoration: none !important;
-  color: white !important;
-  line-height: 22px !important;
-  width: 25px !important;
-  font-size: 1em !important;
-  padding-left: 8px !important; }
-.pagination li:hover {
-  background-color: #242424 !important;
-  cursor: pointer; }
+  .pagination li {
+    background-color: #909090 !important;
+    width: 25px !important;
+    height: 25px !important;
+    padding-top: 2px !important; }
+    .pagination li a {
+      text-decoration: none !important;
+      color: white !important;
+      line-height: 22px !important;
+      width: 25px !important;
+      font-size: 1em !important;
+      padding-left: 8px !important; }
+  .pagination li:hover {
+    background-color: #242424 !important;
+    cursor: pointer; }
 
 .gestion_tab {
   background-color: white;
@@ -67,51 +67,51 @@ body a {
 /****************************INDIQUE OU SE SITUE L'UTILISATEUR******************************/
 .nav_pos {
   display: inline-flex; }
-.nav_pos h1 {
-  font-size: 30px;
-  margin: 0;
-  margin-bottom: 10px; }
-.nav_pos p {
-  padding-top: 5px;
-  font-size: 10px;
-  padding-left: 5px; }
+  .nav_pos h1 {
+    font-size: 30px;
+    margin: 0;
+    margin-bottom: 10px; }
+  .nav_pos p {
+    padding-top: 5px;
+    font-size: 10px;
+    padding-left: 5px; }
 
 /****************************TABLEAU UTILISATEURS******************************/
 .user_content {
   position: absolute;
   padding: 20px 25px;
   width: 60%; }
-.user_content .tab_user {
-  float: none;
-  width: 92%;
-  margin: 0 auto; }
-.user_content input {
-  background-color: white;
-  padding-left: 10px; }
-.user_content table tbody a {
-  padding: 0; }
-.user_content table tbody a:hover {
-  text-decoration: none;
-  cursor: pointer; }
-.user_content table tbody .info {
-  font-weight: 400; }
-.user_content table tbody tr:first-child {
-  border-bottom: 1px black solid;
-  color: #909090; }
-.user_content table tbody > tr > th:first-child input {
-  position: relative;
-  left: 0;
-  opacity: 1; }
-.user_content table tbody > tr > th:nth-child(2), .user_content table tbody > tr > th:nth-child(4), .user_content table tbody > tr > th:nth-child(5), .user_content table tbody > tr > th:nth-child(6) {
-  color: #909090; }
-.user_content table tbody > tr > th:nth-child(3) div {
-  font-size: 11px;
-  padding-top: 3px; }
-.user_content table tbody > tr > th:nth-child(3) div a {
-  color: #909090;
-  font-weight: 400; }
-.user_content table tbody > tr > th:nth-child(3) div a:nth-child(2) {
-  color: red; }
+  .user_content .tab_user {
+    float: none;
+    width: 92%;
+    margin: 0 auto; }
+  .user_content input {
+    background-color: white;
+    padding-left: 10px; }
+  .user_content table tbody a {
+    padding: 0; }
+  .user_content table tbody a:hover {
+    text-decoration: none;
+    cursor: pointer; }
+  .user_content table tbody .info {
+    font-weight: 400; }
+  .user_content table tbody tr:first-child {
+    border-bottom: 1px black solid;
+    color: #909090; }
+  .user_content table tbody > tr > th:first-child input {
+    position: relative;
+    left: 0;
+    opacity: 1; }
+  .user_content table tbody > tr > th:nth-child(2), .user_content table tbody > tr > th:nth-child(4), .user_content table tbody > tr > th:nth-child(5), .user_content table tbody > tr > th:nth-child(6) {
+    color: #909090; }
+  .user_content table tbody > tr > th:nth-child(3) div {
+    font-size: 11px;
+    padding-top: 3px; }
+    .user_content table tbody > tr > th:nth-child(3) div a {
+      color: #909090;
+      font-weight: 400; }
+    .user_content table tbody > tr > th:nth-child(3) div a:nth-child(2) {
+      color: red; }
 
 /*************************************AJOUT PRODUIT*****************************************/
 .user_form.product_form .product_name {
@@ -131,23 +131,23 @@ container .user_tab {
   padding: 25px;
   font-size: 14px;
   float: left; }
-container .user_tab .user_pic {
-  width: 120px !important;
-  height: 120px !important;
-  float: left;
-  background-color: #aa003b;
-  margin: 0 !important;
-  margin-right: 20px !important; }
+  container .user_tab .user_pic {
+    width: 120px !important;
+    height: 120px !important;
+    float: left;
+    background-color: #aa003b;
+    margin: 0 !important;
+    margin-right: 20px !important; }
 container .user_order h2 {
   clear: both;
   padding-top: 32px;
   margin-bottom: 5px; }
 container .user_order table tbody tr + tr:hover {
   background-color: #383838; }
-container .user_order table tbody tr + tr:hover th, container .user_order table tbody tr + tr:hover a {
-  color: white; }
-container .user_order table tbody tr + tr:hover a {
-  text-decoration: underline; }
+  container .user_order table tbody tr + tr:hover th, container .user_order table tbody tr + tr:hover a {
+    color: white; }
+  container .user_order table tbody tr + tr:hover a {
+    text-decoration: underline; }
 container .user_tab_menu {
   width: 450px;
   box-shadow: 0 0 5px;
@@ -156,44 +156,44 @@ container .user_tab_menu {
   font-size: 14px;
   margin-left: 10px;
   font-size: 11px; }
-container .user_tab_menu .user_menu {
-  margin-left: 15px;
-  float: left; }
-container .user_tab_menu div:nth-child(3) {
-  clear: both;
-  float: left; }
-container .user_tab_menu .user_menu_list {
-  margin-left: 300px; }
-container .user_tab_menu .user_menu_list ul {
-  display: table-caption; }
-container .user_tab_menu .user_menu_list ul div {
-  margin-bottom: 3px; }
-container .user_tab_menu .user_menu_list ul .ig1 {
-  margin-left: 34px;
-  position: absolute; }
-container .user_tab_menu .user_menu_list ul .ig2 {
-  margin-left: 34px;
-  position: absolute;
-  padding-top: 30px; }
-container .user_tab_menu .user_menu_list ul .ig3 {
-  margin-left: 34px;
-  position: absolute;
-  padding-top: 58px; }
-container .user_tab_menu .user_menu_list ul > li {
-  float: right; }
-container .user_tab_menu .user_pic_menu_list {
-  float: left;
-  width: 25px;
-  height: 25px;
-  background-color: #aa003b; }
+  container .user_tab_menu .user_menu {
+    margin-left: 15px;
+    float: left; }
+  container .user_tab_menu div:nth-child(3) {
+    clear: both;
+    float: left; }
+  container .user_tab_menu .user_menu_list {
+    margin-left: 300px; }
+    container .user_tab_menu .user_menu_list ul {
+      display: table-caption; }
+      container .user_tab_menu .user_menu_list ul div {
+        margin-bottom: 3px; }
+      container .user_tab_menu .user_menu_list ul .ig1 {
+        margin-left: 34px;
+        position: absolute; }
+      container .user_tab_menu .user_menu_list ul .ig2 {
+        margin-left: 34px;
+        position: absolute;
+        padding-top: 30px; }
+      container .user_tab_menu .user_menu_list ul .ig3 {
+        margin-left: 34px;
+        position: absolute;
+        padding-top: 58px; }
+    container .user_tab_menu .user_menu_list ul > li {
+      float: right; }
+  container .user_tab_menu .user_pic_menu_list {
+    float: left;
+    width: 25px;
+    height: 25px;
+    background-color: #aa003b; }
 container div:nth-child(2) {
   float: left; }
-container div:nth-child(2) .user_pic_menu {
-  width: 130px;
-  height: 130px;
-  background-color: #aa003b;
-  float: left;
-  margin-bottom: 10px; }
+  container div:nth-child(2) .user_pic_menu {
+    width: 130px;
+    height: 130px;
+    background-color: #aa003b;
+    float: left;
+    margin-bottom: 10px; }
 container aside {
   display: block;
   float: right; }
@@ -211,10 +211,10 @@ container .user_pagination th {
   width: 100px;
   border-radius: 3px;
   float: left; }
-.user_interact button img {
-  float: right;
-  margin: 0;
-  padding-top: 2px; }
+  .user_interact button img {
+    float: right;
+    margin: 0;
+    padding-top: 2px; }
 .user_interact input {
   border: 1px solid #909090 !important;
   float: right;
@@ -246,32 +246,32 @@ container .user_pagination th {
   box-shadow: 0px 0px 4px;
   border-spacing: 10px;
   padding: 15px; }
-.user_form label {
-  color: #909090;
-  font-weight: 700; }
-.user_form input {
-  border: 1px solid #909090 !important;
-  height: 2rem !important; }
-.user_form .user_fl input:first-child {
-  margin-right: 44px; }
-.user_form .user_fl input {
-  width: 188px !important; }
-.user_form .user_mail input, .user_form .user_adress input, .user_form .user_role input, .user_form .user_tel input, .user_form .user_password input {
-  width: 425px !important; }
-.user_form .user_lastname {
-  float: right;
-  margin-right: 341px; }
-.user_form button {
-  height: 2rem;
-  width: 40%; }
-.user_form .select {
-  display: inherit;
-  width: 427px !important;
-  border: 1px solid #909090 !important;
-  height: 2.2rem !important;
-  border-radius: 0;
-  color: rgba(128, 128, 128, 0.72);
-  margin-bottom: 20px; }
+  .user_form label {
+    color: #909090;
+    font-weight: 700; }
+  .user_form input {
+    border: 1px solid #909090 !important;
+    height: 2rem !important; }
+  .user_form .user_fl input:first-child {
+    margin-right: 44px; }
+  .user_form .user_fl input {
+    width: 188px !important; }
+  .user_form .user_mail input, .user_form .user_adress input, .user_form .user_role input, .user_form .user_tel input, .user_form .user_password input {
+    width: 425px !important; }
+  .user_form .user_lastname {
+    float: right;
+    margin-right: 341px; }
+  .user_form button {
+    height: 2rem;
+    width: 40%; }
+  .user_form .select {
+    display: inherit;
+    width: 427px !important;
+    border: 1px solid #909090 !important;
+    height: 2.2rem !important;
+    border-radius: 0;
+    color: rgba(128, 128, 128, 0.72);
+    margin-bottom: 20px; }
 
 /*********************************CATEGORIES*****************************/
 .categories_tab {
@@ -283,8 +283,8 @@ container .user_pagination th {
   box-shadow: 0px 0px 4px;
   border-spacing: 10px;
   height: 392px; }
-.categories_tab table {
-  margin: 0 auto; }
+  .categories_tab table {
+    margin: 0 auto; }
 
 .categories_menu {
   background-color: white;
@@ -297,35 +297,35 @@ container .user_pagination th {
   margin-top: 51px;
   height: 392px;
   padding: 15px; }
-.categories_menu .select {
-  display: inherit;
-  width: 100%;
-  border: 1px solid #909090 !important;
-  height: 2.2rem !important;
-  border-radius: 0;
-  color: rgba(128, 128, 128, 0.72);
-  margin-bottom: 20px; }
-.categories_menu label {
-  font-size: 13px;
-  font-weight: 600; }
-.categories_menu input {
-  width: 100%;
-  height: 2rem; }
-.categories_menu input:first-child {
-  margin-bottom: 20px; }
-.categories_menu textarea {
-  width: 100%;
-  height: 100px;
-  margin-bottom: 38px; }
-.categories_menu button {
-  height: 2.5rem; }
+  .categories_menu .select {
+    display: inherit;
+    width: 100%;
+    border: 1px solid #909090 !important;
+    height: 2.2rem !important;
+    border-radius: 0;
+    color: rgba(128, 128, 128, 0.72);
+    margin-bottom: 20px; }
+  .categories_menu label {
+    font-size: 13px;
+    font-weight: 600; }
+  .categories_menu input {
+    width: 100%;
+    height: 2rem; }
+  .categories_menu input:first-child {
+    margin-bottom: 20px; }
+  .categories_menu textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 38px; }
+  .categories_menu button {
+    height: 2.5rem; }
 
 .user_content {
   width: 75%; }
-.user_content table {
-  clear: both;
-  width: 500px;
-  margin-top: 20px; }
+  .user_content table {
+    clear: both;
+    width: 500px;
+    margin-top: 20px; }
 
 /*************************GESTION PRODUITS******************************/
 .button_p.add_product {
@@ -341,15 +341,15 @@ section {
   margin: 0 auto;
   width: 350px;
   margin-top: 60px; }
-section img {
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 40px; }
-section a {
-  color: #909090;
-  padding: 30px 40px; }
-section a:hover {
-  text-decoration: underline; }
+  section img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px; }
+  section a {
+    color: #909090;
+    padding: 30px 40px; }
+  section a:hover {
+    text-decoration: underline; }
 
 .login {
   text-align: center;
@@ -358,82 +358,82 @@ section a:hover {
   margin: 0 auto;
   margin-bottom: 30px;
   width: 300px; }
-.login h1 {
-  font-size: 30px; }
-.login input {
-  width: 100%;
-  background-color: #f7f8fa;
-  border: 1px solid #909090; }
-.login label {
-  font-size: 14px;
-  font-weight: bold;
-  color: #909090;
-  text-align: inherit !important; }
-.login div:nth-child(2) {
-  margin-top: 30px; }
-.login .error {
-  width: 100%;
-  word-wrap: break-word;
-  background-color: red;
-  color: white;
-  padding: 10px;
-  display: none; }
+  .login h1 {
+    font-size: 30px; }
+  .login input {
+    width: 100%;
+    background-color: #f7f8fa;
+    border: 1px solid #909090; }
+  .login label {
+    font-size: 14px;
+    font-weight: bold;
+    color: #909090;
+    text-align: inherit !important; }
+  .login div:nth-child(2) {
+    margin-top: 30px; }
+  .login .error {
+    width: 100%;
+    word-wrap: break-word;
+    background-color: red;
+    color: white;
+    padding: 10px;
+    display: none; }
 
 /******************************PAGE MENU******************************/
 header {
   width: 100%;
   height: 60px;
   background-color: #383838; }
-header .logo_cms {
-  width: 128px;
-  height: 40px;
-  margin-left: 30px;
-  margin-top: 10px; }
-header ul {
-  float: right;
-  display: inline-flex;
-  margin-top: 20px; }
-header ul img {
-  width: 22px;
-  height: 22px; }
-header ul li:first-child, header ul li:nth-child(2) {
-  margin-right: 30px; }
-header ul li:nth-child(3) {
-  margin-right: 25px; }
-header ul li:nth-child(2):hover .submenu {
-  position: absolute;
-  display: block;
-  background-color: #242424;
-  width: 240px;
-  height: 168px;
-  color: white;
-  margin-top: 12px;
-  padding: 21px 15px;
-  font-size: 11px; }
-header ul li:nth-child(2):hover .submenu li:first-child {
-  font-size: 14px;
-  margin-bottom: 27px; }
-header ul li:nth-child(2):hover .submenu li:nth-child(2) {
-  margin-bottom: 41px; }
-header ul li:hover {
-  border-bottom: 4px solid #e3004f;
-  padding-bottom: 8px; }
-header .submenu {
-  display: none; }
-header div {
-  float: right;
-  width: 200px;
-  color: white;
-  margin-top: 10px; }
-header div img {
-  width: 40px;
-  height: 40px;
-  float: left;
-  margin-right: 20px; }
-header div span {
-  float: left; }
-header div span:nth-child(3) {
-  color: #e3004f; }
+  header .logo_cms {
+    width: 128px;
+    height: 40px;
+    margin-left: 30px;
+    margin-top: 10px; }
+  header ul {
+    float: right;
+    display: inline-flex;
+    margin-top: 20px; }
+    header ul img {
+      width: 22px;
+      height: 22px; }
+    header ul li:first-child, header ul li:nth-child(2) {
+      margin-right: 30px; }
+    header ul li:nth-child(3) {
+      margin-right: 25px; }
+    header ul li:nth-child(2):hover .submenu {
+      position: absolute;
+      display: block;
+      background-color: #242424;
+      width: 240px;
+      height: 168px;
+      color: white;
+      margin-top: 12px;
+      padding: 21px 15px;
+      font-size: 11px; }
+    header ul li:nth-child(2):hover .submenu li:first-child {
+      font-size: 14px;
+      margin-bottom: 27px; }
+    header ul li:nth-child(2):hover .submenu li:nth-child(2) {
+      margin-bottom: 41px; }
+    header ul li:hover {
+      border-bottom: 4px solid #e3004f;
+      padding-bottom: 8px; }
+  header .submenu {
+    display: none; }
+  header div {
+    float: right;
+    width: 200px;
+    color: white;
+    margin-top: 10px; }
+    header div img {
+      width: 40px;
+      height: 40px;
+      float: left;
+      margin-right: 20px; }
+    header div span {
+      float: left; }
+    header div span:nth-child(3) {
+      color: #e3004f; }
 
 /******************************PAGE MENU - MENU GAUCHE******************************/
 aside {
@@ -442,208 +442,214 @@ aside {
   background-color: #383838;
   padding-top: 60px;
   display: block; }
-aside ul {
-  width: 210px; }
-aside ul li {
-  width: 180px;
-  float: left;
-  height: 32px;
-  padding-left: 30px; }
-aside ul li a {
-  display: block;
-  cursor: pointer;
-  width: 100%;
-  height: 32px;
-  line-height: 32px;
-  color: #909090;
-  font-size: 14px; }
-aside ul li a:hover {
-  color: #e3004f; }
-aside ul li:hover {
-  background-color: #242424; }
+  aside ul {
+    width: 210px; }
+    aside ul li {
+      width: 180px;
+      float: left;
+      height: 32px;
+      padding-left: 30px; }
+      aside ul li a {
+        display: block;
+        cursor: pointer;
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        color: #909090;
+        font-size: 14px; }
+      aside ul li a:hover {
+        color: #e3004f; }
+    aside ul li:hover {
+      background-color: #242424; }
 
 section {
   width: 60%;
   min-height: 150px;
   margin-left: 280px; }
-section h1 {
-  font-size: 32px; }
-section #menu_top_cms {
-  width: 100%; }
-section .cellule_40_cms {
-  width: 35%;
-  min-height: 50px;
-  float: left;
-  background-color: #fff;
-  margin-top: 20px;
-  border-radius: 4px;
-  padding: 30px 20px;
-  -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
-  -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
-  -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
-  box-shadow: 0px 0px 4px 0px #c0c0c0; }
-section .cellule_40_cms input, section .cellule_40_cms textarea, section .cellule_40_cms select {
-  width: 100%;
-  height: 42px;
-  line-height: 42px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  margin-bottom: 20px; }
-section .cellule_40_cms textarea {
-  max-height: 80px;
-  height: 80px;
-  width: 100%;
-  max-width: 100%; }
-section .cellule_40_cms button {
-  width: 100%;
-  height: 42px;
-  background-color: #e3004f;
-  color: #fff;
-  font-size: 14px;
-  border: none;
-  font-weight: bold;
-  cursor: pointer; }
-section .cellule_40_cms button:hover {
-  background-color: #242424; }
-section .cellule_40_cms table tr {
-  width: 100%;
-  height: 42px;
-  margin-bottom: 8px;
-  line-height: 42px; }
-section .cellule_40_cms table tr td {
-  width: 4%;
-  margin-right: 2%;
-  font-size: 14px;
-  text-align: left;
-  line-height: 16px; }
-section .cellule_60_cms {
-  width: 50%;
-  min-height: 50px;
-  float: right;
-  background-color: #fff;
-  margin-top: 20px;
-  margin-right: 2%;
-  border-radius: 4px;
-  padding: 30px 20px;
-  -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
-  -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
-  -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
-  box-shadow: 0px 0px 4px 0px #c0c0c0; }
-section .cellule_60_cms input, section .cellule_60_cms textarea, section .cellule_60_cms select {
-  width: 100%;
-  height: 42px;
-  line-height: 42px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  margin-bottom: 20px; }
-section .cellule_60_cms textarea {
-  max-height: 80px;
-  height: 80px;
-  width: 100%;
-  max-width: 100%; }
-section .cellule_60_cms button {
-  width: 100%;
-  height: 42px;
-  background-color: #e3004f;
-  color: #fff;
-  font-size: 14px;
-  border: none;
-  font-weight: bold;
-  cursor: pointer; }
-section .cellule_60_cms button:hover {
-  background-color: #242424; }
-section .cellule_60_cms table tr {
-  width: 100%;
-  height: 42px;
-  margin-bottom: 8px;
-  line-height: 42px; }
-section .cellule_60_cms table tr td {
-  width: 4%;
-  margin-right: 2%;
-  font-size: 14px;
-  text-align: left;
-  line-height: 16px; }
-section .cellule_60_cms table tr td:nth-child(2) {
-  width: 6%; }
-section .cellule_60_cms .pagination_form {
-  margin-top: 30px;
-  width: 100%; }
-section .cellule_60_cms .pagination_form li {
-  float: left;
-  margin-right: 10px; }
-section .cellule_60_cms .pagination_form li a {
-  background-color: #909090;
-  font-size: 14px;
-  padding: 8px 10px;
-  cursor: pointer;
-  text-decoration: none;
-  color: #fff;
-  border-radius: 4px; }
-section .cellule_60_cms .pagination_form li a:hover {
-  background-color: #242424; }
-section .cellule_background_cms {
-  width: 100%;
-  min-height: 50px;
-  float: left;
-  background-color: #fff;
-  margin-top: 20px;
-  border-radius: 4px;
-  padding: 30px 20px;
-  -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
-  -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
-  -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
-  box-shadow: 0px 0px 4px 0px #c0c0c0;
-  margin-bottom: 40px; }
-section .cellule_background_cms input, section .cellule_background_cms textarea, section .cellule_background_cms select {
-  width: 100%;
-  height: 42px;
-  line-height: 42px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  margin-bottom: 20px; }
-section .cellule_background_cms textarea {
-  max-height: 80px;
-  height: 80px;
-  width: 100%;
-  max-width: 100%; }
-section .cellule_background_cms .button {
-  width: 100%;
-  height: 42px;
-  background-color: #e3004f;
-  color: #fff;
-  font-size: 14px;
-  border: none;
-  font-weight: bold;
-  cursor: pointer; }
-section .cellule_background_cms .button:hover {
-  background-color: #242424; }
-section .cellule_background_cms table tr {
-  width: 100%;
-  height: 42px;
-  margin-bottom: 8px;
-  line-height: 42px; }
-section .cellule_background_cms table tr td {
-  width: 4%;
-  margin-right: 2%;
-  font-size: 14px;
-  text-align: left;
-  line-height: 16px; }
-section .cellule_background_cms .pagination_form {
-  margin-top: 30px;
-  width: 100%; }
-section .cellule_background_cms .pagination_form li {
-  float: left;
-  margin-right: 10px; }
-section .cellule_background_cms .pagination_form li a {
-  background-color: #909090;
-  font-size: 14px;
-  padding: 8px 10px;
-  cursor: pointer;
-  text-decoration: none;
-  color: #fff;
-  border-radius: 4px; }
-section .cellule_background_cms .pagination_form li a:hover {
-  background-color: #242424; }
+  section h1 {
+    font-size: 32px; }
+  section #menu_top_cms {
+    width: 100%; }
+  section .cellule_40_cms {
+    width: 35%;
+    min-height: 50px;
+    float: left;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 4px;
+    padding: 30px 20px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    section .cellule_40_cms input, section .cellule_40_cms textarea, section .cellule_40_cms select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 20px; }
+    section .cellule_40_cms textarea {
+      max-height: 80px;
+      height: 80px;
+      width: 100%;
+      max-width: 100%; }
+    section .cellule_40_cms button {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    section .cellule_40_cms button:hover {
+      background-color: #242424; }
+    section .cellule_40_cms table tr {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 8px;
+      line-height: 42px; }
+      section .cellule_40_cms table tr td {
+        width: 4%;
+        margin-right: 2%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 16px; }
+  section .cellule_60_cms {
+    width: 50%;
+    min-height: 50px;
+    float: right;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-right: 2%;
+    border-radius: 4px;
+    padding: 30px 20px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    section .cellule_60_cms input, section .cellule_60_cms textarea, section .cellule_60_cms select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 20px; }
+    section .cellule_60_cms textarea {
+      max-height: 80px;
+      height: 80px;
+      width: 100%;
+      max-width: 100%; }
+    section .cellule_60_cms button {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    section .cellule_60_cms button:hover {
+      background-color: #242424; }
+    section .cellule_60_cms table tr {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 8px;
+      line-height: 42px; }
+      section .cellule_60_cms table tr td {
+        width: 4%;
+        margin-right: 2%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 16px; }
+      section .cellule_60_cms table tr td:nth-child(2) {
+        width: 6%; }
+    section .cellule_60_cms .pagination_form {
+      margin-top: 30px;
+      width: 100%; }
+      section .cellule_60_cms .pagination_form li {
+        float: left;
+        margin-right: 10px; }
+        section .cellule_60_cms .pagination_form li a {
+          background-color: #909090;
+          font-size: 14px;
+          padding: 8px 10px;
+          cursor: pointer;
+          text-decoration: none;
+          color: #fff;
+          border-radius: 4px; }
+        section .cellule_60_cms .pagination_form li a:hover {
+          background-color: #242424; }
+  section .cellule_background_cms {
+    width: 100%;
+    min-height: 50px;
+    float: left;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 4px;
+    padding: 30px 20px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0;
+    margin-bottom: 40px; }
+    section .cellule_background_cms input, section .cellule_background_cms textarea, section .cellule_background_cms select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 20px; }
+    section .cellule_background_cms textarea {
+      max-height: 80px;
+      height: 80px;
+      width: 100%;
+      max-width: 100%; }
+    section .cellule_background_cms .bouton {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    section .cellule_background_cms .button:hover {
+      background-color: #242424; }
+    section .cellule_background_cms table tr {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 8px;
+      line-height: 42px; }
+      section .cellule_background_cms table tr td {
+        width: 4%;
+        margin-right: 2%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 16px;
+        border-bottom: 1px solid #eee }
+        section .cellule_background_cms table tr td a{
+          text-align: left;
+          margin:0;
+          padding: 0;
+        }
+    section .cellule_background_cms .pagination_form {
+      margin-top: 30px;
+      width: 100%; }
+      section .cellule_background_cms .pagination_form li {
+        float: left;
+        margin-right: 10px; }
+        section .cellule_background_cms .pagination_form li a {
+          background-color: #909090;
+          font-size: 14px;
+          padding: 8px 10px;
+          cursor: pointer;
+          text-decoration: none;
+          color: #fff;
+          border-radius: 4px; }
+        section .cellule_background_cms .pagination_form li a:hover {
+          background-color: #242424; }
 
 .btn_01 {
   font-size: 14px;
@@ -653,12 +659,55 @@ section .cellule_background_cms .pagination_form li a:hover {
   border-radius: 2px;
   margin-right: 8px;
   cursor: pointer; }
-.btn_01 img {
-  float: right;
-  display: block; }
+  .btn_01 img {
+    float: right;
+    display: block; }
 
 .btn_01:hover {
   background-color: #242424;
   color: #fff;
   text-decoration: none; }
 
+#cellule_login_background_cms {
+  width: 340px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 60px; }
+  #cellule_login_background_cms img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px; }
+  #cellule_login_background_cms #cellule_login {
+    width: 300px;
+    height: auto;
+    padding: 40px 40px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    #cellule_login_background_cms #cellule_login input, #cellule_login_background_cms #cellule_login textarea, #cellule_login_background_cms #cellule_login select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 30px; }
+    #cellule_login_background_cms #cellule_login img, #cellule_login_background_cms #cellule_login h1, #cellule_login_background_cms #cellule_login p {
+      text-align: center; }
+    #cellule_login_background_cms #cellule_login .bouton {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    #cellule_login_background_cms #cellule_login .bouton:hover {
+      background-color: #242424; }
+  #cellule_login_background_cms .motdepasse_perdu {
+    width: 100%;
+    height: 32px;
+    color: #737373;
+    margin-top: 20px;
+    display: block; }
