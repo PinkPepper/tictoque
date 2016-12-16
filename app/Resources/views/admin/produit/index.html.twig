@@ -4,50 +4,50 @@
     <section>
         <div class="menu_top_cms">
                 <h1>Produits - {{ produits|length }}</h1> 
-                <a class="btn_01" href="{{ path('produit_new') }}">Ajouter un produit</a>   
+                <a class="btn_01" href="{{ path('produit_new') }}">Ajouter un produit</a>
+        </div>   
             
 
-            <div class="cellule_background_cms">
-                <table>
-                        <tr>
-                            <td><strong>Id</strong></td>
-                            <td><strong>Nom</strong></td>
-                            <td><strong>Date Peremption</strong></td>
-                            <td><strong>Prix</strong></td>
-                            <td><strong>Quantite</strong></td>
-                            <td><strong>Actions</strong></td>
-                        </tr>
-                        {% for produit in produits %}
-                        <tr>
-                            <td>{{ produit.id }}</td>
-                            <td>{{ produit.nom|length > 20 ? produit.nom|slice(0, 20) ~ '...' : produit.nom }}</td>
-                            <td>{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</td>
-                            <td>{{ produit.prix }}</td>
-                            <td>{{ produit.quantite }}</td>
-                            <td>
-                                <ul>
-                                    <li>
-                                        <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">Voir</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('produit_edit', { 'id': produit.id }) }}">Modifier</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{ path('produit_delete_index', { 'id': produit.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</a>
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                    {% endfor %}    
-                </table>
+        <div class="cellule_background_cms">
+            <table>
+                    <tr>
+                        <td><strong>Id</strong></td>
+                        <td><strong>Nom</strong></td>
+                        <td><strong>Date Peremption</strong></td>
+                        <td><strong>Prix</strong></td>
+                        <td><strong>Quantite</strong></td>
+                        <td><strong>Actions</strong></td>
+                    </tr>
+                    {% for produit in produits %}
+                    <tr>
+                        <td>{{ produit.id }}</td>
+                        <td>{{ produit.nom|length > 20 ? produit.nom|slice(0, 20) ~ '...' : produit.nom }}</td>
+                        <td>{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ produit.prix }}</td>
+                        <td>{{ produit.quantite }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">Voir</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('produit_edit', { 'id': produit.id }) }}">Modifier</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('produit_delete_index', { 'id': produit.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}    
+            </table>
 
-                <ul class="pagination_form">
-                    <li><a>1</a></li>
-                    <li><a>2</a></li>
-                    <li><a>3</a></li>
-                    <li><a>4</a></li>
-                </ul>
-            </div>
+            <ul class="pagination_form">
+                <li><a>1</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+            </ul>
         </div>
     </section>
 {% endblock %}

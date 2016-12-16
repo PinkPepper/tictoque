@@ -1,0 +1,26 @@
+{% extends 'menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Modifier un article</h1>
+        <a class="btn_01" href="{{path('admin_blog_index')}}">Retour</a>
+        <div class="cellule_background_cms">
+
+            {{ form_start(edit_form) }}
+
+                <label>Titre</label>
+                {{ form_widget(edit_form.titre) }}
+                {{ form_errors(edit_form.titre) }}
+
+                <label>Contenu</label>
+                {{ form_widget(edit_form.contenu,{ 'attr':{ 'class': 'tiny'}})}}
+                {{ form_errors(edit_form.contenu) }}
+
+                <br>
+
+                <button class="button_p" type="submit">Modifier le produit</button>
+
+            {{ form_end(edit_form) }}
+        </div>
+    </section>
+{% endblock %}

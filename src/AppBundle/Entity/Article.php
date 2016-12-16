@@ -39,6 +39,13 @@ class Article
     private $contenu;
 
     /**
+     * @var string
+     * @Assert\NotBlank()
+     * @ORM\Column(name="metadescription", type="text")
+     */
+    private $metadescription;
+
+    /**
      * @var int
      * @ORM\ManyToOne(targetEntity="user", inversedBy="articles")
      * @ORM\JoinColumn(name="auteur", referencedColumnName="id")
@@ -50,6 +57,7 @@ class Article
      * @ORM\OneToMany(targetEntity="Commentaire", mappedBy="article", cascade={"remove"})
      */
     private $commentaires;
+
 
     /**
      * Pour obtenir un titre "je suis un titre" en "je-suis-un-titre"
