@@ -215,10 +215,6 @@ class ProduitAdminController extends Controller
      */
     public function deleteIndexAction(Request $request, Produit $produit)
     {
-       // $produit = new Produit();
-
-       // var_dump($produit);
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($produit);
         $em->flush($produit);
