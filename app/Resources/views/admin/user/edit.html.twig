@@ -48,11 +48,12 @@
 
 
 
-            <button class="button" type="submit"> Modifier l'utilisateur </button>
+            <button class="button_p" type="submit"> Modifier l'utilisateur </button>
 
             {{ form_end(edit_form) }}
+            <br>
             {{ form_start(delete_form) }}
-            <input class="button" type="submit" value="Supprimer" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">
+            <button class="button_p" type="submit" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</button>
             {{ form_end(delete_form) }}
 
             {{ form_end(edit_form) }}
