@@ -219,5 +219,21 @@ class Article
     {
         $this->commentaires = $commentaires;
     }
+
+    /**
+     * @return string
+     */
+    public function getMetadescription()
+    {
+        return $this->metadescription;
+    }
+
+    /**
+     * @param string $metadescription
+     */
+    public function setMetadescription($metadescription)
+    {
+        $this->metadescription = $metadescription;
+    }
 }
 

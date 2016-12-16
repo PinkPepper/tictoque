@@ -40,22 +40,13 @@
         <li>
             <a href="{{ path('blog_index') }}">Back to the list</a>
         </li>
-        {% if app.user is not null and ( is_granted('ROLE_ADMIN') or app.user.email == article.auteur.email ) %}
-        <li>
-            <a href="{{ path('article_edit', { 'id': article.id }) }}">Edit</a>
-        </li>
-        {% endif %}
     </ul>
 
     <h3>Liste des commentaires</h3>
     <ul>
     {% for com in article.commentaires %}
        <li>
-            <p>{{ com.contenu }} | {{ com.auteur }}
-                {% if app.user is not null and ( is_granted('ROLE_ADMIN') or app.user.email == com.auteur.email ) %}
-                | <a href="{{ path('commentaire_edit', { 'id': com.id }) }}">edit</a>
-                {% endif %}
-            </p>
+            <p>{{ com.contenu }} | {{ com.auteur }}</p>
 
        </li>
     {% endfor %}

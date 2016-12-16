@@ -19,6 +19,7 @@ class ArticleType extends AbstractType
         $builder
             ->add('titre')
             ->add('contenu', TextareaType::class)
+            ->add('metadescription')
         ;
     }
     

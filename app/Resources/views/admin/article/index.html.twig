@@ -25,11 +25,11 @@
                         <td>{% if article.createdAt %}{{ article.createdAt|date('d/m/Y') }}{% endif %}</td>
                         <td>
                             <ul>
-                                {# <li>
-                                    <a href="{{ path('admin_article_show', { 'id': article.id}) }}">Voir</a>
-                                </li> #}
                                 <li>
                                     <a href="{{ path('admin_article_edit', { 'id': article.id }) }}">Modifier</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('admin_article_delete_index', { 'id': article.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</a>
                                 </li>
                             </ul>
                         </td>

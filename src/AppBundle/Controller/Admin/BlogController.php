@@ -52,7 +52,7 @@ class BlogController extends Controller
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('article_show', array('id' => $article->getId(), 'titre' => $article->getSlug()));
+            return $this->redirectToRoute('admin_blog_index');
         }
 
         return $this->render('admin/article/new.html.twig', array(
@@ -94,7 +94,7 @@ class BlogController extends Controller
             $em->persist($article);
             $em->flush();
 
-            return $this->redirectToRoute('admin_article_edit', array('id' => $article->getId()));
+            return $this->redirectToRoute('admin_blog_index');
         }
 
         return $this->render('admin/article/edit.html.twig', array(
@@ -121,8 +121,23 @@ class BlogController extends Controller
             $em->flush();
         }
 
-        return $this->redirectToRoute('blog_index');
+        return $this->redirectToRoute('admin_blog_index');
     }
+
+    /**
+     * Deletes a Article entity.
+     *
+     * @Route("/delete/delete/{id}", name="admin_article_delete_index")
+     */
+    public function deleteIndexAction(Request $request, Article $article)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($article);
+            $em->flush();
+
+        return $this->redirectToRoute('admin_blog_index');
+    }
+
 
     /**
      * Creates a form to delete a Article entity.

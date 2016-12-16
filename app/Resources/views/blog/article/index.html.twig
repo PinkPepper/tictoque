@@ -33,11 +33,6 @@
                         <li>
                             <a href="{{ path('article_show', { 'id': article.id, 'titre': article.slug }) }}">show</a>
                         </li>
-                        <li>
-                            {% if app.user is not null %}
-                            {% if is_granted("ROLE_ADMIN") %}<a href="{{ path('article_edit', { 'id': article.id }) }}">edit</a>{% endif %}
-                            {% endif %}
-                        </li>
                     </ul>
                 </td>
             </tr>
@@ -45,11 +40,4 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
-            {% if is_granted("ROLE_ADMIN")%}
-                <a href="{{ path('article_new') }}">Créer un nouvel article</a>
-            {% endif %}
-        </li>
-    </ul>
 {% endblock %}

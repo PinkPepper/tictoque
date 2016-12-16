@@ -1,69 +1,26 @@
 {% extends 'menuAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Article</h1>
+<section>
+    <h1>Créer un article</h1>
+    <div class="cellule_background_cms">
+        {{ form_start(form) }}
+                <label>Titre</label>
+                {{ form_widget(form.titre) }}
+                {{ form_errors(form.titre) }}
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ article.titre }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ article.contenu | raw }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ article.slug }}</td>
-            </tr>
-            <tr>
-                <th>Contentchanged</th>
-                <td>{% if article.contentChanged %}{{ article.contentChanged|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{% if article.createdAt %}{{ article.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{% if article.updatedAt %}{{ article.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+                <label>Contenu</label>
+                {{ form_widget(form.contenu, { 'attr': { 'class': 'tiny'}}) }}
+                {{ form_errors(form.contenu) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('blog_index') }}">Back to the list</a>
-        </li>
-        {% if app.user is not null and ( is_granted('ROLE_ADMIN') or app.user.email == article.auteur.email ) %}
-        <li>
-            <a href="{{ path('article_edit', { 'id': article.id }) }}">Edit</a>
-        </li>
-        {% endif %}
-    </ul>
+                <br>
+                <label>Contenu de la balise meta description</label>
+                {{ form_widget(form.metadescription) }}
+                {{ form_errors(form.metadescription) }}
 
-    <h3>Liste des commentaires</h3>
-    <ul>
-    {% for com in article.commentaires %}
-       <li>
-            <p>{{ com.contenu }} | {{ com.auteur }}
-                {% if app.user is not null and ( is_granted('ROLE_ADMIN') or app.user.email == com.auteur.email ) %}
-                | <a href="{{ path('commentaire_edit', { 'id': com.id }) }}">edit</a>
-                {% endif %}
-            </p>
+                <button class="button_p" type="submit">Créer l'article</button>
+        {{ form_end(form) }}
+    </div>
 
-       </li>
-    {% endfor %}
-    </ul>
-
-    {% if app.user is not null %}
-        <a href="{{ path('commentaire_new', {'id': article.id}) }}">Ajouter un commentaire</a>
-    {% else %}
-        <p>Vous devez vous connecter pour commenter.</p>
-    {% endif %}
+</section>
 {% endblock %}
