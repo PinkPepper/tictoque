@@ -85,7 +85,7 @@ class Produit
     private $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="produits")
      */
     private $categories;
 

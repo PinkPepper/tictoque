@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\Categorie;
+use AppBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -175,4 +176,19 @@ class CategorieController extends Controller
             ->getForm()
         ;
     }
+
+    /**
+     * @Route("/categorie/enlever_produit/{categorie}/{produit}", name="categorie_enlever_produit")
+     */
+    public function enleverProduitAction(Categorie $categorie, Produit $produit)
+    {
+        $categorie->removeProduit($produit);
+        $produit->removeCategorie($categorie);
+
+        $this->getDoctrine()->getEntityManager()->flush();
+
+        return $this->redirectToRoute('admin_categorie_show', array('id'=>$categorie->getId()));
+    }
+
+
 }
