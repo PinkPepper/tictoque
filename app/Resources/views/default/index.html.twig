@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+<section>
 	{% if app.user is null %}<a href="{{ path('fos_user_security_login') }}"><h2>Connexion</h2></a>{% endif %}
 
 	{% if app.user is null %}<a href="{{ path('fos_user_registration_register') }}"><h2>S'inscrire</h2></a>{% endif %}
@@ -13,5 +13,5 @@
 	<a href="{{ path('blog_index') }}"><h2>Blog</h2></a>
 
     {% if app.user is not null %} <a href="{{ path('fos_user_security_logout') }}"> <h2>Déconnexion</h2>{% endif %}</a>
-
+</section>
 {% endblock %}

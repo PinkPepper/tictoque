@@ -40,7 +40,6 @@ class ProduitCreationType extends AbstractType
                 // query choices from this entity
                 'class' => 'AppBundle:Categorie',
                 'choice_label' => 'nom',
-
                 'multiple' => true));
     }
     /**
