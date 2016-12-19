@@ -12,6 +12,8 @@
 
 	<a href="{{ path('blog_index') }}"><h2>Blog</h2></a>
 
+	<a href="{{ path('categorie_index') }}"><h2>Les catégories et leurs produits</h2></a>
+
     {% if app.user is not null %} <a href="{{ path('fos_user_security_logout') }}"> <h2>Déconnexion</h2>{% endif %}</a>
 </section>
 {% endblock %}
