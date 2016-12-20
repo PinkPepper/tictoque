@@ -12,25 +12,25 @@
         <section class="user_login">
             <img src="{{ asset('img/logo_CMS.png') }}">
 
-            <form action="{{ path("fos_user_security_check") }}" method="post" class="login">
+            <form action="{{ path("fos_user_security_check")}}" class="login" method="post" class="login">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-                <p>
+                <div>
                     <label for="username">{{ 'Pseudo '|trans }}</label>
                     <input class="input_s" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-                </p>
+                </div>
 
-                <p>
+                <div>
                     <label for="password">{{ 'Mot de passe '|trans }}</label>
                     <input class="input_s" type="password" id="password" name="_password" required="required" />
-                </p>
+                </div>
 
-                <p>
+                <div>
                     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
                     <label for="remember_me">{{ 'Se souvenir de moi '|trans }}</label>
-                </p>
-
-                <input  class="button_p" type="submit" id="_submit" name="_submit" value="{{ 'Se connecter'|trans }}" />
+               </div>
+               <br>
+                <button  class="button_p" type="submit" id="_submit" name="_submit">Se connecter</button>
             </form>
 
 
