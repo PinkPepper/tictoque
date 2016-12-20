@@ -17,5 +17,3 @@
 .idea
 .DS_Store
 composer.lock
-!/web/produits
-/web/produits/*

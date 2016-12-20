@@ -132,6 +132,21 @@ class AdminController extends Controller
     }
 
     /**
+     * Deletes a User entity.
+     *
+     * @Route("/user/{id}/delete/delete", name="user_delete_index")
+     */
+    public function deleteIndexAction(Request $request, User $user)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($user);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_index');
+    }
+
+
+    /**
      * Creates a form to delete a User entity.
      *
      * @param User $user The User entity

@@ -1,11 +1,13 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 body {
   background-color: #f7f8fa;
-  font-family: roboto;
+  font-family: "Roboto", sans-serif;
   margin: 0; }
   body header {
     position: fixed;
     z-index: 9990; }
+  body a, body p, body h1, body h2, body h3, body h4, body h5, body h6, body label, body input, body section {
+    font-family: "Roboto", sans-serif; }
   body aside {
     position: fixed;
     bottom: 0;
@@ -27,6 +29,13 @@ body {
     display: none; }
   body table {
     font-size: 14px; }
+  body li {
+    list-style: none; }
+  body ul {
+    margin: 0px;
+    padding: 0px; }
+  body a {
+    text-decoration: none; }
 
 .pagination {
   margin: 10px; }
@@ -51,7 +60,9 @@ body {
   box-shadow: 0px 0px 4px;
   border-spacing: 10px;
   margin-top: 50px;
-  height: 380px; }
+  margin-bottom: 60px;
+  padding-bottom: 20px;
+  height: auto; }
 
 /****************************INDIQUE OU SE SITUE L'UTILISATEUR******************************/
 .nav_pos {
@@ -342,7 +353,7 @@ section {
 
 .login {
   text-align: center;
-  background-color: #ffffff;
+  background-color: white;
   padding: 30px 40px;
   margin: 0 auto;
   margin-bottom: 30px;
@@ -372,15 +383,16 @@ section {
 header {
   width: 100%;
   height: 60px;
-  background-color: #383838;
-  padding: 10px 50px; }
-  header img {
+  background-color: #383838; }
+  header .logo_cms {
     width: 128px;
-    height: 40px; }
+    height: 40px;
+    margin-left: 30px;
+    margin-top: 10px; }
   header ul {
     float: right;
     display: inline-flex;
-    margin-top: 10px; }
+    margin-top: 20px; }
     header ul img {
       width: 22px;
       height: 22px; }
@@ -404,14 +416,15 @@ header {
     header ul li:nth-child(2):hover .submenu li:nth-child(2) {
       margin-bottom: 41px; }
     header ul li:hover {
-      border-bottom: 4px solid #48d6cc;
+      border-bottom: 4px solid #e3004f;
       padding-bottom: 8px; }
   header .submenu {
     display: none; }
   header div {
     float: right;
     width: 200px;
-    color: white; }
+    color: white;
+    margin-top: 10px; }
     header div img {
       width: 40px;
       height: 40px;
@@ -420,32 +433,290 @@ header {
     header div span {
       float: left; }
     header div span:nth-child(3) {
-      color: #48d6cc; }
+      color: #e3004f; }
 
 /******************************PAGE MENU - MENU GAUCHE******************************/
 aside {
   width: 210px;
-  height: 100vh;
-  background-color: #383838; }
+  height: 90vh;
+  background-color: #383838;
+  padding-top: 60px;
+  display: block; }
   aside ul {
-    margin: 0; }
-    aside ul a {
-      color: #909090 !important; }
-    aside ul a:hover {
-      color: #48d6cc !important;
-      cursor: hand; }
-    aside ul a:nth-child(6) li {
-      margin-bottom: 40px; }
-    aside ul a:nth-child(9) li {
-      margin-bottom: 40px; }
-  aside li:first-child {
-    padding-right: 10px; }
-  aside li {
-    /*padding-bottom: 20px;*/
-    padding-left: 25px;
-    height: 32px;
-    padding-top: 5px; }
-  aside li:hover {
-    background-color: #242424; }
+    width: 210px; }
+    aside ul li {
+      width: 180px;
+      float: left;
+      height: 32px;
+      padding-left: 30px; }
+      aside ul li a {
+        display: block;
+        cursor: pointer;
+        width: 100%;
+        height: 32px;
+        line-height: 32px;
+        color: #909090;
+        font-size: 14px; }
+      aside ul li a:hover {
+        color: #e3004f; }
+    aside ul li:hover {
+      background-color: #242424; }
 
-/*# sourceMappingURL=style.css.map */
+section {
+  width: 70%;
+  min-height: 150px;
+  margin-left: 280px; }
+  section h1 {
+    font-size: 32px; }
+  section #menu_top_cms {
+    width: 100%; }
+  section .cellule_40_cms {
+    width: 35%;
+    min-height: 50px;
+    float: left;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 4px;
+    padding: 30px 20px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    section .cellule_40_cms input, section .cellule_40_cms textarea, section .cellule_40_cms select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 20px; }
+    section .cellule_40_cms textarea {
+      max-height: 80px;
+      height: 80px;
+      width: 100%;
+      max-width: 100%; }
+    section .cellule_40_cms button {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    section .cellule_40_cms button:hover {
+      background-color: #242424; }
+    section .cellule_40_cms table tr {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 8px;
+      line-height: 42px; }
+      section .cellule_40_cms table tr td {
+        width: 4%;
+        margin-right: 2%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 16px; }
+  section .cellule_60_cms {
+    width: 50%;
+    min-height: 50px;
+    float: right;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-right: 2%;
+    border-radius: 4px;
+    padding: 30px 20px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    section .cellule_60_cms input, section .cellule_60_cms textarea, section .cellule_60_cms select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 20px; }
+    section .cellule_60_cms textarea {
+      max-height: 80px;
+      height: 80px;
+      width: 100%;
+      max-width: 100%; }
+    section .cellule_60_cms button {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    section .cellule_60_cms button:hover {
+      background-color: #242424; }
+    section .cellule_60_cms table tr {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 8px;
+      line-height: 42px; 
+      }
+      section .cellule_60_cms table tr td {
+        width: 4%;
+        margin-right: 2%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 16px; 
+        border-bottom: 1px solid #eee;}
+        section .cellule_60_cms table tr td a{
+          text-align: left;
+          margin:0;
+          padding: 0;
+        }
+      section .cellule_60_cms table tr td:nth-child(2) {
+        width: 6%; }
+    section .cellule_60_cms .pagination_form {
+      margin-top: 30px;
+      width: 100%; }
+      section .cellule_60_cms .pagination_form li {
+        float: left;
+        margin-right: 10px; }
+        section .cellule_60_cms .pagination_form li a {
+          background-color: #909090;
+          font-size: 14px;
+          padding: 8px 10px;
+          cursor: pointer;
+          text-decoration: none;
+          color: #fff;
+          border-radius: 4px; }
+        section .cellule_60_cms .pagination_form li a:hover {
+          background-color: #242424; }
+  section .cellule_background_cms {
+    width: 100%;
+    min-height: 50px;
+    float: left;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 4px;
+    padding: 30px 20px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0;
+    margin-bottom: 40px; }
+    section .cellule_background_cms input, section .cellule_background_cms textarea, section .cellule_background_cms select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 20px; }
+    section .cellule_background_cms textarea {
+      max-height: 80px;
+      height: 80px;
+      width: 100%;
+      max-width: 100%; }
+    section .cellule_background_cms .bouton {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    section .cellule_background_cms .button:hover {
+      background-color: #242424; }
+    section .cellule_background_cms table tr {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 8px;
+      line-height: 42px;
+       }
+      section .cellule_background_cms table tr td {
+        width: 4%;
+        margin-right: 2%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 16px;
+        border-bottom: 1px solid #eee;
+         }
+        section .cellule_background_cms table tr td a{
+          text-align: left;
+          margin:0;
+          padding: 0;
+        }
+    section .cellule_background_cms .pagination_form {
+      margin-top: 30px;
+      width: 100%; }
+      section .cellule_background_cms .pagination_form li {
+        float: left;
+        margin-right: 10px; }
+        section .cellule_background_cms .pagination_form li a {
+          background-color: #909090;
+          font-size: 14px;
+          padding: 8px 10px;
+          cursor: pointer;
+          text-decoration: none;
+          color: #fff;
+          border-radius: 4px; }
+        section .cellule_background_cms .pagination_form li a:hover {
+          background-color: #242424; }
+
+.btn_01 {
+  font-size: 14px;
+  padding: 6px 12px;
+  background-color: #e3004f;
+  color: #fff;
+  border-radius: 2px;
+  margin-right: 8px;
+  cursor: pointer; }
+  .btn_01 img {
+    float: right;
+    display: block; }
+
+.btn_01:hover {
+  background-color: #242424;
+  color: #fff;
+  text-decoration: none; }
+
+#cellule_login_background_cms {
+  width: 340px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 60px; }
+  #cellule_login_background_cms img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px; }
+  #cellule_login_background_cms #cellule_login {
+    width: 300px;
+    height: auto;
+    padding: 40px 40px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    #cellule_login_background_cms #cellule_login input, #cellule_login_background_cms #cellule_login textarea, #cellule_login_background_cms #cellule_login select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 30px; }
+    #cellule_login_background_cms #cellule_login img, #cellule_login_background_cms #cellule_login h1, #cellule_login_background_cms #cellule_login p {
+      text-align: center; }
+    #cellule_login_background_cms #cellule_login .bouton {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    #cellule_login_background_cms #cellule_login .bouton:hover {
+      background-color: #242424; }
+  #cellule_login_background_cms .motdepasse_perdu {
+    width: 100%;
+    height: 32px;
+    color: #737373;
+    margin-top: 20px;
+    display: block; }

@@ -1,63 +1,53 @@
 {% extends 'menuAdmin.html.twig' %}
 
 {% block body %}
-    <section class="user_content">
-
-    <content>
-
-        <div class="nav_pos">
-            <h1>Produits</h1> 
-            <p>({{ produits|length }})</p>
-        </div>
-
-        <div class="user_interact">
-            <button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button>
-            <a href="{{ path('produit_new') }}"><button class="button_p add_product">Ajouter un produit<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>   
-        </div>
+    <section>
+        <div class="menu_top_cms">
+                <h1>Produits - {{ produits|length }}</h1> 
+                <a class="btn_01" href="{{ path('produit_new') }}">Ajouter un produit</a>
+        </div>   
             
-    </content>
 
-    <div class="gestion_tab">
-        <table class="tab_user">
-                <tr>
-                    <th>Id</th>
-                    <th>Nom</th>
-                    <th>Description</th>
-                    <th>Dateperemption</th>
-                    <th>Prix</th>
-                    <th>Quantite</th>
-                    <th>Actions</th>
-                </tr>
-                {% for produit in produits %}
-                <tr>
-                    <th class="user_check">
-                        <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">{{ produit.id }}</a>
-                    </th>
-                    <th class="produit_nom">{{ produit.nom }}</th>
-                    <th>{{ produit.description }}</th>
-                    <th class="produit_date">{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</th>
-                    <th>{{ produit.prix }}</th>
-                    <th class="produit_qt">{{ produit.quantite }}</th>
-                    <th>
-                        <ul>
-                            <li>
-                                <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">Voir</a>
-                            </li>
-                            <li>
-                                <a class="produit_edit" href="{{ path('produit_edit', { 'id': produit.id }) }}">Modifier</a>
-                            </li>
-                        </ul>
-                    </th>
-                </tr>
-            {% endfor %}    
-        </table>
+        <div class="cellule_background_cms">
+            <table>
+                    <tr>
+                        <td><strong>Id</strong></td>
+                        <td><strong>Nom</strong></td>
+                        <td><strong>Date Peremption</strong></td>
+                        <td><strong>Prix</strong></td>
+                        <td><strong>Quantite</strong></td>
+                        <td><strong>Actions</strong></td>
+                    </tr>
+                    {% for produit in produits %}
+                    <tr>
+                        <td>{{ produit.id }}</td>
+                        <td>{{ produit.nom|length > 20 ? produit.nom|slice(0, 20) ~ '...' : produit.nom }}</td>
+                        <td>{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</td>
+                        <td>{{ produit.prix }}</td>
+                        <td>{{ produit.quantite }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('produit_show_admin', { 'id': produit.id }) }}">Voir</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('produit_edit', { 'id': produit.id }) }}">Modifier</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('produit_delete_index', { 'id': produit.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}    
+            </table>
 
-        <ul class="pagination">
-            <li><a class="user_page">1</a></li>
-            <li><a class="user_page">2</a></li>
-            <li><a class="user_page">3</a></li>
-            <li><a class="user_page">4</a></li>
-        </ul>
-    </div>
+            <ul class="pagination_form">
+                <li><a>1</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+            </ul>
+        </div>
     </section>
 {% endblock %}

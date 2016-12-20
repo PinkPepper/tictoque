@@ -1,57 +1,58 @@
 {% extends 'menuAdmin.html.twig' %}
 
 {% block body %}
-    <section class="user_content">
-
-        <content>
-            <div class="nav_pos">
-                <h1>Catégories</h1>
-            </div>
-            <div class="user_interact">
-                <button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg')}}"></button>
-            </div>
-        </content>
-
-        {{ form_start(form) }}
-        <div class="categories_menu">
-            <label>Nom de la catégorie</label>
-            <div>
-                {{ form_widget(form.nom) }}
-                {{ form_errors(form.nom) }}
-            </div>
-
-            <label>Description</label>
-            <div>
-                {{ form_widget(form.description,{ 'attr': {'class': 'categories_desc'}}) }}
-                {{ form_errors(form.description) }}
-            </div>
-            <button class="button_p" type="submit">Ajouter la catégorie</button>
+    <section>
+        <div class="menu_top_cms">
+            <h1>Catégories</h1>
         </div>
-        {{ form_end(form) }}
 
-        <div class="categories_tab">
+        
+        <div class="cellule_60_cms">
             <table>
                 <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Decription</th>
-                    <th>Action</th>
+                    <td>ID</td>
+                    <td>Nom</td>
+                    <td>Action</td>
                 </tr>
                 {% for categorie in categories %}
                     <tr>
-                        <th class="info">{{categorie.id}}</th>
-                        <th>{{categorie.nom}}</th>
-                        <th class="info"> {{ categorie.description|length > 20 ? categorie.description|slice(0, 20) ~ '...' : categorie.description  }}</th>
-                        <th class="info">
-                            <a href="{{ path('admin_categorie_edit',{'id': categorie.id})}}" class="">Modifier</a>
-                            |
-                            <a href="{{ path('admin_categorie_show',{'id': categorie.id})}}" class="">Voir</a>
-                        </th>
-
+                        <td>{{categorie.id}}</td>
+                        <td>{{categorie.nom}}</td>
+                        <td>
+                            <ul>
+                                <li>   
+                                    <a href="{{ path('admin_categorie_edit',{'id': categorie.id})}}">Modifier</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('admin_categorie_show',{'id': categorie.id})}}">Voir</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('admin_categorie_delete_index',{'id': categorie.id})}}" onclick="return confirm('Voulez-vous vraiment supprimer cette catégorie ? (Les produits associés ne seront pas supprimés.)')">Supprimer</a>
+                                </li>
+                            </ul>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
         </div>
+
+        <div class="cellule_40_cms">
+            {{ form_start(form) }}
+            <label>Nom de la catégorie</label>
+            {{ form_widget(form.nom) }}
+            {{ form_errors(form.nom) }}
+
+            <label>Description</label>
+            {{ form_widget(form.description) }}
+            {{ form_errors(form.description) }}
+            <button class="button_p" type="submit">Ajouter la catégorie</button>
+            {{ form_end(form) }}
+        </div>
     </section>
 {% endblock %}
+
+
+{# 
+
+#}
 

@@ -85,14 +85,16 @@ class Produit
     private $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="produits")
      */
     private $categories;
+
+    private $cat;
 
     use TraitUploadImage;
     public function getUploadDir()
     {
-        return 'produits/';
+        return 'produits';
     }
 
     /**
@@ -336,6 +338,22 @@ class Produit
     public function __construct()
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCat()
+    {
+        return $this->cat;
+    }
+
+    /**
+     * @param mixed $cat
+     */
+    public function setCat($cat)
+    {
+        $this->cat = $cat;
     }
 }
 

@@ -1,21 +1,22 @@
 {% extends 'menuAdmin.html.twig' %}
 
 {% block body %}
-    <h1>Categorie edit</h1>
+    <section>
+        <h1>Modifier une catégorie</h1>
+        <a class="btn_01" href="{{path('admin_categorie_index')}}">Retour</a>
+        <div class="cellule_background_cms">
+            {{ form_start(edit_form) }}
 
-    {{ form_start(edit_form) }}
-        {{ form_widget(edit_form) }}
-        <input type="submit" value="Edit" />
-    {{ form_end(edit_form) }}
+            <label>Nom</label>
+            {{ form_widget(edit_form.nom) }}
+            {{ form_errors(edit_form.nom) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('admin_categorie_index') }}">Back to the list</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+            <label>Description</label>
+            {{ form_widget(edit_form.description) }}
+            {{ form_errors(edit_form.description) }}
+
+            <button class="button_p" type="submit">Modifier la catégorie</button>
+
+            {{ form_end(edit_form) }}
+        </div>
 {% endblock %}

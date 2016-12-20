@@ -1,82 +1,66 @@
 {% extends 'menuAdmin.html.twig' %}
 
 {% block body %}
-    <section class="user_content" id="user_profile">
-        
-        <content>
+    <section>
+        <h1>Modifier un utilisateur</h1>
+        <a class="btn_01" href="{{ path('admin_index') }}" >Retour</a>
 
-        <div class="nav_pos">
-            <h1>Modifier un utilisateur</h1> 
-            <!--<p>(4)</p>-->
-        </div>
+        <div class="cellule_background_cms">
+            {{ form_start(edit_form, { 'attr': {'class': 'form-group' } }) }}
 
-        <div class="user_interact">
-            <a href="{{ path('admin_index') }}" ><button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>
-
-            <!--<input type="text" name="search" placeholder="Search..."></input>-->
-
-        </div>
-            
-        </content>
-    <container>
-    <div class="user_form">
-    {{ form_start(edit_form) }}
-
-        <label>Nom</label>
-        <label id="user_lastname">Prénom</label>
-        <div id="user_fl">                  
+            <label>Nom</label>
             {{ form_widget(edit_form.nom) }}
             {{ form_errors(edit_form.nom) }}
 
+            <label>Prénom</label>
             {{ form_widget(edit_form.prenom) }}
             {{ form_errors(edit_form.prenom) }}
-        </div>
-        
-        <label>Username</label>
-        <div id="user_mail">
-            {{ form_widget(edit_form.username, {'id':'user_mail'}) }}
-            {{ form_errors(edit_form.username) }}   
-        </div>
 
-        <label>Image</label>
-        <div id="user_adress">
+
+            <label>Username</label>
+            {{ form_widget(edit_form.username, {'id':'user_mail'}) }}
+            {{ form_errors(edit_form.username) }}
+
+
+            <label>Image</label>
             {{ form_widget(edit_form.file) }}
             {{ form_errors(edit_form.file) }}
-        </div>
-        
-        <label>Email</label>
-        <div id="user_mail">
+
+
+            <label>Email</label>
             {{ form_widget(edit_form.email) }}
             {{ form_errors(edit_form.email) }}
-        </div>
 
-        <label>Téléphone</label>
-        <div id="user_tel">
+
+            <label>Téléphone</label>
             {{ form_widget(edit_form.telephone) }}
             {{ form_errors(edit_form.telephone) }}
-        </div>
 
-        <label>Mot de passe</label>
-        <div id="user_password">
+
+            <label>Mot de passe</label>
             {{ form_widget(edit_form.plainPassword.first) }}
             {{ form_errors(edit_form.plainPassword.first) }}
-        </div>
 
-        <label>Retapez votre mot de passe</label>
-        <div id="user_password">
+
+            <label>Retapez votre mot de passe</label>
             {{ form_widget(edit_form.plainPassword.second) }}
             {{ form_errors(edit_form.plainPassword.second) }}
+
+
+
+            <button class="button_p" type="submit"> Modifier l'utilisateur </button>
+
+            {{ form_end(edit_form) }}
+            <br>
+            {{ form_start(delete_form) }}
+            <button class="button_p" type="submit" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</button>
+            {{ form_end(delete_form) }}
+
+            {{ form_end(edit_form) }}
         </div>
-        
-
-        <input class="button_m" type="submit" value="Modifier l'utilisateur" />
-    {{ form_end(edit_form) }}
-    {{ form_start(delete_form) }}
-        <input class="button_m" type="submit" value="Delete">
-    {{ form_end(delete_form) }}
-    <div>
-    </container>
-
     </section>
 
 {% endblock %}
+
+
+

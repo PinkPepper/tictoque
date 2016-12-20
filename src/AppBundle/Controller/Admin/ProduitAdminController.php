@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Admin;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Produit;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -42,11 +43,26 @@ class ProduitAdminController extends Controller
     public function newAction(Request $request)
     {
         $produit = new Produit();
-        $form = $this->createForm('AppBundle\Form\ProduitType', $produit);
+        $form = $this->createForm('AppBundle\Form\ProduitCreationType', $produit);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid())
+        {
             $produit->setAllergenes(null);
+
+            //$tmp = new Entity();
+            //$tmp = $form->getData();
+            $tmp = $form["cat"]->getData();
+            for ($i=0; $i< sizeof($tmp); $i++)
+            {
+                $produit->addCategorie($tmp[$i]);
+                $tmp[$i]->addProduit($produit);
+            }
+
+            //$b = $tmp[0];
+            //var_dump($b);
+
+
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
@@ -162,11 +178,14 @@ class ProduitAdminController extends Controller
      */
     public function deleteAllergene(Produit $produit, $allergene)
     {
-        $diff = array_diff($produit->getAllergenes(), array($allergene));
 
-        $produit->setAllergenes($diff);
-        $this->getDoctrine()->getManager()->flush();
+        if ($produit->getAllergenes() != null)
+        {
+            $diff = array_diff($produit->getAllergenes(), array($allergene));
 
+            $produit->setAllergenes($diff);
+            $this->getDoctrine()->getManager()->flush();
+        }
         return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
     }
 
@@ -187,6 +206,18 @@ class ProduitAdminController extends Controller
             $em->remove($produit);
             $em->flush($produit);
         }
+
+        return $this->redirectToRoute('produit_index_admin');
+    }
+
+    /**
+     * @Route("/delete/delete/{id}", name="produit_delete_index")
+     */
+    public function deleteIndexAction(Request $request, Produit $produit)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($produit);
+        $em->flush($produit);
 
         return $this->redirectToRoute('produit_index_admin');
     }

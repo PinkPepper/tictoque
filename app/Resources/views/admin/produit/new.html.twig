@@ -1,69 +1,52 @@
 {% extends 'menuAdmin.html.twig' %}
 
 {% block body %}
-    <section class="user_content">
-    <content>
-        <div class="nav_pos">
-            <h1>Ajouter un produit</h1> 
-        </div>
-        <div class="user_interact">
-            <a href="{{path('produit_index_admin')}}"><button class="button_p">Retour<img type="svg" src="{{asset('img/puce-right.svg')}}"></button></a>
-        </div>
-    </content>
+    <section>
+        <h1>Ajouter un produit</h1>
+        <a class="btn_01" href="{{path('produit_index_admin')}}">Retour</a>
 
-    <container>
-        <div class="user_form product_form">  
+        <div class="cellule_background_cms">
 
             {{ form_start(form) }}
 
-                <label>Nom</label>
-                <div class="product_name">
-                {{ form_widget(form.nom) }}
-                {{ form_errors(form.nom) }}
-                </div>
+            <label>Nom</label>
+            {{ form_widget(form.nom) }}
+            {{ form_errors(form.nom) }}
 
-                <label>Description</label>
-                <div class="product_desc">
-                {{ form_widget(form.description, { 'attr': { 'class': 'tiny'}}) }}
-                {{ form_errors(form.description) }}
-                </div>
+            <label>Description</label>
+            {{ form_widget(form.description, { 'attr': { 'class': 'tiny'}}) }}
+            {{ form_errors(form.description) }}
 
 
-                <label>Type</label>
-                <div class="product_type">
-                {{ form_widget(form.type) }}
-                {{  form_errors(form.type) }}
-                </div>
+            <label>Type</label>
+            {{ form_widget(form.type) }}
+            {{  form_errors(form.type) }}
 
-                <label>DatePeremption</label>
-                <div class="product_per">
-                {{ form_widget(form.datePeremption) }}
-                {{  form_errors(form.datePeremption) }}
-                </div>
+            <label>DatePeremption</label>
+            {{ form_widget(form.datePeremption) }}
+            {{  form_errors(form.datePeremption) }}
 
-                <label>Prix</label>
-                <div class="product_price"> 
-                {{ form_widget(form.prix) }}
-                {{  form_errors(form.prix) }}
-                </div>
+            <label>Prix</label>
+            {{ form_widget(form.prix) }}
+            {{  form_errors(form.prix) }}
 
-                <label>Quantité</label>
-                <div class="product_qt">
-                {{ form_widget(form.quantite) }}
-                {{  form_errors(form.quantite) }}
-                </div>
+            <label>Quantité</label>
+            {{ form_widget(form.quantite) }}
+            {{  form_errors(form.quantite) }}
 
-                <label>Image</label>
-                <div  class="product_pic">
-                {{ form_widget(form.file) }}
-                {{  form_errors(form.file) }}
-                </div>
+            <label>Image</label>
+            {{ form_widget(form.file) }}
+            {{  form_errors(form.file) }}
 
-                <button class="button_p" type="submit">Créer le produit</button>
+            <label>Catégorie</label>
+            {{ form_widget(form.cat) }}
+            {{ form_errors(form.cat) }}
+
+            <button class="button_p" type="submit">Créer le produit</button>
 
             {{ form_end(form) }}
 
         </div>
-    </container>
     </section>
 {% endblock %}
+
