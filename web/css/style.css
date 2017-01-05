@@ -334,18 +334,22 @@ container .user_pagination th {
 
 /******************************BLOCS LOGIN******************************/
 .user_login {
-  display: block; }
+  display: block; 
+  text-align: center;
+}
 
 section {
   width: 100%;
   margin: 0 auto;
   width: 350px;
   margin-top: 60px; }
-  section img {
+  section img 
+  {
     display: block;
-    float: left;
-    margin: 0 auto;
-    margin-right:15px ;}
+    float: none!important;
+    margin: 0 auto!important;
+    padding-bottom: 40px;
+  }
   section a {
     color: #909090;
     padding: 30px 40px; }
