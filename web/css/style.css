@@ -336,6 +336,8 @@ container .user_pagination th {
 .user_login {
   display: block; 
   text-align: center;
+  margin: 0 auto;
+  padding-top: 50px;
 }
 
 section {
