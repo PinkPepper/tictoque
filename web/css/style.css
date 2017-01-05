@@ -630,7 +630,7 @@ section {
     section .cellule_background_cms input, section .cellule_background_cms textarea, section .cellule_background_cms select {
       width: 100%;
       height: 42px;
-      line-height: 42px;
+      /*line-height: 42px;*/
       background-color: #fff;
       margin-bottom: 20px; }
     section .cellule_background_cms textarea {
