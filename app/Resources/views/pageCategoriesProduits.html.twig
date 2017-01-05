@@ -4,12 +4,20 @@
     <section>
 
         {% block categories %}
+
             {% for categorie in categories %}
-                <a href="{{ path('categorie_show',{'id': categorie.id})}}"><p>{{categorie.nom}}</p></a>
+                <div>
+                <a href="{{ path('categorie_show',{'id': categorie.id})}}">{{categorie.nom}}</a>
+                <br>
                 {% if categorie.image != "" %}
-                    <img src=" {{ asset('categories/' ~ categorie.image ) }} " style="width: 10%; height: auto"></img>
+                    <a href="{{ path('categorie_show',{'id': categorie.id})}}">
+                        <img src=" {{ asset('categories/' ~ categorie.image ) }} " style="width: 10%; height: auto">
+                    </a>
                 {% endif %}
+                <br>
+                </div>
             {% endfor %}
+
         {% endblock %}
 
         {% block produits %}{% endblock %}
