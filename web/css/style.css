@@ -365,11 +365,11 @@ section {
   margin-top: 60px; }
   section img {
     display: block;
+    float: left;
     margin: 0 auto;
-    margin-bottom: 40px; }
+    margin-right:15px ;}
   section a {
-    color: #909090;
-    padding: 30px 40px; }
+    color: #909090;}
   section a:hover {
     text-decoration: underline; }
 
@@ -538,7 +538,8 @@ section {
         width: 4%;
         margin-right: 2%;
         font-size: 14px;
-        text-align: left; }
+        text-align: left; 
+        border-bottom: 1px #eee solid}
     section .cellule_background_cms .pagination_form {
       margin-top: 30px;
       width: 100%; }
@@ -573,4 +574,55 @@ section {
   color: #fff;
   text-decoration: none; }
 
-/*# sourceMappingURL=style.css.map */
+#cellule_login_background_cms {
+  width: 340px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 60px; }
+  #cellule_login_background_cms img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px; }
+  #cellule_login_background_cms #cellule_login {
+    width: 300px;
+    height: auto;
+    padding: 40px 40px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    #cellule_login_background_cms #cellule_login input, #cellule_login_background_cms #cellule_login textarea, #cellule_login_background_cms #cellule_login select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 30px; }
+    #cellule_login_background_cms #cellule_login img, #cellule_login_background_cms #cellule_login h1, #cellule_login_background_cms #cellule_login p {
+      text-align: center; }
+    #cellule_login_background_cms #cellule_login .bouton {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    #cellule_login_background_cms #cellule_login .bouton:hover {
+      background-color: #242424; }
+  #cellule_login_background_cms .motdepasse_perdu {
+    width: 100%;
+    height: 32px;
+    color: #737373;
+    margin-top: 20px;
+    display: block; }
+
+
+.sizePicto{
+  height: 24px;
+}
+
+.sizePicto:hover{
+  opacity: 0.6;
+}

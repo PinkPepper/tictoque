@@ -32,13 +32,13 @@
 					<td>
 						<ul>
 							<li>
-								<a href="{{ path('user_edit' ,{ 'id': user.id }) }}" class="user_modif">Modifier</a>
+								<a href="{{ path('user_edit' ,{ 'id': user.id }) }}" class="user_modif"><img class="sizePicto" src="{{ asset('img/edit.svg') }}"></a>
 							</li>
 							<li>
-								<a href="{{ path('user_show', { 'id': user.id }) }}" class="user_show">Afficher<a>
+								<a href="{{ path('user_show', { 'id': user.id }) }}" class="user_show"><img class="sizePicto" src="{{ asset('img/profile.svg')}}"><a>
 							</li>
 							<li>
-								<a href="{{ path('user_delete_index', { 'id': user.id }) }}" class="user_show" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer<a>
+								<a href="{{ path('user_delete_index', { 'id': user.id }) }}" class="user_show" onclick="return confirm('Voulez-vous vraiment le supprimer ?')"><img class="sizePicto" src="{{ asset('img/delete.svg')}}"><a>
 							</li>
 						</ul>
 					</td>
