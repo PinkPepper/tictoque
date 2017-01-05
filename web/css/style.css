@@ -367,10 +367,15 @@ section {
   width: 300px; }
   .login h1 {
     font-size: 30px; }
-  .login input {
+  .login input 
+  {
     width: 100%;
     background-color: #f7f8fa;
-    border: 1px solid #909090; }
+    border: 1px solid #909090; 
+    margin-top: 5px;
+    height: 25px;
+    margin-bottom: 15px;
+  }
   .login label {
     font-size: 14px;
     font-weight: bold;
@@ -378,6 +383,13 @@ section {
     text-align: inherit !important; }
   .login div:nth-child(2) {
     margin-top: 30px; }
+
+  .login div:last-child input
+  {
+    display: inline-block;
+    width: 10%;
+  }
+
   .login .error {
     width: 100%;
     word-wrap: break-word;
@@ -403,6 +415,12 @@ header {
     header ul img {
       width: 22px;
       height: 22px; }
+    
+    header ul li a
+    {
+      color: #ffffff;
+    }
+
     header ul li:first-child, header ul li:nth-child(2) {
       margin-right: 30px; }
     header ul li:nth-child(3) {
@@ -492,7 +510,7 @@ section {
     section .cellule_40_cms input, section .cellule_40_cms textarea, section .cellule_40_cms select {
       width: 100%;
       height: 42px;
-      line-height: 42px;
+      /*line-height: 42px;*/    /*Casse le style des inputs*/
       background-color: #fff;
       border: 1px solid #ccc;
       margin-bottom: 20px; }
@@ -730,7 +748,10 @@ section {
 
 
 .sizePicto{
-  height: 24px;
+height: 24px;
+float: left !important;
+margin: 0px auto !important;
+margin-right: 15px !important;
 }
 
 .sizePicto:hover{
