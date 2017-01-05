@@ -1,15 +1,13 @@
-@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url(https://fonts.googleapis.com/css?family=Roboto);
 body {
   background-color: #f7f8fa;
   font-family: "Roboto", sans-serif;
   margin: 0; }
-  body a, body p, body h1, body h2, body h3, body h4, body h5, body h6, body label, body input, body section, body textarea {
-    font-family: "Roboto", sans-serif; }
   body header {
     position: fixed;
     z-index: 9990; }
-    body header ul li a {
-      color: #ffffff; }
+  body a, body p, body h1, body h2, body h3, body h4, body h5, body h6, body label, body input, body section {
+    font-family: "Roboto", sans-serif; }
   body aside {
     position: fixed;
     bottom: 0;
@@ -104,15 +102,15 @@ body {
     position: relative;
     left: 0;
     opacity: 1; }
-  .user_content table tbody > tr > td:nth-child(2), .user_content table tbody > tr > td:nth-child(4), .user_content table tbody > tr > td:nth-child(5), .user_content table tbody > tr > td:nth-child(6) {
+  .user_content table tbody > tr > th:nth-child(2), .user_content table tbody > tr > th:nth-child(4), .user_content table tbody > tr > th:nth-child(5), .user_content table tbody > tr > th:nth-child(6) {
     color: #909090; }
-  .user_content table tbody > tr > td:nth-child(2) div {
+  .user_content table tbody > tr > th:nth-child(3) div {
     font-size: 11px;
     padding-top: 3px; }
-    .user_content table tbody > tr > td:nth-child(2) div a {
+    .user_content table tbody > tr > th:nth-child(3) div a {
       color: #909090;
       font-weight: 400; }
-    .user_content table tbody > tr > td:nth-child(2) div a:nth-child(2) {
+    .user_content table tbody > tr > th:nth-child(3) div a:nth-child(2) {
       color: red; }
 
 /*************************************AJOUT PRODUIT*****************************************/
@@ -232,8 +230,7 @@ container .user_pagination th {
   border: none;
   color: white;
   height: 3rem;
-  width: 100%;
-  cursor: pointer; }
+  width: 100%; }
 
 .button_p:hover {
   background-color: #aa003b; }
@@ -242,23 +239,6 @@ container .user_pagination th {
   margin-top: 0; }
 
 /*************************MODIF UTILISATEUR******************************/
-.user_pic.product_pic {
-  width: 120px;
-  height: 120px;
-  background-color: #e3004f;
-  margin-bottom: 15px; }
-
-#user_name {
-  line-height: 0; }
-  #user_name div {
-    font-size: smaller;
-    display: inline-flex;
-    padding: 15px 0px; }
-    #user_name div a {
-      text-decoration: none;
-      padding: 0;
-      cursor: pointer; }
-
 .user_form {
   width: 650px;
   margin-top: 50px;
@@ -354,21 +334,22 @@ container .user_pagination th {
 
 /******************************BLOCS LOGIN******************************/
 .user_login {
-  display: block;
+  display: block; 
   text-align: center;
-  margin: 0 auto !important;
-  float: none !important;
-  padding: 40px; }
+}
 
 section {
   width: 100%;
   margin: 0 auto;
   width: 350px;
   margin-top: 60px; }
-  section img {
+  section img 
+  {
     display: block;
-    margin: 0 auto;
-    margin-bottom: 40px; }
+    float: none!important;
+    margin: 0 auto!important;
+    padding-bottom: 40px;
+  }
   section a {
     color: #909090;
     padding: 30px 40px; }
@@ -377,7 +358,7 @@ section {
 
 .login {
   text-align: center;
-  background-color: #ffffff;
+  background-color: white;
   padding: 30px 40px;
   margin: 0 auto;
   margin-bottom: 30px;
@@ -440,7 +421,7 @@ header {
     header ul li:nth-child(2):hover .submenu li:nth-child(2) {
       margin-bottom: 41px; }
     header ul li:hover {
-      border-bottom: 4px solid #48d6cc;
+      border-bottom: 4px solid #e3004f;
       padding-bottom: 8px; }
   header .submenu {
     display: none; }
@@ -457,7 +438,7 @@ header {
     header div span {
       float: left; }
     header div span:nth-child(3) {
-      color: #48d6cc; }
+      color: #e3004f; }
 
 /******************************PAGE MENU - MENU GAUCHE******************************/
 aside {
@@ -482,18 +463,136 @@ aside {
         color: #909090;
         font-size: 14px; }
       aside ul li a:hover {
-        color: #48d6cc; }
+        color: #e3004f; }
     aside ul li:hover {
       background-color: #242424; }
 
 section {
-  width: 60%;
+  width: 70%;
   min-height: 150px;
   margin-left: 280px; }
   section h1 {
     font-size: 32px; }
   section #menu_top_cms {
     width: 100%; }
+  section .cellule_40_cms {
+    width: 35%;
+    min-height: 50px;
+    float: left;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 4px;
+    padding: 30px 20px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    section .cellule_40_cms input, section .cellule_40_cms textarea, section .cellule_40_cms select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 20px; }
+    section .cellule_40_cms textarea {
+      max-height: 80px;
+      height: 80px;
+      width: 100%;
+      max-width: 100%; }
+    section .cellule_40_cms button {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    section .cellule_40_cms button:hover {
+      background-color: #242424; }
+    section .cellule_40_cms table tr {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 8px;
+      line-height: 42px; }
+      section .cellule_40_cms table tr td {
+        width: 4%;
+        margin-right: 2%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 16px; }
+  section .cellule_60_cms {
+    width: 50%;
+    min-height: 50px;
+    float: right;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-right: 2%;
+    border-radius: 4px;
+    padding: 30px 20px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    section .cellule_60_cms input, section .cellule_60_cms textarea, section .cellule_60_cms select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 20px; }
+    section .cellule_60_cms textarea {
+      max-height: 80px;
+      height: 80px;
+      width: 100%;
+      max-width: 100%; }
+    section .cellule_60_cms button {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    section .cellule_60_cms button:hover {
+      background-color: #242424; }
+    section .cellule_60_cms table tr {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 8px;
+      line-height: 42px; 
+      }
+      section .cellule_60_cms table tr td {
+        width: 4%;
+        margin-right: 2%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 16px; 
+        border-bottom: 1px solid #eee;}
+        section .cellule_60_cms table tr td a{
+          text-align: left;
+          margin:0;
+          padding: 0;
+        }
+      section .cellule_60_cms table tr td:nth-child(2) {
+        width: 6%; }
+    section .cellule_60_cms .pagination_form {
+      margin-top: 30px;
+      width: 100%; }
+      section .cellule_60_cms .pagination_form li {
+        float: left;
+        margin-right: 10px; }
+        section .cellule_60_cms .pagination_form li a {
+          background-color: #909090;
+          font-size: 14px;
+          padding: 8px 10px;
+          cursor: pointer;
+          text-decoration: none;
+          color: #fff;
+          border-radius: 4px; }
+        section .cellule_60_cms .pagination_form li a:hover {
+          background-color: #242424; }
   section .cellule_background_cms {
     width: 100%;
     min-height: 50px;
@@ -505,22 +604,21 @@ section {
     -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
     -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
     -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
-    box-shadow: 0px 0px 4px 0px #c0c0c0; }
-    section .cellule_background_cms input, section .cellule_background_cms textarea {
+    box-shadow: 0px 0px 4px 0px #c0c0c0;
+    margin-bottom: 40px; }
+    section .cellule_background_cms input, section .cellule_background_cms textarea, section .cellule_background_cms select {
       width: 100%;
       height: 42px;
       line-height: 42px;
       background-color: #fff;
       border: 1px solid #ccc;
       margin-bottom: 20px; }
-      section .cellule_background_cms input form button, section .cellule_background_cms textarea form button {
-        cursor: pointer; }
     section .cellule_background_cms textarea {
       max-height: 80px;
       height: 80px;
       width: 100%;
       max-width: 100%; }
-    section .cellule_background_cms button {
+    section .cellule_background_cms .bouton {
       width: 100%;
       height: 42px;
       background-color: #e3004f;
@@ -529,18 +627,27 @@ section {
       border: none;
       font-weight: bold;
       cursor: pointer; }
-    section .cellule_background_cms button:hover {
+    section .cellule_background_cms .button:hover {
       background-color: #242424; }
     section .cellule_background_cms table tr {
       width: 100%;
       height: 42px;
       margin-bottom: 8px;
-      line-height: 42px; }
+      line-height: 42px;
+       }
       section .cellule_background_cms table tr td {
         width: 4%;
         margin-right: 2%;
         font-size: 14px;
-        text-align: left; }
+        text-align: left;
+        line-height: 16px;
+        border-bottom: 1px solid #eee;
+         }
+        section .cellule_background_cms table tr td a{
+          text-align: left;
+          margin:0;
+          padding: 0;
+        }
     section .cellule_background_cms .pagination_form {
       margin-top: 30px;
       width: 100%; }
@@ -575,4 +682,55 @@ section {
   color: #fff;
   text-decoration: none; }
 
-/*# sourceMappingURL=style.css.map */
+#cellule_login_background_cms {
+  width: 340px;
+  height: auto;
+  margin: 0 auto;
+  margin-top: 60px; }
+  #cellule_login_background_cms img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 40px; }
+  #cellule_login_background_cms #cellule_login {
+    width: 300px;
+    height: auto;
+    padding: 40px 40px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    #cellule_login_background_cms #cellule_login input, #cellule_login_background_cms #cellule_login textarea, #cellule_login_background_cms #cellule_login select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 30px; }
+    #cellule_login_background_cms #cellule_login img, #cellule_login_background_cms #cellule_login h1, #cellule_login_background_cms #cellule_login p {
+      text-align: center; }
+    #cellule_login_background_cms #cellule_login .bouton {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    #cellule_login_background_cms #cellule_login .bouton:hover {
+      background-color: #242424; }
+  #cellule_login_background_cms .motdepasse_perdu {
+    width: 100%;
+    height: 32px;
+    color: #737373;
+    margin-top: 20px;
+    display: block; }
+
+
+.sizePicto{
+  height: 24px;
+}
+
+.sizePicto:hover{
+  opacity: 0.6;
+}
