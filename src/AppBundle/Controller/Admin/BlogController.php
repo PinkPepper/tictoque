@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use AppBundle\Entity\Commentaire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -153,6 +154,20 @@ class BlogController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * @Route("/delete/commentaire/{id}", name="commentaire_delete_delete")
+     */
+    public function deleteCommentaireAction(Request $request, Commentaire $commentaire)
+    {
+        $article_id = $commentaire->getArticle()->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($commentaire);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_article_edit', array("id"=>$article_id));
     }
 
 }

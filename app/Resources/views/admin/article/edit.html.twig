@@ -26,5 +26,17 @@
 
             {{ form_end(edit_form) }}
         </div>
+
+        <div class="cellule_background_cms">
+            <h3>Les commentaires</h3>
+
+            {% for com in article.commentaires %}
+                <p>Auteur: {{ com.auteur }}</p>
+                <p>{{ com.contenu }}</p>
+                <a href="{{ path('commentaire_delete_delete', {'id': com.id }) }}" onclick="return confirm('Voulez-vous vraiment supprimer ce commentaire ?')">Supprimer</a>
+                <br>
+            {% endfor %}
+
+        </div>
     </section>
 {% endblock %}
