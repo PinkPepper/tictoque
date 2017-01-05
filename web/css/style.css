@@ -556,6 +556,125 @@ section {
           border-radius: 4px; }
         section .cellule_background_cms .pagination_form li a:hover {
           background-color: #242424; }
+section .cellule_40_cms {
+    width: 35%;
+    min-height: 50px;
+    float: left;
+    background-color: #fff;
+    margin-top: 20px;
+    border-radius: 4px;
+    padding: 30px 20px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    section .cellule_40_cms input, section .cellule_40_cms textarea, section .cellule_40_cms select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 20px; }
+    section .cellule_40_cms textarea {
+      max-height: 80px;
+      height: 80px;
+      width: 100%;
+      max-width: 100%; }
+    section .cellule_40_cms button {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    section .cellule_40_cms button:hover {
+      background-color: #242424; }
+    section .cellule_40_cms table tr {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 8px;
+      line-height: 42px; }
+      section .cellule_40_cms table tr td {
+        width: 4%;
+        margin-right: 2%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 16px; }
+  section .cellule_60_cms {
+    width: 50%;
+    min-height: 50px;
+    float: right;
+    background-color: #fff;
+    margin-top: 20px;
+    margin-right: 2%;
+    border-radius: 4px;
+    padding: 30px 20px;
+    -moz-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -webkit-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    -o-box-shadow: 0px 0px 4px 0px #c0c0c0;
+    box-shadow: 0px 0px 4px 0px #c0c0c0; }
+    section .cellule_60_cms input, section .cellule_60_cms textarea, section .cellule_60_cms select {
+      width: 100%;
+      height: 42px;
+      line-height: 42px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      margin-bottom: 20px; }
+    section .cellule_60_cms textarea {
+      max-height: 80px;
+      height: 80px;
+      width: 100%;
+      max-width: 100%; }
+    section .cellule_60_cms button {
+      width: 100%;
+      height: 42px;
+      background-color: #e3004f;
+      color: #fff;
+      font-size: 14px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer; }
+    section .cellule_60_cms button:hover {
+      background-color: #242424; }
+    section .cellule_60_cms table tr {
+      width: 100%;
+      height: 42px;
+      margin-bottom: 8px;
+      line-height: 42px; 
+      }
+      section .cellule_60_cms table tr td {
+        width: 4%;
+        margin-right: 2%;
+        font-size: 14px;
+        text-align: left;
+        line-height: 16px; 
+        border-bottom: 1px solid #eee;}
+        section .cellule_60_cms table tr td a{
+          text-align: left;
+          margin:0;
+          padding: 0;
+        }
+      section .cellule_60_cms table tr td:nth-child(2) {
+        width: 6%; }
+    section .cellule_60_cms .pagination_form {
+      margin-top: 30px;
+      width: 100%; }
+      section .cellule_60_cms .pagination_form li {
+        float: left;
+        margin-right: 10px; }
+        section .cellule_60_cms .pagination_form li a {
+          background-color: #909090;
+          font-size: 14px;
+          padding: 8px 10px;
+          cursor: pointer;
+          text-decoration: none;
+          color: #fff;
+          border-radius: 4px; }
+        section .cellule_60_cms .pagination_form li a:hover {
+          background-color: #242424; }
+  
 
 .btn_01 {
   font-size: 14px;
