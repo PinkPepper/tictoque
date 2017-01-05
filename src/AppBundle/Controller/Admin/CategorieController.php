@@ -32,6 +32,7 @@ class CategorieController extends Controller
         $categories = $em->getRepository('AppBundle:Categorie')->findAll();
 
         if ($form->isSubmitted() && $form->isValid()) {
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($categorie);
             $em->flush($categorie);

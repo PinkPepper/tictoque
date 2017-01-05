@@ -50,19 +50,12 @@ class ProduitAdminController extends Controller
         {
             $produit->setAllergenes(null);
 
-            //$tmp = new Entity();
-            //$tmp = $form->getData();
             $tmp = $form["cat"]->getData();
             for ($i=0; $i< sizeof($tmp); $i++)
             {
                 $produit->addCategorie($tmp[$i]);
                 $tmp[$i]->addProduit($produit);
             }
-
-            //$b = $tmp[0];
-            //var_dump($b);
-
-
 
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);

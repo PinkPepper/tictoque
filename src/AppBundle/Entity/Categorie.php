@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Traits\TraitUploadImage;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -9,6 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * Categorie
  *
  * @ORM\Table(name="categorie")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CategorieRepository")
  * @UniqueEntity(fields={"nom"})
  */
@@ -46,6 +48,18 @@ class Categorie
      */
     private $produits;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
+     */
+    private $image;
+
+    use TraitUploadImage;
+    public function getUploadDir()
+    {
+        return 'categories';
+    }
 
     /**
      * Add produit
@@ -143,6 +157,22 @@ class Categorie
     public function setProduits($produits)
     {
         $this->produits = $produits;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * @param string $image
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
     }
 
     /**
