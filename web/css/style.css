@@ -514,7 +514,6 @@ section {
       height: 42px;
       /*line-height: 42px;*/    /*Casse le style des inputs*/
       background-color: #fff;
-      border: 1px solid #ccc;
       margin-bottom: 20px; }
     section .cellule_40_cms textarea {
       max-height: 80px;
@@ -633,7 +632,6 @@ section {
       height: 42px;
       line-height: 42px;
       background-color: #fff;
-      border: 1px solid #ccc;
       margin-bottom: 20px; }
     section .cellule_background_cms textarea {
       max-height: 80px;
