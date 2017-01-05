@@ -5,6 +5,14 @@
         <h1>Categorie : {{categorie.nom}}</h1>
         <a class="btn_01" href="{{path('admin_categorie_index')}}">Retour</a>
         <div class="cellule_background_cms">
+
+            <h3>Image :</h3>
+            {% if categorie.image == "" %}
+                <p>Aucune image</p>
+            {% else %}
+                <img src=" {{ asset('categories/' ~ categorie.image ) }} " style="width: 10%; height: auto"></img>
+            {% endif %}
+
             <h3>Description</h3>
             {{categorie.description}}
         </div>
