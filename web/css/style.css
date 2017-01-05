@@ -343,8 +343,9 @@ section {
   margin-top: 60px; }
   section img {
     display: block;
+    float: left;
     margin: 0 auto;
-    margin-bottom: 40px; }
+    margin-right:15px ;}
   section a {
     color: #909090;
     padding: 30px 40px; }
@@ -720,3 +721,12 @@ section {
     color: #737373;
     margin-top: 20px;
     display: block; }
+
+
+.sizePicto{
+  height: 24px;
+}
+
+.sizePicto:hover{
+  opacity: 0.6;
+}
