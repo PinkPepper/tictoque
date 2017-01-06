@@ -764,3 +764,7 @@ section {
 .sizePicto:hover{
   opacity: 0.6;
 }
+
+.pictoNavbar{
+  border-radius: 50%;
+}
