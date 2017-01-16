@@ -208,26 +208,6 @@ class ProduitAdminController extends Controller
         return $this->redirectToRoute('produit_edit', array('id'=>$produit->getId()));
 
     }
-//
-//    /**
-//     * @param Produit $produit
-//     * @param $allergene
-//     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-//     * @Route("/{id}/{allergene}", name="produit_delete_allergene")
-//     */
-//    public function deleteAllergene(Produit $produit, $allergene)
-//    {
-//
-//        if ($produit->getAllergenes() != null)
-//        {
-//            $diff = array_diff($produit->getAllergenes(), array($allergene));
-//
-//            $produit->setAllergenes($diff);
-//            $this->getDoctrine()->getManager()->flush();
-//        }
-//        return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
-//    }
-
 
     /**
      * Deletes a produit entity.
