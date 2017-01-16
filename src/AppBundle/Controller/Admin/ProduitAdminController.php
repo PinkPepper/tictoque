@@ -48,12 +48,19 @@ class ProduitAdminController extends Controller
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $produit->setAllergenes(null);
+           // $produit->setAllergenes(null);
 
             $tmp = $form["cat"]->getData();
             for ($i=0; $i< sizeof($tmp); $i++)
             {
                 $produit->addCategorie($tmp[$i]);
+                $tmp[$i]->addProduit($produit);
+            }
+
+            $tmp = $form["all"]->getData();
+            for ($i=0; $i< sizeof($tmp); $i++)
+            {
+                $produit->addAllergene($tmp[$i]);
                 $tmp[$i]->addProduit($produit);
             }
 

@@ -35,7 +35,7 @@
                 <label>Image</label>
                 {{ form_widget(form.file) }}
                 {{  form_errors(form.file) }}
-
+{#
                  <h2>Les allergènes</h2>
 
                 {% for all in produit.allergenes %}
@@ -50,7 +50,7 @@
                     {{ form_widget(allergeneForm) }}
                     <button class="button_p" type="submit">Ajout d'un allergene</button>
                 {{ form_end(allergeneForm) }}
-
+#}
                 <h2>Les catégories</h2>
 
                 <h3>Ajouter une catégorie</h3>
