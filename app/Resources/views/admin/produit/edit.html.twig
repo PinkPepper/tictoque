@@ -65,7 +65,19 @@
                     <p>{{ all.nom }} <a href="{{ path('supprimer_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">enlever</a></p>
                 {% endfor %}
 
+            <h2>Les allergènes</h2>
 
+            <h3>Ajouter un allergène</h3>
+            {% for all in allergenes %}
+                {% if all not in produit.allergenes %}
+                    <p>{{ all.nom }}<a href="{{ path('ajout_allergene_produit', {'produit': produit.id, 'allergene': all.id }) }}">ajouter</a></p>
+                {% endif %}
+            {% endfor %}
+
+            <h3>Supprimer un allergène</h3>
+            {% for all in produit.allergenes %}
+                <p>{{ all.nom }} <a href="{{ path('supprimer_allergene_produit', {'produit': produit.id, 'allergene': all.id }) }}">enlever</a></p>
+            {% endfor %}
 
                 <button class="button_p" type="submit">Modifier le produit</button>
 

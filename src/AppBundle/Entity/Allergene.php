@@ -10,7 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *
  * @ORM\Table(name="allergene")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\AllergeneRepository")
- * @UniqueEntity("nom")
+ * @UniqueEntity(fields={"nom"})
  */
 class Allergene
 {
@@ -32,7 +32,7 @@ class Allergene
 
     /**
      *
-     *  @ORM\ManyToMany(targetEntity="Produit", inversedBy="allergenes")
+     *  @ORM\ManyToMany(targetEntity="Produit", inversedBy="allergenes", cascade={"persist"})
      *  @ORM\JoinTable(name="RelationProduitAllergene",
      *  joinColumns={@ORM\JoinColumn(name="allergene_id", referencedColumnName="id")},
      *  inverseJoinColumns={@ORM\JoinColumn(name="produit_id", referencedColumnName="id")})
@@ -112,6 +112,11 @@ class Allergene
     public function getNom()
     {
         return $this->nom;
+    }
+
+    public function __toString()
+    {
+        return '' . $this->id;
     }
 }
 

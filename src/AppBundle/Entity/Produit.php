@@ -78,14 +78,14 @@ class Produit
     private $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="produits")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="produits", cascade={"persist"})
      */
     private $categories;
 
     private $cat;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Allergene", inversedBy="produits")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Allergene", inversedBy="produits", cascade={"persist"})
      */
     private $allergenes;
 
@@ -221,7 +221,7 @@ class Produit
     /**
      * Get allergenes
      *
-     * @return string
+     * @return mixed
      */
     public function getAllergenes()
     {

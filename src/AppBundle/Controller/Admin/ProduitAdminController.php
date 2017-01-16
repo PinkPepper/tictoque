@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use AppBundle\Entity\Allergene;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Produit;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -55,6 +56,9 @@ class ProduitAdminController extends Controller
             {
                 $produit->addCategorie($tmp[$i]);
                 $tmp[$i]->addProduit($produit);
+
+                $this->getDoctrine()->getEntityManager()->persist($tmp[$i]);
+                $this->getDoctrine()->getEntityManager()->flush();
             }
 
             $tmp = $form["all"]->getData();
@@ -62,6 +66,9 @@ class ProduitAdminController extends Controller
             {
                 $produit->addAllergene($tmp[$i]);
                 $tmp[$i]->addProduit($produit);
+
+                $this->getDoctrine()->getEntityManager()->persist($tmp[$i]);
+                $this->getDoctrine()->getEntityManager()->flush();
             }
 
             $em = $this->getDoctrine()->getManager();
@@ -129,9 +136,11 @@ class ProduitAdminController extends Controller
 
         $em = $this->getDoctrine()->getEntityManager();
         $categories = $em->getRepository('AppBundle\Entity\Categorie')->findAll();
+        $allergenes = $em->getRepository('AppBundle\Entity\Allergene')->findAll();
 
         return $this->render('admin/produit/edit.html.twig', array(
             'categories' => $categories,
+            'allergenes'=> $allergenes,
             'produit' => $produit,
             'allergeneForm'=>$allergeneForm->createView(),
             'form' => $editForm->createView(),
@@ -170,24 +179,54 @@ class ProduitAdminController extends Controller
 
     }
 
+
     /**
-     * @param Produit $produit
-     * @param $allergene
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     * @Route("/{id}/{allergene}", name="produit_delete_allergene")
+     * @Route("/ajout/all/{produit}/{allergene}", name="ajout_allergene_produit")
      */
-    public function deleteAllergene(Produit $produit, $allergene)
+    public function ajouterAllergene(Request $request, Produit $produit, Allergene $allergene)
     {
+        $produit->addAllergene($allergene);
+        $allergene->addProduit($produit);
 
-        if ($produit->getAllergenes() != null)
-        {
-            $diff = array_diff($produit->getAllergenes(), array($allergene));
+        $this->getDoctrine()->getEntityManager()->persist($allergene);
+        $this->getDoctrine()->getEntityManager()->flush();
 
-            $produit->setAllergenes($diff);
-            $this->getDoctrine()->getManager()->flush();
-        }
-        return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
+        return $this->redirectToRoute('produit_edit', array('id'=>$produit->getId()));
     }
+
+
+    /**
+     * @Route("/supprimer/all/{produit}/{allergene}", name="supprimer_allergene_produit")
+     */
+    public function supprimerAllergene(Request $request, Produit $produit, Allergene $allergene)
+    {
+        $produit->removeAllergene($allergene);
+        $allergene->removeProduit($produit);
+
+        $this->getDoctrine()->getEntityManager()->flush();
+
+        return $this->redirectToRoute('produit_edit', array('id'=>$produit->getId()));
+
+    }
+//
+//    /**
+//     * @param Produit $produit
+//     * @param $allergene
+//     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+//     * @Route("/{id}/{allergene}", name="produit_delete_allergene")
+//     */
+//    public function deleteAllergene(Produit $produit, $allergene)
+//    {
+//
+//        if ($produit->getAllergenes() != null)
+//        {
+//            $diff = array_diff($produit->getAllergenes(), array($allergene));
+//
+//            $produit->setAllergenes($diff);
+//            $this->getDoctrine()->getManager()->flush();
+//        }
+//        return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
+//    }
 
 
     /**
@@ -203,6 +242,22 @@ class ProduitAdminController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $categories = $produit->getCategories();
+            foreach($categories as $cat)
+            {
+                $cat->removeProduit($produit);
+                $produit->removeCategorie($cat);
+            }
+
+            $allergenes = $produit->getAllergenes();
+            foreach($allergenes as $all)
+            {
+                $all->removeProduit($produit);
+                $produit->removeAllergene($all);
+            }
+
+            $this->getDoctrine()->getEntityManager()->flush();
             $em->remove($produit);
             $em->flush($produit);
         }
@@ -215,6 +270,22 @@ class ProduitAdminController extends Controller
      */
     public function deleteIndexAction(Request $request, Produit $produit)
     {
+        $categories = $produit->getCategories();
+        foreach($categories as $cat)
+        {
+            $cat->removeProduit($produit);
+            $produit->removeCategorie($cat);
+        }
+
+        $allergenes = $produit->getAllergenes();
+        foreach($allergenes as $all)
+        {
+            $all->removeProduit($produit);
+            $produit->removeAllergene($all);
+        }
+
+        $this->getDoctrine()->getEntityManager()->flush();
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($produit);
         $em->flush($produit);
