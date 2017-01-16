@@ -42,6 +42,10 @@
             {{ form_widget(form.cat) }}
             {{ form_errors(form.cat) }}
 
+            <label>Allergènes</label>
+            {{ form_widget(form.all) }}
+            {{ form_errors(form.all) }}
+
             <button class="button_p" type="submit">Créer le produit</button>
 
             {{ form_end(form) }}

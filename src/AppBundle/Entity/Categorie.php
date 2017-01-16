@@ -41,7 +41,7 @@ class Categorie
 
     /**
      *
-     *  @ORM\ManyToMany(targetEntity="Produit", inversedBy="categories")
+     *  @ORM\ManyToMany(targetEntity="Produit", inversedBy="categories", cascade={"persist"})
      *  @ORM\JoinTable(name="RelationProduitCategorie",
      *  joinColumns={@ORM\JoinColumn(name="categorie_id", referencedColumnName="id")},
      *  inverseJoinColumns={@ORM\JoinColumn(name="produit_id", referencedColumnName="id")})
