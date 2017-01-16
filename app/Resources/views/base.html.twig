@@ -16,7 +16,7 @@
 <body>
 
 <header>
-    <a href="{{ path('homepage')}}" ><img class="logo_cms" style="height: auto; width: auto;" src="{{ asset('img/logo_top_CMS.jpg') }}"></a>
+    <a href="{{ path('homepage')}}" ><img class="logo_cms" style="height:45px; width:150px;" src="{{ asset('img/logo_top_CMS.png') }}"></a>
     {% if app.user is not  null %}
         <div>
             <img class="pictoNavbar" src="{{ asset('users/' ~ app.user.image) }}">
