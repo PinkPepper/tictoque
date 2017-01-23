@@ -115,6 +115,14 @@ class Produit
      */
     private $menuBoisson;
 
+    /**
+     *  @ORM\ManyToMany(targetEntity="Panier", inversedBy="produits", cascade={"persist"})
+     *  @ORM\JoinTable(name="RelationProduitPanier",
+     *  joinColumns={@ORM\JoinColumn(name="panier_id", referencedColumnName="id")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="produit_id", referencedColumnName="id")})
+     */
+    private $paniers;
+
 
     use TraitUploadImage;
     public function getUploadDir()
@@ -483,6 +491,22 @@ class Produit
     public function setMenuBoisson($menuBoisson)
     {
         $this->menuBoisson = $menuBoisson;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaniers()
+    {
+        return $this->paniers;
+    }
+
+    /**
+     * @param mixed $paniers
+     */
+    public function setPaniers($paniers)
+    {
+        $this->paniers = $paniers;
     }
 }
 

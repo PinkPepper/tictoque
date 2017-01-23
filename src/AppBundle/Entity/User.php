@@ -89,6 +89,10 @@ class User extends BaseUser
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToOne(targetEntity="Panier", mappedBy="client", cascade={"remove"})
+     */
+    private $panier;
 
     use TraitUploadImage;
     public function getUploadDir()
@@ -257,6 +261,22 @@ class User extends BaseUser
     public function setCommentaires($commentaires)
     {
         $this->commentaires = $commentaires;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPanier()
+    {
+        return $this->panier;
+    }
+
+    /**
+     * @param mixed $panier
+     */
+    public function setPanier($panier)
+    {
+        $this->panier = $panier;
     }
 }
 

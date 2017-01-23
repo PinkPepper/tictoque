@@ -55,6 +55,13 @@ class Menu
      */
     private $prix;
 
+    /**
+     *  @ORM\ManyToMany(targetEntity="Panier", inversedBy="menus", cascade={"persist"})
+     *  @ORM\JoinTable(name="RelationMenuPanier",
+     *  joinColumns={@ORM\JoinColumn(name="panier_id", referencedColumnName="id")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="menu_id", referencedColumnName="id")})
+     */
+    private $paniers;
 
     /**
      * Get id
@@ -176,6 +183,22 @@ class Menu
     public function setBoisson($boisson)
     {
         $this->boisson = $boisson;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaniers()
+    {
+        return $this->paniers;
+    }
+
+    /**
+     * @param mixed $paniers
+     */
+    public function setPaniers($paniers)
+    {
+        $this->paniers = $paniers;
     }
 }
 
