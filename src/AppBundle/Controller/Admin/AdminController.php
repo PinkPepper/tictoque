@@ -17,19 +17,28 @@ use AppBundle\Form\UserType;
 class AdminController extends Controller
 {
     /**
-     * Lists all User entities.
      *
      * @Route("/", name="admin_index")
      * @Method("GET")
      */
     public function indexAction()
     {
+        return $this->render('admin/index.html.twig');
+    }
+
+    /**
+     *
+     * @Route("/user", name="admin_user")
+     * @Method("GET")
+     */
+    public function userAction()
+    {
         $em = $this->getDoctrine()->getManager();
 
         $users = $em->getRepository('AppBundle:User')->findAll();
 
         return $this->render('admin/user/index.html.twig', array(
-            'users' => $users,
+            'users' => $users
         ));
     }
 
