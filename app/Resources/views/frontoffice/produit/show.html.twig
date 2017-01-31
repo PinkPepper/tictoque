@@ -109,7 +109,7 @@
                     <span class="type">CLASSIQUE</span>
                     <h4>{{ produitSup.nom }}</h4>
                     <span class="prix"><i class="fa fa-circle"></i>{{ produitSup.prix }}€</span>
-                    <p>{{ produitSup.description|raw }}</p>
+                    {{ produitSup.description|raw }}
                 </div>
             </div>
             {% endfor %}

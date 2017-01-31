@@ -47,14 +47,17 @@ class ProduitController extends Controller
         if($produit->getType()=='entree'){
             $em = $this->getDoctrine()->getManager();
             $autre = $em->getRepository('AppBundle:Produit')->findByType('plat');
+            shuffle($autre);
         }
         if($produit->getType()=='plat'){
             $em = $this->getDoctrine()->getManager();
             $autre = $em->getRepository('AppBundle:Produit')->findByType('dessert');
+            shuffle($autre);
         }
         if($produit->getType()=='dessert'){
             $em = $this->getDoctrine()->getManager();
             $autre = $em->getRepository('AppBundle:Produit')->findByType('boisson');
+            shuffle($autre);
         }
 
         return $this->render('frontoffice/produit/show.html.twig', array(
