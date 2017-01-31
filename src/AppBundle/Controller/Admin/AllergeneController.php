@@ -37,7 +37,7 @@ class AllergeneController extends Controller
             $em->persist($allergene);
             $em->flush($allergene);
 
-            return $this->redirectToRoute('admin_allergene_show', array('id' => $allergene->getId()));
+            return $this->redirectToRoute('admin_allergene_index');
         }
 
         return $this->render('backoffice/admin/allergene/index.html.twig', array(
@@ -63,7 +63,7 @@ class AllergeneController extends Controller
             $em->persist($allergene);
             $em->flush($allergene);
 
-            return $this->redirectToRoute('admin_allergene_show', array('id' => $allergene->getId()));
+            return $this->redirectToRoute('admin_allergene_index');
         }
 
         return $this->render('backoffice/admin/allergene/new.html.twig', array(
