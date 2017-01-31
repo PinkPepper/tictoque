@@ -138,7 +138,7 @@ class ProduitAdminController extends Controller
         $categories = $em->getRepository('AppBundle\Entity\Categorie')->findAll();
         $allergenes = $em->getRepository('AppBundle\Entity\Allergene')->findAll();
 
-        return $this->render('admin/produit/edit.html.twig', array(
+        return $this->render('backoffice/admin/produit/edit.html.twig', array(
             'categories' => $categories,
             'allergenes'=> $allergenes,
             'produit' => $produit,

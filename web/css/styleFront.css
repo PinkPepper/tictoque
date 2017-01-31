@@ -149,7 +149,8 @@ body {
         padding: 10px; }
         body .menu_choix .dessert1 div .type, body .menu_choix .dessert1 div p, body .menu_choix .dessert2 div .type, body .menu_choix .dessert2 div p, body .menu_choix .dessert3 div .type, body .menu_choix .dessert3 div p {
           float: left;
-          max-width: 210px; }
+          max-width: 225px;
+          clear: both; }
         body .menu_choix .dessert1 div h4, body .menu_choix .dessert2 div h4, body .menu_choix .dessert3 div h4 {
           float: left;
           clear: both; }
