@@ -30,7 +30,7 @@ class ProduitAdminController extends Controller
 
         $produits = $em->getRepository('AppBundle:Produit')->findAll();
 
-        return $this->render('admin/produit/index.html.twig', array(
+        return $this->render('backoffice/admin/produit/index.html.twig', array(
             'produits' => $produits,
         ));
     }
@@ -78,7 +78,7 @@ class ProduitAdminController extends Controller
             return $this->redirectToRoute('produit_show_admin', array('id' => $produit->getId()));
         }
 
-        return $this->render('admin/produit/new.html.twig', array(
+        return $this->render('backoffice/admin/produit/new.html.twig', array(
             'produit' => $produit,
             'form' => $form->createView(),
         ));
@@ -94,7 +94,7 @@ class ProduitAdminController extends Controller
     {
         $deleteForm = $this->createDeleteForm($produit);
 
-        return $this->render('admin/produit/show.html.twig', array(
+        return $this->render('backoffice/admin/produit/show.html.twig', array(
             'produit' => $produit,
             'delete_form' => $deleteForm->createView()
         ));

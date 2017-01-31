@@ -1,0 +1,256 @@
+body {
+  color: #929292 !important;
+  font-family: "Roboto", sans-serif !important; }
+  body div:first-child {
+    max-width: 100%;
+    margin: 0; }
+  body div {
+    margin: 0 auto !important;
+    max-width: 1000px; }
+  body div:nth-child(2), body div:nth-child(3) {
+    max-width: 1100px; }
+  body .glyphicon-star {
+    color: yellow; }
+  body .header {
+    background-color: #c9d2db;
+    height: 150px; }
+    body .header ul {
+      list-style: none;
+      display: inline-flex;
+      position: relative;
+      float: right;
+      padding-right: 50px;
+      padding-top: 20px; }
+      body .header ul li {
+        height: 35px;
+        width: 120px;
+        padding: 5px; }
+        body .header ul li a {
+          color: #708ca4; }
+      body .header ul li:last-child {
+        border: 1px solid #708ca4;
+        border-width: 3px;
+        border-radius: 5px; }
+  body .nav ul {
+    display: flex;
+    list-style: none;
+    padding-left: 5px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    color: #929292; }
+    body .nav ul li {
+      padding-right: 4px; }
+    body .nav ul li:last-child {
+      font-weight: 600; }
+  body .desc_prod {
+    padding-left: 30px; }
+    body .desc_prod .produit_nom {
+      margin-top: 0; }
+    body .desc_prod .produit_aller {
+      font-weight: 700;
+      text-decoration: underline; }
+    body .desc_prod .produit_prix {
+      margin: 0;
+      margin-top: 20px;
+      text-decoration: line-through; }
+    body .desc_prod .produit_prix_solde {
+      font-size: 21px;
+      font-weight: 700; }
+    body .desc_prod .produit_quantite {
+      width: 60px;
+      height: 30px;
+      padding-left: 10px;
+      margin-bottom: 15px; }
+    body .desc_prod .produit_ajout {
+      margin-left: 20px;
+      width: 200px;
+      background-color: #95abc0;
+      color: white;
+      border: none;
+      height: 30px;
+      border-radius: 5px; }
+    body .desc_prod .produit_stock {
+      font-size: 8px;
+      color: green; }
+      body .desc_prod .produit_stock .fa.fa-circle {
+        margin-right: 5px; }
+    body .desc_prod .produit_info {
+      padding: 30px; }
+      body .desc_prod .produit_info .fa-map-marker {
+        font-size: 35px;
+        float: left;
+        margin-right: 10px; }
+      body .desc_prod .produit_info .near {
+        width: 160px;
+        margin: 0;
+        float: left;
+        font-size: 13px; }
+      body .desc_prod .produit_info .fa-shopping-bag {
+        font-size: 35px;
+        margin-left: 25px;
+        margin-right: 10px; }
+      body .desc_prod .produit_info .free-ship {
+        font-size: 13px; }
+  body .produit_nav {
+    border-bottom: 1px solid #929292;
+    height: 40px; }
+    body .produit_nav ul {
+      list-style: none;
+      display: flex;
+      padding-left: 0; }
+      body .produit_nav ul li {
+        padding: 10px 25px 8px 25px;
+        margin-right: 45px;
+        font-weight: 600; }
+      body .produit_nav ul li:hover {
+        cursor: pointer; }
+      body .produit_nav ul .active {
+        border: 1px solid #929292;
+        border-bottom: 1px solid white;
+        border-radius: 5px 5px 0 0; }
+  body .content_nav {
+    padding-top: 40px; }
+    body .content_nav h5 {
+      font-weight: 600; }
+  body .menu_choix {
+    float: none;
+    clear: both; }
+    body .menu_choix h4 {
+      text-align: center; }
+    body .menu_choix .dessert1 {
+      right: 5px; }
+    body .menu_choix .dessert2 {
+      left: 12px; }
+    body .menu_choix .dessert3 {
+      left: 28px; }
+    body .menu_choix .dessert1, body .menu_choix .dessert2, body .menu_choix .dessert3 {
+      width: 310px;
+      height: 360px;
+      float: left;
+      border-radius: 5px;
+      box-shadow: 1px 0px 5px;
+      position: relative; }
+      body .menu_choix .dessert1 img, body .menu_choix .dessert2 img, body .menu_choix .dessert3 img {
+        width: 311px;
+        height: 200px;
+        background-color: #95abc0;
+        border-radius: 6px; }
+      body .menu_choix .dessert1 button, body .menu_choix .dessert2 button, body .menu_choix .dessert3 button {
+        float: right;
+        margin-right: 20px;
+        position: relative;
+        bottom: 15px;
+        padding: 5px 12px 5px 12px;
+        background: #d0d0d0;
+        border: none;
+        border-radius: 5px;
+        color: white; }
+      body .menu_choix .dessert1 div, body .menu_choix .dessert2 div, body .menu_choix .dessert3 div {
+        padding: 10px; }
+        body .menu_choix .dessert1 div .type, body .menu_choix .dessert1 div p, body .menu_choix .dessert2 div .type, body .menu_choix .dessert2 div p, body .menu_choix .dessert3 div .type, body .menu_choix .dessert3 div p {
+          float: left;
+          max-width: 210px; }
+        body .menu_choix .dessert1 div h4, body .menu_choix .dessert2 div h4, body .menu_choix .dessert3 div h4 {
+          float: left;
+          clear: both; }
+        body .menu_choix .dessert1 div .prix, body .menu_choix .dessert2 div .prix, body .menu_choix .dessert3 div .prix {
+          float: right;
+          font-weight: 600; }
+          body .menu_choix .dessert1 div .prix .fa.fa-circle, body .menu_choix .dessert2 div .prix .fa.fa-circle, body .menu_choix .dessert3 div .prix .fa.fa-circle {
+            color: #18b118;
+            font-size: 10px;
+            margin-right: 30px; }
+  body .retour_haut {
+    position: absolute;
+    right: 130px;
+    background-color: #95abc0;
+    color: white;
+    width: 45px;
+    height: 45px;
+    padding: 13px;
+    font-size: 20px;
+    border-radius: 4px;
+    cursor: pointer; }
+  body .bg-grey {
+    position: relative;
+    bottom: -60px;
+    background-color: #c9d2db;
+    max-width: none; }
+    body .bg-grey .container {
+      padding: 50px 80px 0 80px;
+      color: white; }
+      body .bg-grey .container .row:first-child {
+        height: 250px; }
+      body .bg-grey .container .row:nth-child(2) {
+        color: #95abc0; }
+    body .bg-grey .best_menu {
+      list-style: none;
+      padding-left: 0; }
+      body .bg-grey .best_menu li img {
+        width: 35px;
+        height: 35px;
+        background-color: #95abc0;
+        border: none; }
+      body .bg-grey .best_menu li span {
+        padding-left: 11px;
+        top: -9px;
+        position: relative; }
+      body .bg-grey .best_menu li ul {
+        padding-left: 50px;
+        top: -19px;
+        position: relative; }
+      body .bg-grey .best_menu li a {
+        color: #ffffff; }
+    body .bg-grey .Categories {
+      list-style: none;
+      padding: 0; }
+      body .bg-grey .Categories li {
+        margin-bottom: 5px; }
+        body .bg-grey .Categories li a {
+          color: #ffffff; }
+    body .bg-grey .newsletter .news_images {
+      display: inline-flex;
+      padding: 0; }
+      body .bg-grey .newsletter .news_images li {
+        width: 35px;
+        height: 35px;
+        background-color: #95abc0;
+        border-radius: 200px;
+        list-style: none;
+        margin-right: 10px; }
+    body .bg-grey .newsletter span {
+      display: flex;
+      max-width: 175px; }
+    body .bg-grey .newsletter input {
+      border: none;
+      height: 25px;
+      padding-left: 5px;
+      background-color: #b3c1ce;
+      border-radius: 5px;
+      color: white; }
+    body .bg-grey .newsletter button {
+      border: none;
+      height: 25px;
+      padding-left: 5px;
+      background-color: #95abc0;
+      border-radius: 5px;
+      width: 50px;
+      font-size: 13px;
+      color: white;
+      font-weight: 700; }
+  body .bg-dark {
+    bottom: -60px;
+    position: relative;
+    background-color: #95abc0;
+    max-width: 100%;
+    height: 65px;
+    padding: 25px; }
+    body .bg-dark .container {
+      padding-left: 80px;
+      padding-right: 80px; }
+      body .bg-dark .container .row span {
+        margin-right: 30px; }
+        body .bg-dark .container .row span a {
+          color: white; }
+
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,27 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Modifier une allergène</h1>
+        <a class="btn_01" href="{{path('admin_allergene_index')}}">Retour</a>
+        <div class="cellule_background_cms">
+            {{ form_start(edit_form) }}
+
+            <label>Nom</label>
+            {{ form_widget(edit_form.nom) }}
+            {{ form_errors(edit_form.nom) }}
+
+            <label>Description</label>
+            {{ form_widget(edit_form.description) }}
+            {{ form_errors(edit_form.description) }}
+
+            <label>Image</label>
+            {{ form_widget(edit_form.file) }}
+            {{ form_errors(edit_form.file) }}
+
+            <button class="button_p" type="submit">Modifier la allergène</button>
+
+            {{ form_end(edit_form) }}
+        </div>
+    </section>
+{% endblock %}

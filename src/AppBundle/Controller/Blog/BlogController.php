@@ -28,7 +28,7 @@ class BlogController extends Controller
 
         $articles = $em->getRepository('AppBundle:Article')->findAll();
 
-        return $this->render('blog/article/index.html.twig', array(
+        return $this->render('backoffice/blog/article/index.html.twig', array(
             'articles' => $articles,
         ));
     }

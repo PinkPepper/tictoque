@@ -5,8 +5,8 @@ parameters:
     database_name: tictoque_base
     database_user: tictoque
     database_password: max59251
-    mailer_transport: smtp
-    mailer_host: 127.0.0.1
-    mailer_user: null
-    mailer_password: null
+    mailer_transport: gmail
+    mailer_host: smtp.gmail.com
+    mailer_user: maxime.detaille
+    mailer_password: maxime59
     secret: 723ceff928474584f7b46dc672a66ce30da708b7

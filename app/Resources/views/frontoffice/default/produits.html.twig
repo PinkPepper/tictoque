@@ -1,0 +1,30 @@
+{% extends 'frontoffice/pageCategoriesProduits.html.twig' %}
+
+{% block produits %}
+    <section>
+        {% for produit in produits %}
+            <table>
+            <tr>
+                <td>{{ produit.nom }}</td>
+                <td>{{ produit.prix }}</td>
+                <td>{% if produit.image == "" %}
+                        Aucune image
+                    {% else %}
+                        <img src=" {{ asset('produits/' ~ produit.image ) }} " style="width: 10%; height: auto"></img>
+                    {% endif %}
+                </td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('produit_show', { 'id': produit.id }) }}">Voir</a>
+                        </li>
+                        <li>
+                            <a href="">ajouter au panier</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+            </table>
+        {% endfor %}
+    </section>
+{% endblock %}

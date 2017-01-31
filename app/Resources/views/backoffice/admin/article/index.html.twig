@@ -1,0 +1,49 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="menu_top_cms">
+            <h1>Articles</h1>
+            <a class="btn_01" href="{{ path('admin_article_new') }}">Créer un article</a>
+        </div>
+
+        <div class="cellule_background_cms">
+            <table>
+                <tr>
+                    <td>Id</td>
+                    <td>Titre</td>
+                    <td>Auteur</td>
+                    <td>Créer le</td>
+                    <td>Actions</td>
+                </tr>
+                <tbody>
+                {% for article in articles %}
+                    <tr>
+                        <td>{{ article.id }}</td>
+                        <td>{{ article.titre }}</td>
+                        <td><a href="{{path('user_show', {'id': article.auteur.id})}}">{{ article.auteur }}</a></td>
+                        <td>{% if article.createdAt %}{{ article.createdAt|date('d/m/Y') }}{% endif %}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('admin_article_edit', { 'id': article.id }) }}">Modifier</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('admin_article_delete_index', { 'id': article.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+
+            <ul class="pagination_form">
+                <li><a>1</a></li>
+                <li><a>2</a></li>
+                <li><a>3</a></li>
+                <li><a>4</a></li>
+            </ul>
+            
+        </div>
+    </section>
+{% endblock %}
