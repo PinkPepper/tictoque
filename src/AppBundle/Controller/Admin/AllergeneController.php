@@ -40,7 +40,7 @@ class AllergeneController extends Controller
             return $this->redirectToRoute('admin_allergene_show', array('id' => $allergene->getId()));
         }
 
-        return $this->render('admin/allergene/index.html.twig', array(
+        return $this->render('backoffice/admin/allergene/index.html.twig', array(
             'allergenes' => $allergenes,
             'form' => $form->createView(),
         ));
@@ -66,7 +66,7 @@ class AllergeneController extends Controller
             return $this->redirectToRoute('admin_allergene_show', array('id' => $allergene->getId()));
         }
 
-        return $this->render('admin/allergene/new.html.twig', array(
+        return $this->render('backoffice/admin/allergene/new.html.twig', array(
             'allergene' => $allergene,
             'form' => $form->createView(),
         ));
@@ -82,7 +82,7 @@ class AllergeneController extends Controller
     {
         $deleteForm = $this->createDeleteForm($allergene);
 
-        return $this->render('admin/allergene/show.html.twig', array(
+        return $this->render('backoffice/admin/allergene/show.html.twig', array(
             'allergene' => $allergene,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -106,7 +106,7 @@ class AllergeneController extends Controller
             return $this->redirectToRoute('admin_allergene_edit', array('id' => $allergene->getId()));
         }
 
-        return $this->render('admin/allergene/edit.html.twig', array(
+        return $this->render('backoffice/admin/allergene/edit.html.twig', array(
             'allergene' => $allergene,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

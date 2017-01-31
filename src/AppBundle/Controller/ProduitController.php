@@ -27,8 +27,10 @@ class ProduitController extends Controller
 
         $produits = $em->getRepository('AppBundle:Produit')->findAll();
 
-        return $this->render('produit/index.html.twig', array(
+
+        return $this->render('frontoffice/produit/index.html.twig', array(
             'produits' => $produits,
+
         ));
     }
 
@@ -40,8 +42,24 @@ class ProduitController extends Controller
      */
     public function showAction(Produit $produit)
     {
-        return $this->render('produit/show.html.twig', array(
-            'produit' => $produit
+        $autre="";
+
+        if($produit->getType()=='entree'){
+            $em = $this->getDoctrine()->getManager();
+            $autre = $em->getRepository('AppBundle:Produit')->findByType('plat');
+        }
+        if($produit->getType()=='plat'){
+            $em = $this->getDoctrine()->getManager();
+            $autre = $em->getRepository('AppBundle:Produit')->findByType('dessert');
+        }
+        if($produit->getType()=='dessert'){
+            $em = $this->getDoctrine()->getManager();
+            $autre = $em->getRepository('AppBundle:Produit')->findByType('boisson');
+        }
+
+        return $this->render('frontoffice/produit/show.html.twig', array(
+            'produit' => $produit,
+            'autre' => $autre
         ));
     }
 }

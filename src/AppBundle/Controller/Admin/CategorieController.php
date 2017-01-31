@@ -40,7 +40,7 @@ class CategorieController extends Controller
             return $this->redirectToRoute('admin_categorie_show', array('id' => $categorie->getId()));
         }
 
-        return $this->render('admin/categorie/index.html.twig', array(
+        return $this->render('backoffice/admin/categorie/index.html.twig', array(
             'categories' => $categories,
             'form' => $form->createView(),
         ));
@@ -66,7 +66,7 @@ class CategorieController extends Controller
             return $this->redirectToRoute('admin_categorie_show', array('id' => $categorie->getId()));
         }
 
-        return $this->render('admin/categorie/new.html.twig', array(
+        return $this->render('backoffice/admin/categorie/new.html.twig', array(
             'categorie' => $categorie,
             'form' => $form->createView(),
         ));
@@ -82,7 +82,7 @@ class CategorieController extends Controller
     {
         $deleteForm = $this->createDeleteForm($categorie);
 
-        return $this->render('admin/categorie/show.html.twig', array(
+        return $this->render('backoffice/admin/categorie/show.html.twig', array(
             'categorie' => $categorie,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -106,7 +106,7 @@ class CategorieController extends Controller
             return $this->redirectToRoute('admin_categorie_edit', array('id' => $categorie->getId()));
         }
 
-        return $this->render('admin/categorie/edit.html.twig', array(
+        return $this->render('backoffice/admin/categorie/edit.html.twig', array(
             'categorie' => $categorie,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
