@@ -114,7 +114,15 @@
 
     <div class="row">
         <div class="col-lg-12 col-md-8 col-xs-6 menu_choix">
-            <h4>Associez {{ produit.nom }} avec un dessert</h4>
+            <h4>Associez votre {{ produit.nom }} avec
+                {% if produit.type == 'entree' %}
+                    un plat
+                {% elseif produit.type == 'plat'%}
+                    un dessert
+                {% else %}
+                    une boisson
+                {% endif %}
+            </h4>
             {% for produitSup in autre|slice(0,3) if produitSup.quantite>0 %}
             <div class="{{ "dessert" ~ loop.index }}">
                 <a href="{{ path('produit_show',{ 'id' : produitSup.id}) }}"><img src="{{ asset('produits/' ~ produitSup.image) }}"></a>

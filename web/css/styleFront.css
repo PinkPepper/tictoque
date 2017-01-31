@@ -136,7 +136,7 @@ body {
         width: 311px;
         height: 200px;
         background-color: #95abc0;
-        border-radius: 6px; }
+        border-radius: 6px 6px 0px 0px; }
       body .menu_choix .dessert1 button, body .menu_choix .dessert2 button, body .menu_choix .dessert3 button {
         float: right;
         margin-right: 20px;
