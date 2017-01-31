@@ -49,6 +49,8 @@ body {
     body .desc_prod .produit_aller {
       font-weight: 700;
       text-decoration: underline; }
+    body .desc_prod .produit_aller:hover {
+      cursor: pointer; }
     body .desc_prod .produit_prix {
       margin: 0;
       margin-top: 20px;

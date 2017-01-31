@@ -1,5 +1,19 @@
 {% extends 'frontoffice/footer.html.twig' %}
 
+{% block title %}
+    {{ produit.nom }}
+{% endblock %}
+
+{% block head %}
+    <meta property="og:title" content="{{ produit.nom }} - L'amour Food" />
+    <meta property="og:description" content="{{ produit.description }}" />
+    <meta property="og:site_name" content="http://amourfood.fr/" />
+
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:description" content="{{ produit.description }}" />
+    <meta name="twitter:title" content="{{ produit.nom }} - L'amour Food" />
+{% endblock %}
+
 {% block body %}
 
     <div class="row">
