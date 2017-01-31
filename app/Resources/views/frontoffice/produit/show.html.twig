@@ -114,13 +114,13 @@
 
     <div class="row">
         <div class="col-lg-12 col-md-8 col-xs-6 menu_choix">
-            <h4>Associez votre {{ produit.nom }} avec
+            <h4>
                 {% if produit.type == 'entree' %}
-                    un plat
+                    Associez votre {{ produit.nom }} avec un plat
                 {% elseif produit.type == 'plat'%}
-                    un dessert
+                    Associez votre {{ produit.nom }} avec un dessert
                 {% else %}
-                    une boisson
+                    Découvrez de nouveaux plats
                 {% endif %}
             </h4>
             {% for produitSup in autre|slice(0,3) if produitSup.quantite>0 %}
