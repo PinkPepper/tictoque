@@ -4,15 +4,15 @@
     <section class="user_content">
         <content>
 
-        <div class="nav_pos">
-            <h1>Produits</h1> 
-            <p>({{ produits|length }})</p>
-        </div>
+            <div class="nav_pos">
+                <h1>Entrees</h1>
+                <p>({{ entrees|length }})</p>
+            </div>
 
-        <div class="user_interact">
-                retour
-        </div>
-            
+            <div class="user_interact">
+               retour
+            </div>
+
         </content>
 
         <table>
@@ -25,7 +25,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for produit in produits %}
+            {% for produit in entrees %}
                 <tr>
                     <td>{{ produit.nom }}</td>
                     <td>{{ produit.prix }}</td>

@@ -22,10 +22,7 @@ class Panier
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\User", inversedBy="panier", cascade={"persist"})
-     * @ORM\JoinTable(name="RelationPanierClient",
-     *  joinColumns={@ORM\JoinColumn(name="client_id", referencedColumnName="id")},
-     *  inverseJoinColumns={@ORM\JoinColumn(name="panier_id", referencedColumnName="id")})
+     * @ORM\OneToOne(targetEntity="User", mappedBy="panier", cascade={"remove"})
      */
     private $client;
 
@@ -46,6 +43,31 @@ class Panier
      */
     private $prix;
 
+
+
+    public function addProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produits[] = $produit;
+
+        return $this;
+    }
+
+    public function removeProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produits->removeElement($produit);
+    }
+
+    public function addMenu(\AppBundle\Entity\Menu $menu)
+    {
+        $this->menus[] = $menu;
+
+        return $this;
+    }
+
+    public function removeMenu(\AppBundle\Entity\Menu $menu)
+    {
+        $this->menus->removeElement($menu);
+    }
 
     /**
      * Get id

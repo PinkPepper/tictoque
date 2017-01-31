@@ -179,6 +179,7 @@ class Produit
         $this->allergenes->removeElement($allergene);
     }
 
+
     /**
      * Get id
      *

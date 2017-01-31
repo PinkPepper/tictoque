@@ -64,6 +64,12 @@ class Menu
     private $paniers;
 
     /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="menus", cascade={"persist"})
+     */
+    private $user;
+
+
+    /**
      * Get id
      *
      * @return int
@@ -199,6 +205,22 @@ class Menu
     public function setPaniers($paniers)
     {
         $this->paniers = $paniers;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }
 
