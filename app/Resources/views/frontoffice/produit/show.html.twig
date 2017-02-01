@@ -43,7 +43,7 @@
                 <option>3</option>
             </select>
 
-            <button class="produit_ajout">Ajouter au panier</button>
+            <a href="#" class="produit_ajout">Ajouter au panier</a>
 
             </br>
             {% if produit.quantite>0 %}
@@ -126,7 +126,7 @@
             {% for produitSup in autre|slice(0,3) if produitSup.quantite>0 %}
             <div class="{{ "dessert" ~ loop.index }}">
                 <a href="{{ path('produit_show',{ 'id' : produitSup.id}) }}"><img src="{{ asset('produits/' ~ produitSup.image) }}"></a>
-                <button>Ajouter</button>
+                <a href="#">Ajouter</a>
                 <div>
                     <span class="type">CLASSIQUE</span>
                     <h4>{{ produitSup.nom }}</h4>

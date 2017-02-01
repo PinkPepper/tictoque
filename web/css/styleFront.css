@@ -60,16 +60,17 @@ body {
       font-weight: 700; }
     body .desc_prod .produit_quantite {
       width: 60px;
-      height: 30px;
+      height: 32px;
       padding-left: 10px;
-      margin-bottom: 15px; }
+      margin-bottom: 15px;
+      border: 2px solid #95abc0;
+      border-radius: 5px; }
     body .desc_prod .produit_ajout {
       margin-left: 20px;
-      width: 200px;
+      padding: 7px 25px 7px 25px;
       background-color: #95abc0;
       color: white;
       border: none;
-      height: 30px;
       border-radius: 5px; }
     body .desc_prod .produit_stock {
       font-size: 8px;
@@ -137,7 +138,7 @@ body {
         height: 200px;
         background-color: #95abc0;
         border-radius: 6px 6px 0px 0px; }
-      body .menu_choix .dessert1 button, body .menu_choix .dessert2 button, body .menu_choix .dessert3 button {
+      body .menu_choix .dessert1 a, body .menu_choix .dessert2 a, body .menu_choix .dessert3 a {
         float: right;
         margin-right: 20px;
         position: relative;
@@ -146,7 +147,8 @@ body {
         background: #d0d0d0;
         border: none;
         border-radius: 5px;
-        color: white; }
+        color: white;
+        cursor: pointer; }
       body .menu_choix .dessert1 div, body .menu_choix .dessert2 div, body .menu_choix .dessert3 div {
         padding: 10px; }
         body .menu_choix .dessert1 div .type, body .menu_choix .dessert1 div p, body .menu_choix .dessert2 div .type, body .menu_choix .dessert2 div p, body .menu_choix .dessert3 div .type, body .menu_choix .dessert3 div p {
@@ -231,13 +233,11 @@ body {
       background-color: #b3c1ce;
       border-radius: 5px;
       color: white; }
-    body .bg-grey .newsletter button {
+    body .bg-grey .newsletter a {
       border: none;
-      height: 25px;
-      padding-left: 5px;
+      padding: 3px 12px 3px 12px;
       background-color: #95abc0;
       border-radius: 5px;
-      width: 50px;
       font-size: 13px;
       color: white;
       font-weight: 700; }
