@@ -22,22 +22,51 @@ class Menu
     private $id;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuEntree", cascade={"persist"})
+     * @ORM\Column(name="type", type="integer")
+     */
+    private $type;
+
+//    /**
+//     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuEntree", cascade={"persist"})
+//     */
+//    private $entree;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuPlat", cascade={"persist"})
+//     */
+//    private $plat;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuDessert", cascade={"persist"})
+//     */
+//    private $dessert;
+//
+//    /**
+//     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuBoisson", cascade={"persist"})
+//     */
+//    private $boisson;
+
+    /**
+     * @ORM\Column(name="entree", nullable=true)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Produit", cascade={"persist"})
      */
     private $entree;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuPlat", cascade={"persist"})
+     * @ORM\Column(name="plat", nullable=true)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Produit", cascade={"persist"})
      */
     private $plat;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuDessert", cascade={"persist"})
+     * @ORM\Column(name="dessert", nullable=true)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Produit", cascade={"persist"})
      */
     private $dessert;
 
     /**
-     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuBoisson", cascade={"persist"})
+     * @ORM\Column(name="boisson", nullable=true)
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Produit", cascade={"persist"})
      */
     private $boisson;
 
@@ -202,7 +231,7 @@ class Menu
     /**
      * @param mixed $paniers
      */
-    public function setPaniers($paniers)
+    public function setPaniers(Panier $paniers = null)
     {
         $this->paniers = $paniers;
     }
@@ -221,6 +250,27 @@ class Menu
     public function setUser($user)
     {
         $this->user = $user;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @param mixed $type
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+    }
+
+    public function __toString()
+    {
+        return '' . $this->id;
     }
 }
 

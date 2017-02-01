@@ -91,29 +91,29 @@ class Produit
 
     private $all;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="entree")
-     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
-     */
-    private $menuEntree;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="plat")
-     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
-     */
-    private $menuPlat;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="dessert")
-     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
-     */
-    private $menuDessert;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="boisson")
-     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
-     */
-    private $menuBoisson;
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="entree")
+//     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+//     */
+//    private $menuEntree;
+//
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="plat")
+//     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+//     */
+//    private $menuPlat;
+//
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="dessert")
+//     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+//     */
+//    private $menuDessert;
+//
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="boisson")
+//     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+//     */
+//    private $menuBoisson;
 
     /**
      *  @ORM\ManyToMany(targetEntity="Panier", inversedBy="produits", cascade={"persist"})
