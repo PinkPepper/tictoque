@@ -138,7 +138,7 @@ body {
         height: 200px;
         background-color: #95abc0;
         border-radius: 6px 6px 0px 0px; }
-      body .menu_choix .dessert1 a, body .menu_choix .dessert2 a, body .menu_choix .dessert3 a {
+      body .menu_choix .dessert1 .ajout_reco, body .menu_choix .dessert2 .ajout_reco, body .menu_choix .dessert3 .ajout_reco {
         float: right;
         margin-right: 20px;
         position: relative;

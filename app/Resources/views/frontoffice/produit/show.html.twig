@@ -126,7 +126,7 @@
             {% for produitSup in autre|slice(0,3) if produitSup.quantite>0 %}
             <div class="{{ "dessert" ~ loop.index }}">
                 <a href="{{ path('produit_show',{ 'id' : produitSup.id}) }}"><img src="{{ asset('produits/' ~ produitSup.image) }}"></a>
-                <a href="#">Ajouter</a>
+                <a class="ajout_reco" href="#">Ajouter</a>
                 <div>
                     <span class="type">CLASSIQUE</span>
                     <h4>{{ produitSup.nom }}</h4>
