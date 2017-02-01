@@ -40,7 +40,12 @@ class ProduitCreationType extends AbstractType
                 // query choices from this entity
                 'class' => 'AppBundle:Categorie',
                 'choice_label' => 'nom',
-                'multiple' => true));
+                'multiple' => true))
+            ->add('all', EntityType::class, array(
+            // query choices from this entity
+            'class' => 'AppBundle:Allergene',
+            'choice_label' => 'nom',
+            'multiple' => true));
     }
     /**
      * {@inheritdoc}

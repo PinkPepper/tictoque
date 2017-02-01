@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use AppBundle\Entity\Commentaire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -28,7 +29,7 @@ class BlogController extends Controller
 
         $articles = $em->getRepository('AppBundle:Article')->findAll();
 
-        return $this->render('admin/article/index.html.twig', array(
+        return $this->render('backoffice/admin/article/index.html.twig', array(
             'articles' => $articles,
         ));
     }
@@ -55,7 +56,7 @@ class BlogController extends Controller
             return $this->redirectToRoute('admin_blog_index');
         }
 
-        return $this->render('admin/article/new.html.twig', array(
+        return $this->render('backoffice/admin/article/new.html.twig', array(
             'article' => $article,
             'form' => $form->createView(),
         ));
@@ -71,7 +72,7 @@ class BlogController extends Controller
     {
         $deleteForm = $this->createDeleteForm($article);
 
-        return $this->render('admin/article/show.html.twig', array(
+        return $this->render('backoffice/admin/article/show.html.twig', array(
             'article' => $article,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -97,7 +98,7 @@ class BlogController extends Controller
             return $this->redirectToRoute('admin_blog_index');
         }
 
-        return $this->render('admin/article/edit.html.twig', array(
+        return $this->render('backoffice/admin/article/edit.html.twig', array(
             'article' => $article,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -153,6 +154,20 @@ class BlogController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    /**
+     * @Route("/delete/commentaire/{id}", name="commentaire_delete_delete")
+     */
+    public function deleteCommentaireAction(Request $request, Commentaire $commentaire)
+    {
+        $article_id = $commentaire->getArticle()->getId();
+
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($commentaire);
+        $em->flush();
+
+        return $this->redirectToRoute('admin_article_edit', array("id"=>$article_id));
     }
 
 }

@@ -41,13 +41,6 @@ class Produit
     private $description;
 
     /**
-     *
-     * @ORM\Column(name="allergenes", type="array", nullable=true)
-     *
-     */
-    private $allergenes;
-
-    /**
      * @var string
      * @ORM\Column(name="type", type="string", length=255, nullable=true)
      */
@@ -85,11 +78,18 @@ class Produit
     private $image;
 
     /**
-     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="produits")
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="produits", cascade={"persist"})
      */
     private $categories;
 
     private $cat;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Allergene", inversedBy="produits", cascade={"persist"})
+     */
+    private $allergenes;
+
+    private $all;
 
     use TraitUploadImage;
     public function getUploadDir()
@@ -121,6 +121,30 @@ class Produit
         $this->categories->removeElement($categorie);
     }
 
+
+    /**
+     * Add allergene
+     *
+     * @param \AppBundle\Entity\Categorie $categorie
+     *
+     * @return Produit
+     */
+    public function addAllergene(\AppBundle\Entity\Allergene $allergene)
+    {
+        $this->allergenes[] = $allergene;
+
+        return $this;
+    }
+
+    /**
+     * Remove allergene
+     *
+     * @param \AppBundle\Entity\Categorie $categorie
+     */
+    public function removeAllergene(\AppBundle\Entity\Allergene $allergene)
+    {
+        $this->allergenes->removeElement($allergene);
+    }
 
     /**
      * Get id
@@ -197,7 +221,7 @@ class Produit
     /**
      * Get allergenes
      *
-     * @return string
+     * @return mixed
      */
     public function getAllergenes()
     {
@@ -354,6 +378,22 @@ class Produit
     public function setCat($cat)
     {
         $this->cat = $cat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAll()
+    {
+        return $this->all;
+    }
+
+    /**
+     * @param mixed $all
+     */
+    public function setAll($all)
+    {
+        $this->all = $all;
     }
 }
 

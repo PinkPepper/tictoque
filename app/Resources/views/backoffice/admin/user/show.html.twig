@@ -1,0 +1,72 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section class="user_content" id="user_profile">
+        <content>
+            <div class="nav_pos">
+                <h1>{{user.username}}</h1> 
+            </div>
+            <div class="user_interact">
+                <a href="{{path('admin_index')}}"><button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>
+            </div>
+        </content>
+
+        <container>
+            <div class="user_tab">
+                <div class="user_pic"><img src=" {{ asset('users/' ~ user.image ) }} " style="height: 120px; width: 120px"></div>
+
+                <div class="user_info">
+                    <ul>
+                        <li>ID : {{user.id}}</li>
+                        <li>{% if user.roles.0=="ROLE_ADMIN" %}
+                            Administrateur
+                            {% else %}
+                            Utilisateur
+                            {% endif %}</li>
+                        <li>Nom, prénom :{{user.prenom}} {{user.prenom}}</li>
+                        <li>Mail : {{user.email}}</li>
+                        <li>Tél. {{user.telephone}}</li>
+                        <li>Adresses : ???</li>
+                    </ul>
+                </div>
+                <div class="user_order">
+                    <h2>Historique des commandes</h2>
+                    <!--- Historique des commandes à integrer -->
+                </div>
+            </div>
+            <div class="user_tab_menu">
+                <div class="user_pic_menu"></div>   
+                <div class="user_menu">
+                    <ul>
+                        <li>Menu vegetarien</li>
+                        <li>Qte : 1</li>
+                        <li>id : 10</li>
+                        <li>prix : 12€50</li>
+                    </ul>
+                </div>
+
+                <div class="user_pic_menu"></div>   
+                <div class="user_menu">
+                    <ul>
+                        <li>Soupe aux trois légumes</li>
+                        <li>Qte : 2</li>
+                        <li>id : 8</li>
+                        <li>prix : 13€50</li>
+                    </ul>
+                </div>
+
+                <div class="user_menu_list">
+                    <ul>
+                        <div class="user_pic_menu_list"></div>
+                        <li class="ig1">Bruchetta</li>
+                        <div class="user_pic_menu_list"></div>
+                        <li class="ig2">Soupe poireaux</li>
+                        <div class="user_pic_menu_list"></div>
+                        <li class="ig3">Gâteau chocolat</li>
+                    </ul>
+                </div> 
+        </div>
+        </container>
+    </section>
+    
+{% endblock %}

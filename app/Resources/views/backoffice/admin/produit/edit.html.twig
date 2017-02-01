@@ -1,0 +1,88 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Modifier un produit</h1> 
+        <a class="btn_01" href="{{path('produit_index_admin')}}">Retour</a>
+        <div class="cellule_background_cms">  
+
+            {{ form_start(form) }}
+
+                <label>Nom</label>
+                {{ form_widget(form.nom) }}
+                {{ form_errors(form.nom) }}
+
+                <label>Description</label>
+                {{ form_widget(form.description, { 'attr': { 'class': 'tiny'}}) }}
+                {{ form_errors(form.description) }}
+
+                <label>Type</label>
+                {{ form_widget(form.type) }}
+                {{  form_errors(form.type) }}
+
+                <label>DatePeremption</label>
+                {{ form_widget(form.datePeremption) }}
+                {{  form_errors(form.datePeremption) }}
+
+                <label>Prix</label>
+                {{ form_widget(form.prix) }}
+                {{  form_errors(form.prix) }}
+
+                <label>Quantité</label>
+                {{ form_widget(form.quantite) }}
+                {{  form_errors(form.quantite) }}
+
+                <label>Image</label>
+                {{ form_widget(form.file) }}
+                {{  form_errors(form.file) }}
+{#
+                 <h2>Les allergènes</h2>
+
+                {% for all in produit.allergenes %}
+                    <ul>
+                        <li>
+                            {{ all }} <a href="{{ path('produit_delete_allergene', { 'id': produit.id, 'allergene': all }) }}">Supprimer</a>
+                        </li>
+                    </ul>
+                {% endfor %}
+                <br>
+                {{ form_start(allergeneForm) }}
+                    {{ form_widget(allergeneForm) }}
+                    <button class="button_p" type="submit">Ajout d'un allergene</button>
+                {{ form_end(allergeneForm) }}
+#}
+                <h2>Les catégories</h2>
+
+                <h3>Ajouter une catégorie</h3>
+                {% for all in categories %}
+                    {% if all not in produit.categories %}
+                        <p>{{ all.nom }}<a href="{{ path('ajout_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">ajouter</a></p>
+                    {% endif %}
+                {% endfor %}
+
+                <h3>Supprimer une catégorie</h3>
+                {% for all in produit.categories %}
+                    <p>{{ all.nom }} <a href="{{ path('supprimer_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">enlever</a></p>
+                {% endfor %}
+
+            <h2>Les allergènes</h2>
+
+            <h3>Ajouter un allergène</h3>
+            {% for all in allergenes %}
+                {% if all not in produit.allergenes %}
+                    <p>{{ all.nom }}<a href="{{ path('ajout_allergene_produit', {'produit': produit.id, 'allergene': all.id }) }}">ajouter</a></p>
+                {% endif %}
+            {% endfor %}
+
+            <h3>Supprimer un allergène</h3>
+            {% for all in produit.allergenes %}
+                <p>{{ all.nom }} <a href="{{ path('supprimer_allergene_produit', {'produit': produit.id, 'allergene': all.id }) }}">enlever</a></p>
+            {% endfor %}
+
+                <button class="button_p" type="submit">Modifier le produit</button>
+
+            {{ form_end(form) }}
+
+        </div>
+    </section>
+{% endblock %}

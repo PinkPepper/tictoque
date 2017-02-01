@@ -27,7 +27,7 @@ class CategorieController extends Controller
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository('AppBundle:Categorie')->findAll();
 
-        return $this->render('pageCategoriesProduits.html.twig', array(
+        return $this->render('frontoffice/pageCategoriesProduits.html.twig', array(
             'categories' => $categories
         ));
     }
@@ -44,7 +44,7 @@ class CategorieController extends Controller
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository('AppBundle:Categorie')->findAll();
 
-        return $this->render('default/produits.html.twig', array(
+        return $this->render('frontoffice/default/produits.html.twig', array(
             'categories' => $categories,
             'categorie' => $categorie,
             'produits'=>$categorie->getProduits()
