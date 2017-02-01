@@ -148,6 +148,34 @@ class MenuController extends Controller
         $em->persist($menu);
         $em->flush($menu);
 
-        return $this->render('menu/boissons.html.twig');
+        return $this->redirectToRoute('menu_boisson', array('menu'=>$menu));
+    }
+
+    /**
+     * @Route("/boisson/{menu}", name="menu_boisson")
+     */
+    public function boissonAction(Request $request, Menu $menu)
+    {
+        $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
+        $produits = $em->findByType('boisson');
+
+        return $this->render('menu/boissons.html.twig', array(
+            'menu' => $menu,
+            'produits' => $produits
+        ));
+    }
+
+    /**
+     * @Route("/boisson/{menu}/{id}", name="menu_choix_boisson")
+     */
+    public function choixBoissonAction(Request $request, Menu $menu, Produit $boisson)
+    {
+        $menu->setBoisson($boisson->getId());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($menu);
+        $em->flush($menu);
+
+        return $this->render('panier/index.html.twig');
     }
 }
