@@ -45,7 +45,8 @@ class ProduitCreationType extends AbstractType
             // query choices from this entity
             'class' => 'AppBundle:Allergene',
             'choice_label' => 'nom',
-            'multiple' => true));
+            'multiple' => true,
+            'expanded' => true));
     }
     /**
      * {@inheritdoc}
