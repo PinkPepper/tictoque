@@ -97,6 +97,12 @@ class Menu
      */
     private $user;
 
+    /**
+     * @var boolean
+     * @ORM\Column(name="valide", type="boolean")
+     */
+    private $valide;
+
 
     /**
      * Get id
@@ -271,6 +277,22 @@ class Menu
     public function __toString()
     {
         return '' . $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getValide()
+    {
+        return $this->valide;
+    }
+
+    /**
+     * @param mixed $valide
+     */
+    public function setValide($valide)
+    {
+        $this->valide = $valide;
     }
 }
 

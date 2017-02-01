@@ -31,6 +31,7 @@ class MenuController extends Controller
         $this->getUser()->setMenus($menu->getId());
         $menu->setUser($this->getUser());
         $menu->setQuantite(1);
+        $menu->setValide(false);
 
         $menu->setType($type);
 
