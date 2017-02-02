@@ -70,4 +70,41 @@ class ProduitController extends Controller
             'autre' => $autre
         ));
     }
+
+    /**
+     * @Route("/ajoutPanier/{produit}", name="ajout_panier")
+     */
+    public function ajouterPanier(Produit $produit)
+    {
+        $doublon = false;
+        $panierProduit=null;
+
+        $em = $this->getDoctrine();
+        $panier = $em->getRepository('AppBundle:Panier')->find($this->getUser()->getPanier());
+
+        $produits = $panier->getProduits();
+        foreach ($produits as $p)
+        {
+            if($p == $produit)
+            {
+                $doublon = true;
+                break;
+            }
+        }
+
+      if($doublon == false)
+      {
+          $panier->addProduit($produit);
+          //TODO mettre quantite à 1
+      }
+      else
+      {
+          //TODO modifier la quantite
+      }
+
+        $em->getManager()->persist($panier);
+        $em->getManager()->flush($panier);
+
+        return $this->render('frontoffice/produit/success.html.twig');
+    }
 }

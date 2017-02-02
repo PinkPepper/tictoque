@@ -36,6 +36,7 @@ class Panier
      */
     private $produits;
 
+
     /**
      * @var float
      *
@@ -150,5 +151,6 @@ class Panier
     {
         $this->client = $client;
     }
+
 }
 
