@@ -1,0 +1,91 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <section class="user_content">
+        <content>
+
+            <div class="nav_pos">
+                <h1>Panier</h1>
+            </div>
+
+            <div class="user_interact">
+                retour
+            </div>
+
+        </content>
+
+        <h2>  Produits : ({{ panier.produits|length }})</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prix</th>
+                <th>Image</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for produit in panier.produits %}
+                <tr>
+                    <td>{{ produit.nom }}</td>
+                    <td>{{ produit.prix }}</td>
+                    <td> {% if produit.image == "" %}
+                            Aucune image
+                        {% else %}
+                            <img src=" {{ asset('produits/' ~ produit.image ) }} " style="width: 10%; height: auto"></img>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="">Enlever du panier</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>  Menus : ({{ panier.menus|length }})</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>entree</th>
+                <th>plat</th>
+                <th>dessert</th>
+                <th>boisson</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for produit in panier.menus %}
+                <tr>
+                    <td>{{ produit.entree }}</td>
+                    <td>{{ produit.plat }}</td>
+                    <td>{{ produit.dessert }}</td>
+                    <td>{{ produit.boisson }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                {#<a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>#}
+                            </li>
+                            <li>
+                                <a>Modifier le menu</a>
+                            </li>
+                            <li>
+                                <a href="">Enlever du panier</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </section>
+
+{% endblock %}

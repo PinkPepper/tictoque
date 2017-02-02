@@ -89,12 +89,40 @@ class User extends BaseUser
      */
     private $commentaires;
 
+    /**
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Panier", inversedBy="client", cascade={"persist"})
+     * @ORM\JoinTable(name="RelationPanierClient",
+     *  joinColumns={@ORM\JoinColumn(name="panier_id", referencedColumnName="id")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="client_id", referencedColumnName="id")})
+     */
+    private $panier;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Allergene", inversedBy="users", cascade={"persist"})
+     */
+    private $allergenes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Menu", mappedBy="user")
+     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+     */
+    private $menus;
 
     use TraitUploadImage;
     public function getUploadDir()
     {
         return 'users/';
     }
+
+//    public function __construct()
+//    {
+//        parent::__construct();
+//
+//        $panier = new Panier();
+//        $panier->setPrix(0);
+//
+//        $this->panier = $panier->getId();
+//    }
 
 
     /**
@@ -257,6 +285,54 @@ class User extends BaseUser
     public function setCommentaires($commentaires)
     {
         $this->commentaires = $commentaires;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPanier()
+    {
+        return $this->panier;
+    }
+
+    /**
+     * @param mixed $panier
+     */
+    public function setPanier($panier)
+    {
+        $this->panier = $panier;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllergenes()
+    {
+        return $this->allergenes;
+    }
+
+    /**
+     * @param mixed $allergenes
+     */
+    public function setAllergenes($allergenes)
+    {
+        $this->allergenes = $allergenes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenus()
+    {
+        return $this->menus;
+    }
+
+    /**
+     * @param mixed $menus
+     */
+    public function setMenus($menus)
+    {
+        $this->menus = $menus;
     }
 }
 

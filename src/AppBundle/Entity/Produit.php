@@ -91,6 +91,39 @@ class Produit
 
     private $all;
 
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="entree")
+//     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+//     */
+//    private $menuEntree;
+//
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="plat")
+//     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+//     */
+//    private $menuPlat;
+//
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="dessert")
+//     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+//     */
+//    private $menuDessert;
+//
+//    /**
+//     * @ORM\ManyToOne(targetEntity="Menu", inversedBy="boisson")
+//     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+//     */
+//    private $menuBoisson;
+
+    /**
+     *  @ORM\ManyToMany(targetEntity="Panier", inversedBy="produits", cascade={"persist"})
+     *  @ORM\JoinTable(name="RelationProduitPanier",
+     *  joinColumns={@ORM\JoinColumn(name="panier_id", referencedColumnName="id")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="produit_id", referencedColumnName="id")})
+     */
+    private $paniers;
+
+
     use TraitUploadImage;
     public function getUploadDir()
     {
@@ -145,6 +178,7 @@ class Produit
     {
         $this->allergenes->removeElement($allergene);
     }
+
 
     /**
      * Get id
@@ -394,6 +428,86 @@ class Produit
     public function setAll($all)
     {
         $this->all = $all;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenuEntree()
+    {
+        return $this->menuEntree;
+    }
+
+    /**
+     * @param mixed $menuEntree
+     */
+    public function setMenuEntree($menuEntree)
+    {
+        $this->menuEntree = $menuEntree;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenuPlat()
+    {
+        return $this->menuPlat;
+    }
+
+    /**
+     * @param mixed $menuPlat
+     */
+    public function setMenuPlat($menuPlat)
+    {
+        $this->menuPlat = $menuPlat;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenuDessert()
+    {
+        return $this->menuDessert;
+    }
+
+    /**
+     * @param mixed $menuDessert
+     */
+    public function setMenuDessert($menuDessert)
+    {
+        $this->menuDessert = $menuDessert;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenuBoisson()
+    {
+        return $this->menuBoisson;
+    }
+
+    /**
+     * @param mixed $menuBoisson
+     */
+    public function setMenuBoisson($menuBoisson)
+    {
+        $this->menuBoisson = $menuBoisson;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPaniers()
+    {
+        return $this->paniers;
+    }
+
+    /**
+     * @param mixed $paniers
+     */
+    public function setPaniers($paniers)
+    {
+        $this->paniers = $paniers;
     }
 }
 
