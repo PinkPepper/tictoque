@@ -173,10 +173,20 @@ class MenuController extends Controller
     {
         $menu->setBoisson($boisson->getId());
 
+        //TODO à la validation du panier
+            $menu->setValide(true);
+        // -----------------------------
+
         $em = $this->getDoctrine()->getManager();
         $em->persist($menu);
         $em->flush($menu);
 
-        return $this->render('panier/index.html.twig');
+        $panier = $this->getDoctrine()->getRepository('AppBundle:Panier')->find($this->getUser()->getPanier());
+        $panier->addMenu($menu);
+        $em->persist($panier);
+        $em->flush($panier);
+
+
+        return $this->render('panier/index.html.twig', array('panier'=>$panier));
     }
 }
