@@ -19,7 +19,7 @@ class MenuController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render('menu/index.html.twig');
+        return $this->render('frontoffice/menu/index.html.twig');
     }
 
     /**
@@ -69,7 +69,7 @@ class MenuController extends Controller
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $produits = $em->findByType('entree');
 
-        return $this->render('menu/entrees.html.twig', array(
+        return $this->render('frontoffice/menu/entrees.html.twig', array(
             'produits' => $produits,
             'menu' => $menu
         ));
@@ -97,7 +97,7 @@ class MenuController extends Controller
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $produits = $em->findByType('plat');
 
-        return $this->render('menu/plats.html.twig', array(
+        return $this->render('frontoffice/menu/plats.html.twig', array(
             'menu' => $menu,
             'produits' => $produits
         ));
@@ -116,7 +116,7 @@ class MenuController extends Controller
 
         if($menu->getType() == 1) // entree + plat + boisson
         {
-            //return $this->render('menu/boisson.html.twig');
+            //return $this->render('frontoffice/menu/boisson.html.twig');
             return $this->redirectToRoute('menu_boisson', array('menu'=>$menu));
         }
 
@@ -132,7 +132,7 @@ class MenuController extends Controller
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $produits = $em->findByType('dessert');
 
-        return $this->render('menu/desserts.html.twig', array(
+        return $this->render('frontoffice/menu/desserts.html.twig', array(
             'menu' => $menu,
             'produits' => $produits
         ));
@@ -160,7 +160,7 @@ class MenuController extends Controller
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $produits = $em->findByType('boisson');
 
-        return $this->render('menu/boissons.html.twig', array(
+        return $this->render('frontoffice/menu/boissons.html.twig', array(
             'menu' => $menu,
             'produits' => $produits
         ));
@@ -187,6 +187,6 @@ class MenuController extends Controller
         $em->flush($panier);
 
 
-        return $this->render('panier/index.html.twig', array('panier'=>$panier));
+        return $this->render('frontoffice/panier/index.html.twig', array('panier'=>$panier));
     }
 }

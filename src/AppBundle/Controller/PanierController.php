@@ -22,6 +22,6 @@ class PanierController extends Controller
         $em = $this->getDoctrine();
         $panier = $em->getRepository("AppBundle:Panier")->find($user->getPanier());
 
-        return $this->render('panier/index.html.twig', array('panier'=>$panier, 'user'=>$user));
+        return $this->render('frontoffice/panier/index.html.twig', array('panier'=>$panier, 'user'=>$user));
     }
 }
