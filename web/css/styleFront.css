@@ -11,6 +11,58 @@ body {
     max-width: 1100px; }
   body .glyphicon-star {
     color: yellow; }
+  body .navbar {
+    margin: 0 !important;
+    border: none;
+    background: none; }
+    body .navbar .container-fluid {
+      padding-left: 224px;
+      padding-right: 224px; }
+  body .row.home {
+    max-width: 100%; }
+  body .row.plats_semaine {
+    max-width: 1000px; }
+  body .Bandeau {
+    background-image: url("http://bossfight.co/wp-content/uploads/2015/11/boss-fight-free-high-quality-stock-images-photos-photography-hot-dog-food.jpg");
+    width: 100%;
+    height: 582px;
+    padding: 150px 382px 150px 382px;
+    text-align: center;
+    color: #ffffff; }
+    body .Bandeau p {
+      font-size: 36px; }
+    body .Bandeau span {
+      font-size: initial; }
+    body .Bandeau button {
+      width: 262px;
+      height: 45px;
+      background-color: #f50f65;
+      border: none;
+      border-radius: 5px;
+      margin-top: 54px;
+      margin-right: 28px; }
+  body .row.relais {
+    max-width: 100%; }
+    body .row.relais .point_relais {
+      height: 220px;
+      padding-left: 382px;
+      padding-right: 382px;
+      border-bottom: 1px solid #96acc1;
+      border-top: 1px solid #96acc1;
+      margin-top: 125px !important; }
+      body .row.relais .point_relais img {
+        width: 178px;
+        height: 235px;
+        position: absolute;
+        bottom: 50px; }
+      body .row.relais .point_relais div {
+        padding: 50px 0 0 255px; }
+        body .row.relais .point_relais div input {
+          width: 245px;
+          height: 35px;
+          background-color: #9b9b9b;
+          border: none;
+          border-radius: 5px; }
   body .header {
     background-color: #c9d2db;
     height: 150px; }
@@ -118,7 +170,7 @@ body {
   body .menu_choix {
     float: none;
     clear: both; }
-    body .menu_choix h4 {
+    body .menu_choix h4, body .menu_choix h5 {
       text-align: center; }
     body .menu_choix .dessert1 {
       right: 5px; }
