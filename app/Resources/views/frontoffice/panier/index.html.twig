@@ -26,7 +26,7 @@
             </thead>
             <tbody>
             {% for produit in produits %}
-                <tr>
+                <tr id="{{ produit[0].id }}">
                     <td>{{ produit[0].nom }}</td>
                     <td>{{ produit[0].prix }}</td>
                     <td> {% if produit[0].image == "" %}
@@ -94,13 +94,33 @@
     </section>
 
     <script type="application/javascript">
+
+
         $('.gestion_panier').on('click', function (e) {
             e.preventDefault();
             var url = $(this).data('url');
             var id = $(this).data('id');
 
-            $('.quantite-' + id).load(url);
+            var res = $('.quantite-' + id).load(url, function(){
+                if(res.text() == "0")
+                {
+                    $('#' + id).css('display', 'none');
+                }
+            });
+
+//            setTimeout(function(){
+//                console.log(res);
+//                console.log(res.valueOf().text());
+//                console.log(res.text());
+//                console.log(res[0]);
+//            }, 1000);
+//
+//
+//            console.log(res.text() == '0');
+
+            console.log('fini');
         }) ;
+
 
     </script>
 

@@ -156,7 +156,10 @@ class ProduitController extends Controller
                 $nombre = $panier['produits'][$i][1] ;
                 if($nombre == 0)
                 {
-                    $panier['produits'] = array_diff($panier['produits'], array($panier['produits'][$i]));
+                 //   $panier['produits'] =   array_diff($panier['produits'], $panier['produits'][$i]); //marche pas
+                    //il se passe rien du coup cest génial
+                    //suffit de pas afficher un produit à 0 et de ne pas le prendre en compte dans la commande
+                    //merci tout le monde pour votre soutient
                 }
                 $session->set('panier', $panier);
                 break;
