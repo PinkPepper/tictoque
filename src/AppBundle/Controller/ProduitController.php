@@ -96,15 +96,13 @@ class ProduitController extends Controller
                 break;
             }
         }
-
-
+        
         if(!$doublon)
         {
             array_push($panier, (array_push($panier['produits'], array($produit->getId(), 1))));
             $session->set('panier', $panier);
         }
 
-        dump($session->get('panier'));
         return $this->render('frontoffice/produit/success.html.twig');
     }
 }
