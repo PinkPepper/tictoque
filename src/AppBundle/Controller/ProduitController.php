@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Produit controller.
@@ -87,7 +88,6 @@ class ProduitController extends Controller
 
         for ($i = 0; $i<sizeof($panier['produits']) ; $i++)
         {
-            var_dump($panier['produits'][$i][0]);
             if($panier['produits'][$i][0] == $produit->getId())
             {
                 $panier['produits'][$i][1] = $panier['produits'][$i][1] + 1;
@@ -96,7 +96,7 @@ class ProduitController extends Controller
                 break;
             }
         }
-        
+
         if(!$doublon)
         {
             array_push($panier, (array_push($panier['produits'], array($produit->getId(), 1))));
@@ -104,5 +104,65 @@ class ProduitController extends Controller
         }
 
         return $this->render('frontoffice/produit/success.html.twig');
+    }
+
+    /**
+     * @Route("/ajoutExemplairePanier/{produit}", name="ajout_exemplaire_panier")
+     */
+    public function ajoutExemplaire(Request $request, Produit $produit)
+    {
+        $session = $request->getSession();
+        $panier = $session->get('panier');
+        $nombre = 0;
+
+        if(!$panier)
+        {
+            throw  new NotFoundHttpException();
+        }
+
+        for ($i = 0; $i<sizeof($panier['produits']) ; $i++)
+        {
+            if ($panier['produits'][$i][0] == $produit->getId()) {
+                $panier['produits'][$i][1] = $panier['produits'][$i][1] + 1;
+
+                $nombre = $panier['produits'][$i][1] ;
+                $session->set('panier', $panier);
+                break;
+            }
+        }
+
+        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+    }
+
+    /**
+     * @Route("/retirerExemplairePanier/{produit}", name="retrait_exemplaire_panier")
+     */
+    public function retirerExemplaire(Request $request, Produit $produit)
+    {
+        $session = $request->getSession();
+        $panier = $session->get('panier');
+        $nombre = 0;
+
+        if(!$panier)
+        {
+            throw  new NotFoundHttpException();
+        }
+
+        for ($i = 0; $i<sizeof($panier['produits']) ; $i++)
+        {
+            if ($panier['produits'][$i][0] == $produit->getId()) {
+                $panier['produits'][$i][1] = $panier['produits'][$i][1] - 1;
+
+                $nombre = $panier['produits'][$i][1] ;
+                if($nombre == 0)
+                {
+                    $panier['produits'] = array_diff($panier['produits'], array($panier['produits'][$i]));
+                }
+                $session->set('panier', $panier);
+                break;
+            }
+        }
+
+        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
     }
 }

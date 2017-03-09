@@ -43,6 +43,9 @@
                                 <a href="{{ path('produit_show', { 'id': produit[0].id }) }}">show</a>
                             </li>
                             <li>
+                                <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}">-</button> <i class="quantite">{{ produit[1] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}">+</button>
+                            </li>
+                            <li>
                                 <a href="">Enlever du panier</a>
                             </li>
                         </ul>
@@ -92,4 +95,18 @@
 
     </section>
 
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <script type="application/javascript">
+        $(document).ready(function(){
+            $('.gestion_panier').on('click', function (e) {
+                e.preventDefault();
+                var url = $(this).data('url');
+                console.log(url);
+
+                $('.quantite').load(url);
+            }) ;
+        });
+    </script>
 {% endblock %}
