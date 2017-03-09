@@ -7,6 +7,7 @@ use AppBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 /**
  * Class MenuController
@@ -181,12 +182,29 @@ class MenuController extends Controller
         $em->persist($menu);
         $em->flush($menu);
 
-        $panier = $this->getDoctrine()->getRepository('AppBundle:Panier')->find($this->getUser()->getPanier()->getId());
-        $panier->addMenu($menu);
-        $em->persist($panier);
-        $em->flush($panier);
+        //$panier = $this->getDoctrine()->getRepository('AppBundle:Panier')->find($this->getUser()->getPanier()->getId());
+        //$panier->addMenu($menu);
+        //$em->persist($panier);
+        //$em->flush($panier);
 
+//        $session = new Session();
+//        $session->start();
 
-        return $this->render('frontoffice/panier/index.html.twig', array('panier'=>$panier));
+        $session = $request->getSession();
+
+        $panier = $session->get('panier');
+
+        if(!$panier)
+        {
+            $panier = array('menus'=>array(), 'produits'=>array());
+        }
+
+        array_push($panier, (array_push($panier['menus'], array($menu->getId(), 1))));
+        $session->set('panier', $panier);
+
+        dump($panier);
+
+        //return $this->render('frontoffice/panier/index.html.twig', array('panier'=>$panier));
+        return $this->redirectToRoute('index_panier');
     }
 }

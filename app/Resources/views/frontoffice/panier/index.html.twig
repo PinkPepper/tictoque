@@ -14,7 +14,7 @@
 
         </content>
 
-        <h2>  Produits : ({{ panier.produits|length }})</h2>
+        <h2>  Produits : ({{ produits|length }})</h2>
         <table>
             <thead>
             <tr>
@@ -25,20 +25,20 @@
             </tr>
             </thead>
             <tbody>
-            {% for produit in panier.produits %}
+            {% for produit in produits %}
                 <tr>
-                    <td>{{ produit.nom }}</td>
-                    <td>{{ produit.prix }}</td>
-                    <td> {% if produit.image == "" %}
+                    <td>{{ produit[0].nom }}</td>
+                    <td>{{ produit[0].prix }}</td>
+                    <td> {% if produit[0].image == "" %}
                             Aucune image
                         {% else %}
-                            <img src=" {{ asset('produits/' ~ produit.image ) }} " style="width: 10%; height: auto"></img>
+                            <img src=" {{ asset('produits/' ~ produit[0].image ) }} " style="width: 10%; height: auto"></img>
                         {% endif %}
                     </td>
                     <td>
                         <ul>
                             <li>
-                                <a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>
+                                <a href="{{ path('produit_show', { 'id': produit[0].id }) }}">show</a>
                             </li>
                             <li>
                                 <a href="">Enlever du panier</a>
@@ -50,7 +50,7 @@
             </tbody>
         </table>
 
-        <h2>  Menus : ({{ panier.menus|length }})</h2>
+        <h2>  Menus : ({{ menus|length }})</h2>
         <table>
             <thead>
             <tr>
@@ -62,16 +62,16 @@
             </tr>
             </thead>
             <tbody>
-            {% for produit in panier.menus %}
+            {% for produit in menus %}
                 <tr>
-                    <td>{{ produit.entree }}</td>
-                    <td>{{ produit.plat }}</td>
-                    <td>{{ produit.dessert }}</td>
-                    <td>{{ produit.boisson }}</td>
+                    <td>{{ produit[0].entree }}</td>
+                    <td>{{ produit[0].plat }}</td>
+                    <td>{{ produit[0].dessert }}</td>
+                    <td>{{ produit[0].boisson }}</td>
                     <td>
                         <ul>
                             <li>
-                                {#<a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>#}
+                                <a href="{{ path('produit_show', { 'id': produit[0].id }) }}">show</a>
                             </li>
                             <li>
                                 <a>Modifier le menu</a>
