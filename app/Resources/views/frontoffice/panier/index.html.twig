@@ -21,7 +21,6 @@
                 <th>Nom</th>
                 <th>Prix</th>
                 <th>Image</th>
-                <th>Nombre</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -36,14 +35,13 @@
                             <img src=" {{ asset('produits/' ~ produit[0].image ) }} " style="width: 10%; height: auto"></img>
                         {% endif %}
                     </td>
-                    <td>{{ produit[1] }}</td>
                     <td>
                         <ul>
                             <li>
                                 <a href="{{ path('produit_show', { 'id': produit[0].id }) }}">show</a>
                             </li>
                             <li>
-                                <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}">-</button> <i class="quantite">{{ produit[1] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}">+</button>
+                                <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}">-</button> <i class="quantite-{{ produit[0].id }}">{{ produit[1] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}">+</button>
                             </li>
                             <li>
                                 <a href="">Enlever du panier</a>
@@ -95,18 +93,16 @@
 
     </section>
 
-{% endblock %}
-{% block javascript %}
-    {{ parent() }}
     <script type="application/javascript">
-        $(document).ready(function(){
-            $('.gestion_panier').on('click', function (e) {
-                e.preventDefault();
-                var url = $(this).data('url');
-                console.log(url);
+        $('.gestion_panier').on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+            var id = $(this).data('id');
 
-                $('.quantite').load(url);
-            }) ;
-        });
+            $('.quantite-' + id).load(url);
+        }) ;
+
     </script>
+
 {% endblock %}
+
