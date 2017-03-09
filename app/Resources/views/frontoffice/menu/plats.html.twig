@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'frontoffice/base.html.twig' %}
 
 {% block body %}
     <section class="user_content">
@@ -41,7 +41,7 @@
                                 <a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>
                             </li>
                             <li>
-                                <a href="{{ path('menu_choix_entree', { 'menu': menu.id,'id': produit.id }) }}">choisir</a>
+                                <a href="{{ path('menu_choix_plat', { 'menu': menu.id,'id': produit.id }) }}">choisir</a>
                             </li>
                         </ul>
                     </td>

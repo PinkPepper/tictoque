@@ -87,6 +87,9 @@ fos_user:
             from_email:
                 address:        resetting@example.com
                 sender_name:    Demo Resetting
+    from_email:
+        address: maxime.detaille@gmail.com
+        sender_name: Tictoque
 
 stof_doctrine_extensions:
   default_locale: en_US

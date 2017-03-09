@@ -114,15 +114,15 @@ class User extends BaseUser
         return 'users/';
     }
 
-//    public function __construct()
-//    {
-//        parent::__construct();
-//
-//        $panier = new Panier();
-//        $panier->setPrix(0);
-//
-//        $this->panier = $panier->getId();
-//    }
+    public function __construct()
+    {
+        parent::__construct();
+
+        $panier = new Panier();
+        $panier->setPrix(0);
+
+        $this->panier = $panier->getId();
+    }
 
 
     /**
