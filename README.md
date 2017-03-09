@@ -1,4 +1,4 @@
-test
-====
+POUR UTILISATION DU PANIER :
 
-A Symfony project created on October 25, 2016, 5:10 pm.
+Si le user n'a pas été crée après la modif alors le panier ne fonctionneras pas.
+Donc pour testez le panier, bien créer un new user
