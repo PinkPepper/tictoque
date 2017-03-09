@@ -26,6 +26,7 @@
             </thead>
             <tbody>
             {% for produit in produits %}
+                {% if produit[1] != 0  %}
                 <tr id="{{ produit[0].id }}">
                     <td>{{ produit[0].nom }}</td>
                     <td>{{ produit[0].prix }}</td>
@@ -41,7 +42,7 @@
                                 <a href="{{ path('produit_show', { 'id': produit[0].id }) }}">show</a>
                             </li>
                             <li>
-                                <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}">-</button> <i class="quantite-{{ produit[0].id }}">{{ produit[1] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}">+</button>
+                                <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}">-</button> <i class="quantite-{{ produit[0].id }}" data-id="{{ produit[0].id }}">{{ produit[1] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}">+</button>
                             </li>
                             <li>
                                 <a href="">Enlever du panier</a>
@@ -49,6 +50,7 @@
                         </ul>
                     </td>
                 </tr>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>
@@ -95,7 +97,6 @@
 
     <script type="application/javascript">
 
-
         $('.gestion_panier').on('click', function (e) {
             e.preventDefault();
             var url = $(this).data('url');
@@ -107,18 +108,6 @@
                     $('#' + id).css('display', 'none');
                 }
             });
-
-//            setTimeout(function(){
-//                console.log(res);
-//                console.log(res.valueOf().text());
-//                console.log(res.text());
-//                console.log(res[0]);
-//            }, 1000);
-//
-//
-//            console.log(res.text() == '0');
-
-            console.log('fini');
         }) ;
 
 
