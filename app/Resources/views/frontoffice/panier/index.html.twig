@@ -21,6 +21,7 @@
                 <th>Nom</th>
                 <th>Prix</th>
                 <th>Image</th>
+                <th>Nombre</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -35,6 +36,7 @@
                             <img src=" {{ asset('produits/' ~ produit[0].image ) }} " style="width: 10%; height: auto"></img>
                         {% endif %}
                     </td>
+                    <td>{{ produit[1] }}</td>
                     <td>
                         <ul>
                             <li>
@@ -58,6 +60,7 @@
                 <th>plat</th>
                 <th>dessert</th>
                 <th>boisson</th>
+                <th>nombre</th>
                 <th>actions</th>
             </tr>
             </thead>
@@ -68,6 +71,7 @@
                     <td>{{ produit[0].plat }}</td>
                     <td>{{ produit[0].dessert }}</td>
                     <td>{{ produit[0].boisson }}</td>
+                    <td>{{ produit[1] }}</td>
                     <td>
                         <ul>
                             <li>

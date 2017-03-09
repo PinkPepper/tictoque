@@ -74,37 +74,37 @@ class ProduitController extends Controller
     /**
      * @Route("/ajoutPanier/{produit}", name="ajout_panier")
      */
-    public function ajouterPanier(Produit $produit)
+    public function ajouterPanier(Request $request, Produit $produit)
     {
         $doublon = false;
-        $panierProduit=null;
+        $session = $request->getSession();
+        $panier = $session->get('panier');
 
-        $em = $this->getDoctrine();
-        $panier = $em->getRepository('AppBundle:Panier')->find($this->getUser()->getPanier());
-
-        $produits = $panier->getProduits();
-        foreach ($produits as $p)
+        if(!$panier)
         {
-            if($p == $produit)
+            $panier = array('menus'=>array(), 'produits'=>array());
+        }
+
+        for ($i = 0; $i<sizeof($panier['produits']) ; $i++)
+        {
+            var_dump($panier['produits'][$i][0]);
+            if($panier['produits'][$i][0] == $produit->getId())
             {
+                $panier['produits'][$i][1] = $panier['produits'][$i][1] + 1;
+                $session->set('panier', $panier);
                 $doublon = true;
                 break;
             }
         }
 
-      if($doublon == false)
-      {
-          $panier->addProduit($produit);
-          //TODO mettre quantite à 1
-      }
-      else
-      {
-          //TODO modifier la quantite
-      }
 
-        $em->getManager()->persist($panier);
-        $em->getManager()->flush($panier);
+        if(!$doublon)
+        {
+            array_push($panier, (array_push($panier['produits'], array($produit->getId(), 1))));
+            $session->set('panier', $panier);
+        }
 
+        dump($session->get('panier'));
         return $this->render('frontoffice/produit/success.html.twig');
     }
 }
