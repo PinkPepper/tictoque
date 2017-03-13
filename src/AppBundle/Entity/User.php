@@ -56,7 +56,7 @@ class User extends BaseUser
      *
      * @ORM\Column(name="image", type="string", length=255)
      */
-    private $image;
+    private $image = 'userdefault.svg';
 
     /**
      * @var string
@@ -75,7 +75,7 @@ class User extends BaseUser
     /**
      * bloqué ou non
      */
-    protected $enabled;
+    protected $enabled = 1;
 
     /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="auteur", cascade={"remove"})
