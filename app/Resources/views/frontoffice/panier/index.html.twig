@@ -69,7 +69,8 @@
             </thead>
             <tbody>
             {% for produit in menus %}
-                <tr>
+                {% if produit[1] != 0  %}
+                <tr id="{{ produit[0].id }}">
                     <td>{{ produit[0].entree }}</td>
                     <td>{{ produit[0].plat }}</td>
                     <td>{{ produit[0].dessert }}</td>
@@ -84,11 +85,15 @@
                                 <a>Modifier le menu</a>
                             </li>
                             <li>
+                                <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': produit[0].id}) }}" data-id="{{ produit[0].id }}">-</button> <i class="quantite-{{ produit[0].id }}" data-id="{{ produit[0].id }}">{{ produit[1] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': produit[0].id}) }}" data-id="{{ produit[0].id }}">+</button>
+                            </li>
+                            <li>
                                 <a href="">Enlever du panier</a>
                             </li>
                         </ul>
                     </td>
                 </tr>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>
@@ -105,6 +110,7 @@
             var res = $('.quantite-' + id).load(url, function(){
                 if(res.text() == "0")
                 {
+                    console.log('oui');
                     $('#' + id).css('display', 'none');
                 }
             });
