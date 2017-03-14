@@ -71,4 +71,17 @@ class ProduitController extends Controller
             'autre' => $autre
         ));
     }
+
+    /**
+     * Finds and displays a produit entity.
+     *
+     * @Route("/produit/panier/{id}", name="produit_panier_show")
+     * @Method("GET")
+     */
+    public function showPanierAction(Produit $produit)
+    {
+        return $this->render('frontoffice/panier/produit.html.twig', array(
+            'produit' => $produit
+        ));
+    }
 }
