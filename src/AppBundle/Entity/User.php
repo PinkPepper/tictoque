@@ -56,7 +56,7 @@ class User extends BaseUser
      *
      * @ORM\Column(name="image", type="string", length=255)
      */
-    private $image = 'userdefault.svg';
+    private $image;
 
     /**
      * @var string
@@ -333,6 +333,12 @@ class User extends BaseUser
     public function setMenus($menus)
     {
         $this->menus = $menus;
+    }
+
+    public function __construct()
+    {
+        $this->image='userdefault.svg';
+        $this->enabled=1;
     }
 }
 
