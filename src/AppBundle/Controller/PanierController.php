@@ -37,16 +37,6 @@ class PanierController extends Controller
         $menus = array();
         $produits = array();
 
-        if($menus_id)
-        {
-            foreach ($menus_id as $menu)
-            {
-                $m = $em->getRepository("AppBundle:Menu")->find($menu[0]);//$menu[0] = id du menu
-                $menu = array($m, $menu[1]); //$menu[1] = nombre de doublon de ce menu
-                array_push($menus, $menu);
-            }
-        }
-
         if($produits_id)
         {
             foreach ($produits_id as $produit)
@@ -56,7 +46,7 @@ class PanierController extends Controller
             }
         }
 
-        return $this->render('frontoffice/panier/index.html.twig', array('panier'=>$panier, 'user'=>$user, 'produits'=>$produits, 'menus'=>$menus));
+        return $this->render('frontoffice/panier/index.html.twig', array('panier'=>$panier, 'user'=>$user, 'produits'=>$produits, 'menus'=>$menus_id));
     }
 
     /**
@@ -161,7 +151,7 @@ class PanierController extends Controller
     /**
      * @Route("/ajoutExemplaireMenuAuPanier/{menu}", name="ajout_exemplaire_menu_panier")
      */
-    public function ajoutExemplaireMenu(Request $request, Menu $menu)
+    public function ajoutExemplaireMenu(Request $request, $menu)
     {
         $session = $request->getSession();
         $panier = $session->get('panier');
@@ -174,10 +164,10 @@ class PanierController extends Controller
 
         for ($i = 0; $i<sizeof($panier['menus']) ; $i++)
         {
-            if ($panier['menus'][$i][0] == $menu->getId()) {
-                $panier['menus'][$i][1] = $panier['menus'][$i][1] + 1;
+            if ($panier['menus'][$i]["id"] == $menu) {
+                $panier['menus'][$i]["quantite"] = $panier['menus'][$i]["quantite"] + 1;
 
-                $nombre = $panier['menus'][$i][1] ;
+                $nombre = $panier['menus'][$i]["quantite"] ;
                 $session->set('panier', $panier);
                 break;
             }
@@ -189,7 +179,7 @@ class PanierController extends Controller
     /**
      * @Route("/retirerExemplaireMenuAuPanier/{menu}", name="retrait_exemplaire_menu_panier")
      */
-    public function retirerExemplaireMenu(Request $request, Menu $menu)
+    public function retirerExemplaireMenu(Request $request, $menu)
     {
         $session = $request->getSession();
         $panier = $session->get('panier');
@@ -202,10 +192,10 @@ class PanierController extends Controller
 
         for ($i = 0; $i<sizeof($panier['menus']) ; $i++)
         {
-            if ($panier['menus'][$i][0] == $menu->getId()) {
-                $panier['menus'][$i][1] = $panier['menus'][$i][1] - 1;
+            if ($panier['menus'][$i]["id"] == $menu) {
+                $panier['menus'][$i]["quantite"] = $panier['menus'][$i]["quantite"] - 1;
 
-                $nombre = $panier['menus'][$i][1] ;
+                $nombre = $panier['menus'][$i]["quantite"] ;
                 if($nombre == 0)
                 {
                     //TODO effacer le menu du panier ? != ignorer menu quantité 0 du panier
@@ -220,5 +210,28 @@ class PanierController extends Controller
         }
 
         return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+    }
+
+    /**
+     * @Route("/ValidationPanier", name="validation_panier")
+     */
+    public function ValidationDuPanierAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $request->getSession();
+        $panier = $session->get('panier');
+
+        /* On crée les menus dans la base */
+        for ($i = 0; $i<sizeof($panier['menus']) ; $i++)
+        {
+            $menu = new Menu();
+            $menu->setMenu($panier['menus']['entree'], $panier['menus']['plat'], $panier['menus']['dessert'], $panier['menus']['boisson'], $panier['menus']['prix'], $panier['menus']['quantite'], $this->getUser()->getId());
+            $em->persist($menu);
+            $em->flush();
+        }
+
+        //TODO créer la commande
+
+        return $this->render('frontoffice/pannier/commande.html.twig');
     }
 }

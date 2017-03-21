@@ -68,23 +68,23 @@
             </thead>
             <tbody>
             {% for produit in menus %}
-                {% if produit[1] != 0  %}
-                <tr id="{{ produit[0].id }}">
-                    <td>{{ produit[0].entree }}</td>
-                    <td>{{ produit[0].plat }}</td>
-                    <td>{{ produit[0].dessert }}</td>
-                    <td>{{ produit[0].boisson }}</td>
-                    <td>{{ produit[1] }}</td>
+                {% if produit["quantite"] != 0  %}
+                <tr id="{{ produit["id"] }}">
+                    <td>{{ produit["entree"] }}</td>
+                    <td>{{ produit["plat"] }}</td>
+                    <td>{{ produit["dessert"] }}</td>
+                    <td>{{ produit["boisson"] }}</td>
+                    <td>{{ produit["quantite"] }}</td>
                     <td>
                         <ul>
                             <li>
-                                <a href="{{ path('produit_show', { 'id': produit[0].id }) }}">show</a>
+                                <a href="">show</a>
                             </li>
                             <li>
                                 <a>Modifier le menu</a>
                             </li>
                             <li>
-                                <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': produit[0].id}) }}" data-id="{{ produit[0].id }}">-</button> <i class="quantite-{{ produit[0].id }}" data-id="{{ produit[0].id }}">{{ produit[1] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': produit[0].id}) }}" data-id="{{ produit[0].id }}">+</button>
+                                <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': produit["id"] }) }}" data-id="{{ produit["id"] }}">-</button> <i class="quantite-{{ produit["id"] }}" data-id="{{ produit["id"] }}">{{ produit["quantite"] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': produit["id"]}) }}" data-id="{{ produit["id"] }}">+</button>
                             </li>
                         </ul>
                     </td>

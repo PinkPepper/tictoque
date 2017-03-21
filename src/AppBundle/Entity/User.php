@@ -31,7 +31,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      */
     private $nom;
@@ -39,7 +39,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      */
     private $prenom;
@@ -54,14 +54,14 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=255)
+     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      */
     private $telephone;
@@ -90,14 +90,6 @@ class User extends BaseUser
     private $commentaires;
 
     /**
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Panier", inversedBy="client", cascade={"persist"})
-     * @ORM\JoinTable(name="RelationPanierClient",
-     *  joinColumns={@ORM\JoinColumn(name="panier_id", referencedColumnName="id")},
-     *  inverseJoinColumns={@ORM\JoinColumn(name="client_id", referencedColumnName="id")})
-     */
-    private $panier;
-
-    /**
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Allergene", inversedBy="users", cascade={"persist"})
      */
     private $allergenes;
@@ -113,17 +105,6 @@ class User extends BaseUser
     {
         return 'users/';
     }
-
-    public function __construct()
-    {
-        parent::__construct();
-
-        $panier = new Panier();
-        $panier->setPrix(0);
-
-        $this->panier = $panier->getId();
-    }
-
 
     /**
      * Get id
@@ -285,22 +266,6 @@ class User extends BaseUser
     public function setCommentaires($commentaires)
     {
         $this->commentaires = $commentaires;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPanier()
-    {
-        return $this->panier;
-    }
-
-    /**
-     * @param mixed $panier
-     */
-    public function setPanier($panier)
-    {
-        $this->panier = $panier;
     }
 
     /**

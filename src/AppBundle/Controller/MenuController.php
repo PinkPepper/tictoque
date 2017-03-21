@@ -178,9 +178,9 @@ class MenuController extends Controller
             $menu->setValide(true);
         // -----------------------------
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($menu);
-        $em->flush($menu);
+       // $em = $this->getDoctrine()->getManager();
+     //   $em->persist($menu);
+     //   $em->flush($menu);
 
         //$panier = $this->getDoctrine()->getRepository('AppBundle:Panier')->find($this->getUser()->getPanier()->getId());
         //$panier->addMenu($menu);
@@ -199,7 +199,7 @@ class MenuController extends Controller
             $panier = array('menus'=>array(), 'produits'=>array());
         }
 
-        array_push($panier, (array_push($panier['menus'], array($menu->getId(), 1))));
+        array_push($panier, (array_push($panier['menus'], array("id"=> sizeof($panier['menus']),"entree"=>$menu->getEntree(), "plat"=>$menu->getPlat(), "dessert"=>$menu->getDessert(), "boisson"=>$menu->getBoisson(), "quantite"=>1, "prix"=>$menu->getPrix()))));
         $session->set('panier', $panier);
 
         dump($panier);
