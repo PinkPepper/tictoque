@@ -26,26 +26,6 @@ class Menu
      */
     private $type;
 
-//    /**
-//     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuEntree", cascade={"persist"})
-//     */
-//    private $entree;
-//
-//    /**
-//     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuPlat", cascade={"persist"})
-//     */
-//    private $plat;
-//
-//    /**
-//     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuDessert", cascade={"persist"})
-//     */
-//    private $dessert;
-//
-//    /**
-//     * @ORM\OneToMany(targetEntity="Produit", mappedBy="menuBoisson", cascade={"persist"})
-//     */
-//    private $boisson;
-
     /**
      * @ORM\Column(name="entree", nullable=true)
      * @ORM\OneToOne(targetEntity="AppBundle\Entity\Produit", cascade={"persist"})
@@ -85,23 +65,9 @@ class Menu
     private $prix;
 
     /**
-     *  @ORM\ManyToMany(targetEntity="Panier", inversedBy="menus", cascade={"persist"})
-     *  @ORM\JoinTable(name="RelationMenuPanier",
-     *  joinColumns={@ORM\JoinColumn(name="panier_id", referencedColumnName="id")},
-     *  inverseJoinColumns={@ORM\JoinColumn(name="menu_id", referencedColumnName="id")})
-     */
-    private $paniers;
-
-    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="menus", cascade={"persist"})
      */
     private $user;
-
-    /**
-     * @var boolean
-     * @ORM\Column(name="valide", type="boolean")
-     */
-    private $valide;
 
 
     /**
@@ -229,22 +195,6 @@ class Menu
     /**
      * @return mixed
      */
-    public function getPaniers()
-    {
-        return $this->paniers;
-    }
-
-    /**
-     * @param mixed $paniers
-     */
-    public function setPaniers(Panier $paniers = null)
-    {
-        $this->paniers = $paniers;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getUser()
     {
         return $this->user;
@@ -279,20 +229,16 @@ class Menu
         return '' . $this->id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getValide()
-    {
-        return $this->valide;
-    }
 
-    /**
-     * @param mixed $valide
-     */
-    public function setValide($valide)
+    public function setMenu($entree, $plat, $dessert, $boisson, $prix, $quantite, $user)
     {
-        $this->valide = $valide;
+        $this->entree = $entree;
+        $this->plat = $plat;
+        $this->dessert = $dessert;
+        $this->boisson = $boisson;
+        $this->prix = $prix;
+        $this->quantite = $quantite;
+        $this->user = $user;
     }
 }
 
