@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Produit controller.
@@ -68,6 +69,19 @@ class ProduitController extends Controller
         return $this->render('frontoffice/produit/show.html.twig', array(
             'produit' => $produit,
             'autre' => $autre
+        ));
+    }
+
+    /**
+     * Finds and displays a produit entity.
+     *
+     * @Route("/produit/panier/{id}", name="produit_panier_show")
+     * @Method("GET")
+     */
+    public function showPanierAction(Produit $produit)
+    {
+        return $this->render('frontoffice/panier/produit.html.twig', array(
+            'produit' => $produit
         ));
     }
 }

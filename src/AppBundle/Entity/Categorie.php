@@ -48,18 +48,6 @@ class Categorie
      */
     private $produits;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="image", type="string", length=255, nullable=true)
-     */
-    private $image;
-
-    use TraitUploadImage;
-    public function getUploadDir()
-    {
-        return 'categories';
-    }
 
     /**
      * Add produit
@@ -157,22 +145,6 @@ class Categorie
     public function setProduits($produits)
     {
         $this->produits = $produits;
-    }
-
-    /**
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param string $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
     }
 
     /**
