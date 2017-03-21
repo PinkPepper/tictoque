@@ -222,16 +222,17 @@ class PanierController extends Controller
         $panier = $session->get('panier');
 
         /* On crée les menus dans la base */
-        for ($i = 0; $i<sizeof($panier['menus']) ; $i++)
+        foreach($panier['menus'] as $panier)
         {
             $menu = new Menu();
-            $menu->setMenu($panier['menus']['entree'], $panier['menus']['plat'], $panier['menus']['dessert'], $panier['menus']['boisson'], $panier['menus']['prix'], $panier['menus']['quantite'], $this->getUser()->getId());
+
+            $menu->setMenu($panier['entree'], $panier['plat'], $panier['dessert'], $panier['boisson'], $panier['prix'], $panier['quantite'], $this->getUser());
             $em->persist($menu);
             $em->flush();
         }
 
         //TODO créer la commande
 
-        return $this->render('frontoffice/pannier/commande.html.twig');
+        return $this->render('frontoffice/panier/commande.html.twig');
     }
 }
