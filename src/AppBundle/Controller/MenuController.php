@@ -32,7 +32,6 @@ class MenuController extends Controller
         $this->getUser()->setMenus($menu->getId());
         $menu->setUser($this->getUser());
         $menu->setQuantite(1);
-        $menu->setValide(false);
 
         $menu->setType($type);
 
@@ -51,7 +50,7 @@ class MenuController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($menu);
-        $em->flush($menu);
+        $em->flush();
 
         if($type == 2) //plat + dessert + boisson
         {
@@ -85,7 +84,7 @@ class MenuController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($menu);
-        $em->flush($menu);
+        $em->flush();
 
        return $this->redirectToRoute('menu_plat', array('menu'=>$menu));
     }
@@ -113,7 +112,7 @@ class MenuController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($menu);
-        $em->flush($menu);
+        $em->flush();
 
         if($menu->getType() == 1) // entree + plat + boisson
         {
@@ -148,7 +147,7 @@ class MenuController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $em->persist($menu);
-        $em->flush($menu);
+        $em->flush();
 
         return $this->redirectToRoute('menu_boisson', array('menu'=>$menu));
     }
@@ -174,24 +173,7 @@ class MenuController extends Controller
     {
         $menu->setBoisson($boisson->getId());
 
-        //TODO à la validation du panier
-            $menu->setValide(true);
-        // -----------------------------
-
-       // $em = $this->getDoctrine()->getManager();
-     //   $em->persist($menu);
-     //   $em->flush($menu);
-
-        //$panier = $this->getDoctrine()->getRepository('AppBundle:Panier')->find($this->getUser()->getPanier()->getId());
-        //$panier->addMenu($menu);
-        //$em->persist($panier);
-        //$em->flush($panier);
-
-//        $session = new Session();
-//        $session->start();
-
         $session = $request->getSession();
-
         $panier = $session->get('panier');
 
         if(!$panier)
