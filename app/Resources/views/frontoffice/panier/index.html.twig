@@ -14,7 +14,7 @@
 
         </content>
 
-        <h2>  Produits : ({{ panier.produits|length }})</h2>
+        <h2>  Produits : ({{ produits|length }})</h2>
         <table>
             <thead>
             <tr>
@@ -25,32 +25,36 @@
             </tr>
             </thead>
             <tbody>
-            {% for produit in panier.produits %}
-                <tr>
-                    <td>{{ produit.nom }}</td>
-                    <td>{{ produit.prix }}</td>
-                    <td> {% if produit.image == "" %}
-                            Aucune image
-                        {% else %}
-                            <img src=" {{ asset('produits/' ~ produit.image ) }} " style="width: 10%; height: auto"></img>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>
-                            </li>
-                            <li>
-                                <a href="">Enlever du panier</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
+            {% for produit in produits %}
+                {% if produit[1] != 0  %}
+                    <tr id="{{ produit[0].id }}">
+                        <td>{{ produit[0].nom }}</td>
+                        <td>{{ produit[0].prix }}</td>
+                        <td> {% if produit[0].image == "" %}
+                                Aucune image
+                            {% else %}
+                                <img src=" {{ asset('produits/' ~ produit[0].image ) }} " style="width: 10%; height: auto"></img>
+                            {% endif %}
+                        </td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('produit_show', { 'id': produit[0].id }) }}">show</a>
+                                </li>
+                                <li><button class="btn btn-info btn-small voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', { 'id': produit[0].id }) }}"  >Voir</button>
+                                </li>
+                                <li>
+                                    <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}">-</button> <i class="quantite-{{ produit[0].id }}" data-id="{{ produit[0].id }}">{{ produit[1] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}">+</button>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>
 
-        <h2>  Menus : ({{ panier.menus|length }})</h2>
+        <h2>  Menus : ({{ menus|length }})</h2>
         <table>
             <thead>
             <tr>
@@ -58,34 +62,77 @@
                 <th>plat</th>
                 <th>dessert</th>
                 <th>boisson</th>
+                <th>nombre</th>
                 <th>actions</th>
             </tr>
             </thead>
             <tbody>
-            {% for produit in panier.menus %}
-                <tr>
-                    <td>{{ produit.entree }}</td>
-                    <td>{{ produit.plat }}</td>
-                    <td>{{ produit.dessert }}</td>
-                    <td>{{ produit.boisson }}</td>
-                    <td>
-                        <ul>
-                            <li>
-                                {#<a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>#}
-                            </li>
-                            <li>
-                                <a>Modifier le menu</a>
-                            </li>
-                            <li>
-                                <a href="">Enlever du panier</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
+            {% for produit in menus %}
+                {% if produit["quantite"] != 0  %}
+                    <tr id="{{ produit["id"] }}">
+                        <td>{{ produit["entree"] }}</td>
+                        <td>{{ produit["plat"] }}</td>
+                        <td>{{ produit["dessert"] }}</td>
+                        <td>{{ produit["boisson"] }}</td>
+                        <td>{{ produit["quantite"] }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="">show</a>
+                                </li>
+                                <li>
+                                    <a>Modifier le menu</a>
+                                </li>
+                                <li>
+                                    <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': produit["id"] }) }}" data-id="{{ produit["id"] }}">-</button> <i class="quantite-{{ produit["id"] }}" data-id="{{ produit["id"] }}">{{ produit["quantite"] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': produit["id"]}) }}" data-id="{{ produit["id"] }}">+</button>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endif %}
             {% endfor %}
             </tbody>
         </table>
 
     </section>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="application/javascript">
+
+        $('.voir').on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+
+            $('#modal-body').load(url);
+        });
+
+        $('.gestion_panier').on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+            var id = $(this).data('id');
+
+            var res = $('.quantite-' + id).load(url, function(){
+                if(res.text() == "0")
+                {
+                    console.log('oui');
+                    $('#' + id).css('display', 'none');
+                }
+            });
+        }) ;
+
+
+    </script>
 
 {% endblock %}
