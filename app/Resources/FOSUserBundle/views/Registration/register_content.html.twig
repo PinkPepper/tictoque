@@ -4,7 +4,7 @@
     <div class="compte_etape1">
         <div class="compte_head">
             <h4>ETAPE 1/2</h4>
-            <h2>CRÉATION D'UN COMPTE</h2>
+            <h2><b>CRÉATION D'UN COMPTE</b></h2>
             <span>Information relative à votre compte utilisateur</span>
         </div>
 
@@ -41,7 +41,7 @@
 
         <div class="form-horizontal">
             <div class="form-group">
-                <label class="col-md-4 control-label" for="textinput">PSEUDO*</label>
+                <label class="col-md-4 control-label" for="textinput">TELEPHONE*</label>
                 <div class="col-md-4">
                     {{ form_widget(form.telephone, { 'attr': {'class': 'form-control input-md', 'placeholder': '060102030405'|trans } }) }}
                     {{ form_errors(form.telephone) }}
@@ -91,25 +91,13 @@
 
             <div>
                 <ul>
-                    <li><input class="unique-class" type="checkbox" name="allergenes"><label>Gluten</label></li>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
+                    {% for allergene in allergenes %}
+                    <li><input class="unique-class" type="checkbox" name="allergenes"><label>{{ allergene.nom }}</label></li>
+                    {% if loop.index == 4 %}
                 </ul>
                 <ul>
-                    <li><input class ="checkbox-default" type="checkbox" name="allergenes"><label>Gluten</label></li>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
-                </ul>
-                <ul>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
-                </ul>
-                <ul>
-                    <li><input type="checkbox" name="allergenes"><label>Gluten</label></li>
+                    {% endif %}
+                    {% endfor %}
                 </ul>
             </div>
         </div>

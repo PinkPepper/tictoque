@@ -1,6 +1,18 @@
-{% extends 'base.html.twig' %}
+{% extends 'frontoffice/footer.html.twig' %}
 
 {% block body %}
+    <div class="fullDiv">
+        <div class="container marginDiv">
+            <div class="row">
+                <div class="col-xs-12 col-sm-1 col-md-1 col-xl-1 text-center">
+                    <div class="retour">
+                        <a>< Retour</a>
+                    </div>
+                </div>
+                <div class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-11 col-md-8 col-xl-8 text-center">
+                    <div class="article">
+                        <h1>{{ article.titre }}</h1>
+                        <p class="text-left">{{ article.contenu|raw }}</p>
     <h1>Article</h1>
 
     <table>
