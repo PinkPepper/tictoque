@@ -211,27 +211,4 @@ class PanierController extends Controller
 
         return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
     }
-
-    /**
-     * @Route("/ValidationPanier", name="validation_panier")
-     */
-    public function ValidationDuPanierAction(Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $session = $request->getSession();
-        $panier = $session->get('panier');
-
-        /* On crée les menus dans la base */
-        for ($i = 0; $i<sizeof($panier['menus']) ; $i++)
-        {
-            $menu = new Menu();
-            $menu->setMenu($panier['menus']['entree'], $panier['menus']['plat'], $panier['menus']['dessert'], $panier['menus']['boisson'], $panier['menus']['prix'], $panier['menus']['quantite'], $this->getUser()->getId());
-            $em->persist($menu);
-            $em->flush();
-        }
-
-        //TODO créer la commande
-
-        return $this->render('frontoffice/pannier/commande.html.twig');
-    }
 }

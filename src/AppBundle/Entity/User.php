@@ -100,6 +100,11 @@ class User extends BaseUser
      */
     private $menus;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Commande",  mappedBy="user", cascade={"remove"})
+     */
+    private $commandes;
+
     use TraitUploadImage;
     public function getUploadDir()
     {
@@ -304,6 +309,22 @@ class User extends BaseUser
     {
         $this->image='userdefault.svg';
         $this->enabled=1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommandes()
+    {
+        return $this->commandes;
+    }
+
+    /**
+     * @param mixed $commandes
+     */
+    public function setCommandes($commandes)
+    {
+        $this->commandes = $commandes;
     }
 }
 
