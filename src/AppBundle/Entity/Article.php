@@ -47,7 +47,7 @@ class Article
 
     /**
      * @var int
-     * @ORM\ManyToOne(targetEntity="user", inversedBy="articles")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="articles")
      * @ORM\JoinColumn(name="auteur", referencedColumnName="id")
      */
     private $auteur;
