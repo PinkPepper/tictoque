@@ -88,8 +88,12 @@ class Produit
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Allergene", inversedBy="produits", cascade={"persist"})
      */
     private $allergenes;
-
     private $all;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CommandeProduit",  mappedBy="produits", cascade={"remove"})
+     */
+    private $commande;
 
     use TraitUploadImage;
     public function getUploadDir()
@@ -395,6 +399,22 @@ class Produit
     public function setAll($all)
     {
         $this->all = $all;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
+
+    /**
+     * @param mixed $commande
+     */
+    public function setCommande($commande)
+    {
+        $this->commande = $commande;
     }
 
 }

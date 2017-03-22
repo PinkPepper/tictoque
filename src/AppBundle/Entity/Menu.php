@@ -69,6 +69,11 @@ class Menu
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="CommandeMenu",  mappedBy="menus", cascade={"remove"})
+     */
+    private $commande;
+
 
     /**
      * Get id

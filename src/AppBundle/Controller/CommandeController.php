@@ -2,6 +2,9 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Commande;
+use AppBundle\Entity\CommandeMenu;
+use AppBundle\Entity\CommandeProduit;
 use AppBundle\Entity\Menu;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -39,26 +42,56 @@ class CommandeController extends Controller
      */
     public function SuccesAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+
         //TODO informer le livreur
         //TODO mettre à jour la quantité de produit dans la base selon la commande
 
-        /* Enregistrer les menus */
-        $em = $this->getDoctrine()->getManager();
+        /* Création de la commande */
+        $commande = new Commande();
+        $commande->setUser($this->getUser());
+        $em->persist($commande);
+        $em->flush();
+
+            //TODO vérifier lien dans l'autre sens (user->getCommande())
+
+        /* Récupération du panier */
         $session = $request->getSession();
         $panier = $session->get('panier');
 
+        dump($panier);
+
         /* On crée les menus dans la base */
-        foreach($panier['menus'] as $panier)
+        foreach($panier['menus'] as $unMenu)
         {
             $menu = new Menu();
 
-            $menu->setMenu($panier['entree'], $panier['plat'], $panier['dessert'], $panier['boisson'], $panier['prix'], $panier['quantite'], $this->getUser());
+            $menu->setMenu($unMenu['entree'], $unMenu['plat'], $unMenu['dessert'], $unMenu['boisson'], $unMenu['prix'], $unMenu['quantite'], $this->getUser());
             $em->persist($menu);
+            $em->flush();
+
+            /* Création commandeMenu */
+            $commandeMenu = new CommandeMenu();
+            $commandeMenu->setCommande($commande);
+            $commandeMenu->setMenus($menu);
+            $em->persist($commandeMenu);
             $em->flush();
         }
 
-        /* Créer un historique de commande */
+        /* On récupère les produits du panier */
+        foreach($panier['produits'] as $produit)
+        {
+            $commandeProduit = new CommandeProduit();
+            $commandeProduit->setCommande($commande);
+            $commandeProduit->setProduits($em->getRepository('AppBundle:Produit')->find($produit[0]));
+            $commandeProduit->setQuantiteCommandee($produit[1]);
+            $em->persist($commandeProduit);
+            $em->flush();
+        }
 
+        $em->flush();
+
+        /* Créer un historique de commande */
 
         //TODO reset le panier
 
