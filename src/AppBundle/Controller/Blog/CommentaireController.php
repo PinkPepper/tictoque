@@ -43,7 +43,7 @@ class CommentaireController extends Controller
 
         return $this->render('frontoffice/blog/commentaire/new.html.twig', array(
             'commentaire' => $commentaire,
-            'form' => $form->createView(),
+            'form' => $formCom->createView(),
             'article' => $article
         ));
     }
