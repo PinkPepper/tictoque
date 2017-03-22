@@ -51,7 +51,7 @@
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{ path('categorie_index') }}">Nos plats</a></li>
                         <li><a href="#">Comment ça marche ?</a></li>
-                        <li><a href="#">Blog</a></li>
+                        <li><a href="{{ path('blog_index') }}">Blog</a></li>
                         {% if app.user %}
                             {% if app.user.roles.0=="ROLE_ADMIN" %}
                                 <li><a href="{{ path('admin_index') }}">Backoffice</a></li>

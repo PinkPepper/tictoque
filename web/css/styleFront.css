@@ -7,8 +7,6 @@ body {
   body div {
     margin: 0 auto !important;
     max-width: 1000px; }
-  body div:nth-child(2), body div:nth-child(3) {
-    max-width: 1100px; }
   body .glyphicon-star {
     color: yellow; }
   body .plat-actu {
@@ -43,6 +41,7 @@ body {
     body .Bandeau div {
       padding-top: 40px; }
       body .Bandeau div a {
+        white-space: nowrap;
         padding: 12px 35px 12px 35px;
         color: #ffffff;
         background-color: #f50f65;
@@ -520,5 +519,84 @@ body {
   @media screen and (min-width: 100px) and (max-width: 1024px) {
     body .container-fluid, body .compte {
       padding: 0 !important; } }
+  body body div {
+    margin: 0px; }
+  body .fullDiv {
+    width: 100% !important;
+    height: 100% !important;
+    padding: 0 !important;
+    max-width: none !important;
+    background-color: #eeeeee;
+    padding-top: 30px !important; }
+    body .fullDiv .retour {
+      margin-bottom: 20px !important;
+      padding: 5px;
+      border: 1px grey solid;
+      border-radius: 3px;
+      background-color: white;
+      display: inline-block;
+      cursor: pointer; }
+      body .fullDiv .retour a {
+        color: grey; }
+    body .fullDiv .retour:hover a {
+      text-decoration: none; }
+    body .fullDiv .article {
+      background-color: white;
+      color: black;
+      padding: 50px;
+      padding-left: 100px;
+      padding-right: 100px;
+      margin-bottom: 50px !important; }
+      body .fullDiv .article h1 {
+        margin: 0 !important;
+        margin-bottom: 30px !important; }
+      body .fullDiv .article .bar {
+        border-bottom: 1px #9f9f9f solid;
+        margin-top: 20px;
+        margin-bottom: 20px; }
+      body .fullDiv .article .auteur {
+        background-color: #eeeeee;
+        padding: 30px; }
+        body .fullDiv .article .auteur p {
+          margin-bottom: 0px;
+          display: inline-block;
+          width: 100%; }
+        body .fullDiv .article .auteur .imgProfil {
+          width: 40px;
+          height: 40px;
+          float: left;
+          margin-right: 20px; }
+    body .fullDiv .commentaire {
+      background-color: white;
+      color: black;
+      padding: 50px;
+      padding-left: 100px;
+      padding-right: 100px;
+      margin-bottom: 50px !important; }
+      body .fullDiv .commentaire h3 {
+        margin-bottom: 50px; }
+      body .fullDiv .commentaire .commentaireShow {
+        padding-bottom: 30px;
+        padding-top: 30px;
+        border-bottom: 1px #eeeeee solid; }
+        body .fullDiv .commentaire .commentaireShow .imgProfil {
+          width: 40px;
+          height: 40px; }
+      body .fullDiv .commentaire .writeCommentaire {
+        margin-bottom: 30px; }
+        body .fullDiv .commentaire .writeCommentaire .zoneCommentaire {
+          border-color: grey;
+          padding: 20px;
+          margin-top: 20px;
+          border-radius: 5px;
+          width: 100%; }
+        body .fullDiv .commentaire .writeCommentaire .send {
+          margin-top: 5px;
+          border: none;
+          padding: 5px;
+          float: right;
+          color: white;
+          background-color: #778BA3; }
+
 
 /*# sourceMappingURL=style.css.map */

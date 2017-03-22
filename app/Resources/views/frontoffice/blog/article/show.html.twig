@@ -6,67 +6,64 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-1 col-md-1 col-xl-1 text-center">
                     <div class="retour">
-                        <a>< Retour</a>
+                        <a href="{{ path('blog_index') }}">< Retour</a>
                     </div>
                 </div>
-                <div class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-11 col-md-8 col-xl-8 text-center">
+                <div class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-10 col-md-10 col-xl-8 text-center">
                     <div class="article">
                         <h1>{{ article.titre }}</h1>
                         <p class="text-left">{{ article.contenu|raw }}</p>
-    <h1>Article</h1>
+                        <div class="bar"></div>
+                        <div class="auteur text-left">
+                            <p>
+                                <img class="imgProfil" src="{{ asset('users/'~ article.auteur.image) }}">
+                                <b>{{ article.auteur }}</b>
+                                <br/>Article publié le {{ article.createdAt|date('d/m/Y') }}
+                            </p>
+                        </div>
+                        <div class="bar"></div>
+                    </div>
+                    <div class="commentaire text-left">
+                        <h3>{{ article.commentaires|length }}
+                            {% if article.commentaires|length>1 %}Commentaires
+                            {% else %}Commentaire
+                            {% endif %}</h3>
+                        {% for com in article.commentaires %}
+                        <div class="commentaireShow row">
+                            <div class="col-xs-12 col-sm-2 col-md-2 col-xl-2">
+                                <img class="imgProfil" src="{{ asset('users/'~ article.auteur.image) }}">
+                            </div>
+                            <div class="col-xs-12 col-sm-10 col-md-10 col-xl-10">
+                                <p class="title"><b>{{ com.auteur }} </b> Publié le {{ com.createdAt|date('d/m/Y')}}</p>
+                                <p>{{ com.contenu|raw }}</p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="writeCommentaire">
+                            {% if app.user is not null %}
+                            {{ form_start(form) }}
+                                {{ form_widget(form.contenu, {'attr':{'class':'zoneCommentaire','placeholder':'Ajouter votre commentaire'}}) }}
+                                {#<textarea class="zoneCommentaire" placeholder="Ajouter votre commentaire"></textarea>#}
+                                <input class="send" type="submit" name="send" value="Laisser un commentaire">
+                            {{ form_end(form) }}
+                            {% else %}
+                                <p>Vous devez vous connecter vous pouvoir commenter.</p>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Titre</th>
-                <td>{{ article.titre }}</td>
-            </tr>
-            <tr>
-                <th>Contenu</th>
-                <td>{{ article.contenu | raw }}</td>
-            </tr>
-            <tr>
-                <th>Slug</th>
-                <td>{{ article.slug }}</td>
-            </tr>
-            <tr>
-                <th>Contentchanged</th>
-                <td>{% if article.contentChanged %}{{ article.contentChanged|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Createdat</th>
-                <td>{% if article.createdAt %}{{ article.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Updatedat</th>
-                <td>{% if article.updatedAt %}{{ article.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+                {#{{ form_start(form) }}#}
+                {#{{ form_widget(form) }}#}
+                {#<input type="submit" value="Create" />#}
+                {#{{ form_end(form) }}#}
 
-    <ul>
-        <li>
-            <a href="{{ path('blog_index') }}">Back to the list</a>
-        </li>
-    </ul>
-
-    <h3>Liste des commentaires</h3>
-    <ul>
-    {% for com in article.commentaires %}
-       <li>
-            <p>{{ com.contenu }} | {{ com.auteur }}</p>
-
-       </li>
-    {% endfor %}
-    </ul>
-
-    {% if app.user is not null %}
-        <a href="{{ path('commentaire_new', {'id': article.id}) }}">Ajouter un commentaire</a>
-    {% else %}
-        <p>Vous devez vous connecter pour commenter.</p>
-    {% endif %}
+                {#<ul>#}
+                    {#<li>#}
+                        {#<a href="{{ path('article_show', {'id': article.id, 'titre': article.slug}) }}">Annuler</a>#}
+                    {#</li>#}
+                {#</ul>#}
 {% endblock %}
