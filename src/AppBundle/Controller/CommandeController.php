@@ -37,7 +37,7 @@ class CommandeController extends Controller
 
     /**
      * Succes de la commande
-     * @Route("/success", name="commande_succes")
+     * @Route("/validation_panier/success", name="commande_succes")
      * @Method("GET")
      */
     public function SuccesAction(Request $request)
@@ -53,47 +53,55 @@ class CommandeController extends Controller
         $em->persist($commande);
         $em->flush();
 
-            //TODO vérifier lien dans l'autre sens (user->getCommande())
-
         /* Récupération du panier */
         $session = $request->getSession();
         $panier = $session->get('panier');
 
-        dump($panier);
 
         /* On crée les menus dans la base */
-        foreach($panier['menus'] as $unMenu)
+        if(sizeof($panier['menus']) > 0)
         {
-            $menu = new Menu();
+            foreach ($panier['menus'] as $unMenu) {
+                if($unMenu->getQuantite != 0)
+                {
+                    $menu = new Menu();
+                    $menu->setMenu($unMenu['entree'], $unMenu['plat'], $unMenu['dessert'], $unMenu['boisson'], $unMenu['prix'], $unMenu['quantite'], $this->getUser());
 
-            $menu->setMenu($unMenu['entree'], $unMenu['plat'], $unMenu['dessert'], $unMenu['boisson'], $unMenu['prix'], $unMenu['quantite'], $this->getUser());
-            $em->persist($menu);
-            $em->flush();
+                    $em->persist($menu);
+                    $em->flush();
 
-            /* Création commandeMenu */
-            $commandeMenu = new CommandeMenu();
-            $commandeMenu->setCommande($commande);
-            $commandeMenu->setMenus($menu);
-            $em->persist($commandeMenu);
-            $em->flush();
+                    var_dump("flush menu : " . $menu->getId());
+
+                    /* Création commandeMenu */
+                    $commandeMenu = new CommandeMenu();
+                    $commandeMenu->setCommande($commande);
+                    $commandeMenu->setMenus($menu);
+                    $em->persist($commandeMenu);
+                    $em->flush();
+                }
+            }
         }
 
         /* On récupère les produits du panier */
-        foreach($panier['produits'] as $produit)
+        if(sizeof($panier['produits']) > 0)
         {
-            $commandeProduit = new CommandeProduit();
-            $commandeProduit->setCommande($commande);
-            $commandeProduit->setProduits($em->getRepository('AppBundle:Produit')->find($produit[0]));
-            $commandeProduit->setQuantiteCommandee($produit[1]);
-            $em->persist($commandeProduit);
-            $em->flush();
+            foreach($panier['produits'] as $produit)
+            {
+                if($produit[1] != 0)
+                {
+                    $commandeProduit = new CommandeProduit();
+                    $commandeProduit->setCommande($commande);
+                    $commandeProduit->setProduits($em->getRepository('AppBundle:Produit')->find($produit[0]));
+                    $commandeProduit->setQuantiteCommandee($produit[1]);
+                    $em->persist($commandeProduit);
+                    $em->flush();
+                }
+            }
         }
 
-        $em->flush();
-
-        /* Créer un historique de commande */
-
-        //TODO reset le panier
+        /* reset le panier */
+        $session = $request->getSession();
+        $session->clear();
 
         return $this->render('frontoffice/commande/succes.html.twig', array(
         ));
