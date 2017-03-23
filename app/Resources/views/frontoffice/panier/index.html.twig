@@ -97,10 +97,10 @@
             {% for menu in menus %}
                 {% if menu["quantite"] != 0  %}
                     <tr id="{{ menu["id"] }}">
-                        <td>{{ menu["entree"].nom }}</td>
-                        <td>{{ menu["plat"].nom }}</td>
-                        <td>{{ menu["dessert"].nom }}</td>
-                        <td>{{ menu["boisson"].nom }}</td>
+                        <td>{% if menu["entree"] is not null %}{{ menu["entree"].nom }}{% else %}NULL{% endif %}</td>
+                        <td>{% if menu["plat"] is not null %}{{ menu["plat"].nom }}{% else %}NULL{% endif %}</td>
+                        <td>{% if menu["dessert"] is not null %}{{ menu["dessert"].nom }}{% else %}NULL{% endif %}</td>
+                        <td>{% if menu["boisson"] is not null %}{{ menu["boisson"].nom }}{% else %}NULL{% endif %}</td>
                         <td>{{ menu["quantite"] }}</td>
                         <td>{{ menu["prix"] }}</td>
                         <td>

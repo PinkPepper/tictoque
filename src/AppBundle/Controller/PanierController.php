@@ -53,17 +53,29 @@ class PanierController extends Controller
                 {
                     $entree = $em->find($menu['entree']);
                 }
-                if($menu['plat'] != null)
-                {
+                else{
+                    $entree=null;
+                }
+                if($menu['plat'] != null) {
                     $plat = $em->find($menu['plat']);
                 }
+                else{
+                    $plat = null;
+                }
+
                 if($menu['dessert'] != null)
                 {
                     $dessert = $em->find($menu['dessert']);
                 }
+                else{
+                    $dessert = null;
+                }
                 if($menu['boisson'] != null)
                 {
                     $boisson = $em->find($menu['boisson']);
+                }
+                else{
+                    $boisson = null;
                 }
                 array_push($menus, array('id'=>$menu['id'], 'entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>$menu['quantite'], 'prix'=>$menu['prix']));
         }
