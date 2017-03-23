@@ -138,6 +138,7 @@ class PanierController extends Controller
                     //il se passe rien du coup cest génial
                     //suffit de pas afficher un produit à 0 et de ne pas le prendre en compte dans la commande
                     //merci tout le monde pour votre soutient
+                    //On t'aime Lucie <3
                 }
                 $session->set('panier', $panier);
                 break;
