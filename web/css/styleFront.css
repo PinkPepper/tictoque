@@ -19,7 +19,19 @@ body {
         width: 200px;
         height: 60px; }
       body .navbar .container-fluid .collapse ul {
-        padding-top: 15px; }
+        padding-top: 5px; }
+        body .navbar .container-fluid .collapse ul li .nav-connexion {
+          border: 2px solid #e52c65;
+          border-radius: 5px;
+          padding: 5px;
+          margin-top: 8px; }
+        body .navbar .container-fluid .collapse ul .nav-panier {
+          display: inline-flex; }
+          body .navbar .container-fluid .collapse ul .nav-panier a:first-child {
+            padding: 2px 0 0 0 !important; }
+            body .navbar .container-fluid .collapse ul .nav-panier a:first-child img {
+              width: 20px;
+              height: 45px; }
   body .row.home {
     max-width: 100%; }
   body .Bandeau {
@@ -58,8 +70,6 @@ body {
       border-top: 1px solid #96acc1;
       margin-top: 125px !important; }
       body .row.relais .point_relais img {
-        width: 178px;
-        height: 235px;
         position: absolute;
         bottom: 50px; }
       body .row.relais .point_relais div {
@@ -189,7 +199,9 @@ body {
       text-align: center; }
     body .menu_choix h4 {
       text-align: center;
-      font-weight: 600; }
+      font-weight: bold;
+      font-size: 25px;
+      color: #4a4a4a; }
     body .menu_choix .partenaire-title {
       padding-top: 50px !important; }
     body .menu_choix .dessert1 {
@@ -303,30 +315,20 @@ body {
     body .menu_choix .infographie ul {
       list-style: none; }
       body .menu_choix .infographie ul li:first-child {
-        display: inline-block; }
-        body .menu_choix .infographie ul li:first-child img {
-          float: left; }
+        display: inline-block;
+        text-align: center; }
       body .menu_choix .infographie ul li:nth-child(2), body .menu_choix .infographie ul li:nth-child(4) {
         text-align: center; }
-      body .menu_choix .infographie ul li:nth-child(3) img {
-        float: right; }
-      body .menu_choix .infographie ul li:nth-child(3) h4 {
-        clear: both;
-        float: right; }
-      body .menu_choix .infographie ul li:nth-child(3) p {
-        clear: both;
-        float: right; }
+      body .menu_choix .infographie ul li:nth-child(3) {
+        float: right;
+        text-align: center; }
       body .menu_choix .infographie ul li:nth-child(4) {
         text-align: center;
         clear: both; }
       body .menu_choix .infographie ul li:last-child {
         clear: both;
-        float: left; }
-        body .menu_choix .infographie ul li:last-child img {
-          float: left; }
-        body .menu_choix .infographie ul li:last-child h4 {
-          float: left;
-          clear: both; }
+        float: left;
+        text-align: center; }
         body .menu_choix .infographie ul li:last-child p {
           clear: both; }
     @media screen and (max-width: 980px) and (min-width: 150px) {
@@ -339,7 +341,8 @@ body {
         left: 0;
         top: 70px; }
       body .menu_choix .dessert1, body .menu_choix .dessert2, body .menu_choix .dessert3 {
-        float: none; }
+        float: none;
+        margin-left: 23%; }
       body .menu_choix .infographie li {
         text-align: center; }
         body .menu_choix .infographie li img {
