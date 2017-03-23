@@ -46,7 +46,34 @@ class PanierController extends Controller
             }
         }
 
-        return $this->render('frontoffice/panier/index.html.twig', array('panier'=>$panier, 'user'=>$user, 'produits'=>$produits, 'menus'=>$menus_id));
+        $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
+        foreach ($menus_id as $menu)
+        {
+                if($menu['entree'] != null)
+                {
+                    $entree = $em->find($menu['entree']);
+                }
+                if($menu['plat'] != null)
+                {
+                    $plat = $em->find($menu['plat']);
+                }
+                if($menu['dessert'] != null)
+                {
+                    $dessert = $em->find($menu['dessert']);
+                }
+                if($menu['boisson'] != null)
+                {
+                    $boisson = $em->find($menu['boisson']);
+                }
+                array_push($menus, array('id'=>$menu['id'], 'entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>$menu['quantite'], 'prix'=>$menu['prix']));
+        }
+
+
+        return $this->render('frontoffice/panier/index.html.twig', array(
+            'panier'=>$panier,
+            'user'=>$user,
+            'produits'=>$produits,
+            'menus'=>$menus));
     }
 
     /**

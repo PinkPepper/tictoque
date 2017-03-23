@@ -89,28 +89,27 @@
                 <th>dessert</th>
                 <th>boisson</th>
                 <th>nombre</th>
+                <th>prix</th>
                 <th>actions</th>
             </tr>
             </thead>
             <tbody>
-            {% for produit in menus %}
-                {% if produit["quantite"] != 0  %}
-                    <tr id="{{ produit["id"] }}">
-                        <td>{{ produit["entree"] }}</td>
-                        <td>{{ produit["plat"] }}</td>
-                        <td>{{ produit["dessert"] }}</td>
-                        <td>{{ produit["boisson"] }}</td>
-                        <td>{{ produit["quantite"] }}</td>
+            {% for menu in menus %}
+                {% if menu["quantite"] != 0  %}
+                    <tr id="{{ menu["id"] }}">
+                        <td>{{ menu["entree"].nom }}</td>
+                        <td>{{ menu["plat"].nom }}</td>
+                        <td>{{ menu["dessert"].nom }}</td>
+                        <td>{{ menu["boisson"].nom }}</td>
+                        <td>{{ menu["quantite"] }}</td>
+                        <td>{{ menu["prix"] }}</td>
                         <td>
                             <ul>
-                                <li>
-                                    <a href="">show</a>
-                                </li>
                                 <li>
                                     <a>Modifier le menu</a>
                                 </li>
                                 <li>
-                                    <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': produit["id"] }) }}" data-id="{{ produit["id"] }}">-</button> <i class="quantite-{{ produit["id"] }}" data-id="{{ produit["id"] }}">{{ produit["quantite"] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': produit["id"]}) }}" data-id="{{ produit["id"] }}">+</button>
+                                    <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': menu["id"] }) }}" data-id="{{ menu["id"] }}">-</button> <i class="quantite-{{ menu["id"] }}" data-id="{{ menu["id"] }}">{{ menu["quantite"] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}">+</button>
                                 </li>
                             </ul>
                         </td>
