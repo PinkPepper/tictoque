@@ -28,6 +28,9 @@ class MenuController extends Controller
      */
     public function choixMenuAction(Request $request, $type)
     {
+        $session = $request->getSession();
+        $SESSION_MENU = array();
+
         $menu = new Menu();
         $this->getUser()->setMenus($menu->getId());
         $menu->setUser($this->getUser());
@@ -48,130 +51,126 @@ class MenuController extends Controller
             $menu->setPrix(16);
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($menu);
-        $em->flush();
+        $SESSION_MENU = array($menu);
+        $session->set('menu', $SESSION_MENU);
+
 
         if($type == 2) //plat + dessert + boisson
         {
-            return $this->redirectToRoute('menu_plat', array('menu'=>$menu->getId()));
+            return $this->redirectToRoute('menu_plat');
         }
 
-        return $this->redirectToRoute('menu_entree', array('menu'=>$menu->getId()));
+        return $this->redirectToRoute('menu_entree');
     }
 
 
     /**
-     * @Route("/entree/{menu}", name="menu_entree")
+     * @Route("/entree", name="menu_entree")
      */
-    public function entreeAction(Request $resquest, Menu $menu)
+    public function entreeAction(Request $request)
     {
+        $session = $request->getSession();
+
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $produits = $em->findByType('entree');
 
         return $this->render('frontoffice/menu/entrees.html.twig', array(
-            'produits' => $produits,
-            'menu' => $menu
-        ));
-    }
-
-    /**
-     * @Route("/entree/{menu}/{id}", name="menu_choix_entree")
-     */
-    public function choixEntreeAction(Request $request, Menu $menu, Produit $entree)
-    {
-        $menu->setEntree($entree->getId());
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($menu);
-        $em->flush();
-
-       return $this->redirectToRoute('menu_plat', array('menu'=>$menu));
-    }
-
-    /**
-     * @Route("/plat/{menu}", name="menu_plat")
-     */
-    public function platAction(Request $request, Menu $menu)
-    {
-        $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
-        $produits = $em->findByType('plat');
-
-        return $this->render('frontoffice/menu/plats.html.twig', array(
-            'menu' => $menu,
             'produits' => $produits
         ));
     }
 
     /**
-     * @Route("/plat/{menu}/{id}", name="menu_choix_plat")
+     * @Route("/entree/{id}", name="menu_choix_entree")
      */
-    public function choixPlatAction(Request $request, Menu $menu, Produit $plat)
+    public function choixEntreeAction(Request $request, Produit $entree)
     {
-        $menu->setPlat($plat->getId());
+        $session = $request->getSession();
+        $menu = $session->get('menu');
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($menu);
-        $em->flush();
+        $menu[0]->setEntree($entree->getId());
 
-        if($menu->getType() == 1) // entree + plat + boisson
-        {
-            //return $this->render('frontoffice/menu/boisson.html.twig');
-            return $this->redirectToRoute('menu_boisson', array('menu'=>$menu));
-        }
-
-        // plat + dessert + boisson || entree + plat + dessert + boisson
-        return $this->redirectToRoute('menu_dessert', array('menu'=>$menu));
+       return $this->redirectToRoute('menu_plat');
     }
 
     /**
-     * @Route("/dessert/{menu}", name="menu_dessert")
+     * @Route("/plat", name="menu_plat")
      */
-    public function dessertAction(Request $request, Menu $menu)
+    public function platAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
+        $produits = $em->findByType('plat');
+
+
+        return $this->render('frontoffice/menu/plats.html.twig', array(
+            'produits' => $produits
+        ));
+    }
+
+    /**
+     * @Route("/plat/{id}", name="menu_choix_plat")
+     */
+    public function choixPlatAction(Request $request, Produit $plat)
+    {
+        $session = $request->getSession();
+        $menu = $session->get('menu');
+        $menu[0]->setPlat($plat->getId());
+
+        if($menu[0]->getType() == 1) // entree + plat + boisson
+        {
+            //return $this->render('frontoffice/menu/boisson.html.twig');
+            return $this->redirectToRoute('menu_boisson');
+        }
+
+        // plat + dessert + boisson || entree + plat + dessert + boisson
+        return $this->redirectToRoute('menu_dessert');
+    }
+
+    /**
+     * @Route("/dessert", name="menu_dessert")
+     */
+    public function dessertAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $produits = $em->findByType('dessert');
 
         return $this->render('frontoffice/menu/desserts.html.twig', array(
-            'menu' => $menu,
             'produits' => $produits
         ));
     }
 
     /**
-     * @Route("/dessert/{menu}/{id}", name="menu_choix_dessert")
+     * @Route("/dessert/{id}", name="menu_choix_dessert")
      */
-    public function choixDessertAction(Request $request, Menu $menu, Produit $dessert)
+    public function choixDessertAction(Request $request, Produit $dessert)
     {
-        $menu->setDessert($dessert->getId());
+        $session = $request->getSession();
+        $menu = $session->get('menu');
+        $menu[0]->setDessert($dessert->getId());
 
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($menu);
-        $em->flush();
-
-        return $this->redirectToRoute('menu_boisson', array('menu'=>$menu));
+        return $this->redirectToRoute('menu_boisson');
     }
 
     /**
-     * @Route("/boisson/{menu}", name="menu_boisson")
+     * @Route("/boisson", name="menu_boisson")
      */
-    public function boissonAction(Request $request, Menu $menu)
+    public function boissonAction(Request $request)
     {
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $produits = $em->findByType('boisson');
 
         return $this->render('frontoffice/menu/boissons.html.twig', array(
-            'menu' => $menu,
             'produits' => $produits
         ));
     }
 
     /**
-     * @Route("/boisson/{menu}/{id}", name="menu_choix_boisson")
+     * @Route("/boisson/{id}", name="menu_choix_boisson")
      */
-    public function choixBoissonAction(Request $request, Menu $menu, Produit $boisson)
+    public function choixBoissonAction(Request $request, Produit $boisson)
     {
-        $menu->setBoisson($boisson->getId());
+        $session = $request->getSession();
+        $menu = $session->get('menu');
+        $menu[0]->setBoisson($boisson->getId());
 
         $session = $request->getSession();
         $panier = $session->get('panier');
@@ -181,13 +180,23 @@ class MenuController extends Controller
             $panier = array('menus'=>array(), 'produits'=>array());
         }
 
-        array_push($panier, (array_push($panier['menus'], array("id"=> sizeof($panier['menus']),"entree"=>$menu->getEntree(), "plat"=>$menu->getPlat(), "dessert"=>$menu->getDessert(), "boisson"=>$menu->getBoisson(), "quantite"=>1, "prix"=>$menu->getPrix()))));
+        $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
+
+        if($menu[0]->getEntree() != null) $entree =  $em->find($menu[0]->getEntree());
+        else $entree = null;
+
+        if($menu[0]->getPlat() != null) $plat =  $em->find($menu[0]->getPlat());
+        else $plat = null;
+
+        if($menu[0]->getDessert() != null) $dessert =  $em->find($menu[0]->getDessert());
+        else $dessert = null;
+
+        if($menu[0]->getBoisson() != null) $boisson =  $em->find($menu[0]->getBoisson());
+        else $boisson = null;
+
+        array_push($panier, (array_push($panier['menus'], array("id"=> sizeof($panier['menus']),"entree"=>$entree, "plat"=>$plat, "dessert"=>$dessert, "boisson"=>$boisson, "quantite"=>1, "prix"=>$menu[0]->getPrix()))));
         $session->set('panier', $panier);
 
-        dump($panier);
-
-
-        //return $this->render('frontoffice/panier/index.html.twig', array('panier'=>$panier));
         return $this->redirectToRoute('index_panier');
     }
 }

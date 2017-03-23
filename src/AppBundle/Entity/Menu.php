@@ -26,27 +26,25 @@ class Menu
      */
     private $type;
 
+
+
     /**
-     * @ORM\Column(name="entree", nullable=true)
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Produit", cascade={"persist"})
+     * @ORM\Column(name="id_entree", type="integer", nullable=true)
      */
     private $entree;
 
     /**
-     * @ORM\Column(name="plat", nullable=true)
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Produit", cascade={"persist"})
+     * @ORM\Column(name="id_plat", type="integer", nullable=true)
      */
     private $plat;
 
     /**
-     * @ORM\Column(name="dessert", nullable=true)
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Produit", cascade={"persist"})
+     * @ORM\Column(name="id_dessert", type="integer", nullable=true)
      */
     private $dessert;
 
     /**
-     * @ORM\Column(name="boisson", nullable=true)
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Produit", cascade={"persist"})
+     * @ORM\Column(name="id_boisson", type="integer", nullable=true)
      */
     private $boisson;
 
@@ -249,6 +247,22 @@ class Menu
         else if($this->dessert === null) $this->type = 1;
         else $this->type = 3;
 
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
+
+    /**
+     * @param mixed $commande
+     */
+    public function setCommande($commande)
+    {
+        $this->commande = $commande;
     }
 }
 

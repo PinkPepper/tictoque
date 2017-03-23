@@ -71,9 +71,10 @@ class ProduitAdminController extends Controller
                 $this->getDoctrine()->getEntityManager()->flush();
             }
 
+            dump($produit);
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
-            $em->flush($produit);
+            $em->flush();
 
             return $this->redirectToRoute('produit_show_admin', array('id' => $produit->getId()));
         }
