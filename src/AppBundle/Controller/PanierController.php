@@ -211,4 +211,40 @@ class PanierController extends Controller
 
         return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
     }
+
+    /**
+     * @Route("/retirerProduitAuPanier/{produit}", name="delete_produit")
+     */
+    public function retirerProduit(Request $request, Produit $produit)
+    {
+        $session = $request->getSession();
+        $panier = $session->get('panier');
+        $nombre = 0;
+
+        if(!$panier)
+        {
+            throw  new NotFoundHttpException();
+        }
+
+        for ($i = 0; $i<sizeof($panier['produits']) ; $i++)
+        {
+            if ($panier['produits'][$i][0] == $produit->getId()) {
+                $panier['produits'][$i][1] = 0;
+
+                $nombre = $panier['produits'][$i][1] ;
+                if($nombre == 0)
+                {
+                    //TODO effacer le produit du panier ? != ignorer produit quantité 0 du panier
+                    //   $panier['produits'] =   array_diff($panier['produits'], $panier['produits'][$i]); //marche pas
+                    //il se passe rien du coup cest génial
+                    //suffit de pas afficher un produit à 0 et de ne pas le prendre en compte dans la commande
+                    //merci tout le monde pour votre soutient
+                }
+                $session->set('panier', $panier);
+                break;
+            }
+        }
+
+        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+    }
 }

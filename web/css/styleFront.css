@@ -1,12 +1,9 @@
 body {
   color: #929292 !important;
   font-family: "Roboto", sans-serif !important; }
-  body div:first-child {
-    max-width: 100%;
-    margin: 0; }
-  body div {
-    margin: 0 auto !important;
-    max-width: 1000px; }
+  body .row {
+    margin-right: 0px;
+    margin-left: 0px; }
   body .glyphicon-star {
     color: yellow; }
   body .plat-actu {
@@ -25,8 +22,6 @@ body {
         padding-top: 15px; }
   body .row.home {
     max-width: 100%; }
-  body .row.plats_semaine {
-    max-width: 1000px; }
   body .Bandeau {
     background-image: url("../img/image_background.jpg");
     width: 100%;
@@ -198,7 +193,8 @@ body {
     body .menu_choix .partenaire-title {
       padding-top: 50px !important; }
     body .menu_choix .dessert1 {
-      right: 5px; }
+      right: 5px;
+      margin-left: 13%; }
     body .menu_choix .dessert2 {
       left: 12px; }
     body .menu_choix .dessert3 {
@@ -293,14 +289,17 @@ body {
           padding: 5px 15px 5px 15px;
           cursor: pointer;
           text-decoration: none; }
-    body .menu_choix .partenaires ul {
-      list-style: none;
-      display: inline-flex;
-      margin-top: 25px; }
-      body .menu_choix .partenaires ul li img {
-        width: 150px;
-        height: auto;
-        margin-right: 35px; }
+    body .menu_choix .partenaires {
+      margin-left: 12%;
+      margin-right: 12%; }
+      body .menu_choix .partenaires ul {
+        list-style: none;
+        display: inline-flex;
+        margin-top: 25px; }
+        body .menu_choix .partenaires ul li img {
+          width: 150px;
+          height: auto;
+          margin-right: 35px; }
     body .menu_choix .infographie ul {
       list-style: none; }
       body .menu_choix .infographie ul li:first-child {
@@ -546,7 +545,7 @@ body {
       padding: 50px;
       padding-left: 100px;
       padding-right: 100px;
-      margin-bottom: 50px !important; }
+      margin-bottom: 30px; }
       body .fullDiv .article h1 {
         margin: 0 !important;
         margin-bottom: 30px !important; }
@@ -572,7 +571,7 @@ body {
       padding: 50px;
       padding-left: 100px;
       padding-right: 100px;
-      margin-bottom: 50px !important; }
+      margin-bottom: 30px; }
       body .fullDiv .commentaire h3 {
         margin-bottom: 50px; }
       body .fullDiv .commentaire .commentaireShow {
@@ -597,6 +596,81 @@ body {
           float: right;
           color: white;
           background-color: #778BA3; }
-
+    body .fullDiv .pub {
+      background-color: red;
+      padding: 20px;
+      margin-bottom: 30px;
+      color: black; }
+    body .fullDiv .pub {
+      background-color: red; }
+  body .panier {
+    background-color: #F6F9FA; }
+    body .panier .container h1 {
+      color: black; }
+    body .panier .container .commande {
+      padding-left: 60px;
+      padding-right: 60px; }
+      body .panier .container .commande .total {
+        float: right; }
+      body .panier .container .commande h4 {
+        color: black; }
+      body .panier .container .commande .bar {
+        border-bottom: 1px #929292 solid;
+        margin-bottom: 10px; }
+      body .panier .container .commande .commander {
+        color: white;
+        background-color: #CF2861;
+        text-align: center;
+        padding: 10px;
+        display: block;
+        width: 100%;
+        height: 40px;
+        margin-top: 30px;
+        margin-bottom: 10px; }
+      body .panier .container .commande .continue {
+        color: white;
+        background-color: #939495;
+        text-align: center;
+        padding: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: block;
+        width: 100%;
+        height: 40px; }
+    body .panier .container .produit {
+      color: black;
+      border: 1px #eee solid;
+      padding: 20px;
+      background-color: white;
+      height: 140px;
+      border-radius: 5px;
+      margin-bottom: 20px !important; }
+      body .panier .container .produit h5 {
+        margin: 7px; }
+      body .panier .container .produit h4 {
+        margin: 7px; }
+      body .panier .container .produit .imgProduit {
+        margin-right: 10px;
+        border: 1px #eee solid;
+        width: 160px;
+        height: 100px;
+        float: left;
+        border-radius: 5px; }
+      body .panier .container .produit .divQuantite {
+        padding-top: 35px; }
+        body .panier .container .produit .divQuantite .quantite {
+          background-color: #F6F9FA;
+          display: inline-block;
+          text-align: center;
+          padding-left: 10px;
+          padding-right: 10px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          border-radius: 5px; }
+      body .panier .container .produit .divPrix {
+        padding-top: 15px; }
+      body .panier .container .produit .divDelete {
+        font-size: 30px;
+        padding-top: 28px; }
 
 /*# sourceMappingURL=style.css.map */
