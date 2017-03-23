@@ -18,20 +18,25 @@ body {
       body .navbar .container-fluid .navbar-header img {
         width: 200px;
         height: 60px; }
-      body .navbar .container-fluid .collapse ul {
-        padding-top: 5px; }
-        body .navbar .container-fluid .collapse ul li .nav-connexion {
-          border: 2px solid #e52c65;
-          border-radius: 5px;
-          padding: 5px;
-          margin-top: 8px; }
-        body .navbar .container-fluid .collapse ul .nav-panier {
-          display: inline-flex; }
-          body .navbar .container-fluid .collapse ul .nav-panier a:first-child {
-            padding: 2px 0 0 0 !important; }
-            body .navbar .container-fluid .collapse ul .nav-panier a:first-child img {
-              width: 20px;
-              height: 45px; }
+      body .navbar .container-fluid .collapse {
+        width: 980px; }
+        body .navbar .container-fluid .collapse ul {
+          padding-top: 5px; }
+          body .navbar .container-fluid .collapse ul li .nav-connexion {
+            border: 2px solid #e52c65;
+            border-radius: 5px;
+            padding: 5px;
+            margin-top: 8px; }
+          body .navbar .container-fluid .collapse ul li .nav-deconnexion {
+            margin-left: 10px; }
+          body .navbar .container-fluid .collapse ul .nav-panier {
+            display: inline-flex; }
+            body .navbar .container-fluid .collapse ul .nav-panier a {
+              padding: 2px 0 0 0 !important; }
+              body .navbar .container-fluid .collapse ul .nav-panier a img {
+                margin: 0 8px 5px 0;
+                width: 20px;
+                height: 45px; }
   body .row.home {
     max-width: 100%; }
   body .Bandeau {

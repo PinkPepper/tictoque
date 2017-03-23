@@ -77,8 +77,8 @@ fos_user:
     registration:
         confirmation:
             from_email:
-                address: maxime.detaille@gmail.com
-                sender_name: Tictoque
+                address: no-reply@amourfood.com
+                sender_name: L'amour Food
             enabled: true
         form:
             type: AppBundle\Form\RegistrationType
@@ -88,8 +88,8 @@ fos_user:
                 address:        resetting@example.com
                 sender_name:    Demo Resetting
     from_email:
-        address: maxime.detaille@gmail.com
-        sender_name: Tictoque
+        address: no-reply@amourfood.com
+        sender_name: L'amour Food
 
 stof_doctrine_extensions:
   default_locale: en_US
