@@ -1,0 +1,12 @@
+{% extends 'frontoffice/base.html.twig' %}
+
+{% block body %}
+
+<section class="user_content">
+    <content>
+        <a href="{{ path('menu_choix', {'type': 1}) }}">Menu 1 (entree plat)</a>
+        <a href="{{ path('menu_choix', {'type': 2}) }}">Menu 3 (plat dessert)</a>
+        <a href="{{ path('menu_choix', {'type': 3}) }}">Menu 2 (entree plat dessert)</a>
+    </content>
+</section>
+{% endblock %}

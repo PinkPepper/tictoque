@@ -1,0 +1,197 @@
+{% extends 'frontoffice/base.html.twig' %}
+
+{% block body %}
+    <script type="application/javascript">
+    var sousTotal = 0;
+    var tabPrice = [];
+</script>
+<div class="panier">
+    <div class="container">
+        <h1>Votre panier</h1>
+        <p>Encore quelques clics et vous pourrez enfin déguster nos plats</p>
+        <div class="row">
+            <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
+                {% for produit in produits %}
+                    {% if produit[1] != 0 %}
+                <div id="produitId-{{ produit[0].id }}" class="produit">
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <img class="imgProduit" src="{{ asset('produits/'~produit[0].image) }}"/>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h5>{{ produit[0].type }}</h5>
+                        <h4>{{ produit[0].nom }}</h4>
+                        <h5>{{ produit[0].prix }}€</h5>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divQuantite">
+                        <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
+                        <div class="quantite">
+                            <i id="qte" class="quantite-{{ produit[0].id }}" data-id="{{ produit[0].id }}">{{ produit[1] }}</i>
+                        </div>
+                        <img width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
+                    </div>
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divPrix">
+                        <h3 id="prixTotal-{{ produit[0].id }}">
+                            <script type="application/javascript">
+                                var prix = {{ produit[0].prix }};
+                                var qte = {{ produit[1] }};
+                                var total = prix*qte;
+                                tabPrice[String({{ produit[0].id }})] = total;
+                                $('#prixTotal-'+{{ produit[0].id }}).text(total+"€");
+                            </script>
+                        </h3>
+                    </div>
+                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 divDelete">
+                        <img class="deleteProd" width="20px" data-id="{{ produit[0].id }}" data-url="{{ path('delete_produit', {'produit': produit[0].id}) }}" src="{{ asset('img/cross.svg') }}"/>
+                    </div>
+                </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12 commande">
+                <h4>Commande</h4>
+                <p>Sous-total : <span id="sousTotal" class="total">
+                        <script type="application/javascript">
+                            tabPrice.forEach(function (element) {
+                                sousTotal = sousTotal+element;
+                            });
+                            $('#sousTotal').text(sousTotal+"€");
+                        </script> </span></p>
+                <p>Réductions : <span id="reduction" class="total">-10%</span></p>
+                <p>Livraison : <span id="livraison" class="total">-10%</span></p>
+                <div class="bar"></div>
+                <p>Total <span id="Total"  class="total">-10%</span></p>
+                <a class="commander">Commander</a>
+                <a class="continue">Continuer mes achats</a>
+            </div>
+        </div>
+    </div>
+</div>
+    <section class="user_content">
+        <content>
+
+            <div class="nav_pos">
+                <h1>Panier</h1>
+            </div>
+
+            <div class="user_interact">
+                retour
+            </div>
+
+        </content>
+
+        <h2>  Menus : ({{ menus|length }})</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>entree</th>
+                <th>plat</th>
+                <th>dessert</th>
+                <th>boisson</th>
+                <th>nombre</th>
+                <th>actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for produit in menus %}
+                {% if produit["quantite"] != 0  %}
+                    <tr id="{{ produit["id"] }}">
+                        <td>{{ produit["entree"] }}</td>
+                        <td>{{ produit["plat"] }}</td>
+                        <td>{{ produit["dessert"] }}</td>
+                        <td>{{ produit["boisson"] }}</td>
+                        <td>{{ produit["quantite"] }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="">show</a>
+                                </li>
+                                <li>
+                                    <a>Modifier le menu</a>
+                                </li>
+                                <li>
+                                    <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': produit["id"] }) }}" data-id="{{ produit["id"] }}">-</button> <i class="quantite-{{ produit["id"] }}" data-id="{{ produit["id"] }}">{{ produit["quantite"] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': produit["id"]}) }}" data-id="{{ produit["id"] }}">+</button>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </section>
+
+    <div>
+        <a href="{{ path('commande_index') }}" class="btn btn-info btn-small"  >Valider mon panier</a>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="application/javascript">
+
+        $('.voir').on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+
+            $('#modal-body').load(url);
+        });
+
+        $('.gestion_panier').on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+            var id = $(this).data('id');
+            var prix = $(this).data('prix');
+
+            var res = $('.quantite-' + id).load(url, function(){
+                if(res.text() == "0")
+                {
+                    console.log('oui');
+                    $('#produitId-' + id).fadeOut("slow");
+                }
+
+                total = prix*res.text();
+                $('#prixTotal-'+id).text(total+"€");
+
+                tabPrice[String(id)] = total;
+
+                sousTotal = 0;
+                tabPrice.forEach(function (element) {
+                    sousTotal = sousTotal+element;
+                });
+
+                $('#sousTotal').text(sousTotal+"€");
+            });
+        }) ;
+
+        $('.deleteProd').on('click',function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var url = $(this).data('url');
+            var res = $('.quantite-'+id).load(url,function () {
+
+            });
+
+            tabPrice[String(id)] = 0;
+            sousTotal = 0;
+            tabPrice.forEach(function (element) {
+                sousTotal = sousTotal+element;
+            });
+            $('#sousTotal').text(sousTotal+"€");
+            $('#produitId-'+id).fadeOut("slow");
+        })
+
+
+    </script>
+
+{% endblock %}

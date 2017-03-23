@@ -31,7 +31,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      */
     private $nom;
@@ -39,7 +39,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      */
     private $prenom;
@@ -54,14 +54,14 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string", length=255)
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
     private $image;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="telephone", type="string", length=255)
+     * @ORM\Column(name="telephone", type="string", length=255, nullable=true)
      * @Assert\NotBlank()
      */
     private $telephone;
@@ -75,7 +75,7 @@ class User extends BaseUser
     /**
      * bloqué ou non
      */
-    protected $enabled;
+    protected $enabled = 1;
 
     /**
      * @ORM\OneToMany(targetEntity="Article", mappedBy="auteur", cascade={"remove"})
@@ -89,13 +89,27 @@ class User extends BaseUser
      */
     private $commentaires;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Allergene", inversedBy="users", cascade={"persist"})
+     */
+    private $allergenes;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Menu", mappedBy="user")
+     * @ORM\JoinColumn(name="menu", referencedColumnName="id")
+     */
+    private $menus;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Commande",  mappedBy="user", cascade={"remove"})
+     */
+    private $commandes;
 
     use TraitUploadImage;
     public function getUploadDir()
     {
         return 'users/';
     }
-
 
     /**
      * Get id
@@ -257,6 +271,61 @@ class User extends BaseUser
     public function setCommentaires($commentaires)
     {
         $this->commentaires = $commentaires;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAllergenes()
+    {
+        return $this->allergenes;
+    }
+
+    /**
+     * @param mixed $allergenes
+     */
+    public function setAllergenes($allergenes)
+    {
+        $this->allergenes = $allergenes;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getMenus()
+    {
+        return $this->menus;
+    }
+
+    /**
+     * @param mixed $menus
+     */
+    public function setMenus($menus)
+    {
+        $this->menus = $menus;
+    }
+
+    public function __construct()
+    {
+        parent::__construct();
+        $this->image='userdefault.svg';
+        $this->enabled=1;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommandes()
+    {
+        return $this->commandes;
+    }
+
+    /**
+     * @param mixed $commandes
+     */
+    public function setCommandes($commandes)
+    {
+        $this->commandes = $commandes;
     }
 }
 

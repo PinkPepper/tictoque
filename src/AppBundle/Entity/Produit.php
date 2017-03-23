@@ -12,6 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="produit")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ProduitRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Produit
 {
@@ -88,8 +89,13 @@ class Produit
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Allergene", inversedBy="produits", cascade={"persist"})
      */
     private $allergenes;
-
     private $all;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CommandeProduit",  mappedBy="produits", cascade={"remove"})
+     */
+    private $commande;
+
 
     use TraitUploadImage;
     public function getUploadDir()
@@ -145,6 +151,7 @@ class Produit
     {
         $this->allergenes->removeElement($allergene);
     }
+
 
     /**
      * Get id
@@ -394,6 +401,58 @@ class Produit
     public function setAll($all)
     {
         $this->all = $all;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCommande()
+    {
+        return $this->commande;
+    }
+
+    /**
+     * @param mixed $commande
+     */
+    public function setCommande($commande)
+    {
+        $this->commande = $commande;
+    }
+
+
+    /**
+     * @param mixed $menu_boisson
+     */
+    public function setMenuBoisson($menu_boisson)
+    {
+        $this->menu_boisson = $menu_boisson;
+    }
+
+    public function __toString()
+    {
+       return "" . $this->id; //todo essayer avec $this->nom
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function isNull()
+    {
+//       if($this->nom == null){
+//           $this->nom = "null";
+//       }
+//        if($this->description == null){
+//            $this->description = "null";
+//        }
+//        if($this->datePeremption == null){
+//            $this->datePeremption = new \DateTime();
+//        }
+//        if($this->prix == null){
+//            $this->prix = 0;
+//        }
+//        if($this->quantite == null){
+//            $this->quantite = 0;
+//        }
     }
 }
 

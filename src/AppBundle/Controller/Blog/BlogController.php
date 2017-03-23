@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller\Blog;
 
+use AppBundle\Entity\Commentaire;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -28,7 +29,7 @@ class BlogController extends Controller
 
         $articles = $em->getRepository('AppBundle:Article')->findAll();
 
-        return $this->render('backoffice/blog/article/index.html.twig', array(
+        return $this->render('frontoffice/blog/article/index.html.twig', array(
             'articles' => $articles,
         ));
     }
@@ -55,7 +56,7 @@ class BlogController extends Controller
             return $this->redirectToRoute('article_show', array('id' => $article->getId(), 'titre' => $article->getSlug()));
         }
 
-        return $this->render('blog/article/new.html.twig', array(
+        return $this->render('frontoffice/blog/article/new.html.twig', array(
             'article' => $article,
             'form' => $form->createView(),
         ));
@@ -65,15 +66,32 @@ class BlogController extends Controller
      * Finds and displays a Article entity.
      *
      * @Route("/{id}/{titre}", name="article_show")
-     * @Method("GET")
+     * @Method({"GET","POST"})
      */
-    public function showAction(Article $article)
+    public function showAction(Article $article, Request $request)
     {
+
         $deleteForm = $this->createDeleteForm($article);
 
-        return $this->render('blog/article/show.html.twig', array(
+        $commentaire = new Commentaire();
+        $formCom = $this->createForm('AppBundle\Form\CommentaireType', $commentaire);
+        $formCom->handleRequest($request);
+
+        if ($formCom->isSubmitted() && $formCom->isValid()) {
+            $commentaire->setAuteur($this->getUser());
+            $commentaire->setArticle($article);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($commentaire);
+            $em->flush();
+
+            return $this->redirectToRoute('article_show', array('id' => $article->getId(), 'titre' => $article->getSlug()));
+        }
+
+        return $this->render('frontoffice/blog/article/show.html.twig', array(
             'article' => $article,
             'delete_form' => $deleteForm->createView(),
+            'form'=>$formCom->createView(),
         ));
     }
 
@@ -97,7 +115,7 @@ class BlogController extends Controller
             return $this->redirectToRoute('article_edit', array('id' => $article->getId()));
         }
 
-        return $this->render('blog/article/edit.html.twig', array(
+        return $this->render('frontoffice/blog/article/edit.html.twig', array(
             'article' => $article,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

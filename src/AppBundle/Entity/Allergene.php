@@ -39,6 +39,16 @@ class Allergene
      */
     private $produits;
 
+
+    /**
+     *
+     *  @ORM\ManyToMany(targetEntity="User", inversedBy="allergenes", cascade={"persist"})
+     *  @ORM\JoinTable(name="RelationUserAllergene",
+     *  joinColumns={@ORM\JoinColumn(name="allergene_id", referencedColumnName="id")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")})
+     */
+    private $users;
+
     /**
      * @return mixed
      */
@@ -117,6 +127,22 @@ class Allergene
     public function __toString()
     {
         return '' . $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUsers()
+    {
+        return $this->users;
+    }
+
+    /**
+     * @param mixed $users
+     */
+    public function setUsers($users)
+    {
+        $this->users = $users;
     }
 }
 

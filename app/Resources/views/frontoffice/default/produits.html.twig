@@ -18,13 +18,34 @@
                         <li>
                             <a href="{{ path('produit_show', { 'id': produit.id }) }}">Voir</a>
                         </li>
-                        <li>
-                            <a href="">ajouter au panier</a>
-                        </li>
+                            <li>
+                                <button class="ajoutPanier" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}" >ajouter au panier</button>
+                            </li>
+
+
                     </ul>
                 </td>
             </tr>
             </table>
         {% endfor %}
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/javascript">
+        $(document).ready(function(){
+
+            $('.ajoutPanier').on('click', function (e) {
+                e.preventDefault();
+                var url = $(this).data('url');
+                var id = $(this).data('id');
+
+                console.log('click');
+                console.log(url);
+                $(this).load(url);
+                $(this).prop('disabled', true);
+            }) ;
+        });
+    </script>
 {% endblock %}

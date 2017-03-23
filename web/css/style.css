@@ -27,8 +27,6 @@ body {
     color: #909090; }
   body h2 {
     font-size: 24px; }
-  body [type="checkbox"] {
-    display: none; }
   body table {
     font-size: 14px; }
   body li {
@@ -777,6 +775,30 @@ section .cellule_40_cms {
   opacity: 0.6;
 }
 
-.pictoNavbar{
+.pictoNavbar {
   border-radius: 50%;
+}
+
+#appbundle_produit_all input
+ {
+   margin: 0;
+   vertical-align: middle;
+   width: auto;
+ }
+
+#appbundle_produit_all label
+{
+  margin: 0 25px 0 5px;
+}
+
+#appbundle_produit_cat input
+{
+  margin: 0;
+  vertical-align: middle;
+  width: auto;
+}
+
+#appbundle_produit_cat label
+{
+  margin: 0 25px 0 5px;
 }

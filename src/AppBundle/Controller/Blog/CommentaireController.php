@@ -27,10 +27,10 @@ class CommentaireController extends Controller
     public function newAction(Request $request, Article $article)
     {
         $commentaire = new Commentaire();
-        $form = $this->createForm('AppBundle\Form\CommentaireType', $commentaire);
-        $form->handleRequest($request);
+        $formCom = $this->createForm('AppBundle\Form\CommentaireType', $commentaire);
+        $formCom->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formCom->isSubmitted() && $formCom->isValid()) {
             $commentaire->setAuteur($this->getUser());
             $commentaire->setArticle($article);
 
@@ -41,9 +41,9 @@ class CommentaireController extends Controller
             return $this->redirectToRoute('commentaire_show', array('id' => $commentaire->getId()));
         }
 
-        return $this->render('blog/commentaire/new.html.twig', array(
+        return $this->render('frontoffice/blog/commentaire/new.html.twig', array(
             'commentaire' => $commentaire,
-            'form' => $form->createView(),
+            'form' => $formCom->createView(),
             'article' => $article
         ));
     }
@@ -58,7 +58,7 @@ class CommentaireController extends Controller
     {
         $deleteForm = $this->createDeleteForm($commentaire);
 
-        return $this->render('blog/commentaire/show.html.twig', array(
+        return $this->render('frontoffice/blog/commentaire/show.html.twig', array(
             'commentaire' => $commentaire,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -84,7 +84,7 @@ class CommentaireController extends Controller
             return $this->redirectToRoute('commentaire_edit', array('id' => $commentaire->getId()));
         }
 
-        return $this->render('blog/commentaire/edit.html.twig', array(
+        return $this->render('frontoffice/blog/commentaire/edit.html.twig', array(
             'commentaire' => $commentaire,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

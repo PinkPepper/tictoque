@@ -35,7 +35,11 @@ class ProduitType extends AbstractType
             ->add('datePeremption', DateType::class)
             ->add('prix')
             ->add('quantite')
-            ->add('file',  FileType::class);
+            ->add('file',  FileType::class,
+                array(
+                'required'  =>
+                    false
+            ));
     }
     
     /**

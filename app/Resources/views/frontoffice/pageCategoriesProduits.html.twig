@@ -8,11 +8,6 @@
                 <div>
                 <a href="{{ path('categorie_show',{'id': categorie.id})}}">{{categorie.nom}}</a>
                 <br>
-                {% if categorie.image != "" %}
-                    <a href="{{ path('categorie_show',{'id': categorie.id})}}">
-                    </a>
-                {% endif %}
-                <br>
                 </div>
             {% endfor %}
         {% endblock %}

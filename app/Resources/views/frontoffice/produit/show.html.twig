@@ -43,7 +43,7 @@
                 <option>3</option>
             </select>
 
-            <button class="produit_ajout">Ajouter au panier</button>
+            <button class="ajoutPanier produit_ajout" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}" >ajouter au panier</button>
 
             </br>
             {% if produit.quantite>0 %}
@@ -123,10 +123,11 @@
                     Découvrez de nouveaux plats
                 {% endif %}
             </h4>
+
             {% for produitSup in autre|slice(0,3) if produitSup.quantite>0 %}
             <div class="{{ "dessert" ~ loop.index }}">
-                <a href="{{ path('produit_show',{ 'id' : produitSup.id}) }}"><img src="{{ asset('produits/' ~ produitSup.image) }}"></a>
-                <button>Ajouter</button>
+                <img class="plat-pic" src="{{ asset('produits/' ~ produitSup.image) }}">
+                <a class="ajout_reco" href="#">Ajouter</a>
                 <div>
                     <span class="type">CLASSIQUE</span>
                     <h4>{{ produitSup.nom }}</h4>
@@ -138,39 +139,57 @@
         </div>
         <i class="fa fa-arrow-up retour_haut" aria-hidden="true"></i>
     </div>
+{% endblock %}
 
-    <script type="text/javascript">
-        $(".produit_aller").click(function(){
-            $('#aller_long').addClass("active");
-            $('#afficher_aller_long').css("display","block");
-            $('#desc_long').removeClass('active');
-            $('#afficher_desc_long').css("display","none");
-            $('#avis_long').removeClass('active');
-            $('#afficher_avis_long').css("display","none");
-        });
-        $("#aller_long").click(function(){
-            $(this).addClass("active");
-            $('#afficher_aller_long').css("display","block");
-            $('#desc_long').removeClass('active');
-            $('#afficher_desc_long').css("display","none");
-            $('#avis_long').removeClass('active');
-            $('#afficher_avis_long').css("display","none");
-        });
-        $("#desc_long").click(function(){
-            $(this).addClass("active");
-            $('#afficher_desc_long').css("display","block");
-            $('#aller_long').removeClass('active');
-            $('#afficher_aller_long').css("display","none");
-            $('#avis_long').removeClass('active');
-            $('#afficher_avis_long').css("display","none");
-        });
-        $("#avis_long").click(function(){
-            $(this).addClass("active");
-            $('#afficher_avis_long').css("display","block");
-            $('#desc_long').removeClass('active');
-            $('#afficher_aller_long').css("display","none");
-            $('#aller_long').removeClass('active');
-            $('#afficher_desc_long').css("display","none");
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/javascript">
+        $(document).ready(function(){
+
+            $(".produit_aller").click(function(){
+                $('#aller_long').addClass("active");
+                $('#afficher_aller_long').css("display","block");
+                $('#desc_long').removeClass('active');
+                $('#afficher_desc_long').css("display","none");
+                $('#avis_long').removeClass('active');
+                $('#afficher_avis_long').css("display","none");
+            });
+            $("#aller_long").click(function(){
+                $(this).addClass("active");
+                $('#afficher_aller_long').css("display","block");
+                $('#desc_long').removeClass('active');
+                $('#afficher_desc_long').css("display","none");
+                $('#avis_long').removeClass('active');
+                $('#afficher_avis_long').css("display","none");
+            });
+            $("#desc_long").click(function(){
+                $(this).addClass("active");
+                $('#afficher_desc_long').css("display","block");
+                $('#aller_long').removeClass('active');
+                $('#afficher_aller_long').css("display","none");
+                $('#avis_long').removeClass('active');
+                $('#afficher_avis_long').css("display","none");
+            });
+            $("#avis_long").click(function(){
+                $(this).addClass("active");
+                $('#afficher_avis_long').css("display","block");
+                $('#desc_long').removeClass('active');
+                $('#afficher_aller_long').css("display","none");
+                $('#aller_long').removeClass('active');
+                $('#afficher_desc_long').css("display","none");
+            });
+
+
+            $('.ajoutPanier').on('click', function (e) {
+                e.preventDefault();
+                var url = $(this).data('url');
+                var id = $(this).data('id');
+
+                console.log('click');
+                console.log(url);
+                $(this).load(url);
+                $(this).prop('disabled', true);
+            }) ;
         });
     </script>
 {% endblock %}
