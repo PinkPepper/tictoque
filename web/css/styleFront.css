@@ -705,5 +705,61 @@ body {
           text-align: center; }
         body .panier .container .produit .divPrix {
           text-align: left !important; } }
+  body .menuGlobal {
+    background-color: #eeeeee;
+    padding-bottom: 50px; }
+    body .menuGlobal .titleMenu {
+      padding-top: 40px;
+      padding-bottom: 40px; }
+      body .menuGlobal .titleMenu h1 {
+        color: #F50F65; }
+    @media (max-width: 767px) {
+      body .menuGlobal .menu {
+        width: 90%; } }
+    body .menuGlobal .menu {
+      box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      background-color: white;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      padding-right: 20px;
+      padding-left: 20px; }
+      @media (max-width: 767px) {
+        body .menuGlobal .menu .marginResponsive {
+          margin-bottom: 50px; } }
+      @media (max-width: 500px) {
+        body .menuGlobal .menu .marginResponsive {
+          margin-bottom: 50px; } }
+      body .menuGlobal .menu .boxShadow {
+        border-radius: 5px;
+        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
+      body .menuGlobal .menu .menuTotal {
+        border-radius: 5px;
+        height: 100%;
+        padding-bottom: 17px; }
+        body .menuGlobal .menu .menuTotal .imgMenu {
+          border-top-right-radius: 5px;
+          border-top-left-radius: 5px; }
+        body .menuGlobal .menu .menuTotal .menuCorps {
+          padding: 10px; }
+        body .menuGlobal .menu .menuTotal .noPadding {
+          margin: 0px;
+          padding-left: 10px; }
+        body .menuGlobal .menu .menuTotal .noPaddingPartir {
+          margin: 0px;
+          padding-left: 10px;
+          margin-top: 20px; }
+      body .menuGlobal .menu .menuCommander {
+        background-color: #F50F65;
+        padding: 10px;
+        text-align: center;
+        cursor: pointer;
+        margin-top: -5px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px; }
+        body .menuGlobal .menu .menuCommander a {
+          color: white; }
+        body .menuGlobal .menu .menuCommander a:hover {
+          text-decoration: none; }
 
 /*# sourceMappingURL=style.css.map */
