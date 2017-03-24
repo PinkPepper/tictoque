@@ -37,19 +37,34 @@ class CategorieController extends Controller
      * Finds and displays a categorie entity.
      *
      * @Route("/{id}", name="categorie_show")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function showAction(Categorie $categorie)
+    public function showAction(Request $request, Categorie $categorie)
     {
         $em = $this->getDoctrine()->getManager();
         $categories = $em->getRepository('AppBundle:Categorie')->findAll();
+        $produits = $categorie->getProduits();
+
+        $form = $this->createForm('AppBundle\Form\TypeFiltreType');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $type = $form->getData()['type'];
+
+            if($type != "all")
+            {
+                $produits = $em->getRepository('AppBundle:Produit')->findBy(array("type"=>$type));
+                if(!$produits) $produits = "Aucun produit disponible";
+            }
+        }
 
         return $this->render('frontoffice/default/produits.html.twig', array(
             'categories' => $categories,
             'categorie' => $categorie,
-            'produits'=>$categorie->getProduits()
+            'produits'=> $produits,
+            'form'=>$form->createView()
         ));
     }
-
 
 }
