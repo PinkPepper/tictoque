@@ -8,6 +8,25 @@ body {
     color: yellow; }
   body .plat-actu {
     padding-bottom: 35px; }
+  body input[type=checkbox] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -border-radius: 4px;
+    height: 15px;
+    width: 15px;
+    background: #fff;
+    border: 1px solid #ccc;
+    margin: 4px 4px 4px; }
+  body input[type="checkbox"]:checked {
+    position: relative; }
+    body input[type="checkbox"]:checked:before {
+      font-family: FontAwesome;
+      content: '\f00c';
+      display: block;
+      color: grey;
+      font-size: 13px;
+      position: absolute; }
   body .navbar {
     margin: 0 !important;
     border: none;
@@ -40,7 +59,7 @@ body {
   body .row.home {
     max-width: 100%; }
   body .Bandeau {
-    background-image: url("img/image_background.jpg");
+    background-image: url("../img/image_background.jpg");
     width: 100%;
     height: 582px;
     padding: 150px 250px 150px 250px;
@@ -199,9 +218,12 @@ body {
       font-weight: 600; }
   body .menu_choix {
     float: none;
-    clear: both; }
+    clear: both;
+    width: 81%;
+    margin: 0 auto; }
     body .menu_choix h5 {
-      text-align: center; }
+      text-align: center;
+      margin-bottom: 25px; }
     body .menu_choix h4 {
       text-align: center;
       font-weight: bold;
@@ -209,21 +231,85 @@ body {
       color: #4a4a4a; }
     body .menu_choix .partenaire-title {
       padding-top: 50px !important; }
-    body .menu_choix .dessert1 {
-      right: 5px;
-      margin-left: 13%; }
-    body .menu_choix .dessert2 {
-      left: 12px; }
-    body .menu_choix .dessert3 {
-      left: 28px; }
-    body .menu_choix .dessert1, body .menu_choix .dessert2, body .menu_choix .dessert3 {
+    body .menu_choix .search_bloc {
+      text-align: center;
+      margin-bottom: 25px; }
+      body .menu_choix .search_bloc input {
+        width: 275px;
+        height: 35px;
+        background-color: #919db9;
+        border: none;
+        border-radius: 5px;
+        padding-left: 10px;
+        color: white; }
+      body .menu_choix .search_bloc input::after {
+        content: '&#xf002'; }
+      body .menu_choix .search_bloc ::-webkit-input-placeholder {
+        /* WebKit, Blink, Edge */
+        color: #fff; }
+      body .menu_choix .search_bloc :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: #fff;
+        opacity: 1; }
+      body .menu_choix .search_bloc ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: #fff;
+        opacity: 1; }
+      body .menu_choix .search_bloc :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: #fff; }
+    body .menu_choix .position_plat {
+      float: left; }
+      body .menu_choix .position_plat .reduction {
+        position: absolute;
+        width: 35px;
+        height: 35px;
+        background-color: #f50f65;
+        border-radius: 30px;
+        right: 20px;
+        cursor: pointer;
+        text-align: center;
+        padding-top: 5px;
+        color: white;
+        margin-top: 15px; }
+      body .menu_choix .position_plat .plus_dispo {
+        text-align: center;
+        color: #f50f65;
+        font-weight: bold;
+        height: 50vh;
+        position: absolute;
+        margin-top: 38vh;
+        transform: translateY(-50%); }
+      body .menu_choix .position_plat .livraison_menu {
+        text-align: center;
+        padding-top: 20px; }
+        body .menu_choix .position_plat .livraison_menu i {
+          background-color: #919db9;
+          color: white;
+          padding: 20px 45px 20px 45px;
+          text-align: center;
+          vertical-align: text-top;
+          border-radius: 100px;
+          font-size: 125px; }
+        body .menu_choix .position_plat .livraison_menu .fa-building-o {
+          padding: 30px 45px 30px 45px; }
+        body .menu_choix .position_plat .livraison_menu h4 {
+          float: none !important; }
+        body .menu_choix .position_plat .livraison_menu p {
+          max-width: initial; }
+        body .menu_choix .position_plat .livraison_menu a {
+          background-color: #919db9;
+          float: none;
+          position: initial; }
+    body .menu_choix .dessert {
       width: 310px;
       height: 360px;
-      float: left;
       border-radius: 5px;
       box-shadow: 1px 0px 5px;
-      position: relative; }
-      body .menu_choix .dessert1 .plat-fav, body .menu_choix .dessert2 .plat-fav, body .menu_choix .dessert3 .plat-fav {
+      position: relative;
+      margin-left: 25px;
+      margin-bottom: 40px; }
+      body .menu_choix .dessert .plat-fav {
         position: absolute;
         width: 20px;
         height: auto;
@@ -231,12 +317,14 @@ body {
         border-radius: 0px;
         left: 20px;
         cursor: pointer; }
-      body .menu_choix .dessert1 .plat-pic, body .menu_choix .dessert2 .plat-pic, body .menu_choix .dessert3 .plat-pic {
+      body .menu_choix .dessert .plat-pic {
         width: 310px;
         height: 200px;
         background-color: #95abc0;
         border-radius: 6px 6px 0px 0px; }
-      body .menu_choix .dessert1 a, body .menu_choix .dessert2 a, body .menu_choix .dessert3 a {
+      body .menu_choix .dessert .plat-pic.indispo {
+        opacity: 0.5; }
+      body .menu_choix .dessert a {
         float: right;
         position: relative;
         bottom: 12px;
@@ -247,7 +335,7 @@ body {
         padding: 5px 15px 5px 15px;
         cursor: pointer;
         text-decoration: none; }
-      body .menu_choix .dessert1 .ajout_reco, body .menu_choix .dessert2 .ajout_reco, body .menu_choix .dessert3 .ajout_reco {
+      body .menu_choix .dessert .ajout_reco {
         float: right;
         margin-right: 20px;
         position: relative;
@@ -258,44 +346,53 @@ body {
         border-radius: 5px;
         color: white;
         cursor: pointer; }
-      body .menu_choix .dessert1 div, body .menu_choix .dessert2 div, body .menu_choix .dessert3 div {
+      body .menu_choix .dessert div {
         padding-left: 5px; }
-        body .menu_choix .dessert1 div .type, body .menu_choix .dessert1 div p, body .menu_choix .dessert2 div .type, body .menu_choix .dessert2 div p, body .menu_choix .dessert3 div .type, body .menu_choix .dessert3 div p {
+        body .menu_choix .dessert div .type, body .menu_choix .dessert div p {
           float: left;
           max-width: 225px;
           clear: both; }
-        body .menu_choix .dessert1 div h4, body .menu_choix .dessert2 div h4, body .menu_choix .dessert3 div h4 {
+        body .menu_choix .dessert div h4 {
           float: left;
           clear: both;
           font-size: 17px;
           font-weight: 600; }
-        body .menu_choix .dessert1 div .prix, body .menu_choix .dessert2 div .prix, body .menu_choix .dessert3 div .prix {
+        body .menu_choix .dessert div .prix {
           float: right;
           font-weight: 600;
           padding-top: 7px;
           padding-right: 10px; }
-          body .menu_choix .dessert1 div .prix .fa.fa-circle, body .menu_choix .dessert2 div .prix .fa.fa-circle, body .menu_choix .dessert3 div .prix .fa.fa-circle {
+          body .menu_choix .dessert div .prix .fa.fa-circle {
             color: #18b118;
             font-size: 10px;
             margin-right: 20px; }
-      body .menu_choix .dessert1 .actu-choix, body .menu_choix .dessert2 .actu-choix, body .menu_choix .dessert3 .actu-choix {
+          body .menu_choix .dessert div .prix .fa.fa-circle.rouge {
+            color: red !important; }
+        body .menu_choix .dessert div .prix_promo {
+          float: right;
+          padding-right: 10px;
+          text-decoration: line-through;
+          font-size: 12px;
+          bottom: 10px;
+          position: relative; }
+      body .menu_choix .dessert .actu-choix {
         padding-left: 7px; }
-        body .menu_choix .dessert1 .actu-choix span, body .menu_choix .dessert2 .actu-choix span, body .menu_choix .dessert3 .actu-choix span {
+        body .menu_choix .dessert .actu-choix span {
           float: left;
           max-width: 294px;
           clear: both;
           font-size: 13px; }
-        body .menu_choix .dessert1 .actu-choix h4, body .menu_choix .dessert2 .actu-choix h4, body .menu_choix .dessert3 .actu-choix h4 {
+        body .menu_choix .dessert .actu-choix h4 {
           float: left;
           clear: both;
           font-size: 16px;
           font-weight: 600; }
-        body .menu_choix .dessert1 .actu-choix p, body .menu_choix .dessert2 .actu-choix p, body .menu_choix .dessert3 .actu-choix p {
+        body .menu_choix .dessert .actu-choix p {
           float: left;
           max-width: 294px;
           clear: both;
           font-size: 13px; }
-        body .menu_choix .dessert1 .actu-choix a, body .menu_choix .dessert2 .actu-choix a, body .menu_choix .dessert3 .actu-choix a {
+        body .menu_choix .dessert .actu-choix a {
           float: left;
           position: relative;
           top: 8px;
@@ -487,26 +584,7 @@ body {
       body .container-fluid.compte .compte_etape2 div:nth-child(2) ul, body .container-fluid.compte .compte_etape3 div:nth-child(2) ul {
         list-style: none;
         padding-top: 20px; }
-    body .container-fluid.compte .compte_etape2 input[type=checkbox], body .container-fluid.compte .compte_etape3 input[type=checkbox] {
-      -webkit-appearance: none;
-      -moz-appearance: none;
-      -ms-appearance: none;
-      -border-radius: 4px;
-      height: 15px;
-      width: 15px;
-      background: #fff;
-      border: 1px solid #ccc;
-      margin: 4px 4px 4px; }
-    body .container-fluid.compte .compte_etape2 input[type="checkbox"]:checked, body .container-fluid.compte .compte_etape3 input[type="checkbox"]:checked {
-      position: relative; }
-      body .container-fluid.compte .compte_etape2 input[type="checkbox"]:checked:before, body .container-fluid.compte .compte_etape3 input[type="checkbox"]:checked:before {
-        font-family: FontAwesome;
-        content: '\f00c';
-        display: block;
-        color: grey;
-        font-size: 13px;
-        position: absolute; }
-    body .container-fluid.compte .compte_etape2 label, body .container-fluid.compte .compte_etape3 label {
+    body .container-fluid.compte .compte_etape2 li label, body .container-fluid.compte .compte_etape3 li label {
       margin-left: 6px;
       top: -6px;
       position: relative; }
@@ -645,18 +723,6 @@ body {
         display: block;
         width: 100%;
         height: 40px; }
-    body .panier .container .imgSousProduit {
-      width: 160px;
-      height: 100px; }
-    body .panier .container .sousMenu {
-      margin-top: -25px;
-      padding-top: 5px;
-      border: 1px #eee solid;
-      background-color: white;
-      border-bottom-left-radius: 5px;
-      border-bottom-right-radius: 5px;
-      padding-bottom: 20px;
-      margin-bottom: 20px; }
     body .panier .container .produit {
       color: black;
       border: 1px #eee solid;
@@ -692,19 +758,46 @@ body {
       body .panier .container .produit .divDelete {
         font-size: 30px;
         padding-top: 28px; }
-    @media (max-width: 767px) {
-      body .panier .container .produit {
-        height: 200px !important; }
-        body .panier .container .produit .imgProduit {
-          width: 120px;
-          height: 80px; }
-        body .panier .container .produit .divQuantite,
-        body .panier .container .produit .divPrix,
-        body .panier .container .produit .divDelete {
-          margin-top: 10px;
-          text-align: center; }
-        body .panier .container .produit .divPrix {
-          text-align: left !important; } }
+  body .Filtre {
+    padding: 0 !important; }
+    body .Filtre .filtre_menu {
+      list-style: none;
+      display: inline-flex;
+      margin-bottom: 0 !important;
+      padding: 0 180px 0 180px;
+      height: 50px;
+      border-top: 1px solid #929292;
+      width: 100%;
+      border-bottom: 1px solid #929292; }
+      body .Filtre .filtre_menu li:first-child, body .Filtre .filtre_menu li:nth-child(2) {
+        border-left: 1px solid #cacaca;
+        display: flex; }
+        body .Filtre .filtre_menu li:first-child select, body .Filtre .filtre_menu li:nth-child(2) select {
+          border: none;
+          padding: 12px; }
+          body .Filtre .filtre_menu li:first-child select .type_select, body .Filtre .filtre_menu li:nth-child(2) select .type_select {
+            padding: 15px; }
+      body .Filtre .filtre_menu li:nth-child(3) {
+        width: 55%;
+        padding: 12px 0 0 20px;
+        border-left: 1px solid #cacaca;
+        display: table-cell;
+        line-height: 2;
+        cursor: pointer; }
+        body .Filtre .filtre_menu li:nth-child(3) i {
+          margin-right: 8px; }
+        body .Filtre .filtre_menu li:nth-child(3) span a {
+          text-decoration: none;
+          color: #929292; }
+      body .Filtre .filtre_menu li:last-child {
+        padding: 12px;
+        border-left: 1px solid #cacaca;
+        border-right: 1px solid #cacaca;
+        width: 165px; }
+        body .Filtre .filtre_menu li:last-child label {
+          width: 95px;
+          font-size: 9px;
+          font-weight: 100; }
   body .menuGlobal {
     background-color: #eeeeee;
     padding-bottom: 50px; }
