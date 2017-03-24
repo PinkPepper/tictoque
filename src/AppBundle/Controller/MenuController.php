@@ -168,6 +168,7 @@ class MenuController extends Controller
      */
     public function choixBoissonAction(Request $request, Produit $boisson)
     {
+
         $session = $request->getSession();
         $menu = $session->get('menu');
         $menu[0]->setBoisson($boisson->getId());

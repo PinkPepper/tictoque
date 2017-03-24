@@ -57,8 +57,8 @@ class ProduitAdminController extends Controller
                 $produit->addCategorie($tmp[$i]);
                 $tmp[$i]->addProduit($produit);
 
-                $this->getDoctrine()->getEntityManager()->persist($tmp[$i]);
-                $this->getDoctrine()->getEntityManager()->flush();
+                $this->getDoctrine()->getManager()->persist($tmp[$i]);
+                $this->getDoctrine()->getManager()->flush();
             }
 
             $tmp = $form["all"]->getData();
@@ -67,11 +67,12 @@ class ProduitAdminController extends Controller
                 $produit->addAllergene($tmp[$i]);
                 $tmp[$i]->addProduit($produit);
 
-                $this->getDoctrine()->getEntityManager()->persist($tmp[$i]);
-                $this->getDoctrine()->getEntityManager()->flush();
+                $this->getDoctrine()->getManager()->persist($tmp[$i]);
+                $this->getDoctrine()->getManager()->flush();
             }
 
-            dump($produit);
+            //TODO probleme catégories
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush();
