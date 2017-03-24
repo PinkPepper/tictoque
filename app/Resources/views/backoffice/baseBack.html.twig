@@ -2,16 +2,21 @@
 <html>
 <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}Welcome!{% endblock %}</title>
-    {% block stylesheets %}{% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>TicToque</title>
-
-    <!-- Import Style Sheet -->
-    <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"/>
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <title>{% block title %}L'Amour Food{% endblock %}</title>
+    {% block stylesheets %}
+        <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    {% endblock %}
+    {% block javascripts %}
+        <script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
+        <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+        <script>tinymce.init({ selector:'.tiny',setup: function (editor) {
+                editor.on('change', function () {
+                    editor.save();
+                });
+            }});</script>
+    {% endblock %}
 </head>
 <body>
 
@@ -20,7 +25,6 @@
     {% if app.user is not  null %}
         <div>
             <img class="pictoNavbar" src="{{ asset('users/' ~ app.user.image) }}">
-
 
             <span>{{ app.user.username }}</span><br>
             <span>{% if app.user.roles.0=="ROLE_ADMIN" %}
@@ -52,14 +56,6 @@
 {% block menuAdmin %}{% endblock %}
 {% block body %}{% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
-    <script>tinymce.init({ selector:'.tiny',setup: function (editor) {
-        editor.on('change', function () {
-            editor.save();
-        });
-    }});</script>
-{% endblock %}
 </body>
 </html>
 
