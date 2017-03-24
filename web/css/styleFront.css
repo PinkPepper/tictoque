@@ -40,7 +40,7 @@ body {
   body .row.home {
     max-width: 100%; }
   body .Bandeau {
-    background-image: url("../img/image_background.jpg");
+    background-image: url("img/image_background.jpg");
     width: 100%;
     height: 582px;
     padding: 150px 250px 150px 250px;
@@ -645,6 +645,18 @@ body {
         display: block;
         width: 100%;
         height: 40px; }
+    body .panier .container .imgSousProduit {
+      width: 160px;
+      height: 100px; }
+    body .panier .container .sousMenu {
+      margin-top: -25px;
+      padding-top: 5px;
+      border: 1px #eee solid;
+      background-color: white;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      padding-bottom: 20px;
+      margin-bottom: 20px; }
     body .panier .container .produit {
       color: black;
       border: 1px #eee solid;
@@ -680,5 +692,18 @@ body {
       body .panier .container .produit .divDelete {
         font-size: 30px;
         padding-top: 28px; }
+    @media (max-width: 767px) {
+      body .panier .container .produit {
+        height: 200px !important; }
+        body .panier .container .produit .imgProduit {
+          width: 120px;
+          height: 80px; }
+        body .panier .container .produit .divQuantite,
+        body .panier .container .produit .divPrix,
+        body .panier .container .produit .divDelete {
+          margin-top: 10px;
+          text-align: center; }
+        body .panier .container .produit .divPrix {
+          text-align: left !important; } }
 
 /*# sourceMappingURL=style.css.map */

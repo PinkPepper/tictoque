@@ -4,13 +4,81 @@
     <script type="application/javascript">
     var sousTotal = 0;
     var tabPrice = [];
+    var total = 0;
+    var livraison = 5;
 </script>
 <div class="panier">
     <div class="container">
         <h1>Votre panier</h1>
         <p>Encore quelques clics et vous pourrez enfin déguster nos plats</p>
         <div class="row">
-            <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
+            <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12">
+                <h2>Menus</h2>
+                {% for menu in menus %}
+                    {% if menu["quantite"] != 0  %}
+                    <div id="menuId-{{ menu["id"] }}" class="produit">
+                        <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+                            image
+                        </div>
+                        <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+                            <h5>Menu n°{{ menu["id"] }}</h5>
+                            <h5>{{ menu["prix"] }}€</h5>
+                            <h5 class="showMore" data-id="{{ menu["id"] }}">En savoir plus ...</h5>
+                        </div>
+                        <div class="col-xs-7 col-sm-2 col-md-2 col-lg-2 divQuantite">
+                            <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>
+                            <div class="quantite">
+                                <i id="qte" class="quantite-{{ menu["id"] }}" data-id="{{ menu["id"] }}">{{ menu["quantite"] }}</i>
+                            </div>
+                            <img width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>
+                        </div>
+                        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">
+                            <h3 id="prixTotal-{{ menu["id"] }}">
+                                <script type="application/javascript">
+                                    var prix = {{ menu["prix"] }};
+                                    var qte = {{ menu["quantite"] }};
+                                    var total = prix*qte;
+                                    tabPrice[String({{ menu["id"] }})] = total;
+                                    $('#prixTotal-'+{{ menu["id"] }}).text(total+"€");
+                                </script>
+                            </h3>
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 divDelete">
+                            {#<img class="deleteProd" width="20px" data-id="{{ produit[0].id }}" data-url="{{ path('delete_produit', {'produit': produit[0].id}) }}" src="{{ asset('img/cross.svg') }}"/>#}
+                        </div>
+                    </div>
+                    <div class="row sousMenu" id="sousMenu-{{ menu["id"] }}" style="display: none">
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <h5>{% if menu["entree"] is not null %}{{ menu["entree"].type }}{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["entree"] is not null %}{{ menu["entree"].nom }}{% else %}Non spécifié{% endif %}</h5>
+                            {% if menu["entree"] is not null %}
+                                <img class="imgSousProduit" src="{{ asset('produits/'~menu["entree"].image) }}"/>
+                            {% else %}Non spécifié{% endif %}
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <h5>Plat</h5>
+                            <h5>{% if menu["plat"] is not null %}{{ menu["plat"].nom }}{% else %}Non spécifié{% endif %}</h5>
+                            {% if menu["plat"] is not null %}
+                                <img class="imgSousProduit" src="{{ asset('produits/'~menu["plat"].image) }}"/>
+                            {% else %}Non spécifié{% endif %}
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <h5>Dessert</h5>
+                            <h5>{% if menu["dessert"] is not null %}{{ menu["dessert"].nom }}{% else %}Non spécifié{% endif %}</h5>
+                            {% if menu["dessert"] is not null %}
+                                <img class="imgSousProduit" src="{{ asset('produits/'~menu["dessert"].image) }}"/>
+                            {% else %}Non spécifié{% endif %}
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                            <h5>Boisson</h5>
+                            <h5>{% if menu["boisson"] is not null %}{{ menu["boisson"].nom }}{% else %}Non spécifié{% endif %}</h5>
+                            {% if menu["boisson"] is not null %}
+                                <img class="imgSousProduit" src="{{ asset('produits/'~menu["boisson"].image) }}"/>
+                            {% else %}Non spécifié{% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
                 <h2>Produits</h2>
                 {% for produit in produits %}
                     {% if produit[1] != 0 %}
@@ -48,61 +116,6 @@
                 </div>
                     {% endif %}
                 {% endfor %}
-                <h2>Menus</h2>
-                {% for menu in menus %}
-                    {% if menu["quantite"] != 0  %}
-                        <div id="menuId-{{ menu["id"] }}" class="produit">
-                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                image
-                            </div>
-                            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                <h5>Menu</h5>
-                                <h5>{{ menu["prix"] }}€</h5>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divQuantite">
-                                <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>
-                                <div class="quantite">
-                                    <i id="qte" class="quantite-{{ menu["id"] }}" data-id="{{ menu["id"] }}">{{ menu["quantite"] }}</i>
-                                </div>
-                                <img width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>
-                            </div>
-                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divPrix">
-                                <h3 id="prixTotal-{{ menu["id"] }}">
-                                    <script type="application/javascript">
-                                        var prix = {{ menu["prix"] }};
-                                        var qte = {{ menu["quantite"] }};
-                                        var total = prix*qte;
-                                        tabPrice[String({{ menu["id"] }})] = total;
-                                        $('#prixTotal-'+{{ menu["id"] }}).text(total+"€");
-                                    </script>
-                                </h3>
-                            </div>
-                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 divDelete">
-                                {#<img class="deleteProd" width="20px" data-id="{{ menu["id"] }}" data-url="{{ path('delete_produit', {'menu': menu["id"]}) }}" src="{{ asset('img/cross.svg') }}"/>#}
-                            </div>
-                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                                <h5>Entree</h5>
-                                <h5>{% if menu["entree"] is not null %}{{ menu["entree"].nom }}{% else %}Non spécifié{% endif %}</h5>
-                                {% if menu["entree"] is not null %}<img class="imgProduit" src="{{ asset('produits/'~menu["entree"].image) }}">{% else %}Non spécifié{% endif %}
-                            </div>
-                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                                <h5>Plat</h5>
-                                <h5>{% if menu["plat"] is not null %}{{ menu["plat"].nom }}{% else %}Non spécifié{% endif %}</h5>
-                                {% if menu["plat"] is not null %}<img class="imgProduit" src="{{ asset('produits/'~menu["plat"].image) }}">{% else %}Non spécifié{% endif %}
-                            </div>
-                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                                <h5>Dessert</h5>
-                                <h5>{% if menu["dessert"] is not null %}{{ menu["dessert"].nom }}{% else %}Non spécifié{% endif %}</h5>
-                                {% if menu["dessert"] is not null %}<img class="imgProduit" src="{{ asset('produits/'~menu["dessert"].image) }}">{% else %}Non spécifié{% endif %}
-                            </div>
-                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
-                                <h5>Boisson</h5>
-                                <h5>{% if menu["boisson"] is not null %}{{ menu["boisson"].nom }}{% else %}Non spécifié{% endif %}</h5>
-                                {% if menu["boisson"] is not null %}<img class="imgProduit" src="{{ asset('produits/'~menu["boisson"].image) }}">{% else %}Non spécifié{% endif %}
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endfor %}
             </div>
             <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12 commande">
                 <h4>Commande</h4>
@@ -112,88 +125,26 @@
                                 sousTotal = sousTotal+element;
                             });
                             $('#sousTotal').text(sousTotal+"€");
-                        </script> </span></p>
-                <p>Réductions : <span id="reduction" class="total">-10%</span></p>
-                <p>Livraison : <span id="livraison" class="total">-10%</span></p>
+                        </script> </span>
+                </p>
+                <p>Livraison : <span id="livraison" class="total">
+                        <script type="application/javascript">
+                            $('#livraison').text(livraison+"€");
+                        </script>
+                    </span></p>
                 <div class="bar"></div>
-                <p>Total <span id="Total"  class="total">-10%</span></p>
-                <a class="commander">Commander</a>
+                <p>Total <span id="total"  class="total">
+                        <script type="application/javascript">
+                            total = (sousTotal + livraison);
+                            $('#total').text(total+"€");
+                        </script>
+                    </span></p>
+                <a href="{{ path('commande_index') }}" class="commander">Commander</a>
                 <a class="continue">Continuer mes achats</a>
             </div>
         </div>
     </div>
 </div>
-    <section class="user_content">
-        <content>
-
-            <div class="nav_pos">
-                <h1>Panier</h1>
-            </div>
-
-            <div class="user_interact">
-                retour
-            </div>
-
-        </content>
-
-        <h2>  Menus : ({{ menus|length }})</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>entree</th>
-                <th>plat</th>
-                <th>dessert</th>
-                <th>boisson</th>
-                <th>nombre</th>
-                <th>prix</th>
-                <th>actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for menu in menus %}
-                {% if menu["quantite"] != 0  %}
-                    <tr id="{{ menu["id"] }}">
-                        <td>{% if menu["entree"] is not null %}{{ menu["entree"].nom }}{% else %}NULL{% endif %}</td>
-                        <td>{% if menu["plat"] is not null %}{{ menu["plat"].nom }}{% else %}NULL{% endif %}</td>
-                        <td>{% if menu["dessert"] is not null %}{{ menu["dessert"].nom }}{% else %}NULL{% endif %}</td>
-                        <td>{% if menu["boisson"] is not null %}{{ menu["boisson"].nom }}{% else %}NULL{% endif %}</td>
-                        <td>{{ menu["quantite"] }}</td>
-                        <td>{{ menu["prix"] }}</td>
-                        <td>
-                            <ul>
-                                <li>
-                                    <a>Modifier le menu</a>
-                                </li>
-                                <li>
-                                    <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': menu["id"] }) }}" data-id="{{ menu["id"] }}">-</button> <i class="quantite-{{ menu["id"] }}" data-id="{{ menu["id"] }}">{{ menu["quantite"] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}">+</button>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-            </tbody>
-        </table>
-
-    </section>
-
-    <div>
-        <a href="{{ path('commande_index') }}" class="btn btn-info btn-small"  >Valider mon panier</a>
-    </div>
-
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body" id="modal-body">
-                    ...
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script type="application/javascript">
 
         $('.voir').on('click', function (e) {
@@ -227,6 +178,8 @@
                 });
 
                 $('#sousTotal').text(sousTotal+"€");
+                total = (sousTotal - livraison);
+                $('#total').text(total+"€");
             });
         }) ;
 
@@ -243,10 +196,15 @@
             tabPrice.forEach(function (element) {
                 sousTotal = sousTotal+element;
             });
-            $('#sousTotal').text(sousTotal+"€");
+            $('#sousTotal').text(sousTotal+'€');
             $('#produitId-'+id).fadeOut("slow");
-        })
+        });
 
+        $('.showMore').on('click',function(e){
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('#sousMenu-'+id).toggle(400);
+        });
 
     </script>
 
