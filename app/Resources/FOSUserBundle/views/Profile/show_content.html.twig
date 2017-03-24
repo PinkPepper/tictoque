@@ -78,6 +78,12 @@
 		</div>
 	</div>
 
+	<script>
+        $('.commande').on('click', function(){
+            var id = $(this).data('id');
+            $('#'+id).toggle(300);
+        })
+	</script>
 {% endblock %}
 
 

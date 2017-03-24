@@ -46,38 +46,41 @@ class PanierController extends Controller
             }
         }
 
-        $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
-        foreach ($menus_id as $menu)
+        if($menus_id)
         {
-                if($menu['entree'] != null)
-                {
-                    $entree = $em->find($menu['entree']);
-                }
-                else{
-                    $entree=null;
-                }
-                if($menu['plat'] != null) {
-                    $plat = $em->find($menu['plat']);
-                }
-                else{
-                    $plat = null;
-                }
+            $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
+            foreach ($menus_id as $menu)
+            {
+                    if($menu['entree'] != null)
+                    {
+                        $entree = $em->find($menu['entree']);
+                    }
+                    else{
+                        $entree=null;
+                    }
+                    if($menu['plat'] != null) {
+                        $plat = $em->find($menu['plat']);
+                    }
+                    else{
+                        $plat = null;
+                    }
 
-                if($menu['dessert'] != null)
-                {
-                    $dessert = $em->find($menu['dessert']);
-                }
-                else{
-                    $dessert = null;
-                }
-                if($menu['boisson'] != null)
-                {
-                    $boisson = $em->find($menu['boisson']);
-                }
-                else{
-                    $boisson = null;
-                }
-                array_push($menus, array('id'=>$menu['id'], 'entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>$menu['quantite'], 'prix'=>$menu['prix']));
+                    if($menu['dessert'] != null)
+                    {
+                        $dessert = $em->find($menu['dessert']);
+                    }
+                    else{
+                        $dessert = null;
+                    }
+                    if($menu['boisson'] != null)
+                    {
+                        $boisson = $em->find($menu['boisson']);
+                    }
+                    else{
+                        $boisson = null;
+                    }
+                    array_push($menus, array('id'=>$menu['id'], 'entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>$menu['quantite'], 'prix'=>$menu['prix']));
+            }
         }
 
 
@@ -147,7 +150,7 @@ class PanierController extends Controller
             }
         }
 
-        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
 
     /**
@@ -170,21 +173,13 @@ class PanierController extends Controller
                 $panier['produits'][$i][1] = $panier['produits'][$i][1] - 1;
 
                 $nombre = $panier['produits'][$i][1] ;
-                if($nombre == 0)
-                {
-                    //TODO effacer le produit du panier ? != ignorer produit quantité 0 du panier
-                    //   $panier['produits'] =   array_diff($panier['produits'], $panier['produits'][$i]); //marche pas
-                    //il se passe rien du coup cest génial
-                    //suffit de pas afficher un produit à 0 et de ne pas le prendre en compte dans la commande
-                    //merci tout le monde pour votre soutient
-                    //On t'aime Lucie <3
-                }
+
                 $session->set('panier', $panier);
                 break;
             }
         }
 
-        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
 
 
@@ -213,7 +208,7 @@ class PanierController extends Controller
             }
         }
 
-        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
 
     /**
@@ -236,20 +231,13 @@ class PanierController extends Controller
                 $panier['menus'][$i]["quantite"] = $panier['menus'][$i]["quantite"] - 1;
 
                 $nombre = $panier['menus'][$i]["quantite"] ;
-                if($nombre == 0)
-                {
-                    //TODO effacer le menu du panier ? != ignorer menu quantité 0 du panier
-                    //   $panier['produits'] =   array_diff($panier['produits'], $panier['produits'][$i]); //marche pas
-                    //il se passe rien du coup cest génial
-                    //suffit de pas afficher un produit à 0 et de ne pas le prendre en compte dans la commande
-                    //merci tout le monde pour votre soutient
-                }
+
                 $session->set('panier', $panier);
                 break;
             }
         }
 
-        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
 
     /**
@@ -272,19 +260,39 @@ class PanierController extends Controller
                 $panier['produits'][$i][1] = 0;
 
                 $nombre = $panier['produits'][$i][1] ;
-                if($nombre == 0)
-                {
-                    //TODO effacer le produit du panier ? != ignorer produit quantité 0 du panier
-                    //   $panier['produits'] =   array_diff($panier['produits'], $panier['produits'][$i]); //marche pas
-                    //il se passe rien du coup cest génial
-                    //suffit de pas afficher un produit à 0 et de ne pas le prendre en compte dans la commande
-                    //merci tout le monde pour votre soutient
-                }
                 $session->set('panier', $panier);
                 break;
             }
         }
 
-        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
+    }
+
+    /**
+     * @Route("/retirerMenuAuPanier/{menu}", name="delete_menu")
+     */
+    public function retirerMenu(Request $request, $menu)
+    {
+        $session = $request->getSession();
+        $panier = $session->get('panier');
+        $nombre = 0;
+
+        if(!$panier)
+        {
+            throw  new NotFoundHttpException();
+        }
+
+        for ($i = 0; $i<sizeof($panier['menus']) ; $i++)
+        {
+            if ($panier['menus'][$i]["id"] == $menu) {
+                $panier['menus'][$i]["quantite"] = 0;
+
+                $nombre = $panier['menus'][$i]["quantite"] ;
+                $session->set('panier', $panier);
+                break;
+            }
+        }
+
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
 }

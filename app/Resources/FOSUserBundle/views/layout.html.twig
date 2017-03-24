@@ -18,6 +18,10 @@
 
         <link type="text/css" rel="stylesheet" href="{{ asset('css/styleFront.css') }}"/>
     {% endblock %}
+    {% block javascript %}
+        <script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
+        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+    {% endblock %}
 
 </head>
 
@@ -189,18 +193,5 @@
             {#</div>#}
         {#</div>#}
     {#</div>#}
-{% endblock %}
-
-{% block javascript %}
-    <script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
-
-    {#pour mon compte, dérouler les menus#}
-    <script>
-        $('.commande').on('click', function(){
-            var id = $(this).data('id');
-            $('#'+id).toggle();
-        })
-    </script>
 {% endblock %}
 </html>

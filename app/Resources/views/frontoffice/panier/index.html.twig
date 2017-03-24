@@ -44,7 +44,7 @@
                             </h3>
                         </div>
                         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 divDelete">
-                            {#<img class="deleteProd" width="20px" data-id="{{ produit[0].id }}" data-url="{{ path('delete_produit', {'produit': produit[0].id}) }}" src="{{ asset('img/cross.svg') }}"/>#}
+                            <img class="deleteMenu" width="20px" data-id="{{ menu["id"] }}" data-url="{{ path('delete_menu', {'menu': menu["id"]}) }}" src="{{ asset('img/cross.svg') }}"/>
                         </div>
                     </div>
                     <div class="row sousMenu" id="sousMenu-{{ menu["id"] }}" style="display: none">
@@ -145,6 +145,7 @@
         </div>
     </div>
 </div>
+
     <script type="application/javascript">
 
         $('.voir').on('click', function (e) {
@@ -200,6 +201,24 @@
             $('#produitId-'+id).fadeOut("slow");
         });
 
+
+        $('.deleteMenu').on('click',function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var url = $(this).data('url');
+            var res = $('.quantite-'+id).load(url,function () {
+
+            });
+
+            tabPrice[String(id)] = 0;
+            sousTotal = 0;
+            tabPrice.forEach(function (element) {
+                sousTotal = sousTotal+element;
+            });
+            $('#sousTotal').text(sousTotal+'€');
+            $('#menuId-'+id).fadeOut("slow");
+        });
+
         $('.showMore').on('click',function(e){
             e.preventDefault();
             var id = $(this).data('id');
@@ -207,5 +226,5 @@
         });
 
     </script>
-
 {% endblock %}
+
