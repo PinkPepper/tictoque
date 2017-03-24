@@ -71,7 +71,8 @@ class ProduitAdminController extends Controller
                 $this->getDoctrine()->getEntityManager()->flush();
             }
 
-            dump($produit);
+            //TODO probleme catégories
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
             $em->flush();
