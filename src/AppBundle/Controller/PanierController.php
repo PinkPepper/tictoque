@@ -27,7 +27,7 @@ class PanierController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $panier = $session->all();
-        
+
         $produits = array();
         $menus = array();
 
