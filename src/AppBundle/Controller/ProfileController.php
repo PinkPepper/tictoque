@@ -15,6 +15,11 @@ class ProfileController extends BaseController
      */
     public function showAction()
     {
+        $entree = null;
+        $plat = null;
+        $dessert = null;
+        $boisson = null;
+
        $user = $this->getUser();
 
         if (!is_object($user) || !$user instanceof UserInterface) {
@@ -49,6 +54,7 @@ class ProfileController extends BaseController
                 {
                     $boisson = $em->find($commandeMenu->getMenus()->getBoisson());
                 }
+
                 array_push($array, array('id_commandeMenu'=>$commandeMenu->getId(), 'entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson));
             }
         }
