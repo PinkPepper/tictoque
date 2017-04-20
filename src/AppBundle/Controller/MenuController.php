@@ -117,7 +117,6 @@ class MenuController extends Controller
 
         if($menu[0]->getType() == 1) // entree + plat + boisson
         {
-            //return $this->render('frontoffice/menu/boisson.html.twig');
             return $this->redirectToRoute('menu_boisson');
         }
 
@@ -172,14 +171,6 @@ class MenuController extends Controller
         $session = $request->getSession();
         $menu = $session->get('menu');
         $menu[0]->setBoisson($boisson->getId());
-//
-//        $session = $request->getSession();
-//        $panier = $session->get('panier');
-//
-//        if(!$panier)
-//        {
-//            $panier = array('menus'=>array(), 'produits'=>array());
-//        }
 
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
 
@@ -194,11 +185,6 @@ class MenuController extends Controller
 
         if($menu[0]->getBoisson() != null) $boisson =  $em->find($menu[0]->getBoisson());
         else $boisson = null;
-//
-//        array_push($panier, (array_push($panier['menus'], array("id"=> sizeof($panier['menus']),"entree"=>$entree, "plat"=>$plat, "dessert"=>$dessert, "boisson"=>$boisson, "quantite"=>1, "prix"=>$menu[0]->getPrix()))));
-//        $session->set('panier', $panier);
-
-
 
         $session->set('menu_' . sizeof($session->all()), array(
             'entree'=>$entree,

@@ -53,64 +53,10 @@ class CommandeController extends Controller
         //TODO informer le livreur
         //TODO mettre à jour la quantité de produit dans la base selon la commande
 
-//        /* Création de la commande */
-//        $commande = new Commande();
-//        $commande->setUser($this->getUser());
-//        $em->persist($commande);
-//        $em->flush();
-//
-//        /* Récupération du panier */
-//        $session = $request->getSession();
-//        $panier = $session->get('panier');
-//
-//
-//        /* On crée les menus dans la base */
-//        if(sizeof($panier['menus']) > 0)
-//        {
-//            foreach ($panier['menus'] as $unMenu) {
-//                if($unMenu->getQuantite != 0)
-//                {
-//                    $menu = new Menu();
-//                    $menu->setMenu($unMenu['entree'], $unMenu['plat'], $unMenu['dessert'], $unMenu['boisson'], $unMenu['prix'], $unMenu['quantite'], $this->getUser());
-//
-//                    $em->persist($menu);
-//                    $em->flush();
-//
-//                    var_dump("flush menu : " . $menu->getId());
-//
-//                    /* Création commandeMenu */
-//                    $commandeMenu = new CommandeMenu();
-//                    $commandeMenu->setCommande($commande);
-//                    $commandeMenu->setMenus($menu);
-//                    $em->persist($commandeMenu);
-//                    $em->flush();
-//                }
-//            }
-//        }
-//
-//        /* On récupère les produits du panier */
-//        if(sizeof($panier['produits']) > 0)
-//        {
-//            foreach($panier['produits'] as $produit)
-//            {
-//                if($produit[1] != 0)
-//                {
-//                    $commandeProduit = new CommandeProduit();
-//                    $commandeProduit->setCommande($commande);
-//                    $commandeProduit->setProduits($em->getRepository('AppBundle:Produit')->find($produit[0]));
-//                    $commandeProduit->setQuantiteCommandee($produit[1]);
-//                    $em->persist($commandeProduit);
-//                    $em->flush();
-//                }
-//            }
-//        }
-
-
         $em = $this->getDoctrine();
         $panier = $session->all();
 
         $produits = array();
-        $menus = array();
 
         foreach ($panier as $key => $value)
         {
