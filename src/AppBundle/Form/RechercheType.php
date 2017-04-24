@@ -2,12 +2,13 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class TypeFiltreType extends AbstractType
+class RechercheType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -29,6 +30,10 @@ class TypeFiltreType extends AbstractType
                     'multiple'=>false,
                 )
             )
+            ->add('categorie', EntityType::class, array(
+                'class' => 'AppBundle:Categorie',
+                'choice_label' => 'nom',
+            ))
         ;
     }
 

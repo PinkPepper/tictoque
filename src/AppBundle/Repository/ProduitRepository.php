@@ -10,4 +10,32 @@ namespace AppBundle\Repository;
  */
 class ProduitRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findByTypeAndCategorie($type, $categorie)
+    {
+       // $rawSql = "SELECT m.id, (SELECT COUNT(i.id) FROM item AS i WHERE i.myclass_id = m.id) AS total FROM myclass AS m";
+
+        $requete = "SELECT produit.id 
+        FROM produit, produit_categorie
+        WHERE produit.type = '" . $type . "'
+        AND produit_categorie.produit_id = produit.id
+        AND produit_categorie.categorie_id = " . $categorie;
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($requete);
+        $stmt->execute([]);
+
+        return $stmt->fetchAll();
+    }
+
+    public function findByCategorie($categorie)
+    {
+        $requete = "SELECT produit.id 
+        FROM produit, produit_categorie
+        WHERE produit_categorie.produit_id = produit.id
+        AND produit_categorie.categorie_id = " . $categorie;
+
+        $stmt = $this->getEntityManager()->getConnection()->prepare($requete);
+        $stmt->execute([]);
+
+        return $stmt->fetchAll();
+    }
 }

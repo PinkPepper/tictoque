@@ -1,54 +1,114 @@
 {% extends 'frontoffice/footer.html.twig' %}
 
 {% block body %}
-    <section class="user_content">
-        <content>
+    <section>
+        <div class="row home">
+            <div class="col-lg-12 col-md-12 col-xs-12 Filtre">
+                <ul class="filtre_menu">
+                    {#<li>#}
+                    {#<select>#}
+                    {#<option class="type_select">Tous les types</option>#}
+                    {#<option>Entrée</option>#}
+                    {#<option>plats</option>#}
+                    {#<option>desserts</option>#}
+                    {#<option>boissons</option>#}
+                    {#</select>#}
+                    {#</li>#}
+                    {#<li>#}
+                    {#<select>#}
+                    {#{% for categorie in categories %}#}
+                    {#<option>{{ categorie.nom }}</option>#}
+                    {#{% endfor %}#}
+                    {#</select>#}
+                    {#</li>#}
 
-        <div class="nav_pos">
-            <h1>Produits</h1> 
-            <p>({{ produits|length }})</p>
+                    {#sur form_start, mettre une autre class custom => ca doit etre pour ca la double epaisseur de trait#}
+                    {{ form_start(form, { attr: {class: "filtre_menu"}}) }}
+                    <li>
+                        {{ form_widget(form.type) }}
+                    </li>
+                    <li>
+                        {{ form_widget(form.categorie) }}
+                    </li>
+                    <li>
+                        <i class="fa fa-refresh" aria-hidden="true"></i><span><a>Réinitialiser la recherche</a></span>
+                    </li>
+                    <li>
+                        <input class="filtre_aller" type="checkbox" name="allergenes"><label>Prendre en compte mes allérgènes</label>
+                    </li>
+                    <li>
+                        <input type="submit" value="Rechercher">
+                    </li>
+                    {{ form_end(form) }}
+
+                </ul>
+            </div>
         </div>
 
-        <div class="user_interact">
-                retour
-        </div>
-        </content>
+        <div class="row plats_semaine">
+            <div class="col-lg-12 col-md-12 col-xs-12 menu_choix">
+                <h4>Liste Produits</h4>
+                <h5>De la simple salade, à la salade composée, découvrez nos produits</h5>
+                <div class="search_bloc">
+                    <input type="text" name="produit_search" placeholder="Rechercher un plat, une boisson...">
+                </div>
+                {% for produit in produits %}
+                    {% if loop.index == 6 %}
+                        <div class="dessert position_plat">
 
-        <table>
-            <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th>Image</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for produit in produits %}
-                <tr>
-                    <td>{{ produit.nom }}</td>
-                    <td>{{ produit.prix }}</td>
-                    <td> {% if produit.image == "" %}
-                            Aucune image
-                        {% else %}
-                            <img src=" {{ asset('produits/' ~ produit.image ) }} " style="width: 10%; height: auto"></img>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('ajout_panier', {'produit': produit.id }) }}" >Ajouter au panier</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                            <div class="livraison_menu">
+                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                <h4>CHOISSISEZ VOTRE POINT DE LIVRAISON</h4>
+                                <p>Vous n'avez pas encore définis de point de livraison</p>
+                                <a class="add_livraison" href="#">Ajoutez un point de livraison</a>
+                            </div>
+
+                        </div>
+                    {% endif %}
+                    {% if loop.index == 9 %}
+                        <div class="dessert position_plat">
+                            <div class="livraison_menu">
+                                <i class="fa fa-building-o" aria-hidden="true"></i>
+                                <h4>BREAKZONE</h4>
+                                <p>Zone dédiée à la promotion d'autre catégorie, aux différentes réductions, mais aussi aux différents services de l'entreprise</p>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="dessert position_plat">
+                        {% if produit.quantite < 1 %}<p class="plus_dispo">Victime de son succès, ce plat n'est plus disponible</p>{% endif %}
+                        <img class="plat-pic{% if produit.quantite < 1 %} indispo{% endif %}" src="{{ asset('produits/'~produit.image) }}">
+                        <a class="ajoutPanier" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                        <div>
+                            <span class="type">{{ produit.type|upper }}</span>
+                            <h4>{{ produit.nom|upper }}</h4>
+                            <span class="prix">
+                            {% if produit.quantite > 0 %}<i class="fa fa-circle"></i>{% else %}<i class="fa fa-circle rouge"></i>{% endif %}
+                                {{ produit.prix }}€</span>
+                            <p>{{ produit.description|raw }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </section>
-
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/javascript">
+        $(document).ready(function(){
+
+            $('.ajoutPanier').on('click', function (e) {
+                e.preventDefault();
+                var url = $(this).data('url');
+                var id = $(this).data('id');
+
+                console.log('click');
+                console.log(url);
+                $(this).load(url);
+                $(this).prop('disabled', true);
+            }) ;
+        });
+    </script>
+{% endblock %}
