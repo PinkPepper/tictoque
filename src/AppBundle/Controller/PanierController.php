@@ -93,8 +93,8 @@ class PanierController extends Controller
         $pProduit = $session->get('produit_' . $produit->getId());
         if( $pProduit != null)
         {
-            $pProduit['quantite'] += 1;
-            $session->set($produit->getId(), $pProduit);
+            $pProduit['quantite'] = $pProduit['quantite'] + 1;
+            $session->set('produit_' . $produit->getId(), $pProduit);
         }
         else
         {
@@ -104,6 +104,7 @@ class PanierController extends Controller
             ));
         }
 
+        dump($session->all());
         return $this->render('frontoffice/produit/success.html.twig');
     }
 
