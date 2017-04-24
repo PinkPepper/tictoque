@@ -1,6 +1,10 @@
 body {
   color: #929292 !important;
-  font-family: "Roboto", sans-serif !important; }
+  font-family: "Roboto", sans-serif !important;
+  background-color: #f7f8fa !important; }
+  body h2, body h4, body h5 {
+    color: #484848;
+    font-weight: bolder; }
   body .row {
     margin-right: 0px;
     margin-left: 0px; }
@@ -59,7 +63,7 @@ body {
   body .row.home {
     max-width: 100%; }
   body .Bandeau {
-    background-image: url("../img/image_background.jpg");
+    background-image: url("img/image_background.jpg");
     width: 100%;
     height: 582px;
     padding: 150px 250px 150px 250px;
@@ -219,7 +223,7 @@ body {
   body .menu_choix {
     float: none;
     clear: both;
-    width: 81%;
+    width: 79%;
     margin: 0 auto; }
     body .menu_choix h5 {
       text-align: center;
@@ -469,11 +473,12 @@ body {
     cursor: pointer; }
   body .bg-grey {
     position: relative;
-    background-color: #c9d2db;
-    max-width: none; }
+    background-color: #ffffff;
+    max-width: none;
+    border-top: 3px solid #f32063; }
     body .bg-grey .container {
-      padding: 50px 80px 0 80px;
-      color: white; }
+      padding-top: 50px;
+      color: #565656; }
       body .bg-grey .container .row:first-child {
         height: 250px; }
       body .bg-grey .container .row:nth-child(2) {
@@ -495,14 +500,14 @@ body {
         top: -19px;
         position: relative; }
       body .bg-grey .best_menu li a {
-        color: #ffffff; }
+        color: #565656; }
     body .bg-grey .Categories {
       list-style: none;
       padding: 0; }
       body .bg-grey .Categories li {
         margin-bottom: 5px; }
         body .bg-grey .Categories li a {
-          color: #ffffff; }
+          color: #565656; }
     body .bg-grey .newsletter .news_images {
       display: inline-flex;
       padding: 0; }
@@ -522,14 +527,14 @@ body {
       padding-left: 5px;
       background-color: #b3c1ce;
       border-radius: 5px;
-      color: white; }
+      color: #565656; }
     body .bg-grey .newsletter a {
       border: none;
       padding: 3px 12px 3px 12px;
       background-color: #95abc0;
       border-radius: 5px;
       font-size: 13px;
-      color: white;
+      color: #565656;
       font-weight: 700; }
   body .bg-dark {
     position: relative;
@@ -798,61 +803,78 @@ body {
           width: 95px;
           font-size: 9px;
           font-weight: 100; }
-  body .menuGlobal {
-    background-color: #eeeeee;
-    padding-bottom: 50px; }
-    body .menuGlobal .titleMenu {
-      padding-top: 40px;
-      padding-bottom: 40px; }
-      body .menuGlobal .titleMenu h1 {
-        color: #F50F65; }
-    @media (max-width: 767px) {
-      body .menuGlobal .menu {
-        width: 90%; } }
-    body .menuGlobal .menu {
-      box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
-      border-radius: 5px;
+  body .recap .recap-banner {
+    background: url(img/bg_summary.jpg) no-repeat;
+    background-size: cover;
+    height: 50vh;
+    text-align: center;
+    padding-top: 4%; }
+    body .recap .recap-banner div {
+      padding: 40px;
+      margin-top: 2%; }
+    @media screen and (max-width: 1100px) {
+      body .recap .recap-banner div {
+        background: rgba(255, 255, 255, 0.82); } }
+  body .container {
+    margin: 0 auto;
+    width: 79%;
+    float: none;
+    clear: none; }
+    body .container .recap-content .livraison-type {
+      background-color: #ffffff;
+      padding: 10px;
+      box-shadow: 0px 0px 6px -1px;
+      border-radius: 5px; }
+    body .container .recap-produits .commande-produits {
       background-color: white;
-      padding-top: 50px;
-      padding-bottom: 50px;
-      padding-right: 20px;
-      padding-left: 20px; }
-      @media (max-width: 767px) {
-        body .menuGlobal .menu .marginResponsive {
-          margin-bottom: 50px; } }
-      @media (max-width: 500px) {
-        body .menuGlobal .menu .marginResponsive {
-          margin-bottom: 50px; } }
-      body .menuGlobal .menu .boxShadow {
+      padding: 10px;
+      margin-bottom: 10px;
+      box-shadow: 0px 0px 6px -1px;
+      border-radius: 5px; }
+      body .container .recap-produits .commande-produits img {
+        width: 15vw;
+        height: 90px;
+        margin-right: 8px;
         border-radius: 5px;
-        box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
-      body .menuGlobal .menu .menuTotal {
-        border-radius: 5px;
-        height: 100%;
-        padding-bottom: 17px; }
-        body .menuGlobal .menu .menuTotal .imgMenu {
-          border-top-right-radius: 5px;
-          border-top-left-radius: 5px; }
-        body .menuGlobal .menu .menuTotal .menuCorps {
-          padding: 10px; }
-        body .menuGlobal .menu .menuTotal .noPadding {
-          margin: 0px;
-          padding-left: 10px; }
-        body .menuGlobal .menu .menuTotal .noPaddingPartir {
-          margin: 0px;
-          padding-left: 10px;
-          margin-top: 20px; }
-      body .menuGlobal .menu .menuCommander {
-        background-color: #F50F65;
-        padding: 10px;
-        text-align: center;
-        cursor: pointer;
-        margin-top: -5px;
-        border-bottom-right-radius: 5px;
-        border-bottom-left-radius: 5px; }
-        body .menuGlobal .menu .menuCommander a {
-          color: white; }
-        body .menuGlobal .menu .menuCommander a:hover {
-          text-decoration: none; }
+        float: left; }
+      body .container .recap-produits .commande-produits h2, body .container .recap-produits .commande-produits p {
+        margin: 0; }
+      @media screen and (max-width: 650px) {
+        body .container .recap-produits .commande-produits img {
+          width: 100%;
+          height: 230px;
+          margin-right: 8px;
+          border-radius: 5px;
+          float: none; } }
+      @media screen and (max-width: 480px) {
+        body .container .recap-produits .commande-produits img {
+          width: 100%;
+          height: 160px;
+          margin-right: 8px;
+          border-radius: 5px;
+          float: none; } }
+    body .container .recap-prix {
+      margin-bottom: 100px; }
+      body .container .recap-prix .livraison-total {
+        width: 40%; }
+        body .container .recap-prix .livraison-total span {
+          clear: both;
+          float: left; }
+        body .container .recap-prix .livraison-total p {
+          float: right; }
+        body .container .recap-prix .livraison-total a {
+          clear: both;
+          float: left;
+          color: white;
+          background-color: #9a9a9a;
+          padding: 10px 60px 10px 60px;
+          text-align: center;
+          width: 100%; }
+        body .container .recap-prix .livraison-total .prix-total {
+          color: #484848;
+          font-weight: bolder; }
+      @media screen and (max-width: 810px) {
+        body .container .recap-prix .livraison-total {
+          width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */
