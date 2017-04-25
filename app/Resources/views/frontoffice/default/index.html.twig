@@ -3,8 +3,8 @@
 {% block body %}
 	<div class="row home">
 		<div class="col-lg-12 col-md-12 col-xs-12 Bandeau">
-			<p>Régalez-vous, commandez des plats gastronomique</p>
-			<span>Nom du site, permet aux estomcs exigeant d'être livré sur leur lieu de travail.</span>
+			<p>Régalez-vous, commandez des plats gastronomiques</p>
+			<span>L'AmourFood permet aux estomacs exigeants d'être livrés sur leur lieu de travail.</span>
 			<div>
 				<a href="{{ path('produit_index') }}">Découvrir les plats</a>
 				<a>Créer mon menu</a></a>
@@ -13,148 +13,159 @@
 	</div>
 
 	<div class="row plats_semaine">
-		<div class="col-lg-12 col-md-12 col-xs-12 menu_choix">
-			<h4>Plats de la semaine </h4>
-			<h5>Découvrez la sélection de la semaine</h5>
+		<div class="col-lg-12 col-md-12 col-xs-12 showPlatSemaine">
+			<img class="center-block pictoHP" src="{{ asset('img/picto_fourchette.svg') }}">
+			<h4 class="text-center titleCat">De nouveaux plats chaque semaine</h4>
+			<h5 class="text-center subTitleCat">Commandez simplement sur lamourfood.fr !</h5>
 
-			<div class="dessert position_plat">
-				<img class="plat-fav" src="{{ asset('img/favoris.png') }}">
-				<img class="plat-pic" src="{{ asset('img/Salade/saint-jacques.jpg') }}">
-				<a>Ajouter</a>
-				<div>
-					<span class="type">SALADE</span>
-					<h4>SALADE DE SAINT JACQUE</h4>
-					<span class="prix"><i class="fa fa-circle"></i>4€99</span>
-					<p>Petite description du produit pour
-						donner envie à l'utilisateur de
-						découvrir le produit</p>
-				</div>
-			</div>
-
-			<div class="dessert position_plat">
-				<img class="plat-fav" src="{{ asset('img/favoris.png') }}">
-				<img class="plat-pic" src="{{ asset('img/Plat_chaud/tourte.jpg') }}">
-				<a href="#">Ajouter</a>
-
-				<div>
-					<span class="type">ENTRÉE CHAUDE</span>
-					<h4>TOURTE AUX LÉGUMES</h4>
-					<span class="prix"><i class="fa fa-circle"></i>6€50</span>
-					<p>Petite description du produit pour
-						donner envie à l'utilisateur de
-						découvrir le produit</p>
-				</div>
-			</div>
-			<div class="dessert position_plat">
-				<img class="plat-fav" src="{{ asset('img/favoris.png') }}">
-				<img class="plat-pic" src="{{ asset('img/Dessert/dessert-orange-food-chocolate-53468.jpg') }}">
-				<a>Ajouter</a>
-
-				<div>
-					<span class="type">DESSERT</span>
-					<h4>MUFFIN ORANGE/CHOCOLAT</h4>
-					<span class="prix"><i class="fa fa-circle"></i>2€80</span>
-					<p>Petite description du produit pour
-						donner envie à l'utilisateur de
-						découvrir le produit</p>
-				</div>
-			</div>
+			{% for produit in produits %}
+				{% if loop.index0 < 3 %}
+					<div class="col-lg-4 col-md-4 col-sm-4">
+						<div class="showPlat">
+							<div class="showImgPlat">
+								<img style="height: 200px;width:310px;" class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
+								<a class="addToCart">Ajouter</a>
+							</div>
+							<div class="showDescPlat">
+								<p class="typeProduct">{{ produit.type|upper }}</p>
+								<div class="row">
+									<h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
+									<i class="text-center dispoProduct col-lg-2 col-md-6 fa col-sm-6  col-xs-6 fa-circle"></i>
+									<span class="text-center prixProduct col-lg-2 col-md-6 col-md-6  col-xs-6 prix">4€99</span>
+									<span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			{% endfor %}
 		</div>
 	</div>
 
-	<div class="row relais">
-		<div class="col-lg-12 col-md-12 col-xs-12 point_relais">
-			<img src="{{ asset('img/bag.png') }}">
-			<div>
-				<p>Livraison</p>
-				<span>Faites vous livrez dans nos points relais partenaire !</span>
-				<input type="search" name="search_relais" placeholder="Trouvez un point relais...">
-			</div>
-		</div>
-
-	</div>
-
-	<div class="row plat-actu col-sm-offset-1 col-md-offset-1 col-lg-offset-1 col-lg-10 col-md-10 col-sm-10 col-xs-12 menu_choix">
-		<div class="col-lg-12 col-md-12 col-xs-12 menu_choix">
-
-			<h4>Comment ça marche ?</h4>
-			<h5>Choississez, commandez, déguster !</h5>
-
-			<div class="infographie">
-				<ul>
-					<li>
-						<img src="{{ asset('img/comment_ca_marche_03.jpg') }}">
-						<h4>Inscrivez-vous sur Nom du site</h4>
-						<p>Inscrivez-vous et choississez parmis des dizaines de plats soigneusement préparées pour vous</p>
-					</li>
-					<li><img src="{{ asset('img/trait1.png') }}"></li>
-					<li>
-						<img src="{{ asset('img/comment_ca_marche_07.jpg') }}">
-						<h4>Choississez parmis des dizaines de plats</h4>
-						<p>Inscrivez-vous et choississez parmis des dizaines de plats soigneusement préparées pour vous</p>
-					</li>
-					<li><img src="{{ asset('img/trait2.png') }}"></li>
-					<li>
-						<img src="{{ asset('img/comment_ca_marche_10.jpg') }}">
-						<h4>Dégustez votre repas au travail</h4>
-						<p>Inscrivez-vous et choississez parmis des dizaines de plats soigneusement préparées pour vous</p>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-
-	<div class="row plat-actu">
-		<div class="col-lg-12 col-md-12 col-xs-12 menu_choix">
-			<h4>Actualité </h4>
-			<h5>Toute l'actualité autour du bien-être et de la nourriture</h5>
-			<div class="dessert position_plat">
-				<img class="plat-pic" src="{{ asset('img/Dessert/flan-choco.jpg') }}">
-				<div class="actu-choix">
-					<span class="type">IDÉE DE RECETTE</span>
-					<h4>IDÉE DE LA SEMAINE N8</h4>
-					<p>Cette semaine nous allons découvrir la recette du flan au chocolat... Découvrez les ingrédients</p>
-					<a>En savoir plus</a>
-				</div>
-			</div>
-			<div class="dessert position_plat">
-				<img class="plat-pic" src="{{ asset('img/Dessert/saint-valentin.jpg') }}">
-				<div class="actu-choix">
-					<span class="type">IDÉE DE RECETTE</span>
-					<h4>PRÉPARER LA SAINT-VALENTIN</h4>
-					<p>Cette semaine nous allons découvrir la recette du flan au chocolat... Découvrez les ingrédients</p>
-					<a>En savoir plus</a>
-				</div>
-			</div>
-
-			<div class="dessert position_plat">
-				<img class="plat-pic" src="{{ asset('img/Dessert/sainement.jpg') }}">
-				<div class="actu-choix">
-					<span class="type">IDÉE DE RECETTE</span>
-					<h4>COMMENT MANGER PLUS SAINEMENT ?</h4>
-					<p>Cette semaine nous allons découvrir la recette du flan au chocolat... Découvrez les ingrédients</p>
-					<a>En savoir plus</a>
+	<div class="row pointRelais center-block">
+		<div class="container">
+			<div class="col-lg-8 col-lg-offset-2 col-md-12 col-sm-12 col-xs-12">
+				<img class="imgBag" src="{{ asset('img/bag.png') }}">
+				<div class="pointRelaisDiv">
+					<h2 class="textShadow">Livraison chez vous</h2>
+					<span>Faites vous livrez dans nos points relais partenaires !</span><br/>
+					<input type="search" name="search_relais" placeholder="Trouvez un point relais...">
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<div class="row plat-actu">
-		<div class="col-lg-12 col-md-12 col-xs-12 menu_choix">
-
-			<h4 class="partenaire-title">Partenaires </h4>
-			<h5>Nos entreprises partenaires commande déjà sur Nom du site.fr</h5>
-
-			<div class="partenaires">
-				<ul>
-					<li><img src="{{ asset('img/logo-willemse.jpg') }}"></li>
-					<li><img src="{{ asset('img/3Suisses.jpg') }}"></li>
-					<li><img src="{{ asset('img/scottage_logo-sans-fond.png') }}"></li>
-					<li><img src="{{ asset('img/locasun.png') }}"></li>
-					<li><img src="{{ asset('img/cache.png') }}"></li>
-				</ul>
+		<div class="col-lg-12 col-md-12 col-xs-12 fonctionnement">
+			<h4 class="text-center">Comment ça marche ?</h4>
+			<div class="container">
+				<div class="row text-center">
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 espaceResp" >
+						<img class="picto" src="{{ asset('img/fourchette.svg') }}">
+						<h5>Vos plat préférés</h5>
+						<p class="text">Choisissez vos plats ou menus préférés et commandez en ligne.</p>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 espaceResp" >
+						<img class="picto" src="{{ asset('img/livraison.svg') }}">
+						<h5>Livraison chez vous</h5>
+						<p class="text">Nous livrons directement à votre porte.</p>
+					</div>
+					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 espaceResp" >
+						<img class="picto" src="{{ asset('img/food.svg') }}">
+						<h5>Mangez et appréciez</h5>
+						<p class="text">Pas de cuisine ni de nettoyage. Profitez de votre repas.</p>
+					</div>
+				</div>
 			</div>
 		</div>
+	</div>
+
+	<div class="sliderQualite">
+		<div class="row">
+			<div class="col-lg-3 col-md-3 col-sm-2 sliderLeft"></div>
+			<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 sliderRight">
+				<h4>Des produits de qualité</h4>
+				<p>Lorem ipsum Lorem ipsum Lorem ipsum v Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum v Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum</p>
+				<p></p>
+			</div>
+		</div>
+	</div>
+
+	<div class="row plats_semaine">
+		<div class="col-lg-12 col-md-12 col-xs-12 showPlatSemaine">
+			<h4 class="text-center titleCat">Actualités</h4>
+			<h5 class="text-center subTitleCat">Toute l'actualité autour du bien-être et de la nourriture</h5>
+
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<div class="showPlat">
+					<div class="showImgPlat">
+						<img class="img-responsive imgPlat" src="img/Salade/saint-jacques.jpg">
+					</div>
+					<div class="showDescPlat">
+						<p class="typeProduct">SALADE</p>
+						<div class="row">
+							<h4 class="text-center titleProduct noMargin col-lg-8 col-md-12 col-sm-12 col-xs-12">SALADE DE SAINT JACQUES</h4>
+							<p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">Petite description du produit pour donner envie à l'utilisateur de découvrir le produit</p>
+							<p class="plusActu col-lg-5 col-md-8 col-sm-10 col-xs-12">En savoir plus</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<div class="showPlat">
+					<div class="showImgPlat">
+						<img class="img-responsive imgPlat" src="img/Salade/saint-jacques.jpg">
+					</div>
+					<div class="showDescPlat">
+						<p class="typeProduct">SALADE</p>
+						<div class="row">
+							<h4 class="text-center titleProduct noMargin col-lg-8 col-md-12 col-sm-12 col-xs-12">SALADE DE SAINT JACQUES</h4>
+							<p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">Petite description du produit pour donner envie à l'utilisateur de découvrir le produit</p>
+							<p class="plusActu col-lg-5 col-md-8 col-sm-10 col-xs-12">En savoir plus</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-4">
+				<div class="showPlat">
+					<div class="showImgPlat">
+						<img class="img-responsive imgPlat" src="img/Salade/saint-jacques.jpg">
+					</div>
+					<div class="showDescPlat">
+						<p class="typeProduct">SALADE</p>
+						<div class="row">
+							<h4 class="text-center titleProduct noMargin col-lg-8 col-md-12 col-sm-12 col-xs-12">SALADE DE SAINT JACQUES</h4>
+							<p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">Petite description du produit pour donner envie à l'utilisateur de découvrir le produit</p>
+							<p class="plusActu col-lg-5 col-md-8 col-sm-10 col-xs-12">En savoir plus</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row plats_semaine">
+		<div class="col-lg-12 col-md-12 col-xs-12 showPlatSemaine">
+			<img class="center-block pictoHP" src="{{ asset('img/picto_vin.svg') }}">
+			<h4 class="titleCat">Partenaires </h4>
+			<h5 class="text-center subTitleCat">Nos entreprises partenaires commande déjà sur lamourfood.fr</h5>
+
+			<div class="row">
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					<img class="img-responsive" src="{{ asset('img/logo-willemse.jpg') }}">
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					<img class="img-responsive" src="{{ asset('img/scottage_logo-sans-fond.png') }}">
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					<img class="img-responsive" src="{{ asset('img/3Suisses.jpg') }}">
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+					<img class="img-responsive" src="{{ asset('img/locasun.png') }}">
+				</div>
+			</div>
+		</div>
+
 	</div>
 
 {% endblock %}

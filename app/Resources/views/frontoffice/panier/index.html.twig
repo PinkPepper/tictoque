@@ -28,9 +28,9 @@
                         <div class="col-xs-7 col-sm-2 col-md-2 col-lg-2 divQuantite">
                             <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>
                             <div class="quantite">
-                                <i id="qte" class="quantite-{{ menu["id"] }}" data-id="{{ menu["id"] }}">{{ menu["quantite"] }}</i>
+                                <i id="qte" class="qte quantite-{{ menu["id"] }}" data-isproduit="false" data-id="{{ menu["id"] }}">{{ menu["quantite"] }}</i>
                             </div>
-                            <img width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>
+                            <img id="menuChevronSup-{{ menu["id"] }}" width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>
                         </div>
                         <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">
                             <h3 id="prixTotal-{{ menu["id"] }}">
@@ -95,9 +95,9 @@
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divQuantite">
                         <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
                         <div class="quantite">
-                            <i id="qte" class="quantite-{{ produit[0].id }}" data-id="{{ produit[0].id }}">{{ produit[1] }}</i>
+                            <i id="qte" class=" qte quantite-{{ produit[0].id }}" data-isproduit="true" data-id="{{ produit[0].id }}" data-quantite="{{ produit[0].quantite }}" data-quantitecurrent="{{ produit[1] }}">{{ produit[1] }}</i>
                         </div>
-                        <img width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
+                        <img id="chevronSup-{{ produit[0].id }}" width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divPrix">
                         <h3 id="prixTotal-{{ produit[0].id }}">
@@ -140,7 +140,7 @@
                         </script>
                     </span></p>
                 <a href="{{ path('commande_index') }}" class="commander">Commander</a>
-                <a class="continue">Continuer mes achats</a>
+                <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
             </div>
         </div>
     </div>
@@ -161,10 +161,39 @@
 
     <script type="application/javascript">
 
+        $(".qte").each(function(){
+
+            var quantite = $(this).data("quantitecurrent");
+            var quantiteMax = $(this).data("quantite");
+            var id = $(this).data('id');
+            var isProduit = $(this).data('isproduit');
+
+            if(quantite < quantiteMax ){
+               if(isProduit == true)
+               {
+                   $('#chevronSup-'+id).removeAttr('style');
+               }
+               else
+               {
+                   $('#menuChevronSup-'+id).removeAttr('style');
+               }
+            }
+            else
+            {
+                if(isProduit == true)
+                {
+                    $('#chevronSup-' + id).attr('style', 'display: none');
+                }
+                else
+                {
+                    $('#menuChevronSup-' + id).attr('style', 'display: none');
+                }
+            }
+        });
+
         $('.voir').on('click', function (e) {
             e.preventDefault();
             var url = $(this).data('url');
-            console.log(url);
             $('#modal-body').load(url);
         });
 
@@ -175,9 +204,10 @@
             var prix = $(this).data('prix');
 
             var res = $('.quantite-' + id).load(url, function(){
+                var quantiteMax = $(this).data('quantite');
+
                 if(res.text() == "0")
                 {
-                    console.log('oui');
                     $('#produitId-' + id).fadeOut("slow");
                 }
 
@@ -194,6 +224,31 @@
                 $('#sousTotal').text(sousTotal+"€");
                 total = (sousTotal - livraison);
                 $('#total').text(total+"€");
+
+                var isProduit = $(this).data("isproduit");
+
+                if(eval(quantiteMax + " < (" + $(this).text() + " + 1) "))
+                {
+                    if(isProduit == true)
+                    {
+                        $('#chevronSup-' + id).attr('style', 'display: none');
+                    }
+                    else
+                    {
+                        $('#menuChevronSup-' + id).attr('style', 'display: none');
+                    }
+                }
+                else
+                {
+                    if(isProduit == true)
+                    {
+                        $('#chevronSup-'+id).removeAttr('style');
+                    }
+                    else
+                    {
+                        $('#menuChevronSup-'+id).removeAttr('style');
+                    }
+                }
             });
         }) ;
 

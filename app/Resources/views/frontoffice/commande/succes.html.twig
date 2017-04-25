@@ -1,64 +1,167 @@
-{% extends 'frontoffice/base.html.twig' %}
+{% extends 'frontoffice/footer.html.twig' %}
 
 {% block body %}
-    <div class="row recap">
-			<div class="col-lg-12 col-md-12 col-xs-12 recap-banner">
-				<div>
-					<h4>L'amourFood vous remercie pour votre confiance !</h4>
-					<p>Votre commande n°047586945214 est enregistrée.</p>
-					<p>Un e-mail de confirmation vient de vous être envoyé à l'adresse: FredEric@vegan.fr</p>
-				</div>
+
+	<div class="row recap">
+		<div class="col-lg-12 col-md-12 col-xs-12 recap-banner">
+			<div>
+				<h4>L'amourFood vous remercie pour votre confiance !</h4>
+				<p>Votre commande n°047586945214 est enregistrée.</p>
+				<p>Un e-mail de confirmation vient de vous être envoyé à l'adresse: FredEric@vegan.fr</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="row container">
+		<div class="col-lg-12 col-md-12 col-xs-12 recap-content">
+			<h5>Récapitulatif de votre commande</h5>
+			<div class="livraison-type">
+				<p>Livraison en point relais</p>
+				<span>Euratechnologies</span>
+				</br>
+				<span>165 Avenue de Bretagne - 59000 Lille</span>
+			</div>
+
+	        {% for menu in menus %}
+	                        {% if menu["quantite"] != 0  %}
+	                            <div id="menuId-{{ menu["id"] }}" class="produit">
+	                                <div class="col-xs-6 col-sm-3 col-md-3 col-lg-3">
+	                                    image
+	                                </div>
+	                                <div class="col-xs-6 col-sm-4 col-md-4 col-lg-4">
+	                                    <h5>Menu n°{{ menu["id"] }}</h5>
+	                                    <h5>{{ menu["prix"] }}€</h5>
+	                                    <a class="showMore" data-id="{{ menu["id"] }}">En savoir plus ...</a>
+	                                </div>
+	                                <div class="col-xs-7 col-sm-2 col-md-2 col-lg-2 divQuantite">
+
+	                                    <div class="quantite">
+	                                        <i id="qte" class="quantite-{{ menu["id"] }}" data-id="{{ menu["id"] }}">{{ menu["quantite"] }}</i>
+	                                    </div>
+
+	                                </div>
+	                                <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">
+	                                    <h3 id="prixTotal-{{ menu["id"] }}">
+	                                        <script type="application/javascript">
+	                                            var prix = {{ menu["prix"] }};
+	                                            var qte = {{ menu["quantite"] }};
+	                                            var total = prix*qte;
+	                                            tabPrice[String({{ menu["id"] }})] = total;
+	                                            $('#prixTotal-'+{{ menu["id"] }}).text(total+"€");
+	                                        </script>
+	                                    </h3>
+	                                </div>
+	                            </div>
+	                            <div class="row sousMenu" id="sousMenu-{{ menu["id"] }}" style="display: none">
+	                                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+	                                    <h5>Entrée</h5>
+	                                    <h5>{% if menu["entree"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["entree"].id}) }}">{{ menu["entree"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+	                                    {% if menu["entree"] is not null %}
+	                                        <img class="imgSousProduit" src="{{ asset('produits/'~menu["entree"].image) }}"/>
+	                                    {% else %}Non spécifié{% endif %}
+	                                </div>
+	                                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+	                                    <h5>Plat</h5>
+	                                    <h5>{% if menu["plat"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["plat"].id}) }}">{{ menu["plat"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+	                                    {% if menu["plat"] is not null %}
+	                                        <img class="imgSousProduit" src="{{ asset('produits/'~menu["plat"].image) }}"/>
+	                                    {% else %}Non spécifié{% endif %}
+	                                </div>
+	                                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+	                                    <h5>Dessert</h5>
+	                                    <h5>{% if menu["dessert"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["dessert"].id}) }}">{{ menu["dessert"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+	                                    {% if menu["dessert"] is not null %}
+	                                        <img class="imgSousProduit" src="{{ asset('produits/'~menu["dessert"].image) }}"/>
+	                                    {% else %}Non spécifié{% endif %}
+	                                </div>
+	                                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+	                                    <h5>Boisson</h5>
+	                                    <h5>{% if menu["boisson"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["boisson"].id}) }}">{{ menu["boisson"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+	                                    {% if menu["boisson"] is not null %}
+	                                        <img class="imgSousProduit" src="{{ asset('produits/'~menu["boisson"].image) }}"/>
+	                                    {% else %}Non spécifié{% endif %}
+	                                </div>
+	                            </div>
+	                        {% endif %}
+	        {% endfor %}
+
+			{% for produit in produits %}
+                {% if produit[1] != 0 %}
+                	<div class="col-lg-12 col-md-12 col-xs-12 recap-produits">
+	                    <div id="produitId-{{ produit[0].id }}" class="commande-produits">
+	                        <img class="imgProduit voir" src="{{ asset('produits/'~produit[0].image) }}"/>
+		                    <div class="produits-info">
+								<span>{{ produit[0].type }}</span>
+								<h2>{{ produit[0].nom }}</h2>
+								<p class="prix-produit">{{ produit[0].prix }}€</p>
+								<p class="quantite-produit">Quantité: {{ produit[0].quantite }}</p>
+								<h5><a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
+							</div>
+						</div>
+	                    <!--<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divQuantite">
+                            <div class="quantite">
+                                <i id="qte" class="quantite-{{ produit[0].id }}" data-id="{{ produit[0].id }}" data-quantite="{{ produit[0].quantite }}" data-quantitecurrent="{{ produit[1] }}">{{ produit[1] }}</i>
+                            </div>
+	                    </div>-->
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divPrix">
+                            <h3 id="prixTotal-{{ produit[0].id }}">
+                                <script type="application/javascript">
+                                    var prix = {{ produit[0].prix }};
+                                    var qte = {{ produit[1] }};
+                                    var total = prix*qte;
+                                    tabPrice[String({{ produit[0].id }})] = total;
+                                    $('#prixTotal-'+{{ produit[0].id }}).text(total+"€");
+                                </script>
+                            </h3>
+                        </div>
+	                </div>
+                {% endif %}
+            {% endfor %}
+		</div>
+
+		<div class="col-lg-12 col-md-12 col-xs-12 recap-prix">
+			<h5>Commande</h5>
+			<div class="livraison-total">
+				<span>Total:</span>
+				<p class="montant">{{ prix }}€</p>
+				<span>Livraison:</span>
+				<p class="frais-de-port">Gratuite</p>
+				</br>
+				<span>Total de la commande:</span>
+				<p class="prix-total">{{ prix }}€</p>
+
+				<a href="#" class="recap-back">Retour sur le site</a>
 			</div>
 		</div>
 
-		<div class="row container">
-			<div class="col-lg-12 col-md-12 col-xs-12 recap-content">
-				<h5>Récapitulatif de votre commande</h5>
-				<div class="livraison-type">
-					<p>Livraison en point relais</p>
-					<span>Euratechnologies</span>
-					</br>
-					<span>165 Avenue de Bretagne - 59000 Lille</span>
-				</div>
-			</div>
+	</div>
 
-			<div class="col-lg-12 col-md-12 col-xs-12 recap-produits">
-				<h5>Liste des produits</h5>
-				<div class="commande-produits">
-					
-					<img src="img/Salade/food.jpg">
-					<div class="produits-info">
-						<span>SALADE</span>
-						<h2>TOMATE MOZZARELLA</h2>
-						<p class="prix-produit">8€50</p>
-						<p class="quantite-produit">Quantité: 1</p>
-					</div>
-				</div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
 
-				<div class="commande-produits">
-					<img src="img/dessert/brownies-cake.jpg">
-					<div class="produits-info">
-						<span>DESSERT</span>
-						<h2>BROWNIES CAKE</h2>
-						<p class="prix-produit">2€50</p>
-						<p class="quantite-produit">Quantité: 1</p>
-					</div>
-				</div>
-			</div>
+    <script type="application/javascript">
 
-			<div class="col-lg-12 col-md-12 col-xs-12 recap-prix">
-				<h5>Commande</h5>
-				<div class="livraison-total">
-					<span>Total:</span>
-					<p class="montant">11€00</p>
-					<span>Livraison:</span>
-					<p class="frais-de-port">Gratuite</p>
-					</br>
-					<span>Total de la commande:</span>
-					<p class="prix-total">11€00</p>
+        $('.voir').on('click', function (e) {
+            e.preventDefault();
+            var url = $(this).data('url');
+            $('#modal-body').load(url);
+        });
 
-					<a href="#" class="recap-back">Retour sur le site</a>
-				</div>
-			</div>
-		</div>
+        $('.showMore').on('click',function(e){
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('#sousMenu-'+id).toggle(400);
+        });
+
+    </script>
 {% endblock %}
