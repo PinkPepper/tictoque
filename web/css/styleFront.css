@@ -742,6 +742,8 @@ body {
       border-radius: 5px; }
       body .panier .container .produit h5 {
         margin: 7px; }
+      body .panier .container .produit .produitMargin {
+        margin-bottom: 20px !important; }
       body .panier .container .produit h4 {
         margin: 7px; }
       body .panier .container .produit .imgProduit {
