@@ -195,6 +195,17 @@ class MenuController extends Controller
             "prix"=>$menu[0]->getPrix()
         ));
 
+        if($session->get('prix') == null)
+        {
+            $session->set('prix', 5); // 5 -> frais de livraison
+            $prix = 5;
+        }
+        else
+        {
+            $prix = $session->get('prix');
+        }
+
+        $session->set('prix', ($prix + $menu[0]->getPrix()));
 
         return $this->redirectToRoute('index_panier');
     }

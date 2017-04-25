@@ -34,6 +34,10 @@ class Commande
      * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
     private $user;
+    /**
+     * @ORM\Column(name="prix", type="float", nullable=true)
+     **/
+    private $prix;
 
     /**
      * @ORM\OneToMany(targetEntity="CommandeProduit",  mappedBy="commande", cascade={"remove"})
@@ -138,6 +142,22 @@ class Commande
     public function getCommandesMenu()
     {
         return $this->commandesMenu;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPrix()
+    {
+        return $this->prix;
+    }
+
+    /**
+     * @param mixed $prix
+     */
+    public function setPrix($prix)
+    {
+        $this->prix = $prix;
     }
 }
 

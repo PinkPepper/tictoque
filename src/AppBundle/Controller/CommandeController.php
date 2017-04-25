@@ -9,6 +9,7 @@ use AppBundle\Entity\Menu;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -45,8 +46,11 @@ class CommandeController extends Controller
         $em = $this->getDoctrine()->getManager();
         $session = $request->getSession();
 
+        $prix = $session->get('prix');
+
         $commande = new Commande();
         $commande->setUser($this->getUser());
+        $commande->setPrix($prix);
         $em->persist($commande);
         $em->flush();
 
@@ -91,12 +95,60 @@ class CommandeController extends Controller
             }
         }
 
+        /* ****** PAGE SUCCES ****** */
+
+        $panier = $session->all();
+        $produits_panier = array();
+        $menus = array();
+
+        foreach ($panier as $key => $value)
+        {
+            if (strpos($key, 'produit') !== false) //produit
+            {
+                $id = explode("_", $key);
+                $id = $id[1];
+                array_push($produits_panier, array($em->getRepository('AppBundle:Produit')->find($id), $value['quantite']));
+            } else if ($key != "menu" && (strpos($key, 'menu') !== false)) //menu
+            {
+                $id = explode("_", $key);
+                $id = $id[1];
+
+                if ($value['entree'] != null) {
+                    $entree = $em->getRepository('AppBundle:Produit')->find($value['entree']);
+                } else {
+                    $entree = null;
+                }
+                if ($value['plat'] != null) {
+                    $plat = $em->getRepository('AppBundle:Produit')->find($value['plat']);
+                } else {
+                    $plat = null;
+                }
+
+                if ($value['dessert'] != null) {
+                    $dessert = $em->getRepository('AppBundle:Produit')->find($value['dessert']);
+                } else {
+                    $dessert = null;
+                }
+                if ($value['boisson'] != null) {
+                    $boisson = $em->getRepository('AppBundle:Produit')->find($value['boisson']);
+                } else {
+                    $boisson = null;
+                }
+                array_push($menus, array('id' => $id, 'entree' => $entree, 'plat' => $plat, 'dessert' => $dessert, 'boisson' => $boisson, 'quantite' => $value['quantite'], 'prix' => $value['prix']));
+            }
+        }
+        /* */
+
 
         /* reset le panier */
         $session = $request->getSession();
         $session->clear();
 
         return $this->render('frontoffice/commande/succes.html.twig', array(
+            'produits'=>$produits_panier,
+            'menus'=>$menus,
+            'prix'=>$prix
         ));
     }
+
 }

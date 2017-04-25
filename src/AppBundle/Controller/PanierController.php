@@ -81,7 +81,8 @@ class PanierController extends Controller
             'panier'=>$panier,
             'user'=>$user,
             'produits'=>$produits,
-            'menus'=>$menus));
+            'menus'=>$menus
+        ));
     }
 
     /**
@@ -90,11 +91,24 @@ class PanierController extends Controller
     public function ajouterProduitAuPanier(Request $request, Produit $produit)
     {
         $session = $request->getsession();
-        $pProduit = $session->get('produit_' . $produit->getId());
-        if( $pProduit != null)
+
+        if($session->get('prix') == null)
         {
-            $pProduit['quantite'] += 1;
-            $session->set($produit->getId(), $pProduit);
+            $session->set('prix', 5); //5 -> frais de livraison
+            $prix = 5;
+        }
+        else
+        {
+            $prix = $session->get('prix');
+        }
+
+        $pProduit = $session->get('produit_' . $produit->getId());
+        if( $pProduit != null) //doublon
+        {
+            $pProduit['quantite'] = $pProduit['quantite'] + 1;
+            $session->set('produit_' . $produit->getId(), $pProduit);
+            $prix = $prix + $produit->getPrix();
+            $session->set('prix', $prix);
         }
         else
         {
@@ -102,8 +116,11 @@ class PanierController extends Controller
                 'quantite'=>1,
                 'prix'=>$produit->getPrix()
             ));
+            $prix = $prix + $produit->getPrix();
+            $session->set('prix', $prix);
         }
 
+        dump($session->all());
         return $this->render('frontoffice/produit/success.html.twig');
     }
 
@@ -119,6 +136,10 @@ class PanierController extends Controller
             $pProduit['quantite'] += 1;
             $session->set('produit_' . $produit->getId(), $pProduit);
             $nombre = $pProduit['quantite'];
+
+            $prix = $session->get("prix");
+            $prix = $prix + $produit->getPrix();
+            $session->set('prix', $prix);
         }
         else
         {
@@ -142,6 +163,10 @@ class PanierController extends Controller
             $pProduit['quantite'] -= 1;
             $session->set('produit_' . $produit->getId(), $pProduit);
             $nombre = $pProduit['quantite'];
+
+            $prix = $session->get("prix");
+            $prix = $prix - $produit->getPrix();
+            $session->set('prix', $prix);
         }
         else
         {
@@ -159,11 +184,16 @@ class PanierController extends Controller
     {
         $session = $request->getsession();
         $pMenu = $session->get('menu_' . $menu);
+
         if( $pMenu != null)
         {
             $pMenu['quantite'] += 1;
             $session->set('menu_' . $menu, $pMenu);
             $nombre = $pMenu['quantite'];
+
+            $prix = $session->get("prix");
+            $prix = $prix + $pMenu['prix'];
+            $session->set('prix', $prix);
         }
         else
         {
@@ -185,6 +215,10 @@ class PanierController extends Controller
             $pMenu['quantite'] -= 1;
             $session->set('menu_' . $menu, $pMenu);
             $nombre = $pMenu['quantite'];
+
+            $prix = $session->get("prix");
+            $prix = $prix - $pMenu['prix'];
+            $session->set('prix', $prix);
         }
         else
         {
@@ -200,7 +234,19 @@ class PanierController extends Controller
     public function retirerProduit(Request $request, Produit $produit)
     {
         $session = $request->getsession();
-        $session->remove('produit_' . $produit->getId());
+        $pProduit = $session->get('produit_' . $produit->getId());
+
+        if( $pProduit != null)
+        {
+            $quantite = $pProduit['quantite'];
+
+            $prix = $session->get("prix");
+            $prix = $prix - ($produit->getPrix() * $quantite);
+            $session->set('prix', $prix);
+
+            $session->remove('produit_' . $produit->getId());
+        }
+
         $nombre = 0;
 
         return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
@@ -212,7 +258,21 @@ class PanierController extends Controller
     public function retirerMenu(Request $request, $menu)
     {
         $session = $request->getsession();
-        $session->remove('menu_' . $menu);
+
+
+        $pMenu = $session->get('menu_' . $menu);
+
+        if( $pMenu != null)
+        {
+            $quantite = $pMenu['quantite'];
+
+            $prix = $session->get("prix");
+            $prix = $prix - ($pMenu['prix'] * $quantite);
+            $session->set('prix', $prix);
+
+            $session->remove('menu_' . $menu);
+        }
+
         $nombre = 0;
 
         return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
