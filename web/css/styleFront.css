@@ -804,7 +804,7 @@ body {
           font-size: 9px;
           font-weight: 100; }
   body .recap .recap-banner {
-    background: url(img/bg_summary.jpg) no-repeat;
+    background: url(../img/bg_summary.jpg) no-repeat;
     background-size: cover;
     height: 50vh;
     text-align: center;
