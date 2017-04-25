@@ -59,7 +59,7 @@ body {
   body .row.home {
     max-width: 100%; }
   body .Bandeau {
-    background-image: url("img/image_background.jpg");
+    background-image: url("../img/image_background.jpg");
     width: 100%;
     height: 582px;
     padding: 150px 250px 150px 250px;
@@ -604,7 +604,7 @@ body {
   @media screen and (min-width: 100px) and (max-width: 1024px) {
     body .container-fluid, body .compte {
       padding: 0 !important; } }
-  body body div {
+  body div {
     margin: 0px; }
   body .fullDiv {
     width: 100% !important;
@@ -876,7 +876,7 @@ body {
   body .pointRelais {
     margin-top: 200px;
     height: 200px;
-    background: url("img/texture_legumes.jpg");
+    background: url("../img/texture_legumes.jpg");
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
     @media screen and (max-width: 670px) {
       body .pointRelais .imgBag {
@@ -926,7 +926,7 @@ body {
     body .sliderQualite .sliderLeft {
       display: none; } }
   body .sliderQualite .sliderLeft {
-    background-image: url("img/qualite_produit.jpg");
+    background-image: url("../img/qualite_produit.jpg");
     float: left;
     height: 300px;
     background-size: cover; }
@@ -947,18 +947,18 @@ body {
   body .actualite h5 {
     text-align: center;
     margin-bottom: 25px; }
-  body body .menuGlobal {
+  body .menuGlobal {
     background-color: #eeeeee;
     padding-bottom: 50px; }
-  body body .menuGlobal .titleMenu {
+  body .menuGlobal .titleMenu {
     padding-top: 40px;
     padding-bottom: 40px; }
-  body body .menuGlobal .titleMenu h1 {
+  body .menuGlobal .titleMenu h1 {
     color: #F50F65; }
   @media (max-width: 767px) {
-    body body .menuGlobal .menu {
+    body .menuGlobal .menu {
       width: 90%; } }
-  body body .menuGlobal .menu {
+  body .menuGlobal .menu {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     background-color: white;
@@ -967,31 +967,31 @@ body {
     padding-right: 20px;
     padding-left: 20px; }
   @media (max-width: 767px) {
-    body body .menuGlobal .menu .marginResponsive {
+    body .menuGlobal .menu .marginResponsive {
       margin-bottom: 50px; } }
   @media (max-width: 500px) {
-    body body .menuGlobal .menu .marginResponsive {
+    body .menuGlobal .menu .marginResponsive {
       margin-bottom: 50px; } }
-  body body .menuGlobal .menu .boxShadow {
+  body .menuGlobal .menu .boxShadow {
     border-radius: 5px;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
-  body body .menuGlobal .menu .menuTotal {
+  body .menuGlobal .menu .menuTotal {
     border-radius: 5px;
     height: 100%;
     padding-bottom: 17px; }
-  body body .menuGlobal .menu .menuTotal .imgMenu {
+  body .menuGlobal .menu .menuTotal .imgMenu {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px; }
-  body body .menuGlobal .menu .menuTotal .menuCorps {
+  body .menuGlobal .menu .menuTotal .menuCorps {
     padding: 10px; }
-  body body .menuGlobal .menu .menuTotal .noPadding {
+  body .menuGlobal .menu .menuTotal .noPadding {
     margin: 0px;
     padding-left: 10px; }
-  body body .menuGlobal .menu .menuTotal .noPaddingPartir {
+  body .menuGlobal .menu .menuTotal .noPaddingPartir {
     margin: 0px;
     padding-left: 10px;
     margin-top: 20px; }
-  body body .menuGlobal .menu .menuCommander {
+  body .menuGlobal .menu .menuCommander {
     background-color: #F50F65;
     padding: 10px;
     text-align: center;
@@ -999,9 +999,9 @@ body {
     margin-top: -5px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px; }
-  body body .menuGlobal .menu .menuCommander a {
+  body .menuGlobal .menu .menuCommander a {
     color: white; }
-  body body .menuGlobal .menu .menuCommander a:hover {
+  body .menuGlobal .menu .menuCommander a:hover {
     text-decoration: none; }
   body .recap .recap-banner {
     background: url(../img/bg_summary.jpg) no-repeat;
