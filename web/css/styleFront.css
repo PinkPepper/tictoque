@@ -1005,7 +1005,7 @@ body {
   body body .menuGlobal .menu .menuCommander a:hover {
     text-decoration: none; }
   body .recap .recap-banner {
-    background: url(img/bg_summary.jpg) no-repeat;
+    background: url(../img/bg_summary.jpg) no-repeat;
     background-size: cover;
     height: 50vh;
     text-align: center;
@@ -1025,7 +1025,8 @@ body {
       background-color: #ffffff;
       padding: 10px;
       box-shadow: 0px 0px 6px -1px;
-      border-radius: 5px; }
+      border-radius: 5px;
+      margin-bottom: 30px; }
     body .container .recap-produits {
       padding-right: 0px;
       padding-left: 0px; }
