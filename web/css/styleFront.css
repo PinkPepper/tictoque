@@ -59,7 +59,7 @@ body {
   body .row.home {
     max-width: 100%; }
   body .Bandeau {
-    background-image: url("../img/image_background.jpg");
+    background-image: url("img/image_background.jpg");
     width: 100%;
     height: 582px;
     padding: 150px 250px 150px 250px;
@@ -604,7 +604,7 @@ body {
   @media screen and (min-width: 100px) and (max-width: 1024px) {
     body .container-fluid, body .compte {
       padding: 0 !important; } }
-  body div {
+  body body div {
     margin: 0px; }
   body .fullDiv {
     width: 100% !important;
@@ -693,6 +693,16 @@ body {
     background-color: #F6F9FA; }
     body .panier .container h1 {
       color: black; }
+    body .panier .container .sousMenu {
+      border: 1px #eee solid;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      padding-bottom: 10px;
+      margin-top: -4px;
+      background-color: white; }
+    body .panier .container .imgSousProduit {
+      height: 100px;
+      width: 100%; }
     body .panier .container .commande {
       padding-left: 60px;
       padding-right: 60px; }
@@ -729,8 +739,7 @@ body {
       padding: 20px;
       background-color: white;
       height: 140px;
-      border-radius: 5px;
-      margin-bottom: 20px !important; }
+      border-radius: 5px; }
       body .panier .container .produit h5 {
         margin: 7px; }
       body .panier .container .produit h4 {
@@ -867,7 +876,7 @@ body {
   body .pointRelais {
     margin-top: 200px;
     height: 200px;
-    background: url("../img/texture_legumes.jpg");
+    background: url("img/texture_legumes.jpg");
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
     @media screen and (max-width: 670px) {
       body .pointRelais .imgBag {
@@ -917,7 +926,7 @@ body {
     body .sliderQualite .sliderLeft {
       display: none; } }
   body .sliderQualite .sliderLeft {
-    background-image: url("../img/qualite_produit.jpg");
+    background-image: url("img/qualite_produit.jpg");
     float: left;
     height: 300px;
     background-size: cover; }
@@ -938,18 +947,18 @@ body {
   body .actualite h5 {
     text-align: center;
     margin-bottom: 25px; }
-  body .menuGlobal {
+  body body .menuGlobal {
     background-color: #eeeeee;
     padding-bottom: 50px; }
-  body .menuGlobal .titleMenu {
+  body body .menuGlobal .titleMenu {
     padding-top: 40px;
     padding-bottom: 40px; }
-  body .menuGlobal .titleMenu h1 {
+  body body .menuGlobal .titleMenu h1 {
     color: #F50F65; }
   @media (max-width: 767px) {
-    body .menuGlobal .menu {
+    body body .menuGlobal .menu {
       width: 90%; } }
-  body .menuGlobal .menu {
+  body body .menuGlobal .menu {
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
     background-color: white;
@@ -958,31 +967,31 @@ body {
     padding-right: 20px;
     padding-left: 20px; }
   @media (max-width: 767px) {
-    body .menuGlobal .menu .marginResponsive {
+    body body .menuGlobal .menu .marginResponsive {
       margin-bottom: 50px; } }
   @media (max-width: 500px) {
-    body .menuGlobal .menu .marginResponsive {
+    body body .menuGlobal .menu .marginResponsive {
       margin-bottom: 50px; } }
-  body .menuGlobal .menu .boxShadow {
+  body body .menuGlobal .menu .boxShadow {
     border-radius: 5px;
     box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
-  body .menuGlobal .menu .menuTotal {
+  body body .menuGlobal .menu .menuTotal {
     border-radius: 5px;
     height: 100%;
     padding-bottom: 17px; }
-  body .menuGlobal .menu .menuTotal .imgMenu {
+  body body .menuGlobal .menu .menuTotal .imgMenu {
     border-top-right-radius: 5px;
     border-top-left-radius: 5px; }
-  body .menuGlobal .menu .menuTotal .menuCorps {
+  body body .menuGlobal .menu .menuTotal .menuCorps {
     padding: 10px; }
-  body .menuGlobal .menu .menuTotal .noPadding {
+  body body .menuGlobal .menu .menuTotal .noPadding {
     margin: 0px;
     padding-left: 10px; }
-  body .menuGlobal .menu .menuTotal .noPaddingPartir {
+  body body .menuGlobal .menu .menuTotal .noPaddingPartir {
     margin: 0px;
     padding-left: 10px;
     margin-top: 20px; }
-  body .menuGlobal .menu .menuCommander {
+  body body .menuGlobal .menu .menuCommander {
     background-color: #F50F65;
     padding: 10px;
     text-align: center;
@@ -990,12 +999,12 @@ body {
     margin-top: -5px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px; }
-  body .menuGlobal .menu .menuCommander a {
+  body body .menuGlobal .menu .menuCommander a {
     color: white; }
-  body .menuGlobal .menu .menuCommander a:hover {
+  body body .menuGlobal .menu .menuCommander a:hover {
     text-decoration: none; }
   body .recap .recap-banner {
-    background: url('img/bg_summary.jpg') no-repeat;
+    background: url(img/bg_summary.jpg) no-repeat;
     background-size: cover;
     height: 50vh;
     text-align: center;
@@ -1016,34 +1025,37 @@ body {
       padding: 10px;
       box-shadow: 0px 0px 6px -1px;
       border-radius: 5px; }
-    body .container .recap-produits .commande-produits {
-      background-color: white;
-      padding: 10px;
-      margin-bottom: 10px;
-      box-shadow: 0px 0px 6px -1px;
-      border-radius: 5px; }
-      body .container .recap-produits .commande-produits img {
-        width: 15vw;
-        height: 90px;
-        margin-right: 8px;
-        border-radius: 5px;
-        float: left; }
-      body .container .recap-produits .commande-produits h2, body .container .recap-produits .commande-produits p {
-        margin: 0; }
-      @media screen and (max-width: 650px) {
+    body .container .recap-produits {
+      padding-right: 0px;
+      padding-left: 0px; }
+      body .container .recap-produits .commande-produits {
+        background-color: white;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0px 0px 6px -1px;
+        border-radius: 5px; }
         body .container .recap-produits .commande-produits img {
-          width: 100%;
-          height: 230px;
+          width: 15vw;
+          height: 90px;
           margin-right: 8px;
           border-radius: 5px;
-          float: none; } }
-      @media screen and (max-width: 480px) {
-        body .container .recap-produits .commande-produits img {
-          width: 100%;
-          height: 160px;
-          margin-right: 8px;
-          border-radius: 5px;
-          float: none; } }
+          float: left; }
+        body .container .recap-produits .commande-produits h2, body .container .recap-produits .commande-produits p {
+          margin: 0; }
+        @media screen and (max-width: 650px) {
+          body .container .recap-produits .commande-produits img {
+            width: 100%;
+            height: 230px;
+            margin-right: 8px;
+            border-radius: 5px;
+            float: none; } }
+        @media screen and (max-width: 480px) {
+          body .container .recap-produits .commande-produits img {
+            width: 100%;
+            height: 160px;
+            margin-right: 8px;
+            border-radius: 5px;
+            float: none; } }
     body .container .recap-prix {
       margin-bottom: 100px; }
       body .container .recap-prix .livraison-total {
