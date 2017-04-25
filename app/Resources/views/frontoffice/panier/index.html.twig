@@ -82,7 +82,7 @@
                 <h2>Produits</h2>
                 {% for produit in produits %}
                     {% if produit[1] != 0 %}
-                <div id="produitId-{{ produit[0].id }}" class="produit">
+                <div id="produitId-{{ produit[0].id }}" class="produit produitMargin">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                         <img class="imgProduit voir" src="{{ asset('produits/'~produit[0].image) }}"/>
                     </div>
@@ -222,7 +222,7 @@
                 });
 
                 $('#sousTotal').text(sousTotal+"€");
-                total = (sousTotal - livraison);
+                total = (sousTotal + livraison);
                 $('#total').text(total+"€");
 
                 var isProduit = $(this).data("isproduit");
@@ -267,6 +267,8 @@
             });
             $('#sousTotal').text(sousTotal+'€');
             $('#produitId-'+id).fadeOut("slow");
+            total = (sousTotal + livraison);
+            $('#total').text(total+'€');
         });
 
 
@@ -285,6 +287,8 @@
             });
             $('#sousTotal').text(sousTotal+'€');
             $('#menuId-'+id).fadeOut("slow");
+            total = (sousTotal + livraison);
+            $('#total').text(total+'€');
         });
 
         $('.showMore').on('click',function(e){
