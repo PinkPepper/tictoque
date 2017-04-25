@@ -13,9 +13,12 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $em = $this->getDoctrine()->getManager();
+        $produits = $em->getRepository('AppBundle:Produit')->findAll();
         // replace this example code with whatever you need
         return $this->render('frontoffice/default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
+            'produits' => $produits
         ]);
     }
 }
