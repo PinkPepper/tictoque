@@ -100,7 +100,6 @@ class MenuController extends Controller
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $produits = $em->findByType('plat');
 
-
         return $this->render('frontoffice/menu/plats.html.twig', array(
             'produits' => $produits
         ));

@@ -433,26 +433,5 @@ class Produit
        return "" . $this->id; //todo essayer avec $this->nom
     }
 
-    /**
-     * @ORM\PrePersist
-     */
-    public function isNull()
-    {
-//       if($this->nom == null){
-//           $this->nom = "null";
-//       }
-//        if($this->description == null){
-//            $this->description = "null";
-//        }
-//        if($this->datePeremption == null){
-//            $this->datePeremption = new \DateTime();
-//        }
-//        if($this->prix == null){
-//            $this->prix = 0;
-//        }
-//        if($this->quantite == null){
-//            $this->quantite = 0;
-//        }
-    }
 }
 
