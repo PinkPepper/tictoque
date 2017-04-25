@@ -87,9 +87,20 @@ class MenuController extends Controller
         $session = $request->getSession();
         $menu = $session->get('menu');
 
-        $menu[0]->setEntree($entree->getId());
+        $pProduit = null;
+        $pProduit = $session->get('produit_' . $entree->getId());
+        if($pProduit != null)
+        {
+            $quantiteFuture =  $pProduit['quantite'] + 1;
+            if ($quantiteFuture > $entree->getQuantite())
+            {
+                $this->addFlash('notice', 'Ce produit ne peut pas être choisi, il n\'est plus disponible.');
+                return $this->redirectToRoute('menu_entree');
+            }
+        }
 
-       return $this->redirectToRoute('menu_plat');
+        $menu[0]->setEntree($entree->getId());
+        return $this->redirectToRoute('menu_plat');
     }
 
     /**
@@ -112,14 +123,26 @@ class MenuController extends Controller
     {
         $session = $request->getSession();
         $menu = $session->get('menu');
+
+        $pProduit = null;
+        $pProduit = $session->get('produit_' . $plat->getId());
+        if($pProduit != null)
+        {
+            $quantiteFuture =  $pProduit['quantite'] + 1;
+            if ($quantiteFuture > $plat->getQuantite())
+            {
+                $this->addFlash('notice', 'Ce produit ne peut pas être choisi, il n\'est plus disponible.');
+                return $this->redirectToRoute('menu_plat');
+            }
+        }
+
         $menu[0]->setPlat($plat->getId());
 
         if($menu[0]->getType() == 1) // entree + plat + boisson
         {
             return $this->redirectToRoute('menu_boisson');
         }
-
-        // plat + dessert + boisson || entree + plat + dessert + boisson
+       // plat + dessert + boisson || entree + plat + dessert + boisson
         return $this->redirectToRoute('menu_dessert');
     }
 
@@ -143,8 +166,20 @@ class MenuController extends Controller
     {
         $session = $request->getSession();
         $menu = $session->get('menu');
-        $menu[0]->setDessert($dessert->getId());
 
+        $pProduit = null;
+        $pProduit = $session->get('produit_' . $dessert->getId());
+        if($pProduit != null)
+        {
+            $quantiteFuture =  $pProduit['quantite'] + 1;
+            if ($quantiteFuture > $dessert->getQuantite())
+            {
+                $this->addFlash('notice', 'Ce produit ne peut pas être choisi, il n\'est plus disponible.');
+                return $this->redirectToRoute('menu_dessert');
+            }
+        }
+
+        $menu[0]->setDessert($dessert->getId());
         return $this->redirectToRoute('menu_boisson');
     }
 
@@ -166,10 +201,25 @@ class MenuController extends Controller
      */
     public function choixBoissonAction(Request $request, Produit $boisson)
     {
-
         $session = $request->getSession();
         $menu = $session->get('menu');
+
+        $pProduit = null;
+        $pProduit = $session->get('produit_' . $boisson->getId());
+        if($pProduit != null)
+        {
+            $quantiteFuture =  $pProduit['quantite'] + 1;
+            if ($quantiteFuture > $boisson->getQuantite())
+            {
+                $this->addFlash('notice', 'Ce produit ne peut pas être choisi, il n\'est plus disponible.');
+                return $this->redirectToRoute('menu_boisson');
+            }
+        }
+
         $menu[0]->setBoisson($boisson->getId());
+
+
+        /* FINALISATION */
 
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
 
