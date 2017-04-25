@@ -1,11 +1,6 @@
-<<<<<<< HEAD
 body {
   color: #929292 !important;
-  font-family: "Roboto", sans-serif !important;
-  background-color: #f7f8fa !important; }
-  body h2, body h4, body h5 {
-    color: #484848;
-    font-weight: bolder; }
+  font-family: "Roboto", sans-serif !important; }
   body .row {
     margin-right: 0px;
     margin-left: 0px; }
@@ -474,12 +469,11 @@ body {
     cursor: pointer; }
   body .bg-grey {
     position: relative;
-    background-color: #ffffff;
-    max-width: none;
-    border-top: 3px solid #f32063; }
+    background-color: #c9d2db;
+    max-width: none; }
     body .bg-grey .container {
-      padding-top: 50px;
-      color: #565656; }
+      padding: 50px 80px 0 80px;
+      color: white; }
       body .bg-grey .container .row:first-child {
         height: 250px; }
       body .bg-grey .container .row:nth-child(2) {
@@ -501,14 +495,14 @@ body {
         top: -19px;
         position: relative; }
       body .bg-grey .best_menu li a {
-        color: #565656; }
+        color: #ffffff; }
     body .bg-grey .Categories {
       list-style: none;
       padding: 0; }
       body .bg-grey .Categories li {
         margin-bottom: 5px; }
         body .bg-grey .Categories li a {
-          color: #565656; }
+          color: #ffffff; }
     body .bg-grey .newsletter .news_images {
       display: inline-flex;
       padding: 0; }
@@ -528,14 +522,14 @@ body {
       padding-left: 5px;
       background-color: #b3c1ce;
       border-radius: 5px;
-      color: #565656; }
+      color: white; }
     body .bg-grey .newsletter a {
       border: none;
       padding: 3px 12px 3px 12px;
       background-color: #95abc0;
       border-radius: 5px;
       font-size: 13px;
-      color: #565656;
+      color: white;
       font-weight: 700; }
   body .bg-dark {
     position: relative;
@@ -699,6 +693,16 @@ body {
     background-color: #F6F9FA; }
     body .panier .container h1 {
       color: black; }
+    body .panier .container .sousMenu {
+      border: 1px #eee solid;
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      padding-bottom: 10px;
+      margin-top: -4px;
+      background-color: white; }
+    body .panier .container .imgSousProduit {
+      height: 100px;
+      width: 100%; }
     body .panier .container .commande {
       padding-left: 60px;
       padding-right: 60px; }
@@ -735,8 +739,7 @@ body {
       padding: 20px;
       background-color: white;
       height: 140px;
-      border-radius: 5px;
-      margin-bottom: 20px !important; }
+      border-radius: 5px; }
       body .panier .container .produit h5 {
         margin: 7px; }
       body .panier .container .produit h4 {
@@ -804,8 +807,204 @@ body {
           width: 95px;
           font-size: 9px;
           font-weight: 100; }
+  body .plats_semaine {
+    width: 80%;
+    margin-left: 10%; }
+    body .plats_semaine .showPlatSemaine, body .plats_semaine .actualite {
+      margin-top: 30px; }
+      body .plats_semaine .showPlatSemaine .titleCat, body .plats_semaine .actualite .titleCat {
+        text-align: center;
+        font-weight: bold;
+        font-size: 25px;
+        color: #4a4a4a; }
+      body .plats_semaine .showPlatSemaine .pictoHP, body .plats_semaine .actualite .pictoHP {
+        width: 22px;
+        transform: rotate(15deg); }
+      body .plats_semaine .showPlatSemaine .subTitleCat, body .plats_semaine .actualite .subTitleCat {
+        margin-bottom: 30px; }
+    body .plats_semaine .showPlat {
+      box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+      border-radius: 5px;
+      margin-top: 30px;
+      margin-bottom: 30px; }
+      body .plats_semaine .showPlat .showImgPlat .imgPlat {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px; }
+      body .plats_semaine .showPlat .showImgPlat .addToCart {
+        float: right;
+        position: relative;
+        margin-top: -15px;
+        margin-right: 25px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        background-color: #f50f65;
+        border-radius: 5px;
+        color: white;
+        cursor: pointer;
+        margin-left: 65%;
+        display: inline; }
+      body .plats_semaine .showPlat .showImgPlat .addToCart:hover {
+        text-decoration: none; }
+      body .plats_semaine .showPlat .showDescPlat {
+        height: 100% !important;
+        padding: 10px; }
+        body .plats_semaine .showPlat .showDescPlat .plusActu {
+          background-color: #4a4a4a;
+          color: white;
+          border-radius: 5px;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          text-align: center; }
+        body .plats_semaine .showPlat .showDescPlat .noMargin {
+          text-align: left; }
+        body .plats_semaine .showPlat .showDescPlat .typeProduct {
+          margin: 0px;
+          font-size: 12px; }
+        body .plats_semaine .showPlat .showDescPlat .titleProduct {
+          padding: 0px;
+          color: black;
+          font-size: 14px; }
+        body .plats_semaine .showPlat .showDescPlat .dispoProduct {
+          margin-top: 10px; }
+        body .plats_semaine .showPlat .showDescPlat .prixProduct {
+          color: black;
+          padding-top: 7px; }
+        body .plats_semaine .showPlat .showDescPlat .descProduit {
+          padding: 0px; }
+  body .pointRelais {
+    margin-top: 200px;
+    height: 200px;
+    background: url("img/texture_legumes.jpg");
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
+    @media screen and (max-width: 670px) {
+      body .pointRelais .imgBag {
+        display: none; } }
+    @media screen and (min-width: 671px) {
+      body .pointRelais .imgBag {
+        display: block;
+        float: left;
+        height: 250px;
+        margin-top: -70px; } }
+    body .pointRelais .pointRelaisDiv {
+      border: 2px #f50f65 solid;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+      background-color: white;
+      margin-top: 30px;
+      color: black;
+      float: right;
+      margin-right: 10%; }
+    body .pointRelais .textShadow {
+      font-weight: 400;
+      text-shadow: 0px 0px 30px white; }
+  body .fonctionnement h4 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    color: #4a4a4a; }
+  body .fonctionnement h5 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    color: #4a4a4a; }
+  body .fonctionnement .picto {
+    height: 48px; }
+  body .fonctionnement .text {
+    padding-left: 20%;
+    padding-right: 20%; }
+  body .fonctionnement .espaceResp {
+    margin-top: 30px;
+    margin-bottom: 30px; }
+  @media screen and (max-width: 767px) {
+    body .sliderQualite .sliderLeft {
+      display: none; } }
+  body .sliderQualite .sliderLeft {
+    background-image: url("img/qualite_produit.jpg");
+    float: left;
+    height: 300px;
+    background-size: cover; }
+  body .sliderQualite .sliderRight {
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-top: 100px;
+    text-align: center;
+    float: left;
+    height: 300px; }
+  body .actualite h4 {
+    margin-top: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 25px;
+    color: #4a4a4a;
+    text-align: center; }
+  body .actualite h5 {
+    text-align: center;
+    margin-bottom: 25px; }
+  body body .menuGlobal {
+    background-color: #eeeeee;
+    padding-bottom: 50px; }
+  body body .menuGlobal .titleMenu {
+    padding-top: 40px;
+    padding-bottom: 40px; }
+  body body .menuGlobal .titleMenu h1 {
+    color: #F50F65; }
+  @media (max-width: 767px) {
+    body body .menuGlobal .menu {
+      width: 90%; } }
+  body body .menuGlobal .menu {
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+    background-color: white;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-right: 20px;
+    padding-left: 20px; }
+  @media (max-width: 767px) {
+    body body .menuGlobal .menu .marginResponsive {
+      margin-bottom: 50px; } }
+  @media (max-width: 500px) {
+    body body .menuGlobal .menu .marginResponsive {
+      margin-bottom: 50px; } }
+  body body .menuGlobal .menu .boxShadow {
+    border-radius: 5px;
+    box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
+  body body .menuGlobal .menu .menuTotal {
+    border-radius: 5px;
+    height: 100%;
+    padding-bottom: 17px; }
+  body body .menuGlobal .menu .menuTotal .imgMenu {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px; }
+  body body .menuGlobal .menu .menuTotal .menuCorps {
+    padding: 10px; }
+  body body .menuGlobal .menu .menuTotal .noPadding {
+    margin: 0px;
+    padding-left: 10px; }
+  body body .menuGlobal .menu .menuTotal .noPaddingPartir {
+    margin: 0px;
+    padding-left: 10px;
+    margin-top: 20px; }
+  body body .menuGlobal .menu .menuCommander {
+    background-color: #F50F65;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    margin-top: -5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px; }
+  body body .menuGlobal .menu .menuCommander a {
+    color: white; }
+  body body .menuGlobal .menu .menuCommander a:hover {
+    text-decoration: none; }
   body .recap .recap-banner {
-    background: url(../img/bg_summary.jpg) no-repeat;
+    background: url(img/bg_summary.jpg) no-repeat;
     background-size: cover;
     height: 50vh;
     text-align: center;
@@ -826,34 +1025,37 @@ body {
       padding: 10px;
       box-shadow: 0px 0px 6px -1px;
       border-radius: 5px; }
-    body .container .recap-produits .commande-produits {
-      background-color: white;
-      padding: 10px;
-      margin-bottom: 10px;
-      box-shadow: 0px 0px 6px -1px;
-      border-radius: 5px; }
-      body .container .recap-produits .commande-produits img {
-        width: 15vw;
-        height: 90px;
-        margin-right: 8px;
-        border-radius: 5px;
-        float: left; }
-      body .container .recap-produits .commande-produits h2, body .container .recap-produits .commande-produits p {
-        margin: 0; }
-      @media screen and (max-width: 650px) {
+    body .container .recap-produits {
+      padding-right: 0px;
+      padding-left: 0px; }
+      body .container .recap-produits .commande-produits {
+        background-color: white;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-shadow: 0px 0px 6px -1px;
+        border-radius: 5px; }
         body .container .recap-produits .commande-produits img {
-          width: 100%;
-          height: 230px;
+          width: 15vw;
+          height: 90px;
           margin-right: 8px;
           border-radius: 5px;
-          float: none; } }
-      @media screen and (max-width: 480px) {
-        body .container .recap-produits .commande-produits img {
-          width: 100%;
-          height: 160px;
-          margin-right: 8px;
-          border-radius: 5px;
-          float: none; } }
+          float: left; }
+        body .container .recap-produits .commande-produits h2, body .container .recap-produits .commande-produits p {
+          margin: 0; }
+        @media screen and (max-width: 650px) {
+          body .container .recap-produits .commande-produits img {
+            width: 100%;
+            height: 230px;
+            margin-right: 8px;
+            border-radius: 5px;
+            float: none; } }
+        @media screen and (max-width: 480px) {
+          body .container .recap-produits .commande-produits img {
+            width: 100%;
+            height: 160px;
+            margin-right: 8px;
+            border-radius: 5px;
+            float: none; } }
     body .container .recap-prix {
       margin-bottom: 100px; }
       body .container .recap-prix .livraison-total {
