@@ -1,43 +1,70 @@
 {% extends 'frontoffice/footer.html.twig' %}
 
 {% block body %}
-    <h1>Article list</h1>
+    <div class="container">
+        <h2>Toute l'actualité pour les amoureux de la cuisine</h2>
+        <span>Recettes, conseils, astuces et tutoriel pour les grands et les petits !</span>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Titre</th>
-                <th>Contenu</th>
-                <th>Slug</th>
-                <th>Auteur</th>
-                <th>Contentchanged</th>
-                <th>Createdat</th>
-                <th>Updatedat</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for article in articles %}
-            <tr>
-                <td>{{ article.id }}</td>
-                <td>{{ article.titre }}</td>
-                <td>{{ article.contenu }}</td>
-                <td>{{ article.slug }}</td>
-                <td>{{ article.auteur }}</td>
-                <td>{% if article.contentChanged %}{{ article.contentChanged|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if article.createdAt %}{{ article.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{% if article.updatedAt %}{{ article.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('article_show', { 'id': article.id, 'titre': article.slug }) }}">show</a>
-                        </li>
-                    </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+         <div class="col-lg-4 col-md-4 col-xs-4 Blog-droite">
+            <p>Haec et huius modi quaedam innumerabilia ultrix facinorum impiorum bonorumque Haec et huius modi quaedam innumerabilia ultrix facinorum impiorum bonorumque Haec et huius modi quaedam innumerabilia ultrix facinorum impiorum bonorumque </p>
 
+            <input type="search" name="blogSearch" placeholder="Rechercher une recette, une astuce...">
+
+            <h4>Recette du moment</h4>
+
+            <img src="" class="bestRecette">
+
+            <h4>Catégories</h4>
+            <ul>
+                <li><a href="#">Catégorie 1</a></li>
+                <li><a href="#">Catégorie 2</a></li>
+                <li><a href="#">Catégorie 3</a></li>
+                <li><a href="#">Catégorie 4</a></li>
+            </ul>
+        </div>
+
+        <div class="row plats_semaine blogContent">
+            <div class="col-lg-8 col-md-8 col-xs-8 showPlatSemaine blogArticle">
+            {% for article in articles %}
+                <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="showPlat">
+                        <div class="showImgPlat">
+                            {% if article.image == "" %}
+                                <p>Aucune image</p>
+                            {% else %}
+                                <img class="img-responsive imgPlat" src=" {{ asset('articles/' ~ article.image ) }} ">
+                            {% endif %}
+                        </div>
+                        <div class="showDescPlat">
+                            <p class="typeProduct">Article n°{{ article.id }}</p>
+                            <div class="row">
+                                <h4 class="text-center titleProduct noMargin col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ article.titre }}</h4>
+                                <p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ article.contenu }}</p>
+                                <p class="plusActu col-lg-5 col-md-8 col-sm-10 col-xs-12">En savoir plus</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}        
+            </div>
+        </div>
+
+        <!--<tr>
+            <td>{{ article.id }}</td>
+            <td>{{ article.titre }}</td>
+            <td>{{ article.contenu }}</td>
+            <td>{{ article.slug }}</td>
+            <td>{{ article.auteur }}</td>
+            <td>{% if article.contentChanged %}{{ article.contentChanged|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if article.createdAt %}{{ article.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>{% if article.updatedAt %}{{ article.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('article_show', { 'id': article.id, 'titre': article.slug }) }}">show</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>-->
+    </div>
 {% endblock %}
