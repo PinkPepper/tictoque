@@ -27,19 +27,20 @@ class PanierController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $panier = $session->all();
-
+        dump($panier);
         $produits = array();
         $menus = array();
 
         foreach ($panier as $key => $value)
         {
-            if (strpos($key, 'produit') !== false) //produit
+            if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
             {
+                dump($value);
                 $id = explode("_", $key);
                 $id = $id[1];
                 array_push($produits, array($em->find($id), $value['quantite']));
             }
-            else if ($key != "menu" && (strpos($key, 'menu') !== false)) //menu
+            else if ($key != "menu" && (strpos($key, 'menu') !== false) && (strpos($key, 'menu') == 0)) //menu
             {
                 $id = explode("_", $key);
                 $id = $id[1];
