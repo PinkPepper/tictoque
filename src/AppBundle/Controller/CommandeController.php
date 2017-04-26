@@ -64,20 +64,22 @@ class CommandeController extends Controller
 
         foreach ($panier as $key => $value)
         {
-            if (strpos($key, 'produit') !== false) //produit
+            if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
             {
-                $id = explode("_", $key);
-                $id = $id[1];
-                array_push($produits, array($em->getRepository('AppBundle:Produit')->find($id), $value['quantite']));
+                    $quantite = $value['quantite'];
+                    $id = explode("_", $key);
+                    $id = $id[1];
+                    array_push($produits, array($em->getRepository('AppBundle:Produit')->find($id), $quantite));
 
-                $commandeProduit = new CommandeProduit();
-                $commandeProduit->setCommande($commande);
-                $commandeProduit->setProduits($em->getRepository('AppBundle:Produit')->find($id));
-                $commandeProduit->setQuantiteCommandee($value['quantite']);
-                $em->getManager()->persist($commandeProduit);
-                $em->getManager()->flush();
+                    $commandeProduit = new CommandeProduit();
+                    $commandeProduit->setCommande($commande);
+                    $commandeProduit->setProduits($em->getRepository('AppBundle:Produit')->find($id));
+                    $commandeProduit->setQuantiteCommandee($quantite);
+                    $em->getManager()->persist($commandeProduit);
+                    $em->getManager()->flush();
             }
-            else if ($key != "menu" && (strpos($key, 'menu') !== false)) //menu
+
+            else if ($key != "menu" && (strpos($key, 'menu') !== false) && (strpos($key, 'menu') == 0)) //menu
             {
                 $menu = new Menu();
                 $menu->setMenu($value['entree'], $value['plat'], $value['dessert'], $value['boisson'], $value['prix'], $value['quantite'], $this->getUser());
@@ -103,12 +105,13 @@ class CommandeController extends Controller
 
         foreach ($panier as $key => $value)
         {
-            if (strpos($key, 'produit') !== false) //produit
+            if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
             {
                 $id = explode("_", $key);
                 $id = $id[1];
                 array_push($produits_panier, array($em->getRepository('AppBundle:Produit')->find($id), $value['quantite']));
-            } else if ($key != "menu" && (strpos($key, 'menu') !== false)) //menu
+            }
+            else if ($key != "menu" && (strpos($key, 'menu') !== false) && (strpos($key, 'menu') == 0)) //menu
             {
                 $id = explode("_", $key);
                 $id = $id[1];
