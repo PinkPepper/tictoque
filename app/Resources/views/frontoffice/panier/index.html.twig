@@ -26,11 +26,11 @@
                             <a class="showMore" data-id="{{ menu["id"] }}">En savoir plus ...</a>
                         </div>
                         <div class="col-xs-7 col-sm-2 col-md-2 col-lg-2 divQuantite">
-                            <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>
-                            <div class="quantite">
-                                <i id="qte" class="qte quantite-{{ menu["id"] }}" data-isproduit="false" data-id="{{ menu["id"] }}">{{ menu["quantite"] }}</i>
-                            </div>
-                            <img id="menuChevronSup-{{ menu["id"] }}" width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>
+                            {#<img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>#}
+                            {#<div class="quantite">#}
+                                {#<i id="qte" class="qte quantite-{{ menu["id"] }}" data-isproduit="false" data-id="{{ menu["id"] }}">{{ menu["quantite"] }}</i>#}
+                            {#</div>#}
+                            {#<img id="menuChevronSup-{{ menu["id"] }}" width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>#}
                         </div>
                         <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">
                             <h3 id="prixTotal-{{ menu["id"] }}">

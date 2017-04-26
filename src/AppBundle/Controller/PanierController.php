@@ -90,6 +90,8 @@ class PanierController extends Controller
      */
     public function ajouterProduitAuPanier(Request $request, Produit $produit)
     {
+        $reponse = "Le produit a été ajouté au panier avec succès.";
+
         $session = $request->getsession();
 
         if($session->get('prix') == null)
@@ -105,10 +107,18 @@ class PanierController extends Controller
         $pProduit = $session->get('produit_' . $produit->getId());
         if( $pProduit != null) //doublon
         {
-            $pProduit['quantite'] = $pProduit['quantite'] + 1;
-            $session->set('produit_' . $produit->getId(), $pProduit);
-            $prix = $prix + $produit->getPrix();
-            $session->set('prix', $prix);
+            $quantiteFutur = $pProduit['quantite'] + 1;
+            if($quantiteFutur <= $produit->getQuantite())
+            {
+                $pProduit['quantite'] = $quantiteFutur;
+                $session->set('produit_' . $produit->getId(), $pProduit);
+                $prix = $prix + $produit->getPrix();
+                $session->set('prix', $prix);
+            }
+            else
+            {
+                $reponse = "Le produit n'est plus disponible, et n'a pas pu être ajouté à votre panier.";
+            }
         }
         else
         {
@@ -121,7 +131,10 @@ class PanierController extends Controller
         }
 
         dump($session->all());
-        return $this->render('frontoffice/produit/success.html.twig');
+
+        return $this->render('frontoffice/produit/success.html.twig', array(
+            "reponse"=>$reponse
+        ));
     }
 
     /**
