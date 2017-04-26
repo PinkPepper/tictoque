@@ -2,19 +2,27 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Traits\TraitUploadImage;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
-use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Article
  *
  * @ORM\Table(name="article")
+ * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\ArticleRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Article
 {
+    /**
+     * Gère la date de création et de modification
+     */
+    use TimestampableEntity;
+
     /**
      * @var int
      *
@@ -26,22 +34,24 @@ class Article
 
     /**
      * @var string
-     * @Assert\NotBlank()
+     *
      * @ORM\Column(name="titre", type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $titre;
 
     /**
      * @var string
-     * @Assert\NotBlank()
+     *
      * @ORM\Column(name="contenu", type="text")
+     * @Assert\NotBlank()
      */
     private $contenu;
 
     /**
      * @var string
      * @Assert\NotBlank()
-     * @ORM\Column(name="metadescription", type="text")
+     * @ORM\Column(name="metadescription", type="text", nullable=true)
      */
     private $metadescription;
 
@@ -58,7 +68,6 @@ class Article
      */
     private $commentaires;
 
-
     /**
      * Pour obtenir un titre "je suis un titre" en "je-suis-un-titre"
      * Utile pour le référencement, dans l'url
@@ -69,6 +78,7 @@ class Article
      */
     private $slug;
 
+
     /**
      * @var \DateTime $contentChanged
      *
@@ -78,9 +88,19 @@ class Article
     private $contentChanged;
 
     /**
-     * Gère la date de création et de modification
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string", length=255, nullable=true)
      */
-    use TimestampableEntity;
+    private $image;
+
+
+    use TraitUploadImage;
+    public function getUploadDir()
+    {
+        return 'articles';
+    }
+
 
     /**
      * Get id
@@ -92,47 +112,39 @@ class Article
         return $this->id;
     }
 
+
+
     /**
-     * Set titre
+     * Set image
      *
-     * @param string $titre
+     * @param string $image
      *
      * @return Article
      */
-    public function setTitre($titre)
+    public function setImage($image)
     {
-        $this->titre = $titre;
+        $this->image = $image;
 
         return $this;
     }
 
     /**
-     * Get titre
+     * Get image
      *
      * @return string
      */
-    public function getTitre()
+    public function getImage()
     {
-        return $this->titre;
+        return $this->image;
+    }
+
+
+    public function __toString()
+    {
+        return "" . $this->id;
     }
 
     /**
-     * Set contenu
-     *
-     * @param string $contenu
-     *
-     * @return Article
-     */
-    public function setContenu($contenu)
-    {
-        $this->contenu = $contenu;
-
-        return $this;
-    }
-
-    /**
-     * Get contenu
-     *
      * @return string
      */
     public function getContenu()
@@ -141,22 +153,46 @@ class Article
     }
 
     /**
-     * Set auteur
-     *
-     * @param integer $auteur
-     *
-     * @return Article
+     * @param string $contenu
      */
-    public function setAuteur($auteur)
+    public function setContenu($contenu)
     {
-        $this->auteur = $auteur;
-
-        return $this;
+        $this->contenu = $contenu;
     }
 
     /**
-     * Get auteur
-     *
+     * @return string
+     */
+    public function getTitre()
+    {
+        return $this->titre;
+    }
+
+    /**
+     * @param string $titre
+     */
+    public function setTitre($titre)
+    {
+        $this->titre = $titre;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMetadescription()
+    {
+        return $this->metadescription;
+    }
+
+    /**
+     * @param string $metadescription
+     */
+    public function setMetadescription($metadescription)
+    {
+        $this->metadescription = $metadescription;
+    }
+
+    /**
      * @return int
      */
     public function getAuteur()
@@ -165,43 +201,11 @@ class Article
     }
 
     /**
-     * Set slug
-     *
-     * @param string $slug
-     *
-     * @return Article
+     * @param int $auteur
      */
-    public function setSlug($slug)
+    public function setAuteur($auteur)
     {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getContentChanged()
-    {
-        return $this->contentChanged;
-    }
-
-    /**
-     * @param \DateTime $contentChanged
-     */
-    public function setContentChanged($contentChanged)
-    {
-        $this->contentChanged = $contentChanged;
+        $this->auteur = $auteur;
     }
 
     /**
@@ -223,17 +227,34 @@ class Article
     /**
      * @return string
      */
-    public function getMetadescription()
+    public function getSlug()
     {
-        return $this->metadescription;
+        return $this->slug;
     }
 
     /**
-     * @param string $metadescription
+     * @param string $slug
      */
-    public function setMetadescription($metadescription)
+    public function setSlug($slug)
     {
-        $this->metadescription = $metadescription;
+        $this->slug = $slug;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getContentChanged()
+    {
+        return $this->contentChanged;
+    }
+
+    /**
+     * @param \DateTime $contentChanged
+     */
+    public function setContentChanged($contentChanged)
+    {
+        $this->contentChanged = $contentChanged;
+    }
+
 }
 

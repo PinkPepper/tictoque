@@ -82,7 +82,6 @@ class Produit
      * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Categorie", inversedBy="produits", cascade={"persist"})
      */
     private $categories;
-
     private $cat;
 
     /**

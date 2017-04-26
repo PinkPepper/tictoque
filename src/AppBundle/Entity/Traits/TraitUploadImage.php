@@ -106,7 +106,8 @@ trait TraitUploadImage
     public function setFile(UploadedFile $file = null)
     {
         $this->file = $file;
-        if(null !== $this->file)
+
+        if(null !== $this->file) //NE PAS ENLEVER LE !
         {
             $this->setImage("");
         }
