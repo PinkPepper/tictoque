@@ -1445,7 +1445,11 @@ body .container .recap-prix .livraison-total .prix-total {
 .login {
   padding-top: 60px; }
 
+@media (max-width: 992px) {
+  .loginLeft {
+    margin-left: 0% !important; } }
 .loginLeft {
+  margin-left: 4%;
   margin-bottom: 50px;
   padding-left: 40px;
   padding-right: 40px;
@@ -1485,18 +1489,24 @@ body .container .recap-prix .livraison-total .prix-total {
 .loginSubmit:hover {
   text-decoration: none; }
 
-.loginSubmit p:hover {
+.loginSubmit:hover {
   color: white;
   padding-top: 10px;
   padding-bottom: 10px;
   background-color: #F42063;
-  text-decoration: none; }
+  border: 1px #F42063 solid;
+  text-decoration: none;
+  cursor: pointer; }
 
-.loginSubmit p {
+.loginSubmit {
+  border: 1px #5F5F5F solid;
+  width: 100%;
+  height: 40px;
   color: white;
   padding-top: 10px;
   padding-bottom: 10px;
-  background-color: #5F5F5F; }
+  background-color: #5F5F5F;
+  cursor: pointer; }
 
 .loginSubmitNew {
   padding-top: 110px; }
