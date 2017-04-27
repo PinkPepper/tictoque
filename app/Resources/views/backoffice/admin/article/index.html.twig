@@ -13,6 +13,7 @@
                     <td>Id</td>
                     <td>Titre</td>
                     <td>Auteur</td>
+                    <td>Image</td>
                     <td>Créer le</td>
                     <td>Actions</td>
                 </tr>
@@ -22,6 +23,13 @@
                         <td>{{ article.id }}</td>
                         <td>{{ article.titre }}</td>
                         <td><a href="{{path('user_show', {'id': article.auteur.id})}}">{{ article.auteur }}</a></td>
+                        <td>
+                            {% if article.image == "" %}
+                                <p>Aucune image</p>
+                            {% else %}
+                                <img src=" {{ asset('articles/' ~ article.image ) }} " style="width: 120px; height: auto">
+                            {% endif %}
+                        </td>
                         <td>{% if article.createdAt %}{{ article.createdAt|date('d/m/Y') }}{% endif %}</td>
                         <td>
                             <ul>

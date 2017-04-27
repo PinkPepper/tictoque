@@ -22,6 +22,10 @@
                 {{ form_widget(edit_form.metadescription)}}
                 {{ form_errors(edit_form.metadescription) }}
 
+                <label>Image</label>
+                {{ form_widget(edit_form.file)}}
+                {{ form_errors(edit_form.file) }}
+
                 <button class="button_p" type="submit">Modifier l'article</button>
 
             {{ form_end(edit_form) }}

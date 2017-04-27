@@ -18,6 +18,10 @@
                 {{ form_widget(form.metadescription) }}
                 {{ form_errors(form.metadescription) }}
 
+                <label>Image</label>
+                {{ form_widget(form.file)}}
+                {{ form_errors(form.file) }}
+
                 <button class="button_p" type="submit">Créer l'article</button>
         {{ form_end(form) }}
     </div>
