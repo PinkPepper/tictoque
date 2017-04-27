@@ -1271,3 +1271,76 @@ body {
       @media screen and (max-width: 810px) {
         body .container .recap-prix .livraison-total {
           width: 100%; } }
+          .login{
+  padding-top:60px;
+}
+
+.loginLeft{
+  margin-bottom: 50px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-bottom: 30px;
+  height: 380px;
+  padding-top:20px;
+  background-color: white;
+  border: 1px #CACACA solid;
+}
+
+.loginRight{
+  margin-bottom: 50px;
+  height: 380px;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top:20px;
+  background-color: white;
+  border: 1px #CACACA solid;
+}
+
+.titleLogin{
+  margin-bottom: 20px;
+  padding-bottom: 30px;
+  border-bottom: 1px #CACACA solid;
+  font-size: 24px;
+  color:black;
+  font-weight: 600;
+}
+
+.loginMail{
+
+}
+
+.loginInput{
+  background-color: #F7F8FA;
+  height: 30px;
+  width: 100%;
+    border-radius: 5px;
+    border: 1px #cacaca solid;
+}
+
+.loginPassword{
+  margin-bottom: 30px;
+}
+
+
+.loginSubmit:hover{
+  text-decoration: none;
+}
+
+.loginSubmit p:hover{
+  color:white;
+  padding-top:10px;
+  padding-bottom: 10px;
+  background-color: #F42063;
+  text-decoration: none;
+}
+
+.loginSubmit p{
+  color:white;
+  padding-top:10px;
+  padding-bottom: 10px;
+  background-color: #5F5F5F;
+}
+
+.loginSubmitNew{
+  padding-top: 110px;
+}
