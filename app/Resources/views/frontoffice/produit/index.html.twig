@@ -77,7 +77,7 @@
 
                     <div class="dessert position_plat">
                         {% if produit.quantite < 1 %}<p class="plus_dispo">Victime de son succès, ce plat n'est plus disponible</p>{% endif %}
-                        <img class="plat-pic{% if produit.quantite < 1 %} indispo{% endif %}" src="{{ asset('produits/'~produit.image) }}">
+                        <a href="#"><img class="plat-pic{% if produit.quantite < 1 %} indispo{% endif %}" src="{{ asset('produits/'~produit.image) }}"></a>
                         <a class="ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
                         <div>
                             <span class="type">{{ produit.type|upper }}</span>

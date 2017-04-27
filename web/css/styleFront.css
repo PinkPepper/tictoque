@@ -40,10 +40,51 @@ body .navbar {
   border: none;
   background: #ffffff; }
 
+@media screen and (max-width: 767px) {
+  body .navbar {
+    padding: 0 12px 0 12px; } }
 body .navbar .container-fluid {
-  padding-left: 224px;
-  padding-right: 224px; }
+  padding-left: 200px;
+  padding-right: 200px; }
 
+@media screen and (max-width: 1268px) {
+  body .navbar .container-fluid {
+    padding-left: 0px;
+    padding-right: 0px; } }
+@media (max-width: 868px) {
+  .navbar-header {
+    float: none; }
+
+  .navbar-left, .navbar-right {
+    float: none !important; }
+
+  .navbar-toggle {
+    display: block; }
+
+  .navbar-collapse {
+    border-top: 1px solid transparent;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1); }
+
+  .navbar-fixed-top {
+    top: 0;
+    border-width: 0 0 1px; }
+
+  .navbar-collapse.collapse {
+    display: none !important; }
+
+  .navbar-nav {
+    float: none !important;
+    margin-top: 7.5px; }
+
+  .navbar-nav > li {
+    float: none; }
+
+  .navbar-nav > li > a {
+    padding-top: 10px;
+    padding-bottom: 10px; }
+
+  .collapse.in {
+    display: block !important; } }
 body .navbar .container-fluid .navbar-header img {
   width: 200px;
   height: 60px; }
@@ -51,6 +92,9 @@ body .navbar .container-fluid .navbar-header img {
 body .navbar .container-fluid .collapse {
   width: 980px; }
 
+@media screen and (min-width: 768px) {
+  body .navbar .container-fluid .collapse {
+    width: 100%; } }
 body .navbar .container-fluid .collapse ul {
   padding-top: 5px; }
 
@@ -399,6 +443,13 @@ body .menu_choix .dessert .plat-fav {
   border-radius: 0px;
   left: 20px;
   cursor: pointer; }
+
+body .menu_choix .dessert a:first-child {
+  float: none;
+  background-color: transparent;
+  bottom: 0;
+  right: 0;
+  padding: 0; }
 
 body .menu_choix .dessert .plat-pic {
   width: 310px;
@@ -975,6 +1026,29 @@ body .Filtre .filtre_menu {
   width: 100%;
   border-bottom: 1px solid #929292; }
 
+@media screen and (max-width: 767px) {
+  body .Filtre .filtre_menu {
+    padding: 0;
+    height: auto;
+    display: block;
+    text-align: center;
+    background-color: #ffffff; } }
+@media screen and (min-width: 768px) {
+  body .Filtre .filtre_menu {
+    padding: 0;
+    background-color: #ffffff; }
+    body .Filtre .filtre_menu form {
+      padding: 0; }
+      body .Filtre .filtre_menu form li:nth-child(4) {
+        width: 500px;
+        padding: 15px 0 0 0; }
+        body .Filtre .filtre_menu form li:nth-child(4) input {
+          float: left; }
+        body .Filtre .filtre_menu form li:nth-child(4) label {
+          float: left;
+          font-size: 12px; }
+      body .Filtre .filtre_menu form li:nth-child(5) {
+        padding: 10px 10px 0 0; } }
 body .Filtre .filtre_menu li:first-child, body .Filtre .filtre_menu li:nth-child(2) {
   border-left: 1px solid #cacaca;
   display: flex; }
@@ -983,14 +1057,27 @@ body .Filtre .filtre_menu li:first-child select, body .Filtre .filtre_menu li:nt
   border: none;
   padding: 12px; }
 
+@media screen and (max-width: 767px) {
+  body .Filtre .filtre_menu li:first-child select, body .Filtre .filtre_menu li {
+    border-left: none !important; }
+
+  body .Filtre .filtre_menu li:first-child select, body .Filtre .filtre_menu li select {
+    width: 100%; }
+
+  body .Filtre .filtre_menu li input[type="submit"] {
+    margin: 10px;
+    background: grey;
+    border: none;
+    color: #ffffff;
+    padding: 5px 15px 5px 15px;
+    border-radius: 5px; } }
 body .Filtre .filtre_menu li:first-child select .type_select, body .Filtre .filtre_menu li:nth-child(2) select .type_select {
   padding: 15px; }
 
 body .Filtre .filtre_menu li:nth-child(3) {
-  width: 55%;
+  width: 100%;
   padding: 12px 0 0 20px;
   border-left: 1px solid #cacaca;
-  display: table-cell;
   line-height: 2;
   cursor: pointer; }
 
@@ -1400,7 +1487,7 @@ body .container .recap-produits .commande-produits img {
 body .container .recap-produits .commande-produits h2, body .container .recap-produits .commande-produits p {
   margin: 0; }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 767px) {
   body .container .recap-produits .commande-produits img {
     width: 100%;
     height: 230px;
