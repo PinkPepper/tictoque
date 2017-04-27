@@ -5,7 +5,7 @@
         <h2>Toute l'actualité pour les amoureux de la cuisine</h2>
         <span>Recettes, conseils, astuces et tutoriel pour les grands et les petits !</span>
 
-         <div class="col-lg-4 col-md-4 col-xs-4 Blog-droite">
+         <div class="col-lg-4 col-md-12 col-xs-12 Blog-droite">
             <p>Haec et huius modi quaedam innumerabilia ultrix facinorum impiorum bonorumque Haec et huius modi quaedam innumerabilia ultrix facinorum impiorum bonorumque Haec et huius modi quaedam innumerabilia ultrix facinorum impiorum bonorumque </p>
 
             <input type="search" name="blogSearch" placeholder="Rechercher une recette, une astuce...">
@@ -23,24 +23,24 @@
             </ul>
         </div>
 
-        <div class="row plats_semaine blogContent">
-            <div class="col-lg-8 col-md-8 col-xs-8 showPlatSemaine blogArticle">
+        <div class="row blogContent">
+            <div class="col-lg-8 col-md-12 col-xs-12 blogArticle">
             {% for a in articles %}
-                <div class="col-lg-6 col-md-6 col-sm-6">
-                    <div class="showPlat">
-                        <div class="showImgPlat">
+                <div class="col-lg-12 col-md-6 col-sm-6 blocArticle">
+                    <div class="showArticle">
+                        <div class="showImgArticle">
                             {% if a.image == "" %}
                                 <p>Aucune image</p>
                             {% else %}
                                 <img class="img-responsive imgPlat" src=" {{ asset('articles/' ~ a.image ) }} ">
                             {% endif %}
                         </div>
-                        <div class="showDescPlat">
-                            <p class="typeProduct">Article n°{{ a.id }}</p>
-                            <div class="row">
-                                <h4 class="text-center titleProduct noMargin col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ a.titre }}</h4>
-                                <p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ a.contenu }}</p>
-                                <p class="plusActu col-lg-5 col-md-8 col-sm-10 col-xs-12">En savoir plus</p>
+                        <div class="showDescArticle">
+                            <p class="numArticle">Article n°{{ a.id }}</p>
+                            <div class="row detailArticle">
+                                <h4>{{ a.titre }}</h4>
+                                <p>{{ a.contenu }}</p>
+                                <a href="#" class="col-lg-8 col-md-12 col-xs-12 openArticle">En savoir plus</a>
                             </div>
                         </div>
                     </div>

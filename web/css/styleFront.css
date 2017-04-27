@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 body {
   color: #929292 !important;
   font-family: "Roboto", sans-serif !important; }
@@ -1035,12 +1034,6 @@ body .plats_semaine .showPlatSemaine .pictoHP, body .plats_semaine .actualite .p
 body .plats_semaine .showPlatSemaine .subTitleCat, body .plats_semaine .actualite .subTitleCat {
   margin-bottom: 30px; }
 
-body .plats_semaine .blogArticle {
-  width: 680px;
-  padding-left: 0 !important; }
-  body .plats_semaine .blogArticle div {
-    padding-left: 0; }
-
 body .plats_semaine .showPlat {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
@@ -1107,9 +1100,91 @@ body .plats_semaine .showPlat .showDescPlat .descProduit {
   white-space: pre-wrap;
   height: 120px; }
 
+body .blogContent .blogArticle {
+  padding: 0; }
+  body .blogContent .blogArticle .blocArticle {
+    height: 144px;
+    margin: 20px 0 20px 0;
+    border: 1px solid #a0a0a0;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px -2px;
+    padding-left: 0; }
+    body .blogContent .blogArticle .blocArticle .showArticle {
+      display: inline-flex; }
+      body .blogContent .blogArticle .blocArticle .showArticle .showImgArticle img {
+        border-radius: 5px;
+        overflow: hidden;
+        height: 142px; }
+      body .blogContent .blogArticle .blocArticle .showArticle .showImgArticle p {
+        height: 142px;
+        padding: 47px; }
+      body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle {
+        display: inline-flex;
+        padding: 0 0px 0px 10px; }
+        body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle p {
+          margin-bottom: 0; }
+        body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle .numArticle {
+          margin-top: 7vh; }
+        body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle .detailArticle {
+          display: flex;
+          padding-left: 10px;
+          text-align: center; }
+          body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle .detailArticle h4 {
+            margin-top: 6vh;
+            max-width: 150px;
+            margin-bottom: 0; }
+          body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle .detailArticle p {
+            width: 185px;
+            overflow: hidden;
+            height: 15vh;
+            white-space: pre-wrap;
+            margin-bottom: 8vh;
+            margin-top: 3vh;
+            text-align: center; }
+          body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle .detailArticle .openArticle {
+            margin-top: 10vh;
+            height: 30px;
+            width: 150px;
+            float: none;
+            background-color: #4a4a4a;
+            color: white;
+            border-radius: 5px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            text-align: center;
+            text-decoration: none; }
+    @media screen and (max-width: 1200px) {
+      body .blogContent .blogArticle .blocArticle .showArticle {
+        display: block; }
+        body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle {
+          display: block; }
+          body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle .detailArticle {
+            display: block;
+            padding-bottom: 15px; }
+            body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle .detailArticle h4 {
+              max-width: 100%; }
+            body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle .detailArticle p {
+              width: auto; } }
+  @media screen and (max-width: 1200px) {
+    body .blogContent .blogArticle .blocArticle {
+      width: 45%;
+      margin-right: 30px;
+      height: auto;
+      padding: 0; }
+      body .blogContent .blogArticle .blocArticle .showArticle .showImgArticle img {
+        width: 100%; }
+      body .blogContent .blogArticle .blocArticle .showArticle .showImgArticle p {
+        text-align: center; } }
+  @media screen and (max-width: 814px) {
+    body .blogContent .blogArticle .blocArticle {
+      width: 100%; }
+      body .blogContent .blogArticle .blocArticle .showArticle .showImgArticle img {
+        height: 200px; } }
+
 body .Blog-droite {
   float: right;
-  top: 80px; }
+  top: 40px;
+  margin-bottom: 30px; }
   body .Blog-droite input {
     border: none;
     padding: 10px;
@@ -1119,7 +1194,8 @@ body .Blog-droite {
   body .Blog-droite img {
     width: 100%; }
   body .Blog-droite ul {
-    list-style: none; }
+    list-style: none;
+    padding: 0; }
 
 body .pointRelais {
   margin-top: 200px;
