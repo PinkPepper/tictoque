@@ -792,7 +792,7 @@ body .container-fluid.compte .conditions_bandeau .annuler {
 @media screen and (min-width: 100px) and (max-width: 1024px) {
   body .container-fluid, body .compte {
     padding: 0 !important; } }
-body body div {
+body div {
   margin: 0px; }
 
 body .fullDiv {
@@ -1392,21 +1392,21 @@ body .Blog-droite {
   text-align: center;
   margin-bottom: 25px; }
 
-body body .menuGlobal {
+body .menuGlobal {
   background-color: #eeeeee;
   padding-bottom: 50px; }
 
-body body .menuGlobal .titleMenu {
+body .menuGlobal .titleMenu {
   padding-top: 40px;
   padding-bottom: 40px; }
 
-body body .menuGlobal .titleMenu h1 {
+body .menuGlobal .titleMenu h1 {
   color: #F50F65; }
 
 @media (max-width: 767px) {
-  body body .menuGlobal .menu {
+  body .menuGlobal .menu {
     width: 90%; } }
-body body .menuGlobal .menu {
+body .menuGlobal .menu {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   background-color: white;
@@ -1416,37 +1416,37 @@ body body .menuGlobal .menu {
   padding-left: 20px; }
 
 @media (max-width: 767px) {
-  body body .menuGlobal .menu .marginResponsive {
+  body .menuGlobal .menu .marginResponsive {
     margin-bottom: 50px; } }
 @media (max-width: 500px) {
-  body body .menuGlobal .menu .marginResponsive {
+  body .menuGlobal .menu .marginResponsive {
     margin-bottom: 50px; } }
-body body .menuGlobal .menu .boxShadow {
+body .menuGlobal .menu .boxShadow {
   border-radius: 5px;
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
 
-body body .menuGlobal .menu .menuTotal {
+body .menuGlobal .menu .menuTotal {
   border-radius: 5px;
   height: 100%;
   padding-bottom: 17px; }
 
-body body .menuGlobal .menu .menuTotal .imgMenu {
+body .menuGlobal .menu .menuTotal .imgMenu {
   border-top-right-radius: 5px;
   border-top-left-radius: 5px; }
 
-body body .menuGlobal .menu .menuTotal .menuCorps {
+body .menuGlobal .menu .menuTotal .menuCorps {
   padding: 10px; }
 
-body body .menuGlobal .menu .menuTotal .noPadding {
+body .menuGlobal .menu .menuTotal .noPadding {
   margin: 0px;
   padding-left: 10px; }
 
-body body .menuGlobal .menu .menuTotal .noPaddingPartir {
+body .menuGlobal .menu .menuTotal .noPaddingPartir {
   margin: 0px;
   padding-left: 10px;
   margin-top: 20px; }
 
-body body .menuGlobal .menu .menuCommander {
+body .menuGlobal .menu .menuCommander {
   background-color: #F50F65;
   padding: 10px;
   text-align: center;
@@ -1455,10 +1455,10 @@ body body .menuGlobal .menu .menuCommander {
   border-bottom-right-radius: 5px;
   border-bottom-left-radius: 5px; }
 
-body body .menuGlobal .menu .menuCommander a {
+body .menuGlobal .menu .menuCommander a {
   color: white; }
 
-body body .menuGlobal .menu .menuCommander a:hover {
+body .menuGlobal .menu .menuCommander a:hover {
   text-decoration: none; }
 
 body .recap .recap-banner {
