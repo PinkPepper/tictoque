@@ -1058,6 +1058,11 @@ body .Filtre .filtre_menu {
   width: 100%;
   border-bottom: 1px solid #929292; }
 
+  body .Filtre ul form
+  {
+    border-top: none!important;
+  }
+
 @media screen and (max-width: 767px) {
   body .Filtre .filtre_menu {
     padding: 0;
