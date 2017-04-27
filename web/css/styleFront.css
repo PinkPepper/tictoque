@@ -1058,6 +1058,14 @@ body .Filtre .filtre_menu {
   width: 100%;
   border-bottom: 1px solid #929292; }
 
+body .Filtre ul form {
+  border-top: none !important; }
+  body .Filtre ul form li:nth-child(3) i {
+    color: #929292; }
+  body .Filtre ul form li:nth-child(3) a {
+    text-decoration: none;
+    color: #929292; }
+
 @media screen and (max-width: 767px) {
   body .Filtre .filtre_menu {
     padding: 0;
