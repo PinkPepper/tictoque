@@ -40,7 +40,7 @@
                             <div class="row detailArticle">
                                 <h4>{{ a.titre }}</h4>
                                 <p>{{ a.contenu }}</p>
-                                <a href="#" class="col-lg-8 col-md-12 col-xs-12 openArticle">En savoir plus</a>
+                                <a href="{{ path('article_show',{'id' :a.id,'titre':a.titre}) }}" class="col-lg-8 col-md-12 col-xs-12 openArticle">En savoir plus</a>
                             </div>
                         </div>
                     </div>
