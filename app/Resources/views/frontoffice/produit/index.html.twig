@@ -33,9 +33,11 @@
                 <h5>De la simple salade, à la salade composée, découvrez nos produits</h5>
 
                 <div class="search_bloc">
-                    <input type="text" name="produit_search" placeholder="Rechercher un plat, une boisson...">
+                    {{ form_start(form_personnalise, { attr: {class: ""}}) }}
+                        {{ form_widget(form_personnalise.search, {attr: {'placeholder': 'Rechercher un plat, une boisson...'}}) }}
+                    {{ form_end(form_personnalise) }}
                 </div>
-                
+
                 {% for produit in produits %}
                     {% if loop.index == 6 %}
                         <div class="dessert position_plat">
