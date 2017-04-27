@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Produit;
+use JasonGrimes\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -25,9 +26,18 @@ class ProduitController extends Controller
     public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
+
         $categories = $em->getRepository('AppBundle:Categorie')->findAll();
         $categorie = null;
-        $produits = $em->getRepository('AppBundle:Produit')->findAll();
+
+        $paginator  = $this->get('knp_paginator');
+        $maxPerPage = 6;
+        $query = $em->getRepository('AppBundle:Produit')->findAll();
+        $produits = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $maxPerPage/*limit per page*/
+        );
 
         $form = $this->createForm('AppBundle\Form\RechercheType');
         $form->handleRequest($request);
@@ -37,36 +47,44 @@ class ProduitController extends Controller
             $type = $form->getData()['type'];
             $categorie = $form->getData()['categorie'];
 
-            if($categorie == 'tous les produits' || $categorie === null)
+            if($type == 'all' && $categorie->getNom() == 'Tous les produits')
             {
-                $produits = $em->getRepository('AppBundle:Produit')->findBy(array("type"=>$type));
+                $produits = $paginator->paginate(
+                    $query, /* query NOT result */
+                    1,
+                    $maxPerPage/*limit per page*/
+                );
+
             }
             else if($type == 'all' || $type === null)
             {
-                $res = $em->getRepository('AppBundle:Produit')->findByCategorie($categorie->getId());
-                $produits = array();
-                foreach ($res as $r)
-                {
-                    array_push($produits, $em->getRepository('AppBundle:Produit')->find($r['id']));
-                }
+                $str = "SELECT p FROM AppBundle:Produit p LEFT JOIN p.categories c WHERE c = " . $categorie->getId();
+                $query = $this->getDoctrine()->getManager()->createQuery($str);
+
+                $produits = $paginator->paginate(
+                    $query, /* query NOT result */
+                    1/*page number*/,
+                    sizeof($query->getResult())/*limit per page*/
+                );
             }
             else
             {
-                $res = $em->getRepository('AppBundle:Produit')->findByTypeAndCategorie($type, $categorie->getId());
-                $produits = array();
-                foreach ($res as $r)
-                {
-                    array_push($produits, $em->getRepository('AppBundle:Produit')->find($r['id']));
-                }
+               $str = "SELECT p FROM AppBundle:Produit p LEFT JOIN p.categories c WHERE p.type = '". $type ."' AND c = " . $categorie->getId();
+               $query = $this->getDoctrine()->getManager()->createQuery($str);
+
+                $produits = $paginator->paginate(
+                    $query, /* query NOT result */
+                    1/*page number*/,
+                    sizeof($query->getResult())/*limit per page*/
+                );
             }
 
-            if(!$produits) $produits = "Aucun produit disponible";
         }
 
         return $this->render('frontoffice/produit/index.html.twig', array(
             'categories' => $categories,
             'categorie' => $categorie,
-            'produits'=> $produits,
+            'produits' => $produits,
             'form'=>$form->createView()
         ));
     }
