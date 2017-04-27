@@ -1276,7 +1276,14 @@ body {
   padding-top:60px;
 }
 
+@media (max-width:992px) {
+  .loginLeft{
+    margin-left: 0% !important;
+  }
+}
+          
 .loginLeft{
+  margin-left: 4%;
   margin-bottom: 50px;
   padding-left: 40px;
   padding-right: 40px;
@@ -1306,10 +1313,6 @@ body {
   font-weight: 600;
 }
 
-.loginMail{
-
-}
-
 .loginInput{
   background-color: #F7F8FA;
   height: 30px;
@@ -1327,19 +1330,25 @@ body {
   text-decoration: none;
 }
 
-.loginSubmit p:hover{
+.loginSubmit:hover{
   color:white;
   padding-top:10px;
   padding-bottom: 10px;
   background-color: #F42063;
+  border:1px #F42063 solid;
   text-decoration: none;
+  cursor: pointer;
 }
 
-.loginSubmit p{
-  color:white;
-  padding-top:10px;
+.loginSubmit{
+  border: 1px #5F5F5F solid;
+  width: 100%;
+  height: 40px;
+  color: white;
+  padding-top: 10px;
   padding-bottom: 10px;
   background-color: #5F5F5F;
+  cursor: pointer;
 }
 
 .loginSubmitNew{

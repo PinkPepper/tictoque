@@ -1,48 +1,49 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
-{% block head %}
-    <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"/>
-{% endblock %}
-
 {% block fos_user_content %}
-    <style>
-        body article, body aside, body details, body figcaption, body figure, body footer, body header, body hgroup, body main, body menu, body nav, body section, body summary {
-            display: block;
-        }
-    </style>
 
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <content>
-        <section class="user_login">
-            <img src="{{ asset('img/logo_CMS.png') }}">
-
-            <form action="{{ path("fos_user_security_check")}}" class="login" method="post" class="login">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
-                <div>
-                    <label for="username">{{ 'Pseudo '|trans }}</label>
-                    <input class="input_s" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
+    <div class="container login">
+        <div class="row">
+            <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 loginLeft">
+                <h1 class="titleLogin">Déjà client chez l'amour food ?</h1>
+                <form action="{{ path("fos_user_security_check")}}" method="post">
+                    <div class="loginMail">
+                        <label>Adresse mail ou identifiant</label>
+                        <br>
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="loginInput">
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+                    </div>
+                    <br/>
+                    <div class="loginPassword">
+                        <label>Mot de passe</label>
+                        <br>
+                        <input type="password" id="password" name="_password" required="required" class="loginInput">
+                        <div class="text-right">
+                            <a>Mot de passe oublié ?</a>
+                        </div>
+                    </div>
+                    <button class="loginSubmit text-center">
+                        <p>Me connecter</p>
+                    </button>
+                </form>
+            </div>
+            <div class="col-lg-offset-1 col-md-offset-1 col-lg-5 col-md-5 col-sm-12 col-xs-12 loginRight">
+                <h1 class="titleLogin">Nouveau client</h1>
+                <p>Créer un compte gratuitement en quelques clics, pour profiter de la livraison gratuite en point relais partenaire</p>
+                <div class="loginSubmitNew">
+                    <a href="{{ path('fos_user_registration_register') }}" style="padding-bottom: 10px;padding-top: 10px;">
+                    <button class="loginSubmit text-center">
+                        <p>Créer mon compte</p>
+                    </button>
+                    </a>
                 </div>
-
-                <div>
-                    <label for="password">{{ 'Mot de passe '|trans }}</label>
-                    <input class="input_s" type="password" id="password" name="_password" required="required" />
-                </div>
-
-                <div>
-                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                    <label for="remember_me">{{ 'Se souvenir de moi '|trans }}</label>
-               </div>
-               <br>
-                <button  class="button_p" type="submit" id="_submit" name="_submit">Se connecter</button>
-            </form>
-
-
-            <a href="mdp.html" class="password_recover">Mot de passe oublié ?</a>
-
+            </div>
+        </div>
+    </div>
         </section>
     </content>
 
