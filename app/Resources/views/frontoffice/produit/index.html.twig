@@ -31,9 +31,11 @@
             <div class="col-lg-12 col-md-12 col-xs-12 menu_choix">
                 <h4>Liste Produits</h4>
                 <h5>De la simple salade, à la salade composée, découvrez nos produits</h5>
+
                 <div class="search_bloc">
                     <input type="text" name="produit_search" placeholder="Rechercher un plat, une boisson...">
                 </div>
+                
                 {% for produit in produits %}
                     {% if loop.index == 6 %}
                         <div class="dessert position_plat">
