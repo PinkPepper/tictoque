@@ -966,9 +966,6 @@ body .panier .container .imgSousProduit {
   height: 100px;
   width: 100%; }
 
-body .panier .container .commande {
-  padding-left: 45px; }
-
 body .panier .container .commande .total {
   float: right; }
 
@@ -1573,7 +1570,6 @@ body .recap .recap-banner div {
     background: rgba(255, 255, 255, 0.82); } }
 body .container {
   margin: 0 auto;
-  width: 79%;
   float: none;
   clear: none; }
 
