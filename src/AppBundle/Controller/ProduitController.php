@@ -106,10 +106,14 @@ class ProduitController extends Controller
             $str = "SELECT p FROM AppBundle:Produit p LEFT JOIN p.categories c WHERE c = " . $categorie->getId();
             $query = $this->getDoctrine()->getManager()->createQuery($str);
 
+            if($query->getresult() == array())$maxPerPage = 1;
+            else $maxPerPage =  sizeof($query->getResult());
+
+
             $produits = $paginator->paginate(
                 $query, /* query NOT result */
                 1/*page number*/,
-                sizeof($query->getResult())/*limit per page*/
+                $maxPerPage/*limit per page*/
             );
         }
         else
@@ -117,10 +121,13 @@ class ProduitController extends Controller
             $str = "SELECT p FROM AppBundle:Produit p LEFT JOIN p.categories c WHERE p.type = '". $type ."' AND c = " . $categorie->getId();
             $query = $this->getDoctrine()->getManager()->createQuery($str);
 
+            if($query->getresult() == array())$maxPerPage = 1;
+            else $maxPerPage =  sizeof($query->getResult());
+
             $produits = $paginator->paginate(
                 $query, /* query NOT result */
                 1/*page number*/,
-                sizeof($query->getResult())/*limit per page*/
+                $maxPerPage/*limit per page*/
             );
         }
 
