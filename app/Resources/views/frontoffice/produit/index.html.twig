@@ -13,10 +13,10 @@
                         {{ form_widget(form.categorie,{attr: {class: "submitForm"}}) }}
                     </li>
                     <li>
-                        <a class="submitForm" href="{{ path("produit_index") }}"> <i class="fa fa-refresh" aria-hidden="true"></i><span>Réinitialiser la recherche</span></a>
+                        <a href="{{ path("produit_index") }}"> <i class="fa fa-refresh" aria-hidden="true"></i><span>Réinitialiser la recherche</span></a>
                     </li>
                     <li>
-                        <input class="filtre_aller submitForm" type="checkbox" name="allergenes"><label>Prendre en compte mes allérgènes</label>
+                        <input class="filtre_aller" type="checkbox" name="allergenes"><label>Prendre en compte mes allérgènes</label>
                     </li>
                     {{ form_end(form) }}
 
