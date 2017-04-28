@@ -91,13 +91,21 @@
 
             <div>
                 <ul>
-                    {% for allergene in allergenes %}
-                    <li><input class="unique-class" type="checkbox" name="allergenes"><label>{{ allergene.nom }}</label></li>
-                    {% if loop.index == 4 %}
+                    {#{% for allergene in allergenes %}#}
+                    {#<li><input class="unique-class" type="checkbox" name="allergenes"><label>{{ allergene.nom }}</label></li>#}
+
+                    {#{% for f in form.allergenes %}#}
+                        {#{{ loop.index }}#}
+                        {#{{ f.nom }}#}
+                    {#{%endfor%}#}
+
+
+                    {{ form_widget(form.allergenes, {attr: {class: "unique-class"}}) }}
+                    {#{% if loop.index == 4 %}#}
                 </ul>
                 <ul>
-                    {% endif %}
-                    {% endfor %}
+                    {#{% endif %}#}
+                    {#{% endfor %}#}
                 </ul>
             </div>
         </div>
