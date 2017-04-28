@@ -1872,3 +1872,34 @@ body {
   color: #F50F65;
 }
 
+.ficheProduit{
+  margin-top: 50px;
+}
+
+.topMargin{
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.topMargin h4{
+  color:#f32063;
+}
+
+.produitSuccess,
+.sousMenuSuccess
+{
+  width:70% !important;
+}
+
+.sousMenuSuccess{
+  margin-bottom: 20px !important;
+}
+
+@media (max-width: 1200px) {
+  .produitSuccess,
+  .sousMenuSuccess
+  {
+    width:100% !important;
+  }
+}
+
