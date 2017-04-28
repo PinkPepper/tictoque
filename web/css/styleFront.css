@@ -1181,8 +1181,8 @@ body .blogContent {
     border-radius: 4px;
     margin-bottom: 30px;
     display: block;
-    height: 380px;
-    background-color: white; }
+    background-color: white;
+    height: 380px; }
     .plats_semaine .showPlat .showBreakzone {
       width: 100%;
       height: 361px;
@@ -1718,7 +1718,13 @@ body .container .recap-prix .livraison-total .prix-total {
   padding-top: 110px; }
 
 .overflowImg {
-  overflow: hidden;
   height: 220px; }
+
+.pagination > .active > a, .pagination > .active > a:focus, .pagination > .active > a:hover, .pagination > .active > span, .pagination > .active > span:focus, .pagination > .active > span:hover {
+  background-color: #f32063;
+  border-color: #f32063; }
+
+.pagination > li > a, .pagination > li > span {
+  color: #f32063; }
 
 /*# sourceMappingURL=styleFront.css.map */
