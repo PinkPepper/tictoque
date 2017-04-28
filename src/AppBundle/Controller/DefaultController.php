@@ -15,10 +15,12 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $produits = $em->getRepository('AppBundle:Produit')->findAll();
+        $articles = $em->getRepository('AppBundle:Article')->findAll();
         // replace this example code with whatever you need
         return $this->render('frontoffice/default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
-            'produits' => $produits
+            'produits' => $produits,
+            'articles' => $articles,
         ]);
     }
 }
