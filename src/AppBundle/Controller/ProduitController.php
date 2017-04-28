@@ -31,52 +31,60 @@ class ProduitController extends Controller
         $categorie = null;
 
         $paginator  = $this->get('knp_paginator');
-        $maxPerPage = 6;
         $query = $em->getRepository('AppBundle:Produit')->findAll();
+        $maxPerPage = 9;
         $produits = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             $maxPerPage/*limit per page*/
         );
 
-        /* RECHERCHE AVEC FILTRES */
+        $isAllergene = false;
+
+
         $form = $this->createForm('AppBundle\Form\RechercheType');
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
-            $produits = $this->rechercheFiltre($form, $paginator, $maxPerPage, $query);
+
+            $isAllergene = $form->getData()['allergene'];
+            dump($form->getData());
+
+            $search = $form->getData()['search'];
+            if($search !== null)
+            {
+                $produits = $this->recherchePersonnalisee($search, $paginator);
+            }
+            else
+            {
+                $produits = $this->rechercheFiltre($form, $paginator, $maxPerPage, $query);
+            }
 
         }
 
-        /* RECHERCHE PERSONNALISÉE */
-        $form2 = $this->createForm('AppBundle\Form\RecherchePersonnaliseeType');
-        $form2->handleRequest($request);
-        if ($form2->isSubmitted() && $form2->isValid())
-        {
-            $produits = $this->recherchePersonnalisee($form2, $paginator);
-
-        }
 
         return $this->render('frontoffice/produit/index.html.twig', array(
             'categories' => $categories,
             'categorie' => $categorie,
             'produits' => $produits,
             'form'=>$form->createView(),
-            'form_personnalise'=>$form2->createView()
+            //'form_personnalise'=>$form2->createView()
+            'isAllergene'=>$isAllergene,
+            'allergenes'=>$this->getUser()->getAllergenes()
         ));
     }
 
-    public function recherchePersonnalisee($form, $paginator)
+    public function recherchePersonnalisee($search, $paginator)
     {
-        $word = $form->getData()['search'];
-
         $repository = $this->getDoctrine()->getManager();
+
         $query = $repository->createQueryBuilder('p')
             ->select('p')
             ->from('AppBundle:Produit', 'p')
             ->where('p.nom LIKE :word')
-            ->setParameter('word', '%'.$word.'%')
+            ->setParameter('word', '%'.$search.'%')
             ->getQuery();
+
 
         $produits = $paginator->paginate(
             $query, /* query NOT result */
@@ -89,8 +97,10 @@ class ProduitController extends Controller
 
     public function rechercheFiltre($form, $paginator, $maxPerPage, $query)
     {
+       // $query = null;
         $type = $form->getData()['type'];
         $categorie = $form->getData()['categorie'];
+
 
         if($type == 'all' && $categorie->getNom() == 'Tous les produits')
         {

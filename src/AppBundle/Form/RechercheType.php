@@ -5,6 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -30,6 +31,16 @@ class RechercheType extends AbstractType
                     'multiple'=>false,
                 )
             )
+            ->add('search', TextType::class,
+                array(
+                    'attr'=>array("placeholder"=>"Rechercher des plats, des boissons...")
+                ))
+            ->add('allergene', ChoiceType::class,
+                array(
+                    'choices'=> array('Prendre en compte mes allergènes'=>true),
+                    'expanded'=>true,
+                    'multiple'=>true
+                ))
             ->add('categorie', EntityType::class, array(
                 'class' => 'AppBundle:Categorie',
                 'choice_label' => 'nom',
