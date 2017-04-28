@@ -46,9 +46,7 @@ class ProduitController extends Controller
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
-
             $isAllergene = $form->getData()['allergene'];
-            dump($form->getData());
 
             $search = $form->getData()['search'];
             if($search !== null)
