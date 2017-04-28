@@ -2,7 +2,22 @@
 
 {% block body %}
 	<div class="container">
-		<p> username : {{ app.user.username }} </p>
+		<h1>Détails du compte de {{ app.user.nom }} {{ app.user.prenom }}</h1>
+
+		<div>
+			<h2>Mes informations</h2>
+			<p>nom :{{ app.user.nom }}</p>
+			<p>prenom :{{ app.user.prenom }}</p>
+			<p>pseudo: {{ app.user.username }}</p>
+			<p>email: {{ app.user.email }}</p>
+			<a href="{{ path('fos_user_profile_edit') }}">Changer mon email et mon pseudo</a>
+			<br>
+			<a href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
+
+			<h3>Allergènes</h3>
+
+		</div>
+
 		<div>
 			<h2>Historique des commandes</h2>
 			{% for commande in user.commandes %}
