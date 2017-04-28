@@ -94,52 +94,24 @@
 		<div class="col-lg-12 col-md-12 col-xs-12 showPlatSemaine">
 			<h4 class="text-center titleCat">Actualités</h4>
 			<h5 class="text-center subTitleCat">Toute l'actualité autour de la nourriture saine et gourmande</h5>
-
-			<div class="col-lg-4 col-md-4 col-sm-4">
-				<div class="showPlat">
-					<div class="showImgPlat">
-						<img class="img-responsive imgPlat" src="img/Salade/saint-jacques.jpg">
-					</div>
-					<div class="showDescPlat">
-						<p class="typeProduct">SALADE</p>
-						<div class="row">
-							<h4 class="text-center titleProduct noMargin col-lg-8 col-md-12 col-sm-12 col-xs-12">SALADE DE SAINT JACQUES</h4>
-							<p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">Petite description du produit pour donner envie à l'utilisateur de découvrir le produit</p>
-							<p class="plusActu col-lg-5 col-md-8 col-sm-10 col-xs-12">En savoir plus</p>
+			{% for article in articles %}
+            	{% if loop.index0 < 3 %}
+				<div class="col-lg-4 col-md-4 col-sm-4">
+					<div class="showPlat">
+						<div class="showImgPlat">
+								<img alt="{%  if article.image =="" %} Pas d'image {% else %} article.titre {% endif %}" class="img-responsive imgPlat" src="{{ asset('articles/'~article.image) }}">
+						</div>
+						<div class="showDescPlat">
+							<div class="row">
+								<h4 class="text-center titleProduct noMargin col-lg-12 col-md-12 col-sm-12 col-xs-12">{{ article.titre }}</h4>
+								<p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ article.contenu|striptags|slice(0,60) }}...</p>
+								<a href="{{ path('article_show',{'id' :article.id,'titre':article.titre}) }}"><p class="plusActu col-lg-5 col-md-8 col-sm-10 col-xs-12">En savoir plus</p></a>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4">
-				<div class="showPlat">
-					<div class="showImgPlat">
-						<img class="img-responsive imgPlat" src="img/Salade/saint-jacques.jpg">
-					</div>
-					<div class="showDescPlat">
-						<p class="typeProduct">SALADE</p>
-						<div class="row">
-							<h4 class="text-center titleProduct noMargin col-lg-8 col-md-12 col-sm-12 col-xs-12">SALADE DE SAINT JACQUES</h4>
-							<p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">Petite description du produit pour donner envie à l'utilisateur de découvrir le produit</p>
-							<p class="plusActu col-lg-5 col-md-8 col-sm-10 col-xs-12">En savoir plus</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-4 col-md-4 col-sm-4">
-				<div class="showPlat">
-					<div class="showImgPlat">
-						<img class="img-responsive imgPlat" src="img/Salade/saint-jacques.jpg">
-					</div>
-					<div class="showDescPlat">
-						<p class="typeProduct">SALADE</p>
-						<div class="row">
-							<h4 class="text-center titleProduct noMargin col-lg-8 col-md-12 col-sm-12 col-xs-12">SALADE DE SAINT JACQUES</h4>
-							<p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">Petite description du produit pour donner envie à l'utilisateur de découvrir le produit</p>
-							<p class="plusActu col-lg-5 col-md-8 col-sm-10 col-xs-12">En savoir plus</p>
-						</div>
-					</div>
-				</div>
-			</div>
+				{% endif %}
+			{% endfor %}
 		</div>
 	</div>
 

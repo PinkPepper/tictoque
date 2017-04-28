@@ -36,10 +36,9 @@
                             {% endif %}
                         </div>
                         <div class="showDescArticle">
-                            <p class="numArticle">Article n°{{ a.id }}</p>
                             <div class="row detailArticle">
                                 <h4>{{ a.titre }}</h4>
-                                <p>{{ a.contenu }}</p>
+                                <p>{{ a.contenu|striptags|slice(0,60) }}...</p>
                                 <a href="{{ path('article_show',{'id' :a.id,'titre':a.titre}) }}" class="col-lg-8 col-md-12 col-xs-12 openArticle">En savoir plus</a>
                             </div>
                         </div>
