@@ -967,8 +967,7 @@ body .panier .container .imgSousProduit {
   width: 100%; }
 
 body .panier .container .commande {
-  padding-left: 60px;
-  padding-right: 60px; }
+  padding-left: 45px; }
 
 body .panier .container .commande .total {
   float: right; }
@@ -1726,5 +1725,12 @@ body .container .recap-prix .livraison-total .prix-total {
 
 .pagination > li > a, .pagination > li > span {
   color: #f32063; }
+
+.titleTop {
+  padding-top: 40px;
+  padding-bottom: 40px; }
+
+.titleTop h1 {
+  color: #F50F65; }
 
 /*# sourceMappingURL=styleFront.css.map */
