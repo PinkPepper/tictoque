@@ -13,11 +13,17 @@
                         {{ form_widget(form.categorie,{attr: {class: "submitForm"}}) }}
                     </li>
                     <li>
-                        <a class="submitForm" href="{{ path("produit_index") }}"> <i class="fa fa-refresh" aria-hidden="true"></i><span>Réinitialiser la recherche</span></a>
+                        <a href="{{ path("produit_index") }}"> <i class="fa fa-refresh" aria-hidden="true"></i><span>Réinitialiser la recherche</span></a>
                     </li>
                     <li>
-                        <input class="filtre_aller submitForm" type="checkbox" name="allergenes"><label>Prendre en compte mes allérgènes</label>
+                        {{ form_widget(form.search, {attr: {class: "submitForm"}}) }}
                     </li>
+                    <li>
+                        {{ form_widget(form.allergene, {attr: {class: "submitForm"}}) }}
+                    </li>
+                   {# <li>
+                        <input class="filtre_aller" type="checkbox" name="allergenes"><label>Prendre en compte mes allérgènes</label>
+                    </li>#}
                     {{ form_end(form) }}
 
                 </ul>
@@ -29,35 +35,72 @@
                 <h4>Liste Produits</h4>
                 <h5>De la simple salade, à la salade composée, découvrez nos produits</h5>
 
-                <div class="search_bloc">
+              {#  <div class="search_bloc">
                     {{ form_start(form_personnalise, { attr: {class: ""}}) }}
                         {{ form_widget(form_personnalise.search, {attr: {'placeholder': 'Rechercher un plat, une boisson...'}}) }}
                     {{ form_end(form_personnalise) }}
-                </div>
+                </div>#}
+
+                {% set foo = 'faux' %}
 
                 {% for produit in produits %}
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="showPlat">
-                            <div class="showImgPlat">
+                    {% if isAllergene == true  %}
+                        {% for allergene in produit.allergenes if foo== 'faux' %}
+                            {% if allergene not in allergenes and foo=='faux' %}
+                                {% set foo = 'vrai' %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if foo=="vrai" %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="showPlat">
+                                    <div class="showImgPlat">
+                                        <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                            <div class="overflowImg">
+                                                <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
+                                            </div>
+                                        </a>
+                                        <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                                    </div>
+                                    <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                        <div class="showDescPlat">
+                                            <p class="typeProduct">{{ produit.type|upper }}</p>
+                                            <div class="row">
+                                                <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
+                                                <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix }}€</span>
+                                                <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            {% set foo = 'faux' %}
+                        {% endif %}
+
+                    {% else %}
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="showPlat">
+                                <div class="showImgPlat">
+                                    <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                        <div class="overflowImg">
+                                            <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
+                                        </div>
+                                    </a>
+                                    <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                                </div>
                                 <a href="{{ path("produit_show", {'id': produit.id}) }}">
-                                    <div class="overflowImg">
-                                        <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
+                                    <div class="showDescPlat">
+                                        <p class="typeProduct">{{ produit.type|upper }}</p>
+                                        <div class="row">
+                                            <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
+                                            <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix }}€</span>
+                                            <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
+                                        </div>
                                     </div>
                                 </a>
-                                <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
                             </div>
-                            <a href="{{ path("produit_show", {'id': produit.id}) }}">
-                                <div class="showDescPlat">
-                                    <p class="typeProduct">{{ produit.type|upper }}</p>
-                                    <div class="row">
-                                        <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
-                                        <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix }}€</span>
-                                        <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
-                                    </div>
-                                </div>
-                            </a>
                         </div>
-                    </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         </div>
