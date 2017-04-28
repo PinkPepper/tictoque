@@ -74,6 +74,36 @@
                                     </a>
                                 </div>
                             </div>
+                            {% if loop.index == 3 %}
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="showPlat">
+                                        <div class="dessert position_plat">
+                                            <div class="livraison_menu">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                <h4>CHOISSISEZ VOTRE POINT DE LIVRAISON</h4>
+                                                <p>Vous n'avez pas encore définis de point de livraison</p>
+                                                <a class="add_livraison" href="#">Ajoutez un point de livraison</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if loop.index == 6 %}
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="showPlat">
+                                        <div class="dessert position_plat">
+                                            <div class="dessert position_plat">
+                                                <div class="livraison_menu">
+                                                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                                                    <h4>BREAKZONE</h4>
+                                                    <p>Zone dédiée à la promotion d'autre catégorie, aux différentes réductions,
+                                                        mais aussi aux différents services de l'entreprise</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
                             {% set foo = 'faux' %}
                         {% endif %}
 
@@ -100,6 +130,37 @@
                                 </a>
                             </div>
                         </div>
+
+                        {% if loop.index == 3 %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="showPlat">
+                                    <div class="dessert position_plat">
+                                        <div class="livraison_menu">
+                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            <h4>CHOISSISEZ VOTRE POINT DE LIVRAISON</h4>
+                                            <p>Vous n'avez pas encore définis de point de livraison</p>
+                                            <a class="add_livraison" href="#">Ajoutez un point de livraison</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                        {% if loop.index == 6 %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="showPlat">
+                                    <div class="dessert position_plat">
+                                        <div class="dessert position_plat">
+                                            <div class="livraison_menu">
+                                                <i class="fa fa-building-o" aria-hidden="true"></i>
+                                                <h4>BREAKZONE</h4>
+                                                <p>Zone dédiée à la promotion d'autre catégorie, aux différentes réductions,
+                                                    mais aussi aux différents services de l'entreprise</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>
