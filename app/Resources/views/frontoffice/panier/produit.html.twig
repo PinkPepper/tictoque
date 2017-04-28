@@ -60,9 +60,9 @@
 
     <div class="col-lg-8 content_nav">
         <div id="afficher_desc_long" style="display:block;">
-            <h5>Nom du plat</h5>
+            <h5>{{ produit.nom }}</h5>
             <p class="produit_desc_long">
-                Lorem itsumLorem itsumLorem itsumLorem itsumLoremLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLoremLorem itsumLorem itsumLorem itsumLorem
+                {{ produit.description | raw }}
             </p>
         </div>
 
