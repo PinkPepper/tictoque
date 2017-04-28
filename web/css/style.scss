@@ -305,7 +305,7 @@ body {
   body .menu_choix {
     float: none;
     clear: both;
-    width: 79%;
+    width: 100%;
     margin: 0 auto; }
     body .menu_choix h5 {
       text-align: center;
@@ -628,6 +628,7 @@ body {
         float:left;
         margin-right:18px;
       }
+
       p
       {
         float:left;
@@ -1165,6 +1166,7 @@ body {
     margin-bottom:30px;
     display:block;
     background-color: white;
+    height: 380px;
 
     .showBreakzone {
       width:100%;
@@ -1177,7 +1179,8 @@ body {
       .imgPlat{
         border-top-left-radius: 4px;
         border-top-right-radius: 4px;
-        min-height: 200px;
+        height: 220px;
+        width: 100%;
       }
       .addToCart{
         float:right;
@@ -1849,6 +1852,19 @@ body {
 
 .loginSubmitNew{
   padding-top: 110px;
+}
+
+.overflowImg{
+  height: 220px;
+}
+
+.pagination>.active>a, .pagination>.active>a:focus, .pagination>.active>a:hover, .pagination>.active>span, .pagination>.active>span:focus, .pagination>.active>span:hover{
+  background-color: #f32063;
+  border-color: #f32063;
+}
+
+.pagination>li>a, .pagination>li>span {
+  color: #f32063;
 }
 
 
