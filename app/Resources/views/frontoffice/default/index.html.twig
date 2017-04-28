@@ -95,6 +95,7 @@
 			<h4 class="text-center titleCat">Actualités</h4>
 			<h5 class="text-center subTitleCat">Toute l'actualité autour de la nourriture saine et gourmande</h5>
 			{% for article in articles %}
+            	{% if loop.index0 < 3 %}
 				<div class="col-lg-4 col-md-4 col-sm-4">
 					<div class="showPlat">
 						<div class="showImgPlat">
@@ -109,6 +110,7 @@
 						</div>
 					</div>
 				</div>
+				{% endif %}
 			{% endfor %}
 		</div>
 	</div>
