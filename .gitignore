@@ -17,3 +17,6 @@
 .idea
 .DS_Store
 composer.lock
+/web/css/.sass-cache/*
+/web/css/styleFront.scss.map
+/web/css/styleFront.css.map
