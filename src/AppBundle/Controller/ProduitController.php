@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Produit;
+use JasonGrimes\Paginator;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -12,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Produit controller.
  *
- * @Route("/produit")
+ * @Route("/produits")
  */
 class ProduitController extends Controller
 {
@@ -20,19 +21,117 @@ class ProduitController extends Controller
      * Lists all produit entities.
      *
      * @Route("/", name="produit_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $produits = $em->getRepository('AppBundle:Produit')->findAll();
+        $categories = $em->getRepository('AppBundle:Categorie')->findAll();
+        $categorie = null;
 
+        $paginator  = $this->get('knp_paginator');
+        $maxPerPage = 6;
+        $query = $em->getRepository('AppBundle:Produit')->findAll();
+        $produits = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $maxPerPage/*limit per page*/
+        );
+
+        /* RECHERCHE AVEC FILTRES */
+        $form = $this->createForm('AppBundle\Form\RechercheType');
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $produits = $this->rechercheFiltre($form, $paginator, $maxPerPage, $query);
+
+        }
+
+        /* RECHERCHE PERSONNALISÉE */
+        $form2 = $this->createForm('AppBundle\Form\RecherchePersonnaliseeType');
+        $form2->handleRequest($request);
+        if ($form2->isSubmitted() && $form2->isValid())
+        {
+            $produits = $this->recherchePersonnalisee($form2, $paginator);
+
+        }
 
         return $this->render('frontoffice/produit/index.html.twig', array(
+            'categories' => $categories,
+            'categorie' => $categorie,
             'produits' => $produits,
-
+            'form'=>$form->createView(),
+            'form_personnalise'=>$form2->createView()
         ));
+    }
+
+    public function recherchePersonnalisee($form, $paginator)
+    {
+        $word = $form->getData()['search'];
+
+        $repository = $this->getDoctrine()->getManager();
+        $query = $repository->createQueryBuilder('p')
+            ->select('p')
+            ->from('AppBundle:Produit', 'p')
+            ->where('p.nom LIKE :word')
+            ->setParameter('word', '%'.$word.'%')
+            ->getQuery();
+
+        $produits = $paginator->paginate(
+            $query, /* query NOT result */
+            1/*page number*/,
+            sizeof($query->getResult())/*limit per page*/
+        );
+
+        return $produits;
+    }
+
+    public function rechercheFiltre($form, $paginator, $maxPerPage, $query)
+    {
+        $type = $form->getData()['type'];
+        $categorie = $form->getData()['categorie'];
+
+        if($type == 'all' && $categorie->getNom() == 'Tous les produits')
+        {
+            $produits = $paginator->paginate(
+                $query, /* query NOT result */
+                1,
+                $maxPerPage/*limit per page*/
+            );
+
+        }
+        else if($type == 'all' || $type === null)
+        {
+            $str = "SELECT p FROM AppBundle:Produit p LEFT JOIN p.categories c WHERE c = " . $categorie->getId();
+            $query = $this->getDoctrine()->getManager()->createQuery($str);
+
+            if($query->getresult() == array())$maxPerPage = 1;
+            else $maxPerPage =  sizeof($query->getResult());
+
+
+            $produits = $paginator->paginate(
+                $query, /* query NOT result */
+                1/*page number*/,
+                $maxPerPage/*limit per page*/
+            );
+        }
+        else
+        {
+            $str = "SELECT p FROM AppBundle:Produit p LEFT JOIN p.categories c WHERE p.type = '". $type ."' AND c = " . $categorie->getId();
+            $query = $this->getDoctrine()->getManager()->createQuery($str);
+
+            if($query->getresult() == array())$maxPerPage = 1;
+            else $maxPerPage =  sizeof($query->getResult());
+
+            $produits = $paginator->paginate(
+                $query, /* query NOT result */
+                1/*page number*/,
+                $maxPerPage/*limit per page*/
+            );
+        }
+
+        return $produits;
     }
 
     /**

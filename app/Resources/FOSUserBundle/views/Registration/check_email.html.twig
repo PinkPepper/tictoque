@@ -3,5 +3,12 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    <div id="content_site" class="c_s_center">
+
+        <h1>Email de confirmation</h1>
+        <p>Un email de confirmation vous a été envoyé à l’adresse : <strong>{{ user.email }}</strong></p>
+
+        <img src="{{ asset('img/picto_envoie_email.svg') }}" height="40px"><br/>
+
+    </div>
 {% endblock fos_user_content %}

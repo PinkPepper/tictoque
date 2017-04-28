@@ -4,6 +4,7 @@
 namespace AppBundle\Form;
 
 use FOS\UserBundle\Util\LegacyFormHelper;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,6 +26,14 @@ class RegistrationType extends AbstractType
             ->add('telephone', TextType::class, array('label'=>'Numéro de téléphone '))
             ->add('nom', TextType::class, array('label'=>'Nom '))
             ->add('prenom', TextType::class, array('label'=>'Prénom '))
+            ->add('allergenes', EntityType::class, array(
+                'class' => 'AppBundle:Allergene',
+                'choice_label' => 'nom',
+                'expanded' => true,
+                'multiple' => true,
+                'choice_attr' => function($val, $key, $index) {
+                    return ['class' => 'unique-class'];
+                },))
         ;
     }
 

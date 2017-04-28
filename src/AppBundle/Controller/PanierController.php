@@ -24,29 +24,66 @@ class PanierController extends Controller
     public function indexAction(Request $request)
     {
         $user = $this->getUser();
-        $em = $this->getDoctrine();
-        
         $session = $request->getSession();
-        $panier = $session->get('panier');
-
+        $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
+        $panier = $session->all();
         dump($panier);
-
-        $menus_id = $panier['menus'];
-        $produits_id = $panier['produits'];
-
-        $menus = array();
         $produits = array();
+        $menus = array();
 
-        if($produits_id)
+        foreach ($panier as $key => $value)
         {
-            foreach ($produits_id as $produit)
+            if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
             {
-                $produit = array($em->getRepository("AppBundle:Produit")->find($produit[0]), $produit[1]);
-                array_push($produits, $produit);
+                dump($value);
+                $id = explode("_", $key);
+                $id = $id[1];
+                array_push($produits, array($em->find($id), $value['quantite']));
+            }
+            else if ($key != "menu" && (strpos($key, 'menu') !== false) && (strpos($key, 'menu') == 0)) //menu
+            {
+                $id = explode("_", $key);
+                $id = $id[1];
+
+                if($value['entree'] != null)
+                {
+                    $entree = $em->find($value['entree']);
+                }
+                else{
+                    $entree=null;
+                }
+                if($value['plat'] != null) {
+                    $plat = $em->find($value['plat']);
+                }
+                else{
+                    $plat = null;
+                }
+
+                if($value['dessert'] != null)
+                {
+                    $dessert = $em->find($value['dessert']);
+                }
+                else{
+                    $dessert = null;
+                }
+                if($value['boisson'] != null)
+                {
+                    $boisson = $em->find($value['boisson']);
+                }
+                else{
+                    $boisson = null;
+                }
+                    array_push($menus, array('id'=>$id, 'entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>$value['quantite'], 'prix'=>$value['prix']));
+
             }
         }
 
-        return $this->render('frontoffice/panier/index.html.twig', array('panier'=>$panier, 'user'=>$user, 'produits'=>$produits, 'menus'=>$menus_id));
+        return $this->render('frontoffice/panier/index.html.twig', array(
+            'panier'=>$panier,
+            'user'=>$user,
+            'produits'=>$produits,
+            'menus'=>$menus
+        ));
     }
 
     /**
@@ -54,33 +91,51 @@ class PanierController extends Controller
      */
     public function ajouterProduitAuPanier(Request $request, Produit $produit)
     {
-        $doublon = false;
-        $session = $request->getSession();
-        $panier = $session->get('panier');
+        $reponse = "Le produit a été ajouté au panier avec succès.";
 
-        if(!$panier)
+        $session = $request->getsession();
+
+        if($session->get('prix') == null)
         {
-            $panier = array('menus'=>array(), 'produits'=>array());
+            $session->set('prix', 5); //5 -> frais de livraison
+            $prix = 5;
+        }
+        else
+        {
+            $prix = $session->get('prix');
         }
 
-        for ($i = 0; $i<sizeof($panier['produits']) ; $i++)
+        $pProduit = $session->get('produit_' . $produit->getId());
+        if( $pProduit != null) //doublon
         {
-            if($panier['produits'][$i][0] == $produit->getId())
+            $quantiteFutur = $pProduit['quantite'] + 1;
+            if($quantiteFutur <= $produit->getQuantite())
             {
-                $panier['produits'][$i][1] = $panier['produits'][$i][1] + 1;
-                $session->set('panier', $panier);
-                $doublon = true;
-                break;
+                $pProduit['quantite'] = $quantiteFutur;
+                $session->set('produit_' . $produit->getId(), $pProduit);
+                $prix = $prix + $produit->getPrix();
+                $session->set('prix', $prix);
+            }
+            else
+            {
+                $reponse = "Le produit n'est plus disponible, et n'a pas pu être ajouté à votre panier.";
             }
         }
-
-        if(!$doublon)
+        else
         {
-            array_push($panier, (array_push($panier['produits'], array($produit->getId(), 1))));
-            $session->set('panier', $panier);
+            $session->set('produit_' . $produit->getId(), array(
+                'quantite'=>1,
+                'prix'=>$produit->getPrix()
+            ));
+            $prix = $prix + $produit->getPrix();
+            $session->set('prix', $prix);
         }
 
-        return $this->render('frontoffice/produit/success.html.twig');
+        dump($session->all());
+
+        return $this->render('frontoffice/produit/success.html.twig', array(
+            "reponse"=>$reponse
+        ));
     }
 
     /**
@@ -88,63 +143,51 @@ class PanierController extends Controller
      */
     public function ajoutExemplaireProduit(Request $request, Produit $produit)
     {
-        $session = $request->getSession();
-        $panier = $session->get('panier');
-        $nombre = 0;
+        $session = $request->getsession();
+        $pProduit = $session->get('produit_' . $produit->getId());
+        if( $pProduit != null)
+        {
+            $pProduit['quantite'] += 1;
+            $session->set('produit_' . $produit->getId(), $pProduit);
+            $nombre = $pProduit['quantite'];
 
-        if(!$panier)
+            $prix = $session->get("prix");
+            $prix = $prix + $produit->getPrix();
+            $session->set('prix', $prix);
+        }
+        else
         {
             throw  new NotFoundHttpException();
         }
 
-        for ($i = 0; $i<sizeof($panier['produits']) ; $i++)
-        {
-            if ($panier['produits'][$i][0] == $produit->getId()) {
-                $panier['produits'][$i][1] = $panier['produits'][$i][1] + 1;
 
-                $nombre = $panier['produits'][$i][1] ;
-                $session->set('panier', $panier);
-                break;
-            }
-        }
-
-        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
+
 
     /**
      * @Route("/retirerExemplaireProduitAuPanier/{produit}", name="retrait_exemplaire_panier")
      */
     public function retirerExemplaireProduit(Request $request, Produit $produit)
     {
-        $session = $request->getSession();
-        $panier = $session->get('panier');
-        $nombre = 0;
+        $session = $request->getsession();
+        $pProduit = $session->get('produit_' . $produit->getId());
+        if( $pProduit != null)
+        {
+            $pProduit['quantite'] -= 1;
+            $session->set('produit_' . $produit->getId(), $pProduit);
+            $nombre = $pProduit['quantite'];
 
-        if(!$panier)
+            $prix = $session->get("prix");
+            $prix = $prix - $produit->getPrix();
+            $session->set('prix', $prix);
+        }
+        else
         {
             throw  new NotFoundHttpException();
         }
 
-        for ($i = 0; $i<sizeof($panier['produits']) ; $i++)
-        {
-            if ($panier['produits'][$i][0] == $produit->getId()) {
-                $panier['produits'][$i][1] = $panier['produits'][$i][1] - 1;
-
-                $nombre = $panier['produits'][$i][1] ;
-                if($nombre == 0)
-                {
-                    //TODO effacer le produit du panier ? != ignorer produit quantité 0 du panier
-                    //   $panier['produits'] =   array_diff($panier['produits'], $panier['produits'][$i]); //marche pas
-                    //il se passe rien du coup cest génial
-                    //suffit de pas afficher un produit à 0 et de ne pas le prendre en compte dans la commande
-                    //merci tout le monde pour votre soutient
-                }
-                $session->set('panier', $panier);
-                break;
-            }
-        }
-
-        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
 
 
@@ -153,27 +196,25 @@ class PanierController extends Controller
      */
     public function ajoutExemplaireMenu(Request $request, $menu)
     {
-        $session = $request->getSession();
-        $panier = $session->get('panier');
-        $nombre = 0;
+        $session = $request->getsession();
+        $pMenu = $session->get('menu_' . $menu);
 
-        if(!$panier)
+        if( $pMenu != null)
+        {
+            $pMenu['quantite'] += 1;
+            $session->set('menu_' . $menu, $pMenu);
+            $nombre = $pMenu['quantite'];
+
+            $prix = $session->get("prix");
+            $prix = $prix + $pMenu['prix'];
+            $session->set('prix', $prix);
+        }
+        else
         {
             throw  new NotFoundHttpException();
         }
 
-        for ($i = 0; $i<sizeof($panier['menus']) ; $i++)
-        {
-            if ($panier['menus'][$i]["id"] == $menu) {
-                $panier['menus'][$i]["quantite"] = $panier['menus'][$i]["quantite"] + 1;
-
-                $nombre = $panier['menus'][$i]["quantite"] ;
-                $session->set('panier', $panier);
-                break;
-            }
-        }
-
-        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
 
     /**
@@ -181,35 +222,24 @@ class PanierController extends Controller
      */
     public function retirerExemplaireMenu(Request $request, $menu)
     {
-        $session = $request->getSession();
-        $panier = $session->get('panier');
-        $nombre = 0;
+        $session = $request->getsession();
+        $pMenu = $session->get('menu_' . $menu);
+        if( $pMenu != null)
+        {
+            $pMenu['quantite'] -= 1;
+            $session->set('menu_' . $menu, $pMenu);
+            $nombre = $pMenu['quantite'];
 
-        if(!$panier)
+            $prix = $session->get("prix");
+            $prix = $prix - $pMenu['prix'];
+            $session->set('prix', $prix);
+        }
+        else
         {
             throw  new NotFoundHttpException();
         }
 
-        for ($i = 0; $i<sizeof($panier['menus']) ; $i++)
-        {
-            if ($panier['menus'][$i]["id"] == $menu) {
-                $panier['menus'][$i]["quantite"] = $panier['menus'][$i]["quantite"] - 1;
-
-                $nombre = $panier['menus'][$i]["quantite"] ;
-                if($nombre == 0)
-                {
-                    //TODO effacer le menu du panier ? != ignorer menu quantité 0 du panier
-                    //   $panier['produits'] =   array_diff($panier['produits'], $panier['produits'][$i]); //marche pas
-                    //il se passe rien du coup cest génial
-                    //suffit de pas afficher un produit à 0 et de ne pas le prendre en compte dans la commande
-                    //merci tout le monde pour votre soutient
-                }
-                $session->set('panier', $panier);
-                break;
-            }
-        }
-
-        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
 
     /**
@@ -217,34 +247,48 @@ class PanierController extends Controller
      */
     public function retirerProduit(Request $request, Produit $produit)
     {
-        $session = $request->getSession();
-        $panier = $session->get('panier');
+        $session = $request->getsession();
+        $pProduit = $session->get('produit_' . $produit->getId());
+
+        if( $pProduit != null)
+        {
+            $quantite = $pProduit['quantite'];
+
+            $prix = $session->get("prix");
+            $prix = $prix - ($produit->getPrix() * $quantite);
+            $session->set('prix', $prix);
+
+            $session->remove('produit_' . $produit->getId());
+        }
+
         $nombre = 0;
 
-        if(!$panier)
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
+    }
+
+    /**
+     * @Route("/retirerMenuAuPanier/{menu}", name="delete_menu")
+     */
+    public function retirerMenu(Request $request, $menu)
+    {
+        $session = $request->getsession();
+
+
+        $pMenu = $session->get('menu_' . $menu);
+
+        if( $pMenu != null)
         {
-            throw  new NotFoundHttpException();
+            $quantite = $pMenu['quantite'];
+
+            $prix = $session->get("prix");
+            $prix = $prix - ($pMenu['prix'] * $quantite);
+            $session->set('prix', $prix);
+
+            $session->remove('menu_' . $menu);
         }
 
-        for ($i = 0; $i<sizeof($panier['produits']) ; $i++)
-        {
-            if ($panier['produits'][$i][0] == $produit->getId()) {
-                $panier['produits'][$i][1] = 0;
+        $nombre = 0;
 
-                $nombre = $panier['produits'][$i][1] ;
-                if($nombre == 0)
-                {
-                    //TODO effacer le produit du panier ? != ignorer produit quantité 0 du panier
-                    //   $panier['produits'] =   array_diff($panier['produits'], $panier['produits'][$i]); //marche pas
-                    //il se passe rien du coup cest génial
-                    //suffit de pas afficher un produit à 0 et de ne pas le prendre en compte dans la commande
-                    //merci tout le monde pour votre soutient
-                }
-                $session->set('panier', $panier);
-                break;
-            }
-        }
-
-        return $this->render('frontoffice/produit/nombre.html.twig', array('nombre'=>$nombre));
+        return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
 }

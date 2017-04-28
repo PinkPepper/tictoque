@@ -1,33 +1,113 @@
-{% extends 'frontoffice/base.html.twig' %}
+{% extends 'frontoffice/footer.html.twig' %}
 
 {% block body %}
     <script type="application/javascript">
     var sousTotal = 0;
     var tabPrice = [];
+    var total = 0;
+    var livraison = 5;
 </script>
 <div class="panier">
     <div class="container">
-        <h1>Votre panier</h1>
-        <p>Encore quelques clics et vous pourrez enfin déguster nos plats</p>
         <div class="row">
-            <div class="col-lg-9 col-sm-9 col-md-9 col-xs-12">
+            <div class="col-lg-12">
+                <h1>Votre panier</h1>
+                <p>Encore quelques clics et vous pourrez enfin déguster nos plats</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
+                {% if menus|length != 0 %}
+                <h2>Menus</h2>
+                {% else %}
+                {% endif %}
+                {% for menu in menus %}
+                    {% if menu["quantite"] != 0  %}
+                    <div id="menuId-{{ menu["id"] }}" class="produit">
+                        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            image
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                            <h5>Menu n°{{ menu["id"] }}</h5>
+                            <h5>{{ menu["prix"] }}€</h5>
+                            <a class="showMore" data-id="{{ menu["id"] }}">En savoir plus ...</a>
+                        </div>
+                        {#<div class="col-xs-7 col-sm-2 col-md-2 col-lg-2 divQuantite">#}
+                            {#<img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>#}
+                            {#<div class="quantite">#}
+                                {#<i id="qte" class="qte quantite-{{ menu["id"] }}" data-isproduit="false" data-id="{{ menu["id"] }}">{{ menu["quantite"] }}</i>#}
+                            {#</div>#}
+                            {#<img id="menuChevronSup-{{ menu["id"] }}" width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>#}
+                        {#</div>#}
+                        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">
+                            <h3 id="prixTotal-{{ menu["id"] }}">
+                                <script type="application/javascript">
+                                    var prix = {{ menu["prix"] }};
+                                    var qte = {{ menu["quantite"] }};
+                                    var total = prix*qte;
+                                    tabPrice[String({{ menu["id"] }})] = total;
+                                    $('#prixTotal-'+{{ menu["id"] }}).text(total+"€");
+                                </script>
+                            </h3>
+                        </div>
+                        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 divDelete">
+                            <img class="deleteMenu" width="20px" data-id="{{ menu["id"] }}" data-url="{{ path('delete_menu', {'menu': menu["id"]}) }}" src="{{ asset('img/cross.svg') }}"/>
+                        </div>
+                    </div>
+                    <div class="row sousMenu" id="sousMenu-{{ menu["id"] }}" style="display: none">
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            <h5>Entrée</h5>
+                            <h5>{% if menu["entree"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["entree"].id}) }}">{{ menu["entree"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            {% if menu["entree"] is not null %}
+                                <img class="imgSousProduit" src="{{ asset('produits/'~menu["entree"].image) }}"/>
+                            {% else %}Non spécifié{% endif %}
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            <h5>Plat</h5>
+                            <h5>{% if menu["plat"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["plat"].id}) }}">{{ menu["plat"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            {% if menu["plat"] is not null %}
+                                <img class="imgSousProduit" src="{{ asset('produits/'~menu["plat"].image) }}"/>
+                            {% else %}Non spécifié{% endif %}
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            <h5>Dessert</h5>
+                            <h5>{% if menu["dessert"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["dessert"].id}) }}">{{ menu["dessert"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            {% if menu["dessert"] is not null %}
+                                <img class="imgSousProduit" src="{{ asset('produits/'~menu["dessert"].image) }}"/>
+                            {% else %}Non spécifié{% endif %}
+                        </div>
+                        <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                            <h5>Boisson</h5>
+                            <h5>{% if menu["boisson"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["boisson"].id}) }}">{{ menu["boisson"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            {% if menu["boisson"] is not null %}
+                                <img class="imgSousProduit" src="{{ asset('produits/'~menu["boisson"].image) }}"/>
+                            {% else %}Non spécifié{% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% endfor %}
+                {% if produits|length != 0 %}
+                <h2>Produits</h2>
+                {% else %}
+                {% endif %}
                 {% for produit in produits %}
                     {% if produit[1] != 0 %}
-                <div id="produitId-{{ produit[0].id }}" class="produit">
+                <div id="produitId-{{ produit[0].id }}" class="produit produitMargin">
                     <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                        <img class="imgProduit" src="{{ asset('produits/'~produit[0].image) }}"/>
+                        <img class="imgProduit voir" src="{{ asset('produits/'~produit[0].image) }}"/>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                         <h5>{{ produit[0].type }}</h5>
                         <h4>{{ produit[0].nom }}</h4>
                         <h5>{{ produit[0].prix }}€</h5>
+                        <h5><a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divQuantite">
                         <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
                         <div class="quantite">
-                            <i id="qte" class="quantite-{{ produit[0].id }}" data-id="{{ produit[0].id }}">{{ produit[1] }}</i>
+                            <i id="qte" class=" qte quantite-{{ produit[0].id }}" data-isproduit="true" data-id="{{ produit[0].id }}" data-quantite="{{ produit[0].quantite }}" data-quantitecurrent="{{ produit[1] }}">{{ produit[1] }}</i>
                         </div>
-                        <img width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
+                        <img id="chevronSup-{{ produit[0].id }}" width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
                     </div>
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divPrix">
                         <h3 id="prixTotal-{{ produit[0].id }}">
@@ -47,7 +127,7 @@
                     {% endif %}
                 {% endfor %}
             </div>
-            <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12 commande">
+            <div class="col-lg-offset-1 col-lg-3 col-sm-12 col-md-12 col-xs-12 commande">
                 <h4>Commande</h4>
                 <p>Sous-total : <span id="sousTotal" class="total">
                         <script type="application/javascript">
@@ -55,75 +135,27 @@
                                 sousTotal = sousTotal+element;
                             });
                             $('#sousTotal').text(sousTotal+"€");
-                        </script> </span></p>
-                <p>Réductions : <span id="reduction" class="total">-10%</span></p>
-                <p>Livraison : <span id="livraison" class="total">-10%</span></p>
+                        </script> </span>
+                </p>
+                <p>Livraison : <span id="livraison" class="total">
+                        <script type="application/javascript">
+                            $('#livraison').text(livraison+"€");
+                        </script>
+                    </span></p>
                 <div class="bar"></div>
-                <p>Total <span id="Total"  class="total">-10%</span></p>
-                <a class="commander">Commander</a>
-                <a class="continue">Continuer mes achats</a>
+                <b><p>Total <span id="total"  class="total">
+                        <script type="application/javascript">
+                            total = (sousTotal + livraison);
+                            $('#total').text(total+"€");
+                        </script>
+                    </span></p></b>
+                <a href="{{ path('commande_index') }}" class="commander">Commander</a>
+                <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
             </div>
         </div>
     </div>
 </div>
-    <section class="user_content">
-        <content>
 
-            <div class="nav_pos">
-                <h1>Panier</h1>
-            </div>
-
-            <div class="user_interact">
-                retour
-            </div>
-
-        </content>
-
-        <h2>  Menus : ({{ menus|length }})</h2>
-        <table>
-            <thead>
-            <tr>
-                <th>entree</th>
-                <th>plat</th>
-                <th>dessert</th>
-                <th>boisson</th>
-                <th>nombre</th>
-                <th>actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for produit in menus %}
-                {% if produit["quantite"] != 0  %}
-                    <tr id="{{ produit["id"] }}">
-                        <td>{{ produit["entree"] }}</td>
-                        <td>{{ produit["plat"] }}</td>
-                        <td>{{ produit["dessert"] }}</td>
-                        <td>{{ produit["boisson"] }}</td>
-                        <td>{{ produit["quantite"] }}</td>
-                        <td>
-                            <ul>
-                                <li>
-                                    <a href="">show</a>
-                                </li>
-                                <li>
-                                    <a>Modifier le menu</a>
-                                </li>
-                                <li>
-                                    <button class="gestion_panier" data-url="{{ path('retrait_exemplaire_menu_panier', {'menu': produit["id"] }) }}" data-id="{{ produit["id"] }}">-</button> <i class="quantite-{{ produit["id"] }}" data-id="{{ produit["id"] }}">{{ produit["quantite"] }}</i> <button class="gestion_panier" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': produit["id"]}) }}" data-id="{{ produit["id"] }}">+</button>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                {% endif %}
-            {% endfor %}
-            </tbody>
-        </table>
-
-    </section>
-
-    <div>
-        <a href="{{ path('commande_index') }}" class="btn btn-info btn-small"  >Valider mon panier</a>
-    </div>
 
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -140,10 +172,39 @@
 
     <script type="application/javascript">
 
+        $(".qte").each(function(){
+
+            var quantite = $(this).data("quantitecurrent");
+            var quantiteMax = $(this).data("quantite");
+            var id = $(this).data('id');
+            var isProduit = $(this).data('isproduit');
+
+            if(quantite < quantiteMax ){
+               if(isProduit == true)
+               {
+                   $('#chevronSup-'+id).removeAttr('style');
+               }
+               else
+               {
+                   $('#menuChevronSup-'+id).removeAttr('style');
+               }
+            }
+            else
+            {
+                if(isProduit == true)
+                {
+                    $('#chevronSup-' + id).attr('style', 'display: none');
+                }
+                else
+                {
+                    $('#menuChevronSup-' + id).attr('style', 'display: none');
+                }
+            }
+        });
+
         $('.voir').on('click', function (e) {
             e.preventDefault();
             var url = $(this).data('url');
-
             $('#modal-body').load(url);
         });
 
@@ -154,9 +215,10 @@
             var prix = $(this).data('prix');
 
             var res = $('.quantite-' + id).load(url, function(){
+                var quantiteMax = $(this).data('quantite');
+
                 if(res.text() == "0")
                 {
-                    console.log('oui');
                     $('#produitId-' + id).fadeOut("slow");
                 }
 
@@ -171,6 +233,33 @@
                 });
 
                 $('#sousTotal').text(sousTotal+"€");
+                total = (sousTotal + livraison);
+                $('#total').text(total+"€");
+
+                var isProduit = $(this).data("isproduit");
+
+                if(eval(quantiteMax + " < (" + $(this).text() + " + 1) "))
+                {
+                    if(isProduit == true)
+                    {
+                        $('#chevronSup-' + id).attr('style', 'display: none');
+                    }
+                    else
+                    {
+                        $('#menuChevronSup-' + id).attr('style', 'display: none');
+                    }
+                }
+                else
+                {
+                    if(isProduit == true)
+                    {
+                        $('#chevronSup-'+id).removeAttr('style');
+                    }
+                    else
+                    {
+                        $('#menuChevronSup-'+id).removeAttr('style');
+                    }
+                }
             });
         }) ;
 
@@ -187,11 +276,38 @@
             tabPrice.forEach(function (element) {
                 sousTotal = sousTotal+element;
             });
-            $('#sousTotal').text(sousTotal+"€");
+            $('#sousTotal').text(sousTotal+'€');
             $('#produitId-'+id).fadeOut("slow");
-        })
+            total = (sousTotal + livraison);
+            $('#total').text(total+'€');
+        });
 
+
+        $('.deleteMenu').on('click',function (e) {
+            e.preventDefault();
+            var id = $(this).data('id');
+            var url = $(this).data('url');
+            var res = $('.quantite-'+id).load(url,function () {
+
+            });
+
+            tabPrice[String(id)] = 0;
+            sousTotal = 0;
+            tabPrice.forEach(function (element) {
+                sousTotal = sousTotal+element;
+            });
+            $('#sousTotal').text(sousTotal+'€');
+            $('#menuId-'+id).fadeOut("slow");
+            total = (sousTotal + livraison);
+            $('#total').text(total+'€');
+        });
+
+        $('.showMore').on('click',function(e){
+            e.preventDefault();
+            var id = $(this).data('id');
+            $('#sousMenu-'+id).toggle(400);
+        });
 
     </script>
-
 {% endblock %}
+

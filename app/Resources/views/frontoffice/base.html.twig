@@ -4,35 +4,46 @@
         <meta charset="UTF-8" />
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <title>L'amour food - {% block title %}Accueil{% endblock %}</title>
-
-        <!-- Jquerry -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <!--Import Google Icon Font-->
-        <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-
-        <!-- Import Style Sheet -->
-        <link type="text/css" rel="stylesheet" href="{{ asset('css/styleFront.css') }}"/>
-        <!-- Balise opengraph (SEO) -->
         <meta property="og:locale" content="fr_FR" />
         <meta property="og:type" content="website" />
+
+        <title>L'amour food - {% block title %}Accueil{% endblock %}</title>
+
+        {% block stylesheet %}
+            <link rel="stylesheet" href="{{ asset('/bootstrap/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('/bootstrap/css/bootstrap-theme.min.css') }}">
+
+            <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+            <link type="text/css" rel="stylesheet" href="{{ asset('css/styleFront.css') }}"/>
+        {% endblock %}
+
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
+            <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+            <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+            <script>tinymce.init({ selector:'.tiny',setup: function (editor) {
+                    editor.on('change', function () {
+                        editor.save();
+                    });
+                }});
+            </script>
+        {% endblock %}
+
         {% block head %}{% endblock %}
     </head>
 
     <body>
+
+    {% for flash_message in app.session.flashBag.get('notice') %}
+        <div class="flash-notice">
+            {{ flash_message }}
+        </div>
+    {% endfor %}
+
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -49,7 +60,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ path('categorie_index') }}">Nos plats</a></li>
+                        <li><a href="{{ path('produit_index') }}">Nos plats</a></li>
                         <li><a href="{{ path('menu') }}">Créer un menu</a></li>
                         <li><a href="{{ path('blog_index') }}">Blog</a></li>
                         {% if app.user %}
@@ -57,7 +68,13 @@
                                 <li><a href="{{ path('admin_index') }}">Backoffice</a></li>
                             {% endif %}
                             <li><a href="{{ path('fos_user_profile_show') }}">Mon compte</a></li>
-                            <li class="nav-panier"><a href="{{ path('index_panier') }}"><img src="{{ asset('img/panier.svg') }}">0.00€</a></li>
+                            <li class="nav-panier"><a href="{{ path('index_panier') }}"><img src="{{ asset('img/panier.svg') }}">
+                                    {% if app.session.get('prix') %}
+                                        {{ app.session.get('prix') }}€
+                                    {% else %}
+                                        0.00€
+                                    {% endif %}
+                                </a></li>
                             <li class="nav-deconnexion"><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                         {% else %}
                             <li><a class="nav-connexion" href="{{ path('fos_user_security_login') }}">Se connecter</a></li>
@@ -70,15 +87,6 @@
         {% block body %}{% endblock %}
         {% block fos_user_content %}{% endblock %}
         {% block footer %}{% endblock %}
-
-        {% block javascripts %}
-            <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
-            <script>tinymce.init({ selector:'.tiny',setup: function (editor) {
-                    editor.on('change', function () {
-                        editor.save();
-                    });
-                }});</script>
-        {% endblock %}
     </body>
 </html>
 

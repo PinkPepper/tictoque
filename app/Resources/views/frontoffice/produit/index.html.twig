@@ -1,54 +1,110 @@
 {% extends 'frontoffice/footer.html.twig' %}
 
 {% block body %}
-    <section class="user_content">
-        <content>
+    <section>
+        <div class="row home">
+            <div class="col-lg-12 col-md-12 col-xs-12 Filtre">
+                <ul class="filtre_menu">
+                    {{ form_start(form, { attr: {class: "filtre_menu",id:"formSearch"}}) }}
+                    <li>
+                        {{ form_widget(form.type,{attr: {class: "submitForm"}}) }}
+                    </li>
+                    <li>
+                        {{ form_widget(form.categorie,{attr: {class: "submitForm"}}) }}
+                    </li>
+                    <li>
+                        <a class="submitForm" href="{{ path("produit_index") }}"> <i class="fa fa-refresh" aria-hidden="true"></i><span>Réinitialiser la recherche</span></a>
+                    </li>
+                    <li>
+                        <input class="filtre_aller submitForm" type="checkbox" name="allergenes"><label>Prendre en compte mes allérgènes</label>
+                    </li>
+                    {{ form_end(form) }}
 
-        <div class="nav_pos">
-            <h1>Produits</h1> 
-            <p>({{ produits|length }})</p>
+                </ul>
+            </div>
         </div>
 
-        <div class="user_interact">
-                retour
-        </div>
-        </content>
+        <div class="row plats_semaine" style="margin: 0 auto;">
+            <div class="col-lg-12 col-md-12 col-xs-12 menu_choix">
+                <h4>Liste Produits</h4>
+                <h5>De la simple salade, à la salade composée, découvrez nos produits</h5>
 
-        <table>
-            <thead>
-            <tr>
-                <th>Nom</th>
-                <th>Prix</th>
-                <th>Image</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for produit in produits %}
-                <tr>
-                    <td>{{ produit.nom }}</td>
-                    <td>{{ produit.prix }}</td>
-                    <td> {% if produit.image == "" %}
-                            Aucune image
-                        {% else %}
-                            <img src=" {{ asset('produits/' ~ produit.image ) }} " style="width: 10%; height: auto"></img>
-                        {% endif %}
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                <a href="{{ path('produit_show', { 'id': produit.id }) }}">show</a>
-                            </li>
-                            <li>
-                                <a href="{{ path('ajout_panier', {'produit': produit.id }) }}" >Ajouter au panier</a>
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                <div class="search_bloc">
+                    {{ form_start(form_personnalise, { attr: {class: ""}}) }}
+                        {{ form_widget(form_personnalise.search, {attr: {'placeholder': 'Rechercher un plat, une boisson...'}}) }}
+                    {{ form_end(form_personnalise) }}
+                </div>
+
+                {% for produit in produits %}
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="showPlat">
+                            <div class="showImgPlat">
+                                <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                    <div class="overflowImg">
+                                        <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
+                                    </div>
+                                </a>
+                                <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                            </div>
+                            <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                <div class="showDescPlat">
+                                    <p class="typeProduct">{{ produit.type|upper }}</p>
+                                    <div class="row">
+                                        <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
+                                        <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix }}€</span>
+                                        <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="row plats_semaine" style="margin-left: 10%;
+    padding-left: 30px;">
+            {{ knp_pagination_render(produits) }}
+        </div>
     </section>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    ...
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+    <script type="application/javascript">
+        $(document).ready(function(){
+
+            $('.ajoutPanier').on('click', function (e) {
+                e.preventDefault();
+                var url = $(this).data('url');
+                var id = $(this).data('id');
+
+                console.log('click');
+                console.log(url);
+                $('#modal-body').load(url);
+                //$(this).load(url);
+                //$(this).prop('disabled', true);
+            }) ;
+
+            $(".submitForm").change(function(){
+                $('#formSearch').submit();
+            });
+        });
+
+
+    </script>
+{% endblock %}

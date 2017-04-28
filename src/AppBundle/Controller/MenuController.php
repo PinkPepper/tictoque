@@ -87,9 +87,20 @@ class MenuController extends Controller
         $session = $request->getSession();
         $menu = $session->get('menu');
 
-        $menu[0]->setEntree($entree->getId());
+        $pProduit = null;
+        $pProduit = $session->get('produit_' . $entree->getId());
+        if($pProduit != null)
+        {
+            $quantiteFuture =  $pProduit['quantite'] + 1;
+            if ($quantiteFuture > $entree->getQuantite())
+            {
+                $this->addFlash('notice', 'Ce produit ne peut pas être choisi, il n\'est plus disponible.');
+                return $this->redirectToRoute('menu_entree');
+            }
+        }
 
-       return $this->redirectToRoute('menu_plat');
+        $menu[0]->setEntree($entree->getId());
+        return $this->redirectToRoute('menu_plat');
     }
 
     /**
@@ -99,7 +110,6 @@ class MenuController extends Controller
     {
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $produits = $em->findByType('plat');
-
 
         return $this->render('frontoffice/menu/plats.html.twig', array(
             'produits' => $produits
@@ -113,15 +123,26 @@ class MenuController extends Controller
     {
         $session = $request->getSession();
         $menu = $session->get('menu');
+
+        $pProduit = null;
+        $pProduit = $session->get('produit_' . $plat->getId());
+        if($pProduit != null)
+        {
+            $quantiteFuture =  $pProduit['quantite'] + 1;
+            if ($quantiteFuture > $plat->getQuantite())
+            {
+                $this->addFlash('notice', 'Ce produit ne peut pas être choisi, il n\'est plus disponible.');
+                return $this->redirectToRoute('menu_plat');
+            }
+        }
+
         $menu[0]->setPlat($plat->getId());
 
         if($menu[0]->getType() == 1) // entree + plat + boisson
         {
-            //return $this->render('frontoffice/menu/boisson.html.twig');
             return $this->redirectToRoute('menu_boisson');
         }
-
-        // plat + dessert + boisson || entree + plat + dessert + boisson
+       // plat + dessert + boisson || entree + plat + dessert + boisson
         return $this->redirectToRoute('menu_dessert');
     }
 
@@ -145,8 +166,20 @@ class MenuController extends Controller
     {
         $session = $request->getSession();
         $menu = $session->get('menu');
-        $menu[0]->setDessert($dessert->getId());
 
+        $pProduit = null;
+        $pProduit = $session->get('produit_' . $dessert->getId());
+        if($pProduit != null)
+        {
+            $quantiteFuture =  $pProduit['quantite'] + 1;
+            if ($quantiteFuture > $dessert->getQuantite())
+            {
+                $this->addFlash('notice', 'Ce produit ne peut pas être choisi, il n\'est plus disponible.');
+                return $this->redirectToRoute('menu_dessert');
+            }
+        }
+
+        $menu[0]->setDessert($dessert->getId());
         return $this->redirectToRoute('menu_boisson');
     }
 
@@ -170,15 +203,23 @@ class MenuController extends Controller
     {
         $session = $request->getSession();
         $menu = $session->get('menu');
+
+        $pProduit = null;
+        $pProduit = $session->get('produit_' . $boisson->getId());
+        if($pProduit != null)
+        {
+            $quantiteFuture =  $pProduit['quantite'] + 1;
+            if ($quantiteFuture > $boisson->getQuantite())
+            {
+                $this->addFlash('notice', 'Ce produit ne peut pas être choisi, il n\'est plus disponible.');
+                return $this->redirectToRoute('menu_boisson');
+            }
+        }
+
         $menu[0]->setBoisson($boisson->getId());
 
-        $session = $request->getSession();
-        $panier = $session->get('panier');
 
-        if(!$panier)
-        {
-            $panier = array('menus'=>array(), 'produits'=>array());
-        }
+        /* FINALISATION */
 
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
 
@@ -194,8 +235,26 @@ class MenuController extends Controller
         if($menu[0]->getBoisson() != null) $boisson =  $em->find($menu[0]->getBoisson());
         else $boisson = null;
 
-        array_push($panier, (array_push($panier['menus'], array("id"=> sizeof($panier['menus']),"entree"=>$entree, "plat"=>$plat, "dessert"=>$dessert, "boisson"=>$boisson, "quantite"=>1, "prix"=>$menu[0]->getPrix()))));
-        $session->set('panier', $panier);
+        $session->set('menu_' . sizeof($session->all()), array(
+            'entree'=>$entree,
+            'plat'=>$plat,
+            'dessert'=>$dessert,
+            'boisson'=>$boisson,
+            'quantite'=>1,
+            "prix"=>$menu[0]->getPrix()
+        ));
+
+        if($session->get('prix') == null)
+        {
+            $session->set('prix', 5); // 5 -> frais de livraison
+            $prix = 5;
+        }
+        else
+        {
+            $prix = $session->get('prix');
+        }
+
+        $session->set('prix', ($prix + $menu[0]->getPrix()));
 
         return $this->redirectToRoute('index_panier');
     }

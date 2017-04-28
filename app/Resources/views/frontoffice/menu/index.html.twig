@@ -1,12 +1,67 @@
-{% extends 'frontoffice/base.html.twig' %}
+{% extends 'frontoffice/footer.html.twig' %}
 
 {% block body %}
-
-<section class="user_content">
-    <content>
-        <a href="{{ path('menu_choix', {'type': 1}) }}">Menu 1 (entree plat)</a>
-        <a href="{{ path('menu_choix', {'type': 2}) }}">Menu 3 (plat dessert)</a>
-        <a href="{{ path('menu_choix', {'type': 3}) }}">Menu 2 (entree plat dessert)</a>
-    </content>
-</section>
+    <div class="menuGlobal">
+        <div class="titleMenu">
+            <h1 class="text-center">Découvrez nos menus</h1>
+            <h4 class="text-center">Choisissez le menu qui vous correspond.</h4>
+        </div>
+        <div class="container menu">
+            <div class="row">
+                <div class="col-lg-offset-1 col-md-offset-1 col-xs-12 col-sm-12 col-md-10 col-lg-10">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 marginResponsive">
+                        <div class="boxShadow">
+                            <div class="menuTotal">
+                                <img class="img-responsive imgMenu" src="{{ asset('img/Salade/food-thai-spicy-asian-162993.jpg') }}">
+                                <h4 class="menuCorps">MENU PETITE FAIM</h4>
+                                <p class="noPadding">- Entrée</p>
+                                <p class="noPadding">- Plat</p>
+                                <p class="noPadding">- Boisson</p>
+                                <br/>
+                                <p class="noPaddingPartir">à partir de</p>
+                                <h4 class="noPadding"><b>10€50</b></h4>
+                            </div>
+                            <div class="menuCommander">
+                                <a href="{{ path('menu_choix', {'type': 1}) }}">Je choisis ce menu</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 marginResponsive">
+                        <div class="boxShadow">
+                            <div class="menuTotal">
+                                <img class="img-responsive imgMenu" src="{{ asset('img/Plat_chaud/pexels-photo-67431.jpg') }}">
+                                <h4 class="menuCorps">MENU CLASSIQUE</h4>
+                                <p class="noPadding">- Plat</p>
+                                <p class="noPadding">- Dessert</p>
+                                <p class="noPadding">- Boisson</p>
+                                <br/>
+                                <p class="noPaddingPartir">à partir de</p>
+                                <h4 class="noPadding"><b>14€50</b></h4>
+                            </div>
+                            <div class="menuCommander">
+                                <a href="{{ path('menu_choix', {'type': 2}) }}">Je choisis ce menu</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 marginResponsive">
+                        <div class="boxShadow">
+                            <div class="menuTotal">
+                                <img class="img-responsive imgMenu" src="{{ asset('img/Dessert/muffin.jpg') }}">
+                                <h4 class="menuCorps">MENU COMPLET</h4>
+                                <p class="noPadding">- Entrée</p>
+                                <p class="noPadding">- Plat</p>
+                                <p class="noPadding">- Dessert</p>
+                                <p class="noPadding">- Boisson</p>
+                                <p class="noPaddingPartir">à partir de</p>
+                                <h4 class="noPadding"><b>16€99</b></h4>
+                            </div>
+                            <div class="menuCommander">
+                                <a href="{{ path('menu_choix', {'type': 3}) }}">Je choisis ce menu</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock %}
