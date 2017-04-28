@@ -1,104 +1,120 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block body %}
-	<div class="container">
-		<h1>Détails du compte de {{ app.user.nom }} {{ app.user.prenom }}</h1>
+    <div class="container infoPersonnelle">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <h1 class="title">Informations personnelles</h1>
+                <p>Nom : <b>{{ app.user.nom }}</b></p>
+                <p>Prénom : <b>{{ app.user.prenom }}</b></p>
+                <p>Tél : <b>{{ app.user.telephone }}</b></p>
+                <p>Mail : <b>{{ app.user.email }}</b></p>
+                <p>Adresse de livraison : <b></b></p>
+            </div>
+            <div class="col-lg-2 col-md-12 col-sm-12">
+                <p>Aide</p>
+                <p>Comment ca marche</p>
+                <p>Contacter le service client</p>
+            </div>
+            <div class="col-lg-2 col-md-12 col-sm-12">
+                <a>
+                    <div class="buttonPerso text-center">
+                        <a>Modifier mon mot de passe</a><br/>
+                    </div>
+                </a>
+                <a>
+                    <div class="buttonPerso text-center">
+                        <a>Modifier adresse mail et/ou pseudo</a>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
 
-		<div>
-			<h2>Mes informations</h2>
-			<p>nom :{{ app.user.nom }}</p>
-			<p>prenom :{{ app.user.prenom }}</p>
-			<p>pseudo: {{ app.user.username }}</p>
-			<p>email: {{ app.user.email }}</p>
-			<a href="{{ path('fos_user_profile_edit') }}">Changer mon email et mon pseudo</a>
-			<br>
-			<a href="{{ path('fos_user_change_password') }}">Changer mon mot de passe</a>
+    <div class="container histoCommandeVide">
+        <h1>Historique des commandes</h1>
+    </div>
 
-			<h3>Allergènes</h3>
+    <div class="container">
+    {% for commande in user.commandes %}
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+            <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                    <h4 class="panel-title">
+                        <a role="button" class="commande" data-id="{{ commande.id }}">
+                            Commande n°{{ commande.id }} | {{ commande.date | date('d-m-y') }} | 0€
+                        </a>
+                    </h4>
+                </div>
+                <div id="{{ commande.id }}" class="panel-collapse collapse in" role="tabpanel"
+                     aria-labelledby="headingOne" style="display:none">
+                    <div class="panel-body">
 
-		</div>
+                        <h2>Produits</h2>
 
-		<div>
-			<h2>Historique des commandes</h2>
-			{% for commande in user.commandes %}
-				<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-					<div class="panel panel-default">
-						<div class="panel-heading" role="tab" id="headingOne">
-							<h4 class="panel-title">
-								<a role="button" class="commande" data-id="{{ commande.id }}">
-									Commande n°{{ commande.id }} | {{ commande.date | date('d-m-y') }} | 0€
-								</a>
-							</h4>
-						</div>
-						<div id="{{ commande.id }}" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne" style="display:none">
-							<div class="panel-body">
-
-								<h2>Produits</h2>
-
-									<table class="table">
-										<thead>
-										<tr>
-											<th>Nom</th>
-											<th>Quantité commandée</th>
-											<th>Prix</th>
-										</tr>
-										</thead>
-										<tbody>
-											{% for commandeProduit in commande.commandesProduit %}
-												<tr>
-													<td>{{ commandeProduit.produits.nom }}</td>
-													<td>{{ commandeProduit.quantiteCommandee }}</td>
-													<td>{{ commandeProduit.produits.prix }}</td>
-												</tr>
-											{% endfor %}
-										</tbody>
-									</table>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Quantité commandée</th>
+                                <th>Prix</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for commandeProduit in commande.commandesProduit %}
+                                <tr>
+                                    <td>{{ commandeProduit.produits.nom }}</td>
+                                    <td>{{ commandeProduit.quantiteCommandee }}</td>
+                                    <td>{{ commandeProduit.produits.prix }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
 
 
-								<h2>Menus</h2>
+                        <h2>Menus</h2>
 
-									<table class="table">
-										<thead>
-										<tr>
-											<th>entree</th>
-											<th>plat</th>
-											<th>dessert</th>
-											<th>boisson</th>
-											<th>Quantité commandée</th>
-											<th>Prix</th>
-										</tr>
-										</thead>
-										<tbody>
-										{% for commandeMenu in commande.commandesMenu %}
-											{% for menu in array %}
-												{% if commandeMenu.id == menu.id_commandeMenu %}
-													<tr>
-														<td>{% if menu.entree is not null %}{{ menu.entree.nom }}{% else %} NULL {% endif %}</td>
-														<td>{% if menu.plat is not null %}{{ menu.plat.nom }}{% else %} NULL {% endif %}</td>
-														<td>{% if menu.dessert is not null %}{{ menu.dessert.nom }}{% else %} NULL {% endif %}</td>
-														<td>{% if menu.boisson is not null %}{{ menu.boisson.nom }}{% else %} NULL {% endif %}</td>
-														<td>{{ commandeMenu.menus.quantite }}</td>
-														<td>{{ commandeMenu.menus.prix }}</td>
-													</tr>
-												{% endif %}
-											{% endfor %}
-										{% endfor %}
-										</tbody>
-									</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			{% endfor %}
-		</div>
-	</div>
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>entree</th>
+                                <th>plat</th>
+                                <th>dessert</th>
+                                <th>boisson</th>
+                                <th>Quantité commandée</th>
+                                <th>Prix</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for commandeMenu in commande.commandesMenu %}
+                                {% for menu in array %}
+                                    {% if commandeMenu.id == menu.id_commandeMenu %}
+                                        <tr>
+                                            <td>{% if menu.entree is not null %}{{ menu.entree.nom }}{% else %} NULL {% endif %}</td>
+                                            <td>{% if menu.plat is not null %}{{ menu.plat.nom }}{% else %} NULL {% endif %}</td>
+                                            <td>{% if menu.dessert is not null %}{{ menu.dessert.nom }}{% else %} NULL {% endif %}</td>
+                                            <td>{% if menu.boisson is not null %}{{ menu.boisson.nom }}{% else %} NULL {% endif %}</td>
+                                            <td>{{ commandeMenu.menus.quantite }}</td>
+                                            <td>{{ commandeMenu.menus.prix }}</td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
 
-	<script>
-        $('.commande').on('click', function(){
+    <script>
+        $('.commande').on('click', function () {
             var id = $(this).data('id');
-            $('#'+id).toggle(300);
+            $('#' + id).toggle(300);
         })
-	</script>
+    </script>
 {% endblock %}
 
 
