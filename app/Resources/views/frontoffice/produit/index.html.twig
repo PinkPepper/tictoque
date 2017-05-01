@@ -60,7 +60,11 @@
                                                 <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
                                             </div>
                                         </a>
-                                        <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                                        {% if app.user is not null %}
+                                           <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                                        {% else %}
+                                            <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
+                                        {% endif %}
                                     </div>
                                     <a href="{{ path("produit_show", {'id': produit.id}) }}">
                                         <div class="showDescPlat">
@@ -116,8 +120,12 @@
                                             <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
                                         </div>
                                     </a>
+                                {% if app.user is not null %}
                                     <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
-                                </div>
+                                {% else %}
+                                    <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
+                                {% endif %}
+                            </div>
                                 <a href="{{ path("produit_show", {'id': produit.id}) }}">
                                     <div class="showDescPlat">
                                         <p class="typeProduct">{{ produit.type|upper }}</p>

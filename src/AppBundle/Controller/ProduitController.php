@@ -59,7 +59,7 @@ class ProduitController extends Controller
             }
 
         }
-        
+
         if($this->getUser() === null)
         {
             $allergenes = array();
