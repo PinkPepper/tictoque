@@ -30,7 +30,6 @@ class CommandeController extends Controller
         //TODO localisation
         //TODO moyen de paiement
 
-
         return $this->render('frontoffice/commande/index.html.twig', array(
         ));
     }
@@ -98,7 +97,33 @@ class CommandeController extends Controller
         }
 
         /* ****** PAGE SUCCES ****** */
+        $page_succes = $this->preparePageSucces($session);
+        $produits_panier = $page_succes[0];
+        $menus = $page_succes[1];
+        /* */
 
+        /* reset le panier */
+        $session = $request->getSession();
+        $session->clear();
+
+        /* Triche pour regler un problème */
+        $badCommande = $em->getRepository('AppBundle:Commande')->findByPrix(null);
+        dump($badCommande);
+        foreach ($badCommande as $bc){
+            $em->getManager()->remove($bc);
+            $em->getManager()->flush();
+        }
+
+        return $this->render('frontoffice/commande/succes.html.twig', array(
+            'produits'=>$produits_panier,
+            'menus'=>$menus,
+            'prix'=>$prix
+        ));
+    }
+
+    function preparePageSucces($session)
+    {
+        $em = $this->getDoctrine()->getManager();
         $panier = $session->all();
         $produits_panier = array();
         $menus = array();
@@ -140,18 +165,8 @@ class CommandeController extends Controller
                 array_push($menus, array('id' => $id, 'entree' => $entree, 'plat' => $plat, 'dessert' => $dessert, 'boisson' => $boisson, 'quantite' => $value['quantite'], 'prix' => $value['prix']));
             }
         }
-        /* */
 
-
-        /* reset le panier */
-        $session = $request->getSession();
-        $session->clear();
-
-        return $this->render('frontoffice/commande/succes.html.twig', array(
-            'produits'=>$produits_panier,
-            'menus'=>$menus,
-            'prix'=>$prix
-        ));
+        return array($produits_panier, $menus);
     }
 
 }
