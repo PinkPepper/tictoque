@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Pointrelais list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Createdat</th>
+                <th>Updatedat</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pointRelai in pointRelais %}
+            <tr>
+                <td><a href="{{ path('pointrelais_show', { 'id': pointRelai.id }) }}">{{ pointRelai.id }}</a></td>
+                <td>{{ pointRelai.nom }}</td>
+                <td>{{ pointRelai.latitude }}</td>
+                <td>{{ pointRelai.longitude }}</td>
+                <td>{% if pointRelai.createdAt %}{{ pointRelai.createdAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>{% if pointRelai.updatedAt %}{{ pointRelai.updatedAt|date('Y-m-d H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('pointrelais_show', { 'id': pointRelai.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('pointrelais_edit', { 'id': pointRelai.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('pointrelais_new') }}">Create a new pointRelai</a>
+        </li>
+    </ul>
+{% endblock %}
