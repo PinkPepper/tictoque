@@ -34,6 +34,7 @@ class RegistrationType extends AbstractType
                 'choice_attr' => function($val, $key, $index) {
                     return ['class' => 'unique-class'];
                 },))
+            ->add('adresse', TextType::class, array('label'=>'Adresse de votre lieu de travail '))
         ;
     }
 
