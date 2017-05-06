@@ -1,6 +1,5 @@
 {% for point in pointsRelais %}
-    {{ point.nom }}
-    {{ point.adresse }}
+    <p><b>{{ point.nom }}</b> - {{ point.adresse }}</p>
 {% endfor %}
 
 {% if pointsRelais == [] %}

@@ -27,10 +27,15 @@ class CommandeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        //TODO localisation
+        $session = $request->getSession();
+        $prix = $session->get('prix');
+        if($prix == 5 || $prix === null) //panier vide
+        {
+            return $this->redirectToRoute('index_panier');
+        }
+
         //TODO moyen de paiement
-        return $this->render('frontoffice/commande/index.html.twig', array(
-        ));
+        return $this->render('frontoffice/commande/index.html.twig');
     }
 
     /**
