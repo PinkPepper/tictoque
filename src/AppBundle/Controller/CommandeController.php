@@ -34,6 +34,18 @@ class CommandeController extends Controller
         ));
     }
 
+    /**
+     * @Route("/results/{adresse}", name="commande_point_relais")
+     */
+    public function resultAction($adresse)
+    {
+        $geocoder = $this->container->get('app.geocoder_service');
+        $pointsRelais = $geocoder->getPointsRelais($adresse);
+
+        return $this->render('frontoffice/commande/results.html.twig', array(
+            'pointsRelais'=>$pointsRelais
+        ));
+    }
 
     /**
      * Succes de la commande

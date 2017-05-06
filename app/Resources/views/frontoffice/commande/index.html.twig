@@ -2,7 +2,42 @@
 
 {% block body %}
     <h1>hey voici la commande et les options de localisation + de paiement</h1>
-    <div>
-        <a href="{{ path('commande_succes') }}" class="btn btn-info btn-small"  >Valider ma commande</a>
+
+    <div id="content_site" >
+        <h3>1. Choisissez un points de livraison</h3>
+        <br>
+        <input type="text" id="input" placeholder="Entrez une adresse" required>
+        <br>
+        <div class="results" data-adresse="{{ app.user.adresse }}" data-url="{{ path('commande_point_relais', {'adresse': '_adresse_'}) }}"></div>
+
+        <h3>2. Choisissez votre moyen de paiement</h3>
+        <br>
+        <div>
+            <a href="{{ path('commande_succes') }}" class="btn btn-info btn-small"  >Valider ma commande</a>
+        </div>
     </div>
+
+
+    <script>
+        $(document).ready(function(){
+            var adresse = $('.results').data('adresse');
+
+            if(adresse != null){
+                const url = $(".results").data('url');
+                $('#input').val(adresse);
+                adresse = adresse.replace(/ /g, '%20');
+                $('.results').load(url.replace(/_adresse_/, adresse));
+            }
+
+            $('#input').keypress(function(e) {
+                if(e.which == 13) {
+                    const url = $(".results").data('url');
+                    var adresse = $('#input').val();
+                    adresse = adresse.replace(/ /g, '%20');
+                    $('.results').load(url.replace(/_adresse_/, adresse));
+                }
+            });
+        });
+
+    </script>
 {% endblock %}

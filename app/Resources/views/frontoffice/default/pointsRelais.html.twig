@@ -6,8 +6,8 @@
 <script>
     $('#button').on('click', function(){
         const url = $(".results").data('url');
-        const adresse = $('#input').val();
-        console.log(url.replace(/_adresse_/, adresse));
+        var adresse = $('#input').val();
+        adresse = adresse.replace(/ /g, '%20');
         $('.results').load(url.replace(/_adresse_/, adresse));
     })
 </script>

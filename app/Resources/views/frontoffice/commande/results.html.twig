@@ -1,0 +1,23 @@
+
+{% for point in pointsRelais %}
+    <p>
+    <input type="radio" name="pointRelais" value="{{ point.id }}">
+        <b>{{ point.nom }}</b> - {{ point.adresse }}
+    </p>
+{% endfor %}
+
+{% if pointsRelais == [] %}
+    Aucun point relais trouvé pour cette adresse
+{% else %}
+    <div class="message"></div>
+{% endif %}
+
+
+{#<script>
+    $( "input" ).on( "click", function() {
+        const id = $( "input:checked" ).val();
+
+        $( ".message" ).html("ok");
+    });
+</script>#}
+
