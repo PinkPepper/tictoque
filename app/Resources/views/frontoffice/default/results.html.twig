@@ -1,7 +1,9 @@
+{% for point in pointsRelais %}
+    {{ point.nom }}
+    {{ point.adresse }}
+{% endfor %}
 
-    {% for point in pointsRelais %}
-        {{ point.nom }}
-        {{ point.adresse }}
-    {% endfor %}
-
+{% if pointsRelais == [] %}
+    Aucun point relais trouvé pour cette adresse
+{% endif %}
 
