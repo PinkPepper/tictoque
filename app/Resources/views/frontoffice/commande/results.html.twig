@@ -1,7 +1,7 @@
 
 {% for point in pointsRelais %}
     <p>
-    <input type="radio" name="pointRelais" value="{{ point.id }}">
+    <input class="pt" type="radio" name="pointRelais" value="{{ point.id }}">
         <b>{{ point.nom }}</b> - {{ point.adresse }}
     </p>
 {% endfor %}
@@ -13,11 +13,10 @@
 {% endif %}
 
 
-{#<script>
+<script>
     $( "input" ).on( "click", function() {
         const id = $( "input:checked" ).val();
-
-        $( ".message" ).html("ok");
+        document.cookie = 'pointRelais=' + id;
     });
-</script>#}
+</script>
 

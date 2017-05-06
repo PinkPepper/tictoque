@@ -5,8 +5,8 @@
         <div class="col-lg-12 col-md-12 col-xs-12 recap-banner">
             <div>
                 <h4>L'amourFood vous remercie pour votre confiance !</h4>
-                <p>Votre commande n°047586945214 est enregistrée.</p>
-                <p>Un e-mail de confirmation vient de vous être envoyé à l'adresse: FredEric@vegan.fr</p>
+                <p>Votre commande n°{{ commande.id }} est enregistrée.</p>
+                <p>Un e-mail de confirmation vient de vous être envoyé à l'adresse: {{ app.user.email }}</p>
             </div>
         </div>
     </div>
@@ -16,9 +16,9 @@
                 <div class="produit produitSuccess">
                     <div class="livraison-type">
                         <p>Livraison en point relais</p>
-                        <span>Euratechnologies</span>
+                        <span>{{ pointRelais.nom }}</span>
                         </br>
-                        <span>165 Avenue de Bretagne - 59000 Lille</span>
+                        <span>{{ pointRelais.adresse }}</span>
                     </div>
                 </div>
             </div>

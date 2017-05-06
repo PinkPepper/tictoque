@@ -29,7 +29,6 @@ class CommandeController extends Controller
     {
         //TODO localisation
         //TODO moyen de paiement
-
         return $this->render('frontoffice/commande/index.html.twig', array(
         ));
     }
@@ -54,7 +53,11 @@ class CommandeController extends Controller
      */
     public function SuccesAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine();
+        $pointRelais = $request->cookies->get('pointRelais');
+        $pointRelais = $em->getRepository('AppBundle:PointRelais')->find($pointRelais);
+
+        $em = $em->getManager();
         $session = $request->getSession();
 
         $prix = $session->get('prix');
@@ -62,6 +65,8 @@ class CommandeController extends Controller
         $commande = new Commande();
         $commande->setUser($this->getUser());
         $commande->setPrix($prix);
+        $commande->setAdresse($pointRelais->getAdresse());
+
         $em->persist($commande);
         $em->flush();
 
@@ -120,13 +125,14 @@ class CommandeController extends Controller
 
         /* Triche pour regler un problème */
         $badCommande = $em->getRepository('AppBundle:Commande')->findByPrix(null);
-        dump($badCommande);
         foreach ($badCommande as $bc){
             $em->getManager()->remove($bc);
             $em->getManager()->flush();
         }
 
         return $this->render('frontoffice/commande/succes.html.twig', array(
+            'commande'=>$commande,
+            'pointRelais'=>$pointRelais,
             'produits'=>$produits_panier,
             'menus'=>$menus,
             'prix'=>$prix
