@@ -27,7 +27,6 @@ class PanierController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $panier = $session->all();
-        dump($panier);
         $produits = array();
         $menus = array();
 
@@ -35,7 +34,6 @@ class PanierController extends Controller
         {
             if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
             {
-                dump($value);
                 $id = explode("_", $key);
                 $id = $id[1];
                 array_push($produits, array($em->find($id), $value['quantite']));
@@ -130,8 +128,6 @@ class PanierController extends Controller
             $prix = $prix + $produit->getPrix();
             $session->set('prix', $prix);
         }
-
-        dump($session->all());
 
         return $this->render('frontoffice/produit/success.html.twig', array(
             "reponse"=>$reponse

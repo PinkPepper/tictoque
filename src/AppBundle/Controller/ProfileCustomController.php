@@ -17,14 +17,22 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 class ProfileCustomController extends Controller
 {
     /**
+     * @Route("/index", name="profile_edit_index")
+     */
+    public function editAction()
+    {
+        return $this->render('frontoffice/profile/edit.html.twig');
+    }
+
+    /**
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
-     * @Route("/allergene", name="profile_allergene")
+     * @Route("/edit", name="profile_edit_show")
      */
     public function resetAllergenesAction(Request $request)
     {
         $user = $this->getUser();
-        $form = $this->createForm('AppBundle\Form\UserAllergeneType', $user);
+        $form = $this->createForm('AppBundle\Form\UserProfileEditType', $user);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
@@ -33,10 +41,10 @@ class ProfileCustomController extends Controller
             $em->persist($user);
             $em->flush();
 
-            return $this->redirectToRoute('profile_allergene');
+            return $this->redirectToRoute('profile_edit_show');
         }
 
-        return $this->render('frontoffice/profile/allergene.html.twig', array(
+        return $this->render('frontoffice/profile/edit_show.html.twig', array(
             'form'=>$form->createView()
         ));
     }

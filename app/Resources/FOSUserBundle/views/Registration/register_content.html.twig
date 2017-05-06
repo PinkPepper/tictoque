@@ -41,6 +41,16 @@
 
         <div class="form-horizontal">
             <div class="form-group">
+                <label class="col-md-4 control-label" for="textinput">ADRESSE DU LIEU DE TRAVAIL*</label>
+                <div class="col-md-4">
+                    {{ form_widget(form.adresse, { 'attr': {'class': 'form-control input-md', 'placeholder': 'Adresse'|trans }}) }}
+                    {{ form_errors(form.adresse) }}
+                </div>
+            </div>
+        </div>
+
+        <div class="form-horizontal">
+            <div class="form-group">
                 <label class="col-md-4 control-label" for="textinput">TELEPHONE*</label>
                 <div class="col-md-4">
                     {{ form_widget(form.telephone, { 'attr': {'class': 'form-control input-md', 'placeholder': '060102030405'|trans } }) }}
