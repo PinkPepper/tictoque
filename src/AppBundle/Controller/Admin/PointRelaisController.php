@@ -48,8 +48,8 @@ class PointRelaisController extends Controller
 
             $geocoder = $this->container->get('app.geocoder_service');
             $coord = $geocoder->adresseToCoord($pointRelai->getAdresse());
-            $pointRelai->setLatitude($coord[0]);
-            $pointRelai->setLongitude($coord[1]);
+            $pointRelai->setLatitude($coord[1]);
+            $pointRelai->setLongitude($coord[0]);
 
             $em->persist($pointRelai);
             $em->flush($pointRelai);

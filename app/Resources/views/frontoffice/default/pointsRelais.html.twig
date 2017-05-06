@@ -1,0 +1,13 @@
+<input type="text" id="input" placeholder="Entrez une adresse">
+<button id="button">go</button>
+
+<div class="results" data-url="{{ path('point_relais_results', {'adresse': '_adresse_'}) }}"></div>
+
+<script>
+    $('#button').on('click', function(){
+        const url = $(".results").data('url');
+        const adresse = $('#input').val();
+        console.log(url.replace(/_adresse_/, adresse));
+        $('.results').load(url.replace(/_adresse_/, adresse));
+    })
+</script>
