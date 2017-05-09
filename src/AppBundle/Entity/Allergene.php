@@ -49,6 +49,9 @@ class Allergene
      */
     private $users;
 
+
+    private $nomForm;
+
     /**
      * @return mixed
      */
@@ -144,5 +147,18 @@ class Allergene
     {
         $this->users = $users;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getNomForm()
+    {
+        if($this->nom == "aucun")
+        {
+            return " ";
+        }
+        return $this->nom;
+    }
+
 }
 

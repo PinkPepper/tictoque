@@ -96,7 +96,7 @@
             <div class="compte_head">
                 <h4>ETAPE 2/2</h4>
                 <h2>AVEZ-VOUS DES ALLERGIES</h2>
-                <span>Personnalisé votre profils en ajoutant vos allergies, pour ne pas avoir de produit suceptible de vous rendre malade.</span>
+                <span>Personnalisez votre profil en ajoutant vos allergies, pour ne pas avoir de produit suceptible de vous rendre malade.</span>
             </div>
 
             <div>
@@ -111,6 +111,7 @@
 
 
                     {{ form_widget(form.allergenes, {attr: {class: "unique-class"}}) }}
+
                     {#{% if loop.index == 4 %}#}
                 </ul>
                 <ul>
@@ -121,7 +122,7 @@
         </div>
 
         <div class="col-lg-12 col-md-8 col-xs-8 compte_etape3">
-            <input type="checkbox" name="conditions" required><label>J'ai lu et j'accpete les <a href="#">conditions d'utilisations</a></label>
+            <input type="checkbox" name="conditions" required><label>J'ai lu et j'accepte les <a href="{{ path('conditions_ventes') }}">conditions d'utilisations</a></label>
         </div>
 
         <div class="col-lg-12 col-md-8 col-xs-8 conditions_bandeau">
