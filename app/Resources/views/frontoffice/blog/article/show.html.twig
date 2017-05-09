@@ -9,10 +9,21 @@
                         <a href="{{ path('blog_index') }}">< Retour</a>
                     </div>
                 </div>
-                <div class="col-sm-offset-1 col-md-offset-1 col-xs-12 col-sm-10 col-md-10 col-xl-8 text-center">
+                <div class="col-xs-12 col-sm-10 col-md-10 col-xl-8 text-left">
                     <div class="article">
-                        <h1>{{ article.titre }}</h1>
+                        <h1 class="text-center">{{ article.titre }}</h1>
                         <p class="text-left">{{ article.contenu|raw }}</p>
+                        <div class="social">
+                            <p>Partager sur :</p>
+                            <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&width=122&layout=button&action=like&size=small&show_faces=false&share=true&height=65&appId" width="122" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+                            <iframe
+                                    src="https://platform.twitter.com/widgets/tweet_button.html?size=m&url=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ftweet-button&via=twitterdev&related=twitterapi%2Ctwitter&text=custom%20share%20text&hashtags=example%2Cdemo"
+                                    width="140"
+                                    height="20"
+                                    title="Twitter Tweet Button"
+                                    style="border: 0; overflow: hidden;">
+                            </iframe>
+                        </div>
                         <div class="bar"></div>
                         <div class="auteur text-left">
                             <p>
