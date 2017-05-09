@@ -24,13 +24,18 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 desc_prod">
                 <h1 class="produit_nom">{{ produit.nom }}</h1>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
 
-                <span class="produit_avis">(12)</span>
+                {% if produit.nbVotants is not null %}
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+                    <span class="glyphicon glyphicon-star"></span>
+
+                    <span class="produit_avis">(moy: {{ produit.notation }}, votes: {{ produit.nbVotants }})</span>
+                {% else %}
+                    Aucune note
+                {% endif %}
 
                 <p class="produit_desc">{{ produit.description | raw }}</p>
                 <span class="produit_aller"><a>Allergenes</a></span>
