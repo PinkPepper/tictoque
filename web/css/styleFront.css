@@ -1072,14 +1072,23 @@ body .Filtre ul form {
       padding: 0; }
       body .Filtre .filtre_menu form li:nth-child(4) {
         width: 500px;
-        padding: 15px 0 0 0; }
+        padding: 12px 0 0 0; }
         body .Filtre .filtre_menu form li:nth-child(4) input {
-          float: left; }
+          width: 80%;
+          float: left;
+          border-radius: 5px;
+          border: 1px #929292 solid;
+          background-color: white !important;
+          padding-left: 5px;
+          padding-right: 5px;
+          padding-top: 2.5px;
+          padding-bottom: 2.5px;
+          color: #929292; }
         body .Filtre .filtre_menu form li:nth-child(4) label {
           float: left;
           font-size: 12px; }
       body .Filtre .filtre_menu form li:nth-child(5) {
-        padding: 10px 10px 0 0; } }
+        padding: 5px 10px 0 0; } }
 body .Filtre .filtre_menu li:first-child, body .Filtre .filtre_menu li:nth-child(2) {
   border-left: 1px solid #cacaca;
   display: flex; }
@@ -1106,7 +1115,7 @@ body .Filtre .filtre_menu li:first-child select .type_select, body .Filtre .filt
   padding: 15px; }
 
 body .Filtre .filtre_menu li:nth-child(3) {
-  width: 100%;
+  width: 60%;
   padding: 12px 0 0 20px;
   border-left: 1px solid #cacaca;
   line-height: 2;
@@ -1903,5 +1912,11 @@ body .container .recap-prix .livraison-total .prix-total {
 
 .showDescPlat a:hover {
   text-decoration: none; }
+
+#type_filtre_allergene label {
+  display: block !important; }
+
+#type_filtre_allergene_0 {
+  float: left; }
 
 /*# sourceMappingURL=styleFront.css.map */

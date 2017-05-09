@@ -1032,11 +1032,20 @@ body {
             li:nth-child(4)
             {
               width: 500px;
-              padding: 15px 0 0 0;
+              padding: 12px 0 0 0;
 
               input
               {
+                width: 80%;
                 float: left;
+                border-radius: 5px;
+                border: 1px #929292 solid;
+                background-color: white !important;
+                padding-left: 5px;
+                padding-right: 5px;
+                padding-top: 2.5px;
+                padding-bottom: 2.5px;
+                color:#929292;
               }
 
               label
@@ -1047,7 +1056,7 @@ body {
             }
             li:nth-child(5)
             {
-              padding: 10px 10px 0 0;
+              padding: 5px 10px 0 0;
             }
           }
         }
@@ -1081,7 +1090,7 @@ body {
           body .Filtre .filtre_menu li:first-child select .type_select, body .Filtre .filtre_menu li:nth-child(2) select .type_select {
             padding: 15px; }
       body .Filtre .filtre_menu li:nth-child(3) {
-        width: 100%;
+        width: 60%;
         padding: 12px 0 0 20px;
         border-left: 1px solid #cacaca;
         line-height: 2;
@@ -2104,6 +2113,13 @@ body {
   text-decoration: none;
 }
 
+#type_filtre_allergene label{
+  display: block !important;
+}
+
+#type_filtre_allergene_0{
+  float:left;
+}
 
 
 
