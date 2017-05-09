@@ -29,9 +29,12 @@ class AvisProduitType extends AbstractType
                     "3"=>3,
                     "4"=>4,
                     "5"=>5
-                )
+                ),
+                'label'=>'Note'
             ))
-            ->add('avisForm')
+            ->add('avisForm', null, array(
+                'label'=>"Avis"
+            ))
             ;
     }
 
