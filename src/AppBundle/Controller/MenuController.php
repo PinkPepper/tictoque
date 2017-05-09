@@ -40,15 +40,15 @@ class MenuController extends Controller
 
         if($type == 1)
         {
-            $menu->setPrix(12);
+            $menu->setPrix(8.99);
         }
         else if($type == 2)
         {
-            $menu->setPrix(14);
+            $menu->setPrix(10.50);
         }
         else
         {
-            $menu->setPrix(16);
+            $menu->setPrix(13.99);
         }
 
         $SESSION_MENU = array($menu);

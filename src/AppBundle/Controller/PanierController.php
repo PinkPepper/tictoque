@@ -268,8 +268,6 @@ class PanierController extends Controller
     public function retirerMenu(Request $request, $menu)
     {
         $session = $request->getsession();
-
-
         $pMenu = $session->get('menu_' . $menu);
 
         if( $pMenu != null)
