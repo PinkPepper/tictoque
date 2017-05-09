@@ -236,6 +236,7 @@ class MenuController extends Controller
         else $boisson = null;
 
         $session->set('menu_' . sizeof($session->all()), array(
+            'type'=>$menu[0]->getType(),
             'entree'=>$entree,
             'plat'=>$plat,
             'dessert'=>$dessert,
