@@ -26,39 +26,50 @@
 </head>
 
 <body>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.svg') }}" alt="logo"></a>
-                </div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="{{ path('homepage') }}"><img src="{{ asset('img/logo.svg') }}" alt="logo"></a>
+            </div>
 
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="{{ path('produit_index') }}">Nos plats</a></li>
-                        <li><a href="{{ path('menu') }}">Créer un menu</a></li>
-                        <li><a href="{{ path('blog_index') }}">Blog</a></li>
-                        {% if app.user %}
-                            {% if app.user.roles.0=="ROLE_ADMIN" %}
-                                <li><a href="{{ path('admin_index') }}">Backoffice</a></li>
-                            {% endif %}
-                            <li><a href="{{ path('fos_user_profile_show') }}">Mon compte</a></li>
-                            <li class="nav-panier"><a href="{{ path('index_panier') }}"><img src="{{ asset('img/panier.svg') }}">0.00€</a></li>
-                            <li class="nav-deconnexion"><a href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
-                        {% else %}
-                            <li><a class="nav-connexion" href="{{ path('fos_user_security_login') }}">Se connecter</a></li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ path('produit_index') }}">Nos plats</a></li>
+                    <li><a href="{{ path('menu') }}">Créer un menu</a></li>
+                    <li><a href="{{ path('blog_index') }}">Blog</a></li>
+                    {% if app.user %}
+                        {% if app.user.roles.0=="ROLE_ADMIN" %}
+                            <li><a href="{{ path('admin_index') }}">Backoffice</a></li>
                         {% endif %}
-                    </ul>
-                </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-        </nav>
+                        <li class="hoverCompte">
+                            <a href="{{ path('fos_user_profile_show') }}">Mon compte</a>
+                            <ul class="hideHoverCompte">
+                                <a href="{{ path('fos_user_profile_show') }}"><li>Historique des commandes</li></a>
+                                <a href="{{ path('fos_user_security_logout') }}"><li>Déconnexion</li></a>
+                            </ul>
+                        </li>
+                        <li class="nav-panier"><a href="{{ path('index_panier') }}"><img src="{{ asset('img/panier.svg') }}"><span>Panier</span>
+                                {% if app.session.get('prix') %}
+                                    <span class="spanPrix"><b>{{ app.session.get('prix') }}€</b></span>
+                                {% else %}
+                                    <span class="spanPrix"><b>0.00€</b></span>
+                                {% endif %}
+                            </a></li>
+                    {% else %}
+                        <li><a class="nav-connexion" href="{{ path('fos_user_security_login') }}">Se connecter</a></li>
+                    {% endif %}
+                </ul>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
         <div>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 <!-- {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} -->

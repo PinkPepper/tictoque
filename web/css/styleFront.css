@@ -108,15 +108,22 @@ body .navbar .container-fluid .collapse ul li .nav-deconnexion {
   margin-left: 10px; }
 
 body .navbar .container-fluid .collapse ul .nav-panier {
-  display: inline-flex; }
+  display: inline-flex;
+  margin-top: 10px;
+  border: 2px #f32063 solid;
+  border-radius: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 3px;
+  padding-top: 3px; }
 
 body .navbar .container-fluid .collapse ul .nav-panier a {
   padding: 2px 0 0 0 !important; }
 
 body .navbar .container-fluid .collapse ul .nav-panier a img {
-  margin: 0 8px 5px 0;
   width: 20px;
-  height: 45px; }
+  height: 20px;
+  margin-right: 10px; }
 
 body .row.home {
   max-width: 100%; }
@@ -1839,5 +1846,38 @@ body .container .recap-prix .livraison-total .prix-total {
 @media (max-width: 767px) {
   .infoPersonnelle {
     width: 370px; } }
+.hoverCompte:hover
+.hideHoverCompte {
+  display: block !important; }
+
+.hideHoverCompte {
+  display: none !important;
+  position: ABSOLUTE;
+  top: 20px;
+  z-index: 100;
+  background-color: white;
+  text-align: center;
+  padding-top: 5px !important;
+  padding-bottom: 0px !important;
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important; }
+
+.hideHoverCompte li {
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
+  cursor: pointer; }
+
+.hideHoverCompte a {
+  color: #929292;
+  text-decoration: none; }
+
+.hideHoverCompte li:hover {
+  color: white;
+  background-color: #f32063; }
+
+.spanPrix {
+  margin-top: 5px; }
 
 /*# sourceMappingURL=styleFront.css.map */
