@@ -60,6 +60,12 @@ class ProduitController extends Controller
 
         }
 
+        if($this->getUser() === null)
+        {
+            $allergenes = array();
+        }
+        else $allergenes = $this->getUser()->getAllergenes();
+
 
         return $this->render('frontoffice/produit/index.html.twig', array(
             'categories' => $categories,
@@ -68,7 +74,7 @@ class ProduitController extends Controller
             'form'=>$form->createView(),
             //'form_personnalise'=>$form2->createView()
             'isAllergene'=>$isAllergene,
-            'allergenes'=>$this->getUser()->getAllergenes()
+            'allergenes'=>$allergenes
         ));
     }
 

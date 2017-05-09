@@ -9,7 +9,7 @@
                 <p>Prénom : <b>{{ app.user.prenom }}</b></p>
                 <p>Tél : <b>{{ app.user.telephone }}</b></p>
                 <p>Mail : <b>{{ app.user.email }}</b></p>
-                <p>Adresse de livraison : <b></b></p>
+                <p>Adresse du lieu de travail : <b>{{ app.user.adresse }}</b></p>
             </div>
             <div class="col-lg-2 col-md-12 col-sm-12">
                 <p>Aide</p>
@@ -19,17 +19,7 @@
             <div class="col-lg-2 col-md-12 col-sm-12">
                 <a>
                     <div class="buttonPerso text-center">
-                        <a href="{{ path('fos_user_change_password') }}" >Modifier mon mot de passe</a><br/>
-                    </div>
-                </a>
-                <a>
-                    <div class="buttonPerso text-center">
-                        <a href="{{ path('fos_user_resetting_check_email') }}" >Modifier adresse mail et/ou pseudo</a>
-                    </div>
-                </a>
-                <a>
-                    <div class="buttonPerso text-center">
-                        <a href="{{ path('profile_allergene') }}">Modifier mes allergènes</a>
+                        <a href="{{ path('profile_edit_index') }}" >Modifier mon profil</a><br/>
                     </div>
                 </a>
             </div>
@@ -47,7 +37,7 @@
                 <div class="panel-heading" role="tab" id="headingOne">
                     <h4 class="panel-title">
                         <a role="button" class="commande" data-id="{{ commande.id }}">
-                            Commande n°{{ commande.id }} | {{ commande.date | date('d-m-y') }} | 0€
+                            Commande n°{{ commande.id }} | {{ commande.date | date('d-m-y') }} | {{ commande.prix }}€
                         </a>
                     </h4>
                 </div>

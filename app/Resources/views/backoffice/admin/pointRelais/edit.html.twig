@@ -1,0 +1,24 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Modifier un point relais</h1>
+        <a class="btn_01" href="{{path('admin_point_relais_index')}}">Retour</a>
+        <div class="cellule_background_cms">
+
+            {{ form_start(edit_form) }}
+
+                <label>Nom</label>
+                {{ form_widget(edit_form.nom) }}
+                {{ form_errors(edit_form.nom) }}
+
+                <label>Adresse</label>
+                {{ form_widget(edit_form.adresse) }}
+                {{ form_errors(edit_form.adresse) }}
+
+                <button class="button_p" type="submit">Modifier le point relais</button>
+
+            {{ form_end(edit_form) }}
+        </div>
+    </section>
+{% endblock %}

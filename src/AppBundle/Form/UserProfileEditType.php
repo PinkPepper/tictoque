@@ -14,7 +14,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
-class UserAllergeneType extends AbstractType
+class UserProfileEditType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -23,6 +23,10 @@ class UserAllergeneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('nom')
+            ->add('prenom')
+            ->add('telephone')
+            ->add('adresse')
             ->add('allergenes', EntityType::class, array(
                 'class' => 'AppBundle:Allergene',
                 'choice_label' => 'nom',

@@ -1,0 +1,22 @@
+{% extends 'frontoffice/footer.html.twig' %}
+
+{% block body %}
+    <div id="content_site" class="c_s_center">
+        <a>
+            <div class="buttonPerso text-center">
+                <a href="{{ path('fos_user_change_password') }}" >Modifier mon mot de passe</a><br/>
+            </div>
+        </a>
+        <a>
+            <div class="buttonPerso text-center">
+                <a href="{{ path('fos_user_resetting_check_email') }}" >Modifier mon adresse mail et/ou pseudo</a>
+            </div>
+        </a>
+
+        <a>
+            <div class="buttonPerso text-center">
+                <a href="{{ path('profile_edit_show') }}">Modifier mes informations</a>
+            </div>
+        </a>
+    </div>
+{% endblock %}

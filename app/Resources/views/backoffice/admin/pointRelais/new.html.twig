@@ -1,0 +1,23 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+<section>
+    <h1>Créer un point relais</h1>
+    <div class="cellule_background_cms">
+        {{ form_start(form) }}
+
+        <label>Nom</label>
+        {{ form_widget(form.nom) }}
+        {{ form_errors(form.nom) }}
+
+        <label>Adresse</label>
+        {{ form_widget(form.adresse) }}
+        {{ form_errors(form.adresse) }}
+
+        <button class="button_p" type="submit">Créer</button>
+
+        {{ form_end(form) }}
+    </div>
+
+</section>
+{% endblock %}

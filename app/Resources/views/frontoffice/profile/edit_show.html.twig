@@ -1,0 +1,10 @@
+{% extends 'frontoffice/footer.html.twig' %}
+
+{% block body %}
+    <div id="content_site" class="c_s_center">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" value="modifier">
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

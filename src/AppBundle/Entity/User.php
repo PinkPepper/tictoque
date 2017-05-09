@@ -105,6 +105,13 @@ class User extends BaseUser
      */
     private $commandes;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
+     */
+    private $adresse;
+
     use TraitUploadImage;
     public function getUploadDir()
     {
@@ -326,6 +333,22 @@ class User extends BaseUser
     public function setCommandes($commandes)
     {
         $this->commandes = $commandes;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAdresse()
+    {
+        return $this->adresse;
+    }
+
+    /**
+     * @param string $adresse
+     */
+    public function setAdresse($adresse)
+    {
+        $this->adresse = $adresse;
     }
 }
 
