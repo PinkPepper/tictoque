@@ -275,7 +275,7 @@ body .desc_prod .produit_ajout {
   border-radius: 5px; }
 
 body .desc_prod .produit_stock {
-  font-size: 8px;
+  font-size: 14px;
   color: green; }
 
 body .desc_prod .produit_stock .fa.fa-circle {
@@ -322,7 +322,7 @@ body .produit_nav ul li:hover {
 
 body .produit_nav ul .active {
   border: 1px solid #929292;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #f7f8fa;
   border-radius: 5px 5px 0 0; }
 
 body .content_nav {
@@ -344,7 +344,7 @@ body .menu_choix h5 {
 body .menu_choix h4 {
   text-align: center;
   font-weight: bold;
-  font-size: 25px;
+  font-size: 24px;
   color: #4a4a4a; }
 
 body .menu_choix .partenaire-title {
@@ -1890,5 +1890,15 @@ body .container .recap-prix .livraison-total .prix-total {
 
   .onMobile {
     display: block !important; } }
+.imgProduit {
+  border-radius: 4px; }
+
+.pictoFP {
+  width: 25px;
+  float: left;
+  margin-right: 10px; }
+
+.topMarginNav {
+  margin-top: 50px !important; }
 
 /*# sourceMappingURL=styleFront.css.map */
