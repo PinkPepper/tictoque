@@ -23,4 +23,12 @@ class DefaultController extends Controller
             'articles' => $articles,
         ]);
     }
+
+    /**
+     * @Route("/mentions-legales", name="mentions_legales")
+     */
+    public function mentionsAction()
+    {
+        return $this->render("frontoffice/default/mentions.html.twig");
+    }
 }
