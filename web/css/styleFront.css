@@ -1901,4 +1901,7 @@ body .container .recap-prix .livraison-total .prix-total {
 .topMarginNav {
   margin-top: 50px !important; }
 
+.showDescPlat a:hover {
+  text-decoration: none; }
+
 /*# sourceMappingURL=styleFront.css.map */
