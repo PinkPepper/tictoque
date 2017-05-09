@@ -664,12 +664,9 @@ body {
       padding: 0;
       li
       {
-        width: 35px;
-        height: 35px;
-        background-color: #f32063;
-        border-radius: 200px;
+        cursor: pointer;
         list-style: none;
-        margin-right: 10px;
+        margin-right: 5px;
       }
     }
     h4 {
