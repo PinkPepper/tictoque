@@ -31,4 +31,12 @@ class DefaultController extends Controller
     {
         return $this->render("frontoffice/default/mentions.html.twig");
     }
+
+    /**
+     * @Route("/conditions-ventes", name="conditions_ventes")
+     */
+    public function conditionsVentesAction()
+    {
+        return $this->render("frontoffice/default/conditions.html.twig");
+    }
 }
