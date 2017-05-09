@@ -35,7 +35,7 @@
                 <p class="produit_desc">{{ produit.description | raw }}</p>
                 <span class="produit_aller"><a>Allergenes</a></span>
 
-                <p class="produit_prix">5.95€</p>
+                {#<p class="produit_prix">5.95€</p>#}
                 <p class="produit_prix_solde">{{ produit.prix }}€</p>
 
                 <select class="produit_quantite">
@@ -63,7 +63,7 @@
 
                 <div class="produit_info">
                     <img class="pictoFP" src="{{ asset('img/picto_livraison_page_produit.svg') }}">
-                    <span class="near">Ce produit peut être livré prêt de chez vous</span>
+                    <span class="near" style="margin-right: 13px">Livraison près de votre lieu de travail</span>
 
                     <img class="pictoFP" src="{{ asset('img/picto_livraison_gratuite.svg') }}">
                     <span class="free_ship">Livraison gratuite</span>
