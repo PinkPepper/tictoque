@@ -29,10 +29,26 @@
                     {% if menu["quantite"] != 0 %}
                         <div id="menuId-{{ menu["id"] }}" class="produit produitSuccess">
                             <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                                image
+                                {% if menu["type"] == 1 %}
+                                    <img class="imgSousProduit" src="{{ asset('img/menus/menu1.jpg') }}"/>
+                                {% else %}
+                                    {% if menu["type"] == 2 %}
+                                        <img class="imgSousProduit" src="{{ asset('img/menus/menu2.jpg') }}"/>
+                                    {% else %}
+                                        <img class="imgSousProduit" src="{{ asset('img/menus/menu3.jpg') }}"/>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                                <h5>Menu n°{{ menu["id"] }}</h5>
+                                {% if menu["type"] == 1 %}
+                                    <h5>Menu petite faim</h5>
+                                {% else %}
+                                    {% if menu["type"] == 2 %}
+                                        <h5>Menu classique</h5>
+                                    {% else %}
+                                        <h5>Menu complet</h5>
+                                    {% endif %}
+                                {% endif %}
                                 <a class="showMore" data-id="{{ menu["id"] }}">En savoir plus ...</a>
                             </div>
                             <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">

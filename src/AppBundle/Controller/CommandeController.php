@@ -185,7 +185,7 @@ class CommandeController extends Controller
                 } else {
                     $boisson = null;
                 }
-                array_push($menus, array('id' => $id, 'entree' => $entree, 'plat' => $plat, 'dessert' => $dessert, 'boisson' => $boisson, 'quantite' => $value['quantite'], 'prix' => $value['prix']));
+                array_push($menus, array('id' => $id, 'entree' => $entree, 'plat' => $plat, 'dessert' => $dessert, 'boisson' => $boisson, 'quantite' => $value['quantite'], 'prix' => $value['prix'], 'type' => $value['type']));
             }
         }
 
