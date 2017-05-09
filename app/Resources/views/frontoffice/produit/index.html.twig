@@ -13,13 +13,17 @@
                         {{ form_widget(form.categorie,{attr: {class: "submitForm"}}) }}
                     </li>
                     <li>
-                        <a class="submitForm" href="{{ path("produit_index") }}"> <i class="fa fa-refresh"
-                                                                                     aria-hidden="true"></i><span>Réinitialiser la recherche</span></a>
+                        <a href="{{ path("produit_index") }}"> <i class="fa fa-refresh" aria-hidden="true"></i><span>Réinitialiser la recherche</span></a>
                     </li>
                     <li>
-                        <input class="filtre_aller submitForm" type="checkbox" name="allergenes"><label>Prendre en
-                            compte mes allérgènes</label>
+                        {{ form_widget(form.search, {attr: {class: "submitForm"}}) }}
                     </li>
+                    <li>
+                        {{ form_widget(form.allergene, {attr: {class: "submitForm"}}) }}
+                    </li>
+                   {# <li>
+                        <input class="filtre_aller" type="checkbox" name="allergenes"><label>Prendre en compte mes allérgènes</label>
+                    </li>#}
                     {{ form_end(form) }}
 
                 </ul>
@@ -31,68 +35,140 @@
                 <h4>Liste Produits</h4>
                 <h5>De la simple salade, à la salade composée, découvrez nos produits</h5>
 
-                <div class="search_bloc">
+              {#  <div class="search_bloc">
                     {{ form_start(form_personnalise, { attr: {class: ""}}) }}
-                    {{ form_widget(form_personnalise.search, {attr: {'placeholder': 'Rechercher un plat, une boisson...'}}) }}
+                        {{ form_widget(form_personnalise.search, {attr: {'placeholder': 'Rechercher un plat, une boisson...'}}) }}
                     {{ form_end(form_personnalise) }}
-                </div>
+                </div>#}
+
+                {% set foo = 'faux' %}
 
                 {% for produit in produits %}
-                    <div class="col-lg-4 col-md-6 col-sm-6">
-                        <div class="showPlat">
-                            <div class="showImgPlat">
+                    {% if isAllergene == true  %}
+                        {% for allergene in produit.allergenes if foo== 'faux' %}
+                            {% if allergene not in allergenes and foo=='faux' %}
+                                {% set foo = 'vrai' %}
+                            {% endif %}
+                        {% endfor %}
+
+                        {% if foo=="vrai" %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="showPlat">
+                                    <div class="showImgPlat">
+                                        <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                            <div class="overflowImg">
+                                                <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
+                                            </div>
+                                        </a>
+                                        {% if app.user is not null %}
+                                           <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                                        {% else %}
+                                            <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
+                                        {% endif %}
+                                    </div>
+                                    <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                        <div class="showDescPlat">
+                                            <p class="typeProduct">{{ produit.type|upper }}</p>
+                                            <div class="row">
+                                                <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
+                                                <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix }}€</span>
+                                                <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            {% if loop.index == 3 %}
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="showPlat">
+                                        <div class="dessert position_plat">
+                                            <div class="livraison_menu">
+                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                <h4>CHOISSISEZ VOTRE POINT DE LIVRAISON</h4>
+                                                <p>Vous n'avez pas encore définis de point de livraison</p>
+                                                <a class="add_livraison" href="#">Ajoutez un point de livraison</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% if loop.index == 6 %}
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <div class="showPlat">
+                                        <div class="dessert position_plat">
+                                            <div class="dessert position_plat">
+                                                <div class="livraison_menu">
+                                                    <i class="fa fa-building-o" aria-hidden="true"></i>
+                                                    <h4>BREAKZONE</h4>
+                                                    <p>Zone dédiée à la promotion d'autre catégorie, aux différentes réductions,
+                                                        mais aussi aux différents services de l'entreprise</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                            {% set foo = 'faux' %}
+                        {% endif %}
+
+                    {% else %}
+                        <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="showPlat">
+                                <div class="showImgPlat">
+                                    <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                        <div class="overflowImg">
+                                            <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
+                                        </div>
+                                    </a>
+                                {% if app.user is not null %}
+                                    <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                                {% else %}
+                                    <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
+                                {% endif %}
+                            </div>
                                 <a href="{{ path("produit_show", {'id': produit.id}) }}">
-                                    <div class="overflowImg">
-                                        <img class="img-responsive imgPlat"
-                                             src="{{ asset('produits/'~produit.image) }}">
+                                    <div class="showDescPlat">
+                                        <p class="typeProduct">{{ produit.type|upper }}</p>
+                                        <div class="row">
+                                            <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
+                                            <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix }}€</span>
+                                            <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
+                                        </div>
                                     </div>
                                 </a>
-                                <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal"
-                                   data-url="{{ path('ajout_panier', {'produit': produit.id}) }}"
-                                   data-id="{{ produit.id }}">Ajouter</a>
-                            </div>
-                            <a href="{{ path("produit_show", {'id': produit.id}) }}">
-                                <div class="showDescPlat">
-                                    <p class="typeProduct">{{ produit.type|upper }}</p>
-                                    <div class="row">
-                                        <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
-                                        <span class="prixProduct col-lg-4 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix }}
-                                            €</span>
-                                        <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                    {% if loop.index == 3 %}
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="showPlat">
-                                <div class="dessert position_plat">
-                                    <div class="livraison_menu">
-                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                        <h4>CHOISSISEZ VOTRE POINT DE LIVRAISON</h4>
-                                        <p>Vous n'avez pas encore définis de point de livraison</p>
-                                        <a class="add_livraison" href="#">Ajoutez un point de livraison</a>
-                                    </div>
-                                </div>
                             </div>
                         </div>
-                    {% endif %}
-                    {% if loop.index == 6 %}
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="showPlat">
-                                <div class="dessert position_plat">
+
+                        {% if loop.index == 3 %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="showPlat">
                                     <div class="dessert position_plat">
                                         <div class="livraison_menu">
-                                            <i class="fa fa-building-o" aria-hidden="true"></i>
-                                            <h4>BREAKZONE</h4>
-                                            <p>Zone dédiée à la promotion d'autre catégorie, aux différentes réductions,
-                                                mais aussi aux différents services de l'entreprise</p>
+                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                            <h4>CHOISSISEZ VOTRE POINT DE LIVRAISON</h4>
+                                            <p>Vous n'avez pas encore définis de point de livraison</p>
+                                            <a class="add_livraison" href="#">Ajoutez un point de livraison</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endif %}
+                        {% if loop.index == 6 %}
+                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                <div class="showPlat">
+                                    <div class="dessert position_plat">
+                                        <div class="dessert position_plat">
+                                            <div class="livraison_menu">
+                                                <i class="fa fa-building-o" aria-hidden="true"></i>
+                                                <h4>BREAKZONE</h4>
+                                                <p>Zone dédiée à la promotion d'autre catégorie, aux différentes réductions,
+                                                    mais aussi aux différents services de l'entreprise</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>
@@ -108,8 +184,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body" id="modal-body">
                     ...
@@ -123,7 +198,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="application/javascript">
-        $(document).ready(function () {
+        $(document).ready(function(){
 
             $('.ajoutPanier').on('click', function (e) {
                 e.preventDefault();
@@ -135,9 +210,9 @@
                 $('#modal-body').load(url);
                 //$(this).load(url);
                 //$(this).prop('disabled', true);
-            });
+            }) ;
 
-            $(".submitForm").change(function () {
+            $(".submitForm").change(function(){
                 $('#formSearch').submit();
             });
         });

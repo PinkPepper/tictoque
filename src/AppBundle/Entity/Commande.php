@@ -16,7 +16,7 @@ class Commande
     /**
      * @var int
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="UUID")
      */

@@ -19,12 +19,17 @@
             <div class="col-lg-2 col-md-12 col-sm-12">
                 <a>
                     <div class="buttonPerso text-center">
-                        <a>Modifier mon mot de passe</a><br/>
+                        <a href="{{ path('fos_user_change_password') }}" >Modifier mon mot de passe</a><br/>
                     </div>
                 </a>
                 <a>
                     <div class="buttonPerso text-center">
-                        <a>Modifier adresse mail et/ou pseudo</a>
+                        <a href="{{ path('fos_user_resetting_check_email') }}" >Modifier adresse mail et/ou pseudo</a>
+                    </div>
+                </a>
+                <a>
+                    <div class="buttonPerso text-center">
+                        <a href="{{ path('profile_allergene') }}">Modifier mes allergènes</a>
                     </div>
                 </a>
             </div>
