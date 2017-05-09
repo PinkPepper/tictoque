@@ -1880,4 +1880,15 @@ body .container .recap-prix .livraison-total .prix-total {
 .spanPrix {
   margin-top: 5px; }
 
+.onMobile {
+  display: none !important; }
+
+@media (max-width: 869px) {
+  .hoverCompte:hover
+  .hideHoverCompte {
+    display: none !important; }
+
+  .onMobile {
+    display: block !important; } }
+
 /*# sourceMappingURL=styleFront.css.map */

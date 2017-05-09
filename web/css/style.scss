@@ -2071,5 +2071,21 @@ body {
   margin-top: 5px;
 }
 
+.onMobile{
+  display: none !important;
+}
+
+@media (max-width: 869px){
+  .hoverCompte:hover
+  .hideHoverCompte {
+    display: none !important;
+  }
+
+  .onMobile{
+    display: block !important;
+  }
+}
+
+
 
 
