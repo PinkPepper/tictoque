@@ -1561,6 +1561,7 @@ body {
   }
 }
 .fonctionnement{
+  padding-top: 30px;
   h2{
     text-align:center;
     font-weight:bold;
@@ -1624,6 +1625,11 @@ body {
     float:left;
     height: 300px;
     background-color: white;
+
+    h4{
+      font-size: 24px;
+      color:#4a4a4a;
+    }
   }
 }
 .actualite {
