@@ -181,7 +181,8 @@ class ProduitController extends Controller
 
         return $this->render('frontoffice/produit/show.html.twig', array(
             'produit' => $produit,
-            'autre' => $autre
+            'autre' => $autre,
+            'avis'=>unserialize($produit->getAvis())
         ));
     }
 
