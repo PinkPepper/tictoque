@@ -26,13 +26,13 @@
                 <h1 class="produit_nom">{{ produit.nom }}</h1>
 
                 {% if produit.nbVotants is not null %}
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-                    <span class="glyphicon glyphicon-star"></span>
-
-                    <span class="produit_avis">(moy: {{ produit.notation }}, votes: {{ produit.nbVotants }})</span>
+                    {% set max = produit.notation %}
+                    {% if produit.notation >= 1 %}
+                        {% for i in 1..max %}
+                            <span class="glyphicon glyphicon-star"></span>
+                        {% endfor %}
+                    {% endif %}
+                    <span class="produit_avis">(moy: {{ produit.notation |number_format(2, '.', ',') }}, votes: {{ produit.nbVotants }})</span>
                 {% else %}
                     Aucune note
                 {% endif %}
