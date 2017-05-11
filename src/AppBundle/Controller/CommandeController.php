@@ -151,6 +151,37 @@ class CommandeController extends Controller
             $em->getManager()->flush();
         }
 
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Confirmation de votre commande')
+            ->setFrom('no-reply@lamourfood.fr')
+            ->setTo('maxime.detaille@gmail.com') //A REMPLACER PAR VARIABLE USER MAIL
+            ->setBody(
+                $this->renderView(
+                // app/Resources/views/Emails/registration.html.twig
+                    'Emails/confirmation.html.twig',
+                    array(
+                        'commande'=>$commande,
+                        'pointRelais'=>$pointRelais,
+                        'produits'=>$produits_panier,
+                        'menus'=>$menus,
+                        'prix'=>$prix
+                    )
+                ),
+                'text/html'
+            )
+            /*
+             * If you also want to include a plaintext version of the message
+            ->addPart(
+                $this->renderView(
+                    'Emails/registration.txt.twig',
+                    array('name' => $name)
+                ),
+                'text/plain'
+            )
+            */
+        ;
+        $this->get('mailer')->send($message);
+
         return $this->render('frontoffice/commande/succes.html.twig', array(
             'commande'=>$commande,
             'pointRelais'=>$pointRelais,
