@@ -1,0 +1,19 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Produits de la page d'accueil</h1>
+        <a class="btn_01" href="{{path('produit_index_admin')}}">Retour</a>
+
+        <div class="cellule_background_cms">
+
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            <button class="button_p" type="submit">Modifier</button>
+
+            {{ form_end(form) }}
+
+        </div>
+    </section>
+{% endblock %}
+

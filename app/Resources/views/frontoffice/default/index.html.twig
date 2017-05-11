@@ -18,8 +18,7 @@
 			<h2 class="text-center titleCat">De nouveaux plats chaque semaine</h2>
 			<p class="text-center subTitleCat">Commandez simplement sur L'amour Food !</p>
 
-			{% for produit in produits %}
-				{% if loop.index0 < 3 %}
+			{% for produit in homepage %}
 					<div class="col-lg-4 col-md-4 col-sm-4">
 						<div class="showPlat">
 							<div class="showImgPlat">
@@ -37,14 +36,13 @@
 								<p class="typeProduct">{{ produit.type|upper }}</p>
 								<div class="row">
 									<h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
-									<span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">4€99</span>
+									<span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',')}}€</span>
 									<span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
 								</div>
 								</a>
 							</div>
 						</div>
 					</div>
-				{% endif %}
 			{% endfor %}
 		</div>
 	</div>

@@ -1,12 +1,14 @@
 
 {% for point in pointsRelais %}
-    <p>
-        <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
-        <div>
-            <h4>{{ point.nom }}</h4>
-            <p>{{ point.adresse }}</p>
-        </div>
-    </p>
+    <div class="bcr">
+        <p>
+            <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
+            <div class="relais_infos">
+                <h4>{{ point.nom }}</h4>
+                <p>{{ point.adresse }}</p>
+            </div>
+        </p>
+    </div>
 {% endfor %}
 
 {% if pointsRelais == [] %}
@@ -23,6 +25,13 @@
     $( "input" ).on( "click", function() {
         const id = $( "input:checked" ).val();
         document.cookie = 'pointRelais=' + id;
+    });
+
+    $("div.choix_relais .bcr").on("click",function() {
+        if($(this).find('input[type="radio"]').is(':checked')) { 
+          $("div.choix_relais .bcr").removeClass('sel_bk_color');
+          $(this).addClass('sel_bk_color');
+        }
     });
 </script>
 

@@ -5,6 +5,7 @@ namespace AppBundle\Controller\Admin;
 use AppBundle\Entity\Allergene;
 use AppBundle\Entity\Categorie;
 use AppBundle\Entity\Produit;
+use AppBundle\Entity\ProduitHomePage;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -26,12 +27,24 @@ class ProduitAdminController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getManager();
-
+        $em = $this->getDoctrine();
+        $produitsHP = $em->getRepository('AppBundle:ProduitHomePage')->findAll();
         $produits = $em->getRepository('AppBundle:Produit')->findAll();
+
+        if($produitsHP == array())
+        {
+            $homepage = array();
+        }
+        else{
+            $homepage = array(
+                $em->getRepository('AppBundle:Produit')->find($produitsHP[0]->getProduit1()),
+                $em->getRepository('AppBundle:Produit')->find($produitsHP[0]->getProduit2()),
+                $em->getRepository('AppBundle:Produit')->find($produitsHP[0]->getProduit3()));
+        }
 
         return $this->render('backoffice/admin/produit/index.html.twig', array(
             'produits' => $produits,
+            'homepage'=>$homepage
         ));
     }
 
@@ -85,6 +98,60 @@ class ProduitAdminController extends Controller
             'form' => $form->createView(),
         ));
     }
+
+    /**
+     * @Route("/produit/homepage/new", name="produit_homepage_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newProduitHomepageAction(Request $request)
+    {
+        $produitHP = new ProduitHomePage();
+        $form = $this->createForm('AppBundle\Form\ProduitHomePageType', $produitHP);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $this->getDoctrine()->getManager()->persist($produitHP);
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute("produit_index_admin");
+        }
+
+        return $this->render("backoffice/admin/produit/newHP.html.twig", array(
+            "form"=>$form->createView()
+        ));
+    }
+
+    /**
+     * @Route("/produit/homepage/edit", name="produit_homepage_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editProduitHomepageAction(Request $request)
+    {
+        $produitHP = $this->getDoctrine()->getRepository('AppBundle:ProduitHomePage')->findAll();
+
+        if($produitHP == array())
+        {
+            return $this->redirectToRoute("produit_homepage_new");
+        }
+
+        $produitHP = $produitHP[0];
+
+        $form = $this->createForm('AppBundle\Form\ProduitHomePageType', $produitHP);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid())
+        {
+           /* $this->getDoctrine()->getManager()->persist($produitHP);*/
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute("produit_homepage_edit");
+        }
+
+        return $this->render("backoffice/admin/produit/editHP.html.twig", array(
+            "form"=>$form->createView()
+        ));
+    }
+
 
     /**
      * Finds and displays a produit entity.
