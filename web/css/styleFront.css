@@ -650,6 +650,7 @@ body .retour_haut {
   cursor: pointer; }
 
 .bg-grey {
+  margin-top: 50px;
   position: relative;
   background-color: #ffffff;
   max-width: none;
