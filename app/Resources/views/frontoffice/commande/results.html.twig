@@ -1,6 +1,6 @@
 
 {% for point in pointsRelais %}
-    <div>
+    <div class="bcr">
         <p>
             <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
             <div class="relais_infos">
@@ -29,11 +29,11 @@
 
     $('.relais_check').on('click', function (f) {
         if ($(this).is(':checked')) {
-            document.querySelector('.choix_relais').style.border = "2px solid #e52c65";
+            document.querySelector('.bcr').style.border = "2px solid #e52c65";
         }
         else 
         {
-            document.querySelector('.choix_relais').style.border = "0";
+            document.querySelector('.bcr').style.border = "0";
         }
     });
 </script>
