@@ -8,7 +8,7 @@
                 <h4>Livraison et paiement</h4>
 
                 <input type="text"  id="input" placeholder="Adresse de mon entreprise" required="">
-                <div class="results" data-adresse="{{ app.user.adresse }}" data-url="{{ path('commande_point_relais', {'adresse': '_adresse_'}) }}"></div>
+                <div class="choix_relais" data-adresse="{{ app.user.adresse }}" data-url="{{ path('commande_point_relais', {'adresse': '_adresse_'}) }}"></div>
 
                 <p>2 choix possible en fonction de votre lieu de travail</p>
             </div>
@@ -79,31 +79,21 @@
 
     <script>
         $(document).ready(function(){
-            var adresse = $('.results').data('adresse');
+            var adresse = $('.choix_relais').data('adresse');
 
             if(adresse != null){
-                const url = $(".results").data('url');
+                const url = $(".choix_relais").data('url');
                 $('#input').val(adresse);
                 adresse = adresse.replace(/ /g, '%20');
-                $('.results').load(url.replace(/_adresse_/, adresse));
+                $('.choix_relais').load(url.replace(/_adresse_/, adresse));
             }
 
             $('#input').keypress(function(e) {
                 if(e.which == 13) {
-                    const url = $(".results").data('url');
+                    const url = $(".choix_relais").data('url');
                     var adresse = $('#input').val();
                     adresse = adresse.replace(/ /g, '%20');
-                    $('.results').load(url.replace(/_adresse_/, adresse));
-                }
-            });
-
-            $('.relais_check').on('click', function (f) {
-                if ($(this).is(':checked')) {
-                    document.querySelector('.choix_relais').style.border = "2px solid #e52c65";
-                }
-                else 
-                {
-                    document.querySelector('.choix_relais').style.border = "0";
+                    $('.choix_relais').load(url.replace(/_adresse_/, adresse));
                 }
             });
         });

@@ -1930,14 +1930,14 @@ body .container .recap-prix .livraison-total .prix-total {
   color: #ffffff;
   margin: 10px 0 10px 0;
   padding: 5px 5px 5px 20px;
-  width: 250px;
   border-radius: 3px; }
-.livraison_paiement .choix_relais {
+.livraison_paiement .choix_relais div {
   display: inline-flex;
   width: 100%;
   background-color: #ffffff;
-  border-radius: 5px; }
-  .livraison_paiement .choix_relais input {
+  border-radius: 5px;
+  margin-bottom: 15px; }
+  .livraison_paiement .choix_relais div input {
     padding: 0;
     border-radius: 10px;
     margin: 35px;
@@ -1946,7 +1946,7 @@ body .container .recap-prix .livraison-total .prix-total {
     -moz-transform: scale(2);
     -webkit-transform: scale(2);
     -o-transform: scale(2); }
-  .livraison_paiement .choix_relais input:checked::before {
+  .livraison_paiement .choix_relais div input:checked::before {
     font-family: FontAwesome;
     content: '\f111';
     display: block;
@@ -1954,8 +1954,13 @@ body .container .recap-prix .livraison-total .prix-total {
     font-size: 11px;
     position: absolute;
     padding: 1px 2px 2px 2px; }
-  .livraison_paiement .choix_relais input[type="checkbox"]:focus {
+  .livraison_paiement .choix_relais div input[type="checkbox"]:focus {
     outline: 0; }
+  .livraison_paiement .choix_relais div .relais_infos {
+    display: block;
+    margin-top: 10px; }
+.livraison_paiement .choix_relais .sel_bk_color {
+  border: 2px solid #e52c65; }
 
 .paiement_carte .carte_header {
   display: inline-flex;
@@ -2027,6 +2032,8 @@ body .container .recap-prix .livraison-total .prix-total {
     margin: 10px 10px 10px 15px; }
   .paiement_carte .paiement_paypal img:last-child {
     margin: 10px 25px 10px 10px;
-    margin-left: calc(70% - 10px); }
+    margin-left: calc(70% - 10px);
+    width: 50px;
+    height: 30px; }
 
 /*# sourceMappingURL=styleFront.css.map */
