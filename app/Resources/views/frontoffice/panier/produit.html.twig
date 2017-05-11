@@ -6,123 +6,41 @@
 
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 desc_prod" style="margin-top: 20px;">
         <h1 class="produit_nom">{{ produit.nom }}</h1>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
-        <span class="glyphicon glyphicon-star"></span>
+        {% if produit.nbVotants is not null %}
+            {% set max = produit.notation %}
+            {% if produit.notation >= 1 %}
+                {% set fin = 0 %}
+                {% for i in 1..max %}
+                    <span class="glyphicon glyphicon-star"></span>
+                    {% set fin = fin + 1 %}
+                {% endfor %}
 
-        <span class="produit_avis">(12)</span>
-
-        <p class="produit_desc">{{ produit.description | raw }}</p>
-        <span class="produit_aller"><a>Allergenes</a></span>
-
-        <p class="produit_prix">5.95€</p>
-        <p class="produit_prix_solde">{{ produit.prix }}€</p>
-
-        </br>
-        {% if produit.quantite>0 %}
-            <span class="produit_stock"><i class="fa fa-circle"></i>PRODUIT EN STOCK</span>
+                {% if fin != 5 %}
+                    {% for i in fin..4 %}
+                        <span class="glyphicon glyphicon-star glyphicon-star-off"></span>
+                    {% endfor %}
+                {% endif %}
+            {% endif %}
+            <span class="produit_avis">({{ produit.notation |number_format(2, '.', ',') }})</span>
         {% else %}
-            <span class="produit_stock"><i class="fa fa-circle"></i>PRODUIT HORS STOCK</span>
+            Aucune note
         {% endif %}
 
+        <p class="produit_desc">{{ produit.description | raw }}</p>
 
+        <p class="produit_prix_solde">{{ produit.prix }}€</p>
 
-        <div class="produit_info">
-            <i class="fa fa-map-marker" aria-hidden="true"></i>
-            <span class="near">
-						Ce produit peut être livré prêt de chez vous
-					</span>
-
-            <i class="fa fa-shopping-bag" aria-hidden="true"></i>
-            <span class="free_ship">
-						Livraison gratuite
-					</span>
-        </div>
-    </div>
-</div>
-
-
-
-<div class="row">
-    <div class="col-lg-12">
-        <div class="produit_nav">
-            <ul>
-                <li id="desc_long" class="active">Description</li>
-                {% if produit.allergenes|length>0 %}
-                    <li id="aller_long">Allergènes</li>
-                {% endif %}
-                <li id="avis_long">Avis <span class="produit_avis">(12)</span></li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="col-lg-8 content_nav">
-        <div id="afficher_desc_long" style="display:block;">
-            <h5>{{ produit.nom }}</h5>
-            <p class="produit_desc_long">
-                {{ produit.description | raw }}
-            </p>
-        </div>
-
-
-        <div id="afficher_aller_long" style="display:none;">
-            <p class="produit_desc_long">
-                {% for all in produit.allergenes %}
+        <div>
+            <p class="produit_desc">Allergènes</p>
+             {% for all in produit.allergenes %}
             <ul>
                 <li>
                     {{all.nom}}
                 </li>
             </ul>
             {% endfor %}
-            </p>
         </div>
 
-        <div id="afficher_avis_long" style="display:none;">
-            <p class="produit_desc_long" >
-                itsumLorem itsumLorem itsumLorem itsumLorem itsumLoremLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLoremLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsum
-            </p>
-        </div>
     </div>
 </div>
 
-
-<script type="application/javascript">
-    $(document).ready(function(){
-
-        $(".produit_aller").click(function(){
-            $('#aller_long').addClass("active");
-            $('#afficher_aller_long').css("display","block");
-            $('#desc_long').removeClass('active');
-            $('#afficher_desc_long').css("display","none");
-            $('#avis_long').removeClass('active');
-            $('#afficher_avis_long').css("display","none");
-        });
-        $("#aller_long").click(function(){
-            $(this).addClass("active");
-            $('#afficher_aller_long').css("display","block");
-            $('#desc_long').removeClass('active');
-            $('#afficher_desc_long').css("display","none");
-            $('#avis_long').removeClass('active');
-            $('#afficher_avis_long').css("display","none");
-        });
-        $("#desc_long").click(function(){
-            $(this).addClass("active");
-            $('#afficher_desc_long').css("display","block");
-            $('#aller_long').removeClass('active');
-            $('#afficher_aller_long').css("display","none");
-            $('#avis_long').removeClass('active');
-            $('#afficher_avis_long').css("display","none");
-        });
-        $("#avis_long").click(function(){
-            $(this).addClass("active");
-            $('#afficher_avis_long').css("display","block");
-            $('#desc_long').removeClass('active');
-            $('#afficher_aller_long').css("display","none");
-            $('#aller_long').removeClass('active');
-            $('#afficher_desc_long').css("display","none");
-        });
-
-    });
-</script>
