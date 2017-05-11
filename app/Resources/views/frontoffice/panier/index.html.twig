@@ -119,7 +119,7 @@
                         <img class="imgProduit voir" src="{{ asset('produits/'~produit[0].image) }}"/>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <h5>{{ produit[0].type }}</h5>
+                        <h5>{{ produit[0].type | upper }}</h5>
                         <h4>{{ produit[0].nom }}</h4>
                         <h5>{{ produit[0].prix }}€</h5>
                         <h5><a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
