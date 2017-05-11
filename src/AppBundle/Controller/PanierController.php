@@ -89,7 +89,7 @@ class PanierController extends Controller
      */
     public function ajouterProduitAuPanier(Request $request, Produit $produit)
     {
-        $reponse = "Le produit a été ajouté au panier avec succès.";
+        $reponse = "a été ajouté au panier avec succès.";
 
         $session = $request->getsession();
 
@@ -116,7 +116,7 @@ class PanierController extends Controller
             }
             else
             {
-                $reponse = "Le produit n'est plus disponible, et n'a pas pu être ajouté à votre panier.";
+                $reponse = "n'est plus disponible, et n'a pas pu être ajouté à votre panier.";
             }
         }
         else
