@@ -2148,36 +2148,39 @@ body {
 
   .choix_relais
   {
-    display: inline-flex;
-    width: 100%;
-    background-color: #ffffff;
-    border-radius: 5px;
-
-    input
+    div
     {
-      padding: 0;
-      border-radius: 10px;
-      margin: 35px;
-      cursor: pointer;
-      -ms-transform: scale(2);
-      -moz-transform: scale(2);
-      -webkit-transform: scale(2);
-      -o-transform: scale(2);
-    }
+      display: inline-flex;
+      width: 100%;
+      background-color: #ffffff;
+      border-radius: 5px;
+      margin-bottom: 15px;
+      input
+      {
+        padding: 0;
+        border-radius: 10px;
+        margin: 35px;
+        cursor: pointer;
+        -ms-transform: scale(2);
+        -moz-transform: scale(2);
+        -webkit-transform: scale(2);
+        -o-transform: scale(2);
+      }
 
-    input:checked::before
-    {
-      font-family: FontAwesome;
-      content: '\f111';
-      display: block;
-      color: #e52c65;
-      font-size: 11px;
-      position: absolute;
-      padding: 1px 2px 2px 2px;
-    }
+      input:checked::before
+      {
+        font-family: FontAwesome;
+        content: '\f111';
+        display: block;
+        color: #e52c65;
+        font-size: 11px;
+        position: absolute;
+        padding: 1px 2px 2px 2px;
+      }
 
-    input[type="checkbox"]:focus{
-        outline:0;
+      input[type="checkbox"]:focus{
+          outline:0;
+      }
     }
   }
 }

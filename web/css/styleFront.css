@@ -1935,12 +1935,13 @@ body .container .recap-prix .livraison-total .prix-total {
   padding: 5px 5px 5px 20px;
   width: 250px;
   border-radius: 3px; }
-.livraison_paiement .choix_relais {
+.livraison_paiement .choix_relais div {
   display: inline-flex;
   width: 100%;
   background-color: #ffffff;
-  border-radius: 5px; }
-  .livraison_paiement .choix_relais input {
+  border-radius: 5px;
+  margin-bottom: 15px; }
+  .livraison_paiement .choix_relais div input {
     padding: 0;
     border-radius: 10px;
     margin: 35px;
@@ -1949,7 +1950,7 @@ body .container .recap-prix .livraison-total .prix-total {
     -moz-transform: scale(2);
     -webkit-transform: scale(2);
     -o-transform: scale(2); }
-  .livraison_paiement .choix_relais input:checked::before {
+  .livraison_paiement .choix_relais div input:checked::before {
     font-family: FontAwesome;
     content: '\f111';
     display: block;
@@ -1957,7 +1958,7 @@ body .container .recap-prix .livraison-total .prix-total {
     font-size: 11px;
     position: absolute;
     padding: 1px 2px 2px 2px; }
-  .livraison_paiement .choix_relais input[type="checkbox"]:focus {
+  .livraison_paiement .choix_relais div input[type="checkbox"]:focus {
     outline: 0; }
 
 .paiement_carte .carte_header {
