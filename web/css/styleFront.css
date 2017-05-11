@@ -970,7 +970,8 @@ body .panier .container .sousMenu {
 
 body .panier .container .imgSousProduit {
   height: 100px;
-  width: 100%; }
+  width: 100%;
+  border-radius: 5px; }
 
 body .panier .container .commande .total {
   float: right; }
@@ -2068,28 +2069,50 @@ body .container .recap-prix .livraison-total .prix-total {
     width: 50px;
     height: 30px; }
 
-.modal-content .modal-header {
-  padding: 15px 15px 0 0;
-  border-bottom: 0; }
-.modal-content .modal-body {
-  padding: 30px 0 30px 115px; }
-  .modal-content .modal-body img {
-    width: 85px;
-    height: 70px;
-    border-radius: 5px;
-    margin-right: 20px;
-    float: left; }
-  .modal-content .modal-body div {
-    clear: both;
-    margin-top: 30px; }
-    .modal-content .modal-body div a {
+.modal-content {
+  border-radius: 4px; }
+  .modal-content .modal-header {
+    padding: 15px 15px 0 0;
+    border-bottom: 0; }
+  .modal-content .modal-body {
+    padding: 30px 0 30px 115px; }
+    .modal-content .modal-body img {
+      width: 100px;
+      height: 70px;
+      border-radius: 5px;
+      margin-right: 20px;
+      float: left; }
+    .modal-content .modal-body div {
+      clear: both;
+      margin-top: 30px; }
+      .modal-content .modal-body div a {
+        background-color: #5f5f5f;
+        color: #ffffff; }
+      .modal-content .modal-body div a:hover {
+        background-color: #e52c65;
+        color: #ffffff; }
+      .modal-content .modal-body div a:first-child {
+        margin-right: 50px; }
+
+.modal-dialog .modal-content .modal-body input {
+  border: none;
+  background-color: #f7f7f7;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  font-style: italic;
+  font-size: 12px;
+  box-shadow: 0px 1px 1px 0px; }
+  .modal-dialog .modal-content .modal-body input .popup_home {
+    text-align: center; }
+    .modal-dialog .modal-content .modal-body input .popup_home button {
       background-color: #5f5f5f;
-      color: #ffffff; }
-    .modal-content .modal-body div a:hover {
-      background-color: #e52c65;
-      color: #ffffff; }
-    .modal-content .modal-body div a:first-child {
-      margin-right: 50px; }
+      border: none;
+      padding: 5px 50px 5px 50px;
+      color: #ffffff;
+      border-radius: 5px; }
+    .modal-dialog .modal-content .modal-body input .popup_home button:hover {
+      color: #e52c65; }
 
 .font5f {
   color: #5f5f5f; }
