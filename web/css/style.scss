@@ -2426,6 +2426,13 @@ body {
   {
     .modal-body
     {
+      h4
+      {
+        position: absolute;
+        left: 10px;
+        top: -35px;
+      }
+
       input
       {
         border: none;
