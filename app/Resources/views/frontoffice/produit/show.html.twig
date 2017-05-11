@@ -43,7 +43,6 @@
                 {% else %}
                     Aucune note
                 {% endif %}
-                {#{{ produit.description|striptags|raw|length > 100 ? produit.description|raw ~ '...' : produit.description|raw }}#}
                 <p class="produit_desc">{% if produit.description|raw|length > 100 %}
                                         {{ produit.description|raw|slice(0,100)|raw }}...
                                         {% else %}
