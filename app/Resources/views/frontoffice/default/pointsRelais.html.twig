@@ -1,3 +1,5 @@
+<div class="home_pop">
+
 <h4>Livraison et paiement</h4>
 
 <input type="text" id="input" placeholder="Entrez une adresse">
@@ -7,6 +9,7 @@
 
 <div class="results" data-url="{{ path('point_relais_results', {'adresse': '_adresse_'}) }}"></div>
 
+</div>
 <script>
     $('#button').on('click', function(){
         const url = $(".results").data('url');
