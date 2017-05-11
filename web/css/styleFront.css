@@ -2035,6 +2035,8 @@ body .container .recap-prix .livraison-total .prix-total {
     margin: 10px 10px 10px 15px; }
   .paiement_carte .paiement_paypal img:last-child {
     margin: 10px 25px 10px 10px;
-    margin-left: calc(70% - 10px); }
+    margin-left: calc(70% - 10px);
+    width: 50px;
+    height: 30px; }
 
 /*# sourceMappingURL=styleFront.css.map */
