@@ -28,9 +28,17 @@
                 {% if produit.nbVotants is not null %}
                     {% set max = produit.notation %}
                     {% if produit.notation >= 1 %}
+                        {% set fin = 0 %}
                         {% for i in 1..max %}
                             <span class="glyphicon glyphicon-star"></span>
+                            {% set fin = fin + 1 %}
                         {% endfor %}
+
+                        {% if fin != 5 %}
+                            {% for i in fin..4 %}
+                                <span class="glyphicon glyphicon-star glyphicon-star-off"></span>
+                            {% endfor %}
+                        {% endif %}
                     {% endif %}
                     <span class="produit_avis">({{ produit.notation |number_format(2, '.', ',') }})</span>
                 {% else %}
