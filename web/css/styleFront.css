@@ -970,7 +970,8 @@ body .panier .container .sousMenu {
 
 body .panier .container .imgSousProduit {
   height: 100px;
-  width: 100%; }
+  width: 100%;
+  border-radius: 5px; }
 
 body .panier .container .commande .total {
   float: right; }
