@@ -73,7 +73,7 @@
                                             <p class="typeProduct">{{ produit.type|upper }}</p>
                                             <div class="row">
                                                 <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
-                                                <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produitSup.prix|number_format(2, '.', ',') }}€</span>
+                                                <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',') }}€</span>
                                                 <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,10) }}</span>
                                             </div>
                                         </div>
@@ -86,7 +86,7 @@
                                         <div class="dessert position_plat">
                                             <div class="livraison_menu">
                                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                                <h4>CHOISSISEZ VOTRE POINT DE LIVRAISON</h4>
+                                                <h4>CHOISISSEZ VOTRE POINT DE LIVRAISON</h4>
                                                 <p>Vous n'avez pas encore définis de point de livraison</p>
                                                 <a class="add_livraison" href="#">Ajoutez un point de livraison</a>
                                             </div>
