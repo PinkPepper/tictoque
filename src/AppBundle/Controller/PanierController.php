@@ -130,7 +130,8 @@ class PanierController extends Controller
         }
 
         return $this->render('frontoffice/produit/success.html.twig', array(
-            "reponse"=>$reponse
+            "reponse"=>$reponse,
+            "produit"=>$produit
         ));
     }
 
