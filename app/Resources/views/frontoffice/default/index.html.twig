@@ -36,8 +36,8 @@
 								<p class="typeProduct">{{ produit.type|upper }}</p>
 								<div class="row">
 									<h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
-									<span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',')}}€</span>
-									<span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
+									<span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',')}}€</span>
+									<span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
 								</div>
 								</a>
 							</div>
@@ -145,13 +145,13 @@
 
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-					<img class="img-responsive" src="{{ asset('img/logo-willemse.jpg') }}">
+					<img class="img-responsive" src="{{ asset('img/logo-willemse.png') }}">
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 					<img class="img-responsive" src="{{ asset('img/scottage_logo-sans-fond.png') }}">
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-					<img class="img-responsive" src="{{ asset('img/3Suisses.jpg') }}">
+					<img class="img-responsive" src="{{ asset('img/3Suisses.png') }}">
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 					<img class="img-responsive" src="{{ asset('img/locasun.png') }}">

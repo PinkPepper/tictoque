@@ -328,15 +328,14 @@ body {
     float: none;
     clear: both;
     width: 100%;
-    margin: 0 auto; }
+    margin: 0 auto;
+    padding-top: 40px;}
     body .menu_choix h5 {
       text-align: center;
-      margin-bottom: 25px; }
-    body .menu_choix h4 {
-      text-align: center;
-      font-weight: bold;
-      font-size: 24px;
-      color: #4a4a4a; }
+      margin-bottom: 40px;
+      color:#5F5F5F;}
+    body .menu_choix .titleCat {
+      color:#F50F65; }
     body .menu_choix .partenaire-title {
       padding-top: 50px !important; }
     body .menu_choix .search_bloc {
@@ -907,7 +906,7 @@ body {
           padding: 5px;
           float: right;
           color: white;
-          background-color: #778BA3; }
+          background-color: #f50f65; }
     body .fullDiv .pub {
       background-color: red;
       padding: 20px;
@@ -1668,7 +1667,6 @@ body {
   }
 }
   body .menuGlobal {
-    background-color: #eeeeee;
     padding-bottom: 50px; }
   body .menuGlobal .titleMenu {
     padding-top: 40px;

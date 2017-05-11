@@ -53,4 +53,13 @@ class DefaultController extends Controller
     {
         return $this->render("frontoffice/default/conditions.html.twig");
     }
+
+    /**
+     * @Route("/qualite-produit", name="qualite_produit")
+     */
+    public function qualiteProduitAction()
+    {
+        return $this->render("frontoffice/default/qualite.html.twig");
+    }
+
 }
