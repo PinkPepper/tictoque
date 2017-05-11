@@ -10,9 +10,6 @@ body .row {
 body .glyphicon-star {
   color: #f32063; }
 
-body .glyphicon-star-off {
-  color: #c7c7c7 !important; }
-
 body .plat-actu {
   padding-bottom: 35px; }
 
@@ -1999,8 +1996,8 @@ body .container .recap-prix .livraison-total .prix-total {
   border-radius: 5px;
   padding: 20px; }
   .paiement_carte .carte_header img:first-child {
-    width: 70px;
-    height: 40px;
+    width: 60px;
+    height: 30px;
     margin: 5px; }
   .paiement_carte .carte_header h4 {
     margin: 15px; }
