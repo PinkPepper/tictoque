@@ -29,12 +29,16 @@ class UserProfileEditType extends AbstractType
             ->add('adresse')
             ->add('allergenes', EntityType::class, array(
                 'class' => 'AppBundle:Allergene',
-                'choice_label' => 'nom',
+                'choice_label' => 'nomForm',
                 'expanded' => true,
                 'multiple' => true,
                 'choice_attr' => function($val, $key, $index) {
+                    if($key == "aucun")
+                    {
+                        return ['class' => 'unique-class', "style" => "display:none"];
+                    }
                     return ['class' => 'unique-class'];
-                }))
+                },))
         ;
     }
 
