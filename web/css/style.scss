@@ -2187,6 +2187,11 @@ body {
         margin-top: 10px;
       }
     }
+
+    .sel_bk_color
+    {
+      border: 2px solid #e52c65;
+    }
   }
 }
 
@@ -2232,11 +2237,6 @@ body {
     border-radius: 5px;
     margin-bottom: 50px;
     height: 40vh;
-
-    .sel_bk_color
-    {
-      border: 2px solid #e52c65;
-    }
 
     div
     {

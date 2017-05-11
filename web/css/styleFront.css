@@ -1962,6 +1962,8 @@ body .container .recap-prix .livraison-total .prix-total {
   .livraison_paiement .choix_relais div .relais_infos {
     display: block;
     margin-top: 10px; }
+.livraison_paiement .choix_relais .sel_bk_color {
+  border: 2px solid #e52c65; }
 
 .paiement_carte .carte_header {
   display: inline-flex;
@@ -1987,8 +1989,6 @@ body .container .recap-prix .livraison-total .prix-total {
   border-radius: 5px;
   margin-bottom: 50px;
   height: 40vh; }
-  .paiement_carte .carte_details .sel_bk_color {
-    border: 2px solid #e52c65; }
   .paiement_carte .carte_details div {
     padding: 20px; }
     .paiement_carte .carte_details div input {
