@@ -2161,6 +2161,7 @@ body {
 
 .livraison_paiement
 {
+  padding-top: 30px;
   h4 
   {
     color: black;
@@ -2267,11 +2268,12 @@ body {
     border-top: 0;
     border-radius: 5px;
     margin-bottom: 50px;
-    height: 40vh;
+    height: 50vh;
 
     div
     {
       padding: 20px;
+      margin-bottom: 15px;
 
       input
       {
