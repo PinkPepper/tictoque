@@ -8,7 +8,7 @@ body .row {
   margin-left: 0px; }
 
 body .glyphicon-star {
-  color: yellow; }
+  color: #f32063; }
 
 body .plat-actu {
   padding-bottom: 35px; }
@@ -237,7 +237,9 @@ body .desc_prod {
   padding-left: 30px; }
 
 body .desc_prod .produit_nom {
-  margin-top: 0; }
+  margin-top: 0;
+  color: #5f5f5f;
+  font-weight: bold; }
 
 body .desc_prod .produit_aller {
   font-weight: 700;
@@ -271,6 +273,9 @@ body .desc_prod .produit_ajout {
   color: white;
   border: none;
   border-radius: 5px; }
+
+body .desc_prod .produit_ajout:hover {
+  background-color: #fb1e64; }
 
 body .desc_prod .produit_stock {
   font-size: 11px;
@@ -320,11 +325,17 @@ body .produit_nav ul li:hover {
 
 body .produit_nav ul .active {
   border: 1px solid #929292;
-  border-bottom: 1px solid #f7f8fa;
-  border-radius: 5px 5px 0 0; }
+  border-radius: 5px 5px 0 0;
+  background-color: white;
+  border-bottom: 1px white solid; }
 
 body .content_nav {
-  padding-top: 40px; }
+  border: 1px #929292 solid;
+  background-color: white;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-top: none;
+  padding: 30px !important; }
 
 body .content_nav h5 {
   font-weight: 600; }
@@ -1806,8 +1817,8 @@ body .container .recap-prix .livraison-total .prix-total {
   margin-top: 50px; }
 
 .topMargin {
-  margin-bottom: 30px;
-  margin-top: 30px; }
+  margin-bottom: 10px !important;
+  margin-top: 60px !important; }
 
 .topMargin h4 {
   color: #f32063; }
@@ -1909,6 +1920,10 @@ body .container .recap-prix .livraison-total .prix-total {
   width: 25px;
   float: left;
   margin-right: 10px; }
+
+.topMarginNav .row .col-lg-12 {
+  padding-left: 0px;
+  padding-right: 0px; }
 
 .topMarginNav {
   margin-top: 50px !important; }
