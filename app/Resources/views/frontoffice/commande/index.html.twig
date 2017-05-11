@@ -1,22 +1,76 @@
 {% extends 'frontoffice/base.html.twig' %}
 
 {% block body %}
-    <h1>hey voici la commande et les options de localisation + de paiement</h1>
+    <div class="panier">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12 livraison_paiement">
+                <h4>Livraison et paiement</h4>
 
-    <div id="content_site" >
-        <h3>1. Choisissez un point de livraison</h3>
-        <br>
-        <input type="text" id="input" placeholder="Entrez une adresse" required>
-        <br>
-        <div class="results" data-adresse="{{ app.user.adresse }}" data-url="{{ path('commande_point_relais', {'adresse': '_adresse_'}) }}"></div>
+                <input type="text"  id="input" placeholder="Adresse de mon entreprise" required="">
+                <div class="results" data-adresse="{{ app.user.adresse }}" data-url="{{ path('commande_point_relais', {'adresse': '_adresse_'}) }}"></div>
 
-        <h3>2. Choisissez votre moyen de paiement</h3>
-        <br>
-        <div>
-            <a href="{{ path('commande_succes') }}" class="btn btn-info btn-small"  >Valider ma commande</a>
+                <p>2 choix possible en fonction de votre lieu de travail</p>
+
+                <div class="choix_relais">
+                    <input type="checkbox" class="relais_check" required>
+                    <div>
+                        <h4>Euratechnologie</h4>
+                        <p>165 Avenue de Bretagne - 59000 Lille</p>
+                        <p>à partir de 12h30</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-offset-1 col-lg-3 col-sm-12 col-md-12 col-xs-12 commande">
+                <h4>Commande</h4>
+                <p>Sous-total : <span id="sousTotal" class="total">2€ </span>
+                </p>
+                <p>Livraison : <span id="livraison" class="total">5€
+                    </span></p>
+                <div class="bar"></div>
+                <b><p>Total <span id="total" class="total">7€
+                    </span></p></b>
+
+                <a href="/tictoque/web/app_dev.php/commande/" class="commander">Passer la commande</a>
+                <a class="continue" href="/tictoque/web/app_dev.php/produits/">Continuer mes achats</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
+                <h4>Choissisez votre mode de paiement pour continuer</h4>
+                <div class="paiement_carte">
+                    <div class="carte_header">
+                        <img src="../../../web/img/picto_carte_bancaire.png"><h4>Paiement par carte</h4>
+                        <div class="carte_img">
+                            <img src="../../../web/img/cb.jpg">
+                            <img src="../../../web/img/visa.jpg">
+                            <img src="../../../web/img/master_card.jpg">
+                        </div>
+                    </div>
+                    <div class="carte_details">
+                        <div class="numero_cb">
+                            <label>Numéro de la carte</label>
+                            <input type="text" name="carte_numero" class="carte_numero" placeholder="4111 1111 1111 1111">
+                        </div>
+                        <div class="chiffre_cb">
+                            <label>Date d'éxpritation</label>
+                            <input type="text" name="date_expiration" class="date_expiration" placeholder="MM/YY">
+                            <label>Cryptogramme</label>
+                            <input type="text" name="crypto" class="crypto" placeholder="758">
+                        </div>
+                        <a href="{{ path('commande_succes') }}" class="paimement_valider"  >Valider mon paiement</a>
+                    </div>
+                    <a href="">
+                    <div class="paiement_paypal">
+                        <img src="../../../web/img/picto_paypal.png"><h4>Paypal</h4>
+                        <img src="../../../web/img/paypal.svg">
+                    </div>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
-
+    </div>
 
     <script>
         $(document).ready(function(){
@@ -35,6 +89,16 @@
                     var adresse = $('#input').val();
                     adresse = adresse.replace(/ /g, '%20');
                     $('.results').load(url.replace(/_adresse_/, adresse));
+                }
+            });
+
+            $('.relais_check').on('click', function (f) {
+                if ($(this).is(':checked')) {
+                    document.querySelector('.choix_relais').style.border = "2px solid #e52c65";
+                }
+                else 
+                {
+                    document.querySelector('.choix_relais').style.border = "0";
                 }
             });
         });
