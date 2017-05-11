@@ -2094,6 +2094,10 @@ body .container .recap-prix .livraison-total .prix-total {
       .modal-content .modal-body div a:first-child {
         margin-right: 50px; }
 
+.modal-dialog .modal-content .modal-body h4 {
+  position: absolute;
+  left: 10px;
+  top: -35px; }
 .modal-dialog .modal-content .modal-body input {
   border: none;
   background-color: #f7f7f7;
