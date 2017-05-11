@@ -27,9 +27,9 @@
         document.cookie = 'pointRelais=' + id;
     });
 
-    $(".choix_relais.bcr").on("click",function() {
+    $("div.choix_relais .bcr").on("click",function() {
         if($(this).find('input[type="radio"]').is(':checked')) { 
-          $(".choix_relais.bcr").removeClass('sel_bk_color');
+          $("div.choix_relais .bcr").removeClass('sel_bk_color');
           $(this).addClass('sel_bk_color');
         }
     });
