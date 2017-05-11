@@ -3,6 +3,7 @@
 {% endif %}
 
 {% for point in pointsRelais %}
+    {% if loop.index == 1 %}<script>const id = {{ point.id }}; document.cookie = 'pointRelais=' + id;</script>{% endif %}
     <div class="bcr">
         <p>
             <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>

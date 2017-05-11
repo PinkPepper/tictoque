@@ -30,6 +30,13 @@ class Commande
     private $date;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_livraison", type="datetime")
+     */
+    private $dateLivraison;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="commandes")
      * @ORM\JoinColumn(name="user", referencedColumnName="id")
      */
@@ -180,6 +187,22 @@ class Commande
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDateLivraison()
+    {
+        return $this->dateLivraison;
+    }
+
+    /**
+     * @param mixed $dateLivraison
+     */
+    public function setDateLivraison($dateLivraison)
+    {
+        $this->dateLivraison = $dateLivraison;
     }
 }
 
