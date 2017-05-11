@@ -8,7 +8,7 @@
                 <h4>Livraison et paiement</h4>
 
                 <input type="text"  id="input" placeholder="Adresse de mon entreprise" required="">
-                <div class="results" data-adresse="{{ app.user.adresse }}" data-url="{{ path('commande_point_relais', {'adresse': '_adresse_'}) }}"></div>
+                <div class="choix_relais" data-adresse="{{ app.user.adresse }}" data-url="{{ path('commande_point_relais', {'adresse': '_adresse_'}) }}"></div>
 
                 <p>2 choix possible en fonction de votre lieu de travail</p>
             </div>
