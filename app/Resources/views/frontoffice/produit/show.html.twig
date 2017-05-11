@@ -6,7 +6,7 @@
 
 {% block head %}
     <meta property="og:title" content="{{ produit.nom }} - L'amour Food" />
-    <meta property="og:description" content="{{ produit.description|raw }}" />
+    <meta property="og:description" content="{{ produit.description|striptags }}" />
     <meta property="og:site_name" content="http://amourfood.fr/" />
 
     <meta name="twitter:card" content="summary" />
@@ -48,7 +48,8 @@
                                         {{ produit.description|raw|slice(0,100)|raw }}...
                                         {% else %}
                                         {{ produit.description|raw }}
-                                        {% endif %}</p>
+                                        {% endif %}
+                </p>
 
                 <span class="produit_aller"><a>Allergenes</a></span>
 
