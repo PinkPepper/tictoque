@@ -61,7 +61,6 @@ class CommandeController extends Controller
         $em = $this->getDoctrine();
         $pointRelais = $request->cookies->get('pointRelais');
 
-        var_dump($pointRelais);
         if($pointRelais == "" | $pointRelais === null)
         {
             return $this->redirectToRoute("commande_index");

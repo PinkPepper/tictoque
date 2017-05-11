@@ -1,3 +1,6 @@
+{% if pointsRelais != [] %}
+    <p> {{ pointsRelais | length }} choix possibles en fonction de votre lieu de travail</p>
+{% endif %}
 
 {% for point in pointsRelais %}
     <div class="bcr">
