@@ -27,20 +27,13 @@
         document.cookie = 'pointRelais=' + id;
     });
 
-    $('.relais_check').on('click', function (f) {
-        if ($(this).is(':checked')) {
-            document.querySelectorAll('.bcr').style.border = "2px solid #e52c65";
-        }
-        else 
-        {
-            document.querySelectorAll('.bcr').style.border = "0";
-        }
-    });
-
-    $('.relais_check').on("click",function() {
+    $('.bcr').on("click",function() {
         if($(this).find('input[type="radio"]').is(':checked')) { 
-          $('.relais_check').removeClass('sel_bk_color');
-          $(this).addClass('sel_bk_color');
+            $('.relais_check').addClass('sel_bk_color');
+        }
+        else
+        {
+            $('.relais_check').removeClass('sel_bk_color');
         }
     });
 </script>
