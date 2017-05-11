@@ -13,11 +13,11 @@
 
                 </div>
                 <div class="col-lg-3 col-md-8 col-xs-6 infos_footer hideMobile">
-                    <h3>Menu les mieux notés</h3>
+                    <h3>Plats les mieux notés</h3>
                     <ul class="best_menu">
                         <li>
-                            <img src="#">
-                            <h4><a href="#">Poulet au pot</a></h4>
+                            <img src="{{ asset('img/Plat_chaud/pexels-photo-169743.jpg') }}">
+                            <h4><a href="#">Pasta Zucchini</a></h4>
                             <ul>
                                 <li class="glyphicon glyphicon-star"></li>
                                 <li class="glyphicon glyphicon-star"></li>
@@ -27,8 +27,8 @@
                             </ul>
                         </li>
                         <li>
-                            <img src="">
-                            <h4><a href="#">Poulet au pot</a></h4>
+                            <img src="{{ asset('img/Plat_chaud/pexels-photo-67431.jpg') }}">
+                            <h4><a href="#">Fish & Chips</a></h4>
                             <ul>
                                 <li class="glyphicon glyphicon-star"></li>
                                 <li class="glyphicon glyphicon-star"></li>
@@ -38,8 +38,8 @@
                             </ul>
                         </li>
                         <li>
-                            <img src="">
-                            <h4><a href="#">Poulet au pot</a></h4>
+                            <img src="{{ asset('img/Plat_chaud/pexels-photo-62097.jpg') }}">
+                            <h4><a href="#">Omelette gratinée</a></h4>
                             <ul>
                                 <li class="glyphicon glyphicon-star"></li>
                                 <li class="glyphicon glyphicon-star"></li>
@@ -93,9 +93,10 @@
             <div class="row">
                 <div class="col-lg-12 col-md-8 col-xs-12">
                     <ul class="paiement">
-                        <li> <a href="#"><img src="img/pages_checkout_05.jpg"></a> </li>
-                        <li> <a href="#"><img src="img/pages_checkout_07.jpg"></a> </li>
-                        <li> <a href="#"><img src="img/pages_checkout_03.jpg"></a> </li>
+                        <li> <a href="#"><img src="{{ asset('img/cb.jpg') }}"></a> </li>
+                        <li> <a href="#"><img style="width:41px;height:24px;" src="{{ asset('img/paypal.svg') }}"></a> </li>
+                        <li> <a href="#"><img src="{{ asset('img/visa.jpg') }}"></a> </li>
+                        <li> <a href="#"><img src="{{ asset('img/master_card.jpg') }}"></a> </li>
                     </ul>
                     <ul class="mentions_legales">
                         <li> <a href="{{ path("conditions_ventes") }}">Conditions générales de vents</a> </li>
