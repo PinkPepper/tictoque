@@ -2094,11 +2094,11 @@ body .container .recap-prix .livraison-total .prix-total {
       .modal-content .modal-body div a:first-child {
         margin-right: 50px; }
 
-.modal-dialog.home_pop .modal-content.home_pop .modal-body.home_pop h4 {
+.home_pop h4 {
   position: absolute;
   left: 10px;
   top: -35px; }
-.modal-dialog.home_pop .modal-content.home_pop .modal-body.home_pop input {
+.home_pop input {
   border: none;
   background-color: #f7f7f7;
   padding: 10px;
@@ -2107,16 +2107,16 @@ body .container .recap-prix .livraison-total .prix-total {
   font-style: italic;
   font-size: 12px;
   box-shadow: 0px 1px 1px 0px; }
-  .modal-dialog.home_pop .modal-content.home_pop .modal-body.home_pop input .popup_home {
+  .home_pop input .popup_home {
     text-align: center !important; }
-    .modal-dialog.home_pop .modal-content.home_pop .modal-body.home_pop input .popup_home a {
+    .home_pop input .popup_home a {
       background-color: #5f5f5f;
       border: none;
       padding: 5px 50px 5px 50px;
       color: #ffffff;
       border-radius: 5px;
       text-decoration: none; }
-    .modal-dialog.home_pop .modal-content.home_pop .modal-body.home_pop input .popup_home a:hover {
+    .home_pop input .popup_home a:hover {
       color: #e52c65; }
 
 .font5f {
