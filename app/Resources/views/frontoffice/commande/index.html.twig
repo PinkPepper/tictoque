@@ -11,28 +11,33 @@
                 <div class="results" data-adresse="{{ app.user.adresse }}" data-url="{{ path('commande_point_relais', {'adresse': '_adresse_'}) }}"></div>
 
                 <p>2 choix possible en fonction de votre lieu de travail</p>
-
-                <div class="choix_relais">
-                    <input type="checkbox" class="relais_check" required>
-                    <div>
-                        <h4>Euratechnologie</h4>
-                        <p>165 Avenue de Bretagne - 59000 Lille</p>
-                        <p>à partir de 12h30</p>
-                    </div>
-                </div>
             </div>
             <div class="col-lg-offset-1 col-lg-3 col-sm-12 col-md-12 col-xs-12 commande">
                 <h4>Commande</h4>
-                <p>Sous-total : <span id="sousTotal" class="total">2€ </span>
+                <p>Sous-total : <span id="sousTotal" class="total">
+                        <script type="application/javascript">
+                            tabPrice.forEach(function (element) {
+                                console.log(element);
+                                sousTotal = sousTotal+element;
+                            });
+                            $('#sousTotal').text(sousTotal.toFixed(2)+"€");
+                        </script> </span>
                 </p>
-                <p>Livraison : <span id="livraison" class="total">5€
+                <p>Livraison : <span id="livraison" class="total">
+                        <script type="application/javascript">
+                            $('#livraison').text(livraison+"€");
+                        </script>
                     </span></p>
                 <div class="bar"></div>
-                <b><p>Total <span id="total" class="total">7€
+                <b><p>Total <span id="total"  class="total">
+                        <script type="application/javascript">
+                            total = (sousTotal + livraison);
+                            $('#total').text(total.toFixed(2)+"€");
+                        </script>
                     </span></p></b>
 
-                <a href="/tictoque/web/app_dev.php/commande/" class="commander">Passer la commande</a>
-                <a class="continue" href="/tictoque/web/app_dev.php/produits/">Continuer mes achats</a>
+                <a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>
+                <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
             </div>
         </div>
         <div class="row">
