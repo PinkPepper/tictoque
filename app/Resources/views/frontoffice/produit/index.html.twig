@@ -63,7 +63,7 @@
                                             </div>
                                         </a>
                                         {% if app.user is not null %}
-                                           <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                                            <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
                                         {% else %}
                                             <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
                                         {% endif %}
@@ -73,20 +73,21 @@
                                             <p class="typeProduct">{{ produit.type|upper }}</p>
                                             <div class="row">
                                                 <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
-                                                <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',') }}€</span>
-                                                <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,10) }}</span>
+                                                <span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',') }}€</span>
+                                                <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                             </div>
+
                             {% if loop.index == 5 %}
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <div class="showPlat">
                                         <div class="dessert position_plat">
                                             <div class="livraison_menu">
                                                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                                <h4>CHOISISSEZ VOTRE POINT DE LIVRAISON</h4>
+                                                <h4>CHOISSISEZ VOTRE POINT DE LIVRAISON</h4>
                                                 <p>Vous n'avez pas encore définis de point de livraison</p>
                                                 <a class="add_livraison" href="#">Ajoutez un point de livraison</a>
                                             </div>
