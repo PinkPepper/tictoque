@@ -2095,9 +2095,8 @@ body .container .recap-prix .livraison-total .prix-total {
         margin-right: 50px; }
 
 .home_pop h4 {
-  position: absolute;
-  left: 10px;
-  top: -35px; }
+  text-align: center;
+  padding-bottom: 20px; }
 .home_pop input {
   border: none;
   background-color: #f7f7f7;
