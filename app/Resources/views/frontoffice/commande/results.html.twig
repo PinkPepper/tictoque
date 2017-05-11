@@ -27,13 +27,10 @@
         document.cookie = 'pointRelais=' + id;
     });
 
-    $('.bcr').on("click",function() {
+    $('.choix_relais.bcr').on("click",function() {
         if($(this).find('input[type="radio"]').is(':checked')) { 
-            $('.relais_check').addClass('sel_bk_color');
-        }
-        else
-        {
-            $('.relais_check').removeClass('sel_bk_color');
+          $('.choix_relais.bcr').removeClass('sel_bk_color');
+          $(this).addClass('sel_bk_color');
         }
     });
 </script>
