@@ -1999,7 +1999,8 @@ body .container .recap-prix .livraison-total .prix-total {
   width: 100%;
   border: 2px solid #e52c65;
   border-radius: 5px;
-  padding: 20px; }
+  padding: 20px;
+  background-color: #ffffff; }
   .paiement_carte .carte_header img:first-child {
     width: 60px;
     height: 30px;
@@ -2054,7 +2055,8 @@ body .container .recap-prix .livraison-total .prix-total {
   margin-bottom: 100px;
   padding: 20px;
   display: inline-flex;
-  width: 100%; }
+  width: 100%;
+  background-color: #ffffff; }
   .paiement_carte .paiement_paypal h4 {
     margin: 18px 0 0 0;
     color: #999999; }
