@@ -36,5 +36,12 @@
             document.querySelectorAll('.bcr').style.border = "0";
         }
     });
+
+    $('.relais_check').on("click",function() {
+        if($(this).find('input[type="radio"]').is(':checked')) { 
+          $('.relais_check').removeClass('sel_bk_color');
+          $(this).addClass('sel_bk_color');
+        }
+    });
 </script>
 
