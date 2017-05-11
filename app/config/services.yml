@@ -10,3 +10,7 @@ services:
     app.geocoder_service:
         class: AppBundle\Service\GeocodeService
         autowire: true
+#    twig.extension.text:
+#          class: Twig_Extensions_Extension_Text
+#          tags:
+#              - { name: twig.extension }

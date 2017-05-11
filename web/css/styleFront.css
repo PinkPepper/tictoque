@@ -10,9 +10,6 @@ body .row {
 body .glyphicon-star {
   color: #f32063; }
 
-body .glyphicon-star-off {
-  color: #c7c7c7 !important; }
-
 body .plat-actu {
   padding-bottom: 35px; }
 
@@ -877,7 +874,7 @@ body .fullDiv .retour:hover a {
 
 body .fullDiv .article {
   background-color: white;
-  color: black;
+  color: #9a9a9a;
   padding: 50px;
   padding-left: 100px;
   padding-right: 100px;
@@ -931,7 +928,7 @@ body .fullDiv .commentaire .writeCommentaire {
   margin-bottom: 30px; }
 
 body .fullDiv .commentaire .writeCommentaire .zoneCommentaire {
-  border-color: grey;
+  border-color: #9a9a9a;
   padding: 20px;
   margin-top: 20px;
   border-radius: 5px;
@@ -1496,7 +1493,7 @@ body .Blog-droite {
   background-color: white; }
   .sliderQualite .sliderRight h4 {
     font-size: 24px;
-    color: #4a4a4a; }
+    color: #5F5F5F; }
 
 .actualite h4 {
   margin-top: 30px;
@@ -1820,7 +1817,9 @@ body .container .recap-prix .livraison-total .prix-total {
   color: #F50F65; }
 
 .ficheProduit {
-  margin-top: 50px; }
+  margin-top: 50px;
+  padding-left: 10%;
+  padding-right: 10%; }
 
 .topMargin {
   margin-bottom: 10px !important;
@@ -1828,6 +1827,10 @@ body .container .recap-prix .livraison-total .prix-total {
 
 .topMargin h4 {
   color: #f32063; }
+
+.topMarginNav .row {
+  padding-right: 10%;
+  padding-left: 10%; }
 
 .produitSuccess,
 .sousMenuSuccess {
@@ -1993,8 +1996,8 @@ body .container .recap-prix .livraison-total .prix-total {
   border-radius: 5px;
   padding: 20px; }
   .paiement_carte .carte_header img:first-child {
-    width: 70px;
-    height: 40px;
+    width: 60px;
+    height: 30px;
     margin: 5px; }
   .paiement_carte .carte_header h4 {
     margin: 15px; }
@@ -2065,5 +2068,17 @@ body .container .recap-prix .livraison-total .prix-total {
 
 .deleteMenu {
   cursor: pointer; }
+
+.article h1, h2, h3, h4, h5, h6 {
+  color: #5F5F5F; }
+
+@media (max-width: 1268px) {
+  .topMarginNav .row {
+    padding-right: 0%;
+    padding-left: 0%; }
+
+  .ficheProduit {
+    padding-right: 0%;
+    padding-left: 0%; } }
 
 /*# sourceMappingURL=styleFront.css.map */
