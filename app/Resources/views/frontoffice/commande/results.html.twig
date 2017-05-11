@@ -1,7 +1,7 @@
 
 {% for point in pointsRelais %}
     <p>
-        <input type="checkbox" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
+        <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
         <div>
             <h4>{{ point.nom }}</h4>
             <p>{{ point.adresse }}</p>
