@@ -103,32 +103,65 @@ class CommandeController extends Controller
         {
             if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
             {
-                    $quantite = $value['quantite'];
-                    $id = explode("_", $key);
-                    $id = $id[1];
-                    array_push($produits, array($em->getRepository('AppBundle:Produit')->find($id), $quantite));
+                $quantite = $value['quantite'];
+                $id = explode("_", $key);
+                $id = $id[1];
 
-                    $commandeProduit = new CommandeProduit();
-                    $commandeProduit->setCommande($commande);
-                    $commandeProduit->setProduits($em->getRepository('AppBundle:Produit')->find($id));
-                    $commandeProduit->setQuantiteCommandee($quantite);
-                    $em->getManager()->persist($commandeProduit);
-                    $em->getManager()->flush();
+                $produit = $em->getRepository('AppBundle:Produit')->find($id);
+                array_push($produits, array($produit, $quantite));
+
+                $commandeProduit = new CommandeProduit();
+                $commandeProduit->setCommande($commande);
+                $commandeProduit->setProduits($produit);
+                $commandeProduit->setQuantiteCommandee($quantite);
+
+                $produit->setQuantite($produit->getQuantite()-$quantite);
+
+                $em->getManager()->persist($commandeProduit);
+                $em->getManager()->persist($produit);
+                $em->getManager()->flush();
             }
 
             else if ($key != "menu" && (strpos($key, 'menu') !== false) && (strpos($key, 'menu') == 0)) //menu
             {
                 $menu = new Menu();
                 $menu->setMenu($value['entree'], $value['plat'], $value['dessert'], $value['boisson'], $value['prix'], $value['quantite'], $this->getUser());
-
                 $em->getManager()->persist($menu);
-                $em->getManager()->flush();
+
+                if($value['entree'] !== null)
+                {
+                    $produit = $em->getRepository('AppBundle:Produit')->find($value['entree']);
+                    $produit->setQuantite($produit->getQuantite()-1);
+                    $em->getManager()->persist($produit);
+                }
+
+                if($value['plat'] !== null)
+                {
+                    $produit = $em->getRepository('AppBundle:Produit')->find($value['plat']);
+                    $produit->setQuantite($produit->getQuantite()-1);
+                    $em->getManager()->persist($produit);
+                }
+
+                if($value['dessert'] !== null)
+                {
+                    $produit = $em->getRepository('AppBundle:Produit')->find($value['dessert']);
+                    $produit->setQuantite($produit->getQuantite()-1);
+                    $em->getManager()->persist($produit);
+                }
+
+                if($value['boisson'] !== null)
+                {
+                    $produit = $em->getRepository('AppBundle:Produit')->find($value['boisson']);
+                    $produit->setQuantite($produit->getQuantite()-1);
+                    $em->getManager()->persist($produit);
+                }
 
                 /* Création commandeMenu */
                 $commandeMenu = new CommandeMenu();
                 $commandeMenu->setCommande($commande);
                 $commandeMenu->setMenus($menu);
                 $em->getManager()->persist($commandeMenu);
+
                 $em->getManager()->flush();
 
             }

@@ -19,7 +19,11 @@
                                         <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
                                         </a>
                                     </div>
-                                    <a class="addToCart" href="{{ path('menu_choix_entree', { 'id': produit.id }) }}">Choisir</a>
+                                    {% if produit.quantite == 0 %}
+                                        <a class="addToCart">Indisponible</a>
+                                    {% else %}
+                                        <a class="addToCart" href="{{ path('menu_choix_entree', { 'id': produit.id }) }}">Choisir</a>
+                                    {% endif %}
                                 </div>
                                 <div class="showDescPlat">
                                     <a href="" class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit.id}) }}">

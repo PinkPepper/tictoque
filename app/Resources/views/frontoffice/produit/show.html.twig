@@ -59,12 +59,16 @@
                     <option>3</option>
                 </select>
 
-                {% if app.user is not null %}
-                    <button class="ajoutPanier produit_ajout" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}" >Ajouter au panier</button>
-                {% else %}
-                    <a class="produit_ajout" href="{{ path('fos_user_security_login') }}">Ajouter au panier</a>
-                {% endif %}
 
+                {% if produit.quantite == 0 %}
+                    <a class="produit_ajout">Indisponible</a>
+                {% else %}
+                    {% if app.user is not null %}
+                        <button class="ajoutPanier produit_ajout" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}" >Ajouter au panier</button>
+                    {% else %}
+                        <a class="produit_ajout" href="{{ path('fos_user_security_login') }}">Ajouter au panier</a>
+                    {% endif %}
+                {% endif %}
 
 
                 </br>
