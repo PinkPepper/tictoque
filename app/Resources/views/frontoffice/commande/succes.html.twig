@@ -17,7 +17,7 @@
             <div class="container">
                 <div class="produit produitSuccess">
                     <div class="livraison-type">
-                        <p>Livraison en point relais</p>
+                        <p>Livraison en point relais, le {{ commande.dateLivraison | date('d/m/Y') }}</p>
                         <span>{{ pointRelais.nom }}</span>
                         </br>
                         <span>{{ pointRelais.adresse }}</span>

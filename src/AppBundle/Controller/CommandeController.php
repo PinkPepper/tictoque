@@ -78,6 +78,16 @@ class CommandeController extends Controller
         $commande->setPrix($prix);
         $commande->setAdresse($pointRelais->getAdresse());
 
+        $hours = (new \DateTime())->format('H');
+        if($hours < 10)
+        {
+            $commande->setDateLivraison(new \DateTime());
+        }
+        else
+        {
+            $commande->setDateLivraison((new \DateTime())->add(new \DateInterval('P1D')));
+        }
+
         $em->persist($commande);
         $em->flush();
 
