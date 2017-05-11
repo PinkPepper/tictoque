@@ -1,29 +1,21 @@
-{% block subject %}L'amour Food - Création de votre compte{% endblock %}
-
-{% block body_text %}
-{% autoescape false %}
-{% endautoescape %}
-{% endblock %}
-
-{% block body_html %}
 <html>
 <body style="background: #f2f2f2;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;">
 
 <div style="max-width: 560px;padding: 20px;background: #ffffff;border-radius: 5px;margin:40px auto;font-family: Open Sans,Helvetica,Arial;font-size: 15px;color: #666;">
 
 	<div style="color: #444444;font-weight: normal;">
-		<div style="text-align: center;font-weight:600;font-size:26px;padding: 10px 0;border-bottom: solid 3px #eeeeee;"><a href="http://81.67.208.32/tictoque/web/app_dev.php/"><img height="60px" src="http://81.67.208.32/tictoque/web/img/logo.png"></a></div>
+		<div style="text-align: center;font-weight:600;font-size:26px;padding: 10px 0;border-bottom: solid 3px #eeeeee;"><a href="https://lamourfood.fr/"><img height="60px" src="http://81.67.208.32/tictoque/web/img/logo.svg"></a></div>
 
 		<div style="clear:both"></div>
 	</div>
 
 	<div style="padding: 0 30px 30px 30px;border-bottom: 3px solid #eeeeee;">
 
-		<div style="padding:20px 0;font-size: 20px;text-align: center;line-height:28px;">Bienvenue {{ user.prenom }} {{ user.nom }}<br/>Plus qu'une &eacute;tape avant de d&eacute;guster votre repas !</span></div>
+		<div style="padding:20px 0;font-size: 20px;text-align: center;line-height:28px;">Bienvenue PrenomUtilisateur<br/>Plus qu'une &eacute;tape avant de d&eacute;guster votre repas !</span></div>
 
 		<div style="font-size: 16px;text-align: left;line-height:20px;">Pour activer votre compte, veuillez cliquer sur le lien ci-dessous. </div>
 
-		<div style="padding: 40px 0 20px 0;text-align: center;margin-bottom:10px;"><a href="{{ confirmationUrl }}" style="background: #f32063;color: #fff;padding: 12px 30px;text-decoration: none;border-radius: 3px;letter-spacing: 0.3px;">Valider mon compte</a></div>
+		<div style="padding: 40px 0 20px 0;text-align: center;margin-bottom:10px;"><a href="https://lamourfood.fr/" style="background: #f32063;color: #fff;padding: 12px 30px;text-decoration: none;border-radius: 3px;letter-spacing: 0.3px;">Valider mon compte</a></div>
 
 		<div style="font-size: 11px;text-align: left;line-height:20px;margin-bottom:20px;">Attention, ce lien est valable pour une dur&eacute;e de 24 heures. Au del&agrave;, vous devrez recommencer la proc&eacute;dure sur le site [lamourfood.fr].</div>
 
@@ -39,4 +31,3 @@
 
 </body>
 </html>
-{% endblock %}

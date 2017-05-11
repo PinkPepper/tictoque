@@ -73,13 +73,14 @@ fos_user:
     firewall_name: main
     user_class: AppBundle\Entity\User
     service:
-           mailer: fos_user.mailer.default
+           mailer: fos_user.mailer.twig_swift
     registration:
         confirmation:
             from_email:
                 address: no-reply@amourfood.com
                 sender_name: L'amour Food
             enabled: true
+            template: FOSUserBundle:Registration:email.txt.twig
         form:
             type: AppBundle\Form\RegistrationType
     resetting:
