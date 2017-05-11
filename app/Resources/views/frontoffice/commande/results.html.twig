@@ -1,13 +1,16 @@
 
 {% for point in pointsRelais %}
     <p>
-    <input class="pt" type="radio" name="pointRelais" value="{{ point.id }}">
+        <input class="pt" type="radio" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
         <b>{{ point.nom }}</b> - {{ point.adresse }}
     </p>
 {% endfor %}
 
 {% if pointsRelais == [] %}
     Aucun point relais trouvé pour cette adresse
+    <script>
+            document.cookie = 'pointRelais=';
+    </script>
 {% else %}
     <div class="message"></div>
 {% endif %}
