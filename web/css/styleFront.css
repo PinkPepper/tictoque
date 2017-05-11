@@ -1960,7 +1960,8 @@ body .container .recap-prix .livraison-total .prix-total {
   .livraison_paiement .choix_relais div input[type="checkbox"]:focus {
     outline: 0; }
   .livraison_paiement .choix_relais div .relais_infos {
-    display: block; }
+    display: block;
+    margin-top: 10px; }
 
 .paiement_carte .carte_header {
   display: inline-flex;

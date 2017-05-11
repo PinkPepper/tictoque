@@ -96,16 +96,6 @@
                     $('.choix_relais').load(url.replace(/_adresse_/, adresse));
                 }
             });
-
-            $('.relais_check').on('click', function (f) {
-                if ($(this).is(':checked')) {
-                    document.querySelector('.choix_relais').style.border = "2px solid #e52c65";
-                }
-                else 
-                {
-                    document.querySelector('.choix_relais').style.border = "0";
-                }
-            });
         });
 
     </script>
