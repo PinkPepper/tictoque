@@ -1,12 +1,15 @@
-<h4>Livraison et paiement</h4>
+<div class="home_pop">
+
+<h4>Trouvez votre point relais</h4>
 
 <input type="text" id="input" placeholder="Entrez une adresse">
 <div class="popup_home">  
-    <a href="#" id="button">Valider</a>
+    <button href="#" id="button">Valider</button>
 </div>
 
 <div class="results" data-url="{{ path('point_relais_results', {'adresse': '_adresse_'}) }}"></div>
 
+</div>
 <script>
     $('#button').on('click', function(){
         const url = $(".results").data('url');
