@@ -1,0 +1,22 @@
+<input type="text" id="input" placeholder="Entrez une adresse">
+<button id="button">rechercher</button>
+
+<div class="results" data-url="{{ path('point_relais_results', {'adresse': '_adresse_'}) }}"></div>
+
+<script>
+    $('#button').on('click', function(){
+        const url = $(".results").data('url');
+        var adresse = $('#input').val();
+        adresse = adresse.replace(/ /g, '%20');
+        $('.results').load(url.replace(/_adresse_/, adresse));
+    })
+
+    $('#input').keypress(function(e) {
+        if(e.which == 13) {
+            const url = $(".results").data('url');
+            var adresse = $('#input').val();
+            adresse = adresse.replace(/ /g, '%20');
+            $('.results').load(url.replace(/_adresse_/, adresse));
+        }
+    });
+</script>

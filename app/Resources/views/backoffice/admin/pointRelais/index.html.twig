@@ -1,0 +1,46 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="menu_top_cms">
+            <h1>Points relais</h1>
+            <a class="btn_01" href="{{ path('admin_point_relais_new') }}">Créer un point relais</a>
+        </div>
+
+        <div class="cellule_background_cms">
+            <table>
+                <tr>
+                    <td>Id</td>
+                    <td>nom</td>
+                    <td>adresse</td>
+                    <td>latitude</td>
+                    <td>longitude</td>
+                    <td>Créer le</td>
+                    <td>Actions</td>
+                </tr>
+                <tbody>
+                {% for point in pointsRelais %}
+                    <tr>
+                        <td>{{ point.id }}</td>
+                        <td>{{ point.nom }}</td>
+                        <td>{{ point.adresse }}</td>
+                        <td>{{ point.latitude }}</td>
+                        <td>{{ point.longitude }}</td>
+                        <td>{% if point.createdAt %}{{ point.createdAt|date('d/m/Y') }}{% endif %}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('admin_point_relais_edit', { 'id': point.id }) }}">Modifier</a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('admin_point_relais_delete', { 'id': point.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+            
+        </div>
+    </section>
+{% endblock %}

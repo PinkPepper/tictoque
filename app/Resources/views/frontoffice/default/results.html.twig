@@ -1,0 +1,8 @@
+{% for point in pointsRelais %}
+    <p><b>{{ point.nom }}</b> - {{ point.adresse }}</p>
+{% endfor %}
+
+{% if pointsRelais == [] %}
+    Aucun point relais trouvé pour cette adresse
+{% endif %}
+

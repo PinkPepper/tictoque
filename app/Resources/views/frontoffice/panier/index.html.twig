@@ -2,10 +2,10 @@
 
 {% block body %}
     <script type="application/javascript">
-    var sousTotal = 0;
+    var sousTotal = 0.0;
     var tabPrice = [];
-    var total = 0;
-    var livraison = 5;
+    var total = 0.0;
+    var livraison = 5.0;
 </script>
 <div class="panier">
     <div class="container">
@@ -25,10 +25,26 @@
                     {% if menu["quantite"] != 0  %}
                     <div id="menuId-{{ menu["id"] }}" class="produit">
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                            image
+                            {% if menu["type"] == 1 %}
+                                <img class="imgSousProduit" src="{{ asset('img/menus/menu1.jpg') }}"/>
+                            {% else %}
+                                {% if menu["type"] == 2 %}
+                                    <img class="imgSousProduit" src="{{ asset('img/menus/menu2.jpg') }}"/>
+                                {% else %}
+                                    <img class="imgSousProduit" src="{{ asset('img/menus/menu3.jpg') }}"/>
+                                {% endif %}
+                            {% endif %}
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                            <h5>Menu n°{{ menu["id"] }}</h5>
+                            {% if menu["type"] == 1 %}
+                                <h5>Menu petite faim</h5>
+                            {% else %}
+                                {% if menu["type"] == 2 %}
+                                    <h5>Menu classique</h5>
+                                {% else %}
+                                    <h5>Menu complet</h5>
+                                {% endif %}
+                            {% endif %}
                             <h5>{{ menu["prix"] }}€</h5>
                             <a class="showMore" data-id="{{ menu["id"] }}">En savoir plus ...</a>
                         </div>
@@ -39,15 +55,19 @@
                             {#</div>#}
                             {#<img id="menuChevronSup-{{ menu["id"] }}" width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ menu["prix"] }}" data-url="{{ path('ajout_exemplaire_menu_panier', {'menu': menu["id"]}) }}" data-id="{{ menu["id"] }}"/>#}
                         {#</div>#}
+                        <div class="quantiteMenu-{{ menu["id"] }}"></div>
                         <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">
                             <h3 id="prixTotal-{{ menu["id"] }}">
-                                <script type="application/javascript">
-                                    var prix = {{ menu["prix"] }};
-                                    var qte = {{ menu["quantite"] }};
-                                    var total = prix*qte;
+                               {# <script type="application/javascript">
+                                    #}{#var prix = {{ menu["prix"] }};#}{#
+                                    #}{#var qte = {{ menu["quantite"] }};#}{#
+                                    #}{#var total = prix*qte;#}{#
+                                    var total = {{ menu["prix"] }};
                                     tabPrice[String({{ menu["id"] }})] = total;
                                     $('#prixTotal-'+{{ menu["id"] }}).text(total+"€");
-                                </script>
+                                </script>#}
+                                <script>tabPrice[String({{ menu["id"] }})] = {{ menu["prix"] }};</script>
+                                {{ menu["prix"] }}€
                             </h3>
                         </div>
                         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 divDelete">
@@ -132,9 +152,10 @@
                 <p>Sous-total : <span id="sousTotal" class="total">
                         <script type="application/javascript">
                             tabPrice.forEach(function (element) {
+                                console.log(element);
                                 sousTotal = sousTotal+element;
                             });
-                            $('#sousTotal').text(sousTotal+"€");
+                            $('#sousTotal').text(sousTotal.toFixed(2)+"€");
                         </script> </span>
                 </p>
                 <p>Livraison : <span id="livraison" class="total">
@@ -146,10 +167,11 @@
                 <b><p>Total <span id="total"  class="total">
                         <script type="application/javascript">
                             total = (sousTotal + livraison);
-                            $('#total').text(total+"€");
+                            $('#total').text(total.toFixed(2)+"€");
                         </script>
                     </span></p></b>
-                <a href="{{ path('commande_index') }}" class="commander">Commander</a>
+
+                <a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>
                 <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
             </div>
         </div>
@@ -287,7 +309,7 @@
             e.preventDefault();
             var id = $(this).data('id');
             var url = $(this).data('url');
-            var res = $('.quantite-'+id).load(url,function () {
+            var res = $('.quantiteMenu-'+id).load(url,function () {
 
             });
 

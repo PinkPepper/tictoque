@@ -27,7 +27,6 @@ class PanierController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine()->getRepository('AppBundle:Produit');
         $panier = $session->all();
-        dump($panier);
         $produits = array();
         $menus = array();
 
@@ -35,7 +34,6 @@ class PanierController extends Controller
         {
             if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
             {
-                dump($value);
                 $id = explode("_", $key);
                 $id = $id[1];
                 array_push($produits, array($em->find($id), $value['quantite']));
@@ -73,7 +71,7 @@ class PanierController extends Controller
                 else{
                     $boisson = null;
                 }
-                    array_push($menus, array('id'=>$id, 'entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>$value['quantite'], 'prix'=>$value['prix']));
+                    array_push($menus, array('id'=>$id, 'entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>$value['quantite'], 'prix'=>$value['prix'], 'type'=>$value['type']));
 
             }
         }
@@ -130,8 +128,6 @@ class PanierController extends Controller
             $prix = $prix + $produit->getPrix();
             $session->set('prix', $prix);
         }
-
-        dump($session->all());
 
         return $this->render('frontoffice/produit/success.html.twig', array(
             "reponse"=>$reponse
@@ -272,8 +268,6 @@ class PanierController extends Controller
     public function retirerMenu(Request $request, $menu)
     {
         $session = $request->getsession();
-
-
         $pMenu = $session->get('menu_' . $menu);
 
         if( $pMenu != null)

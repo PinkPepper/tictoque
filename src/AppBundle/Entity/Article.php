@@ -78,7 +78,6 @@ class Article
      */
     private $slug;
 
-
     /**
      * @var \DateTime $contentChanged
      *

@@ -27,14 +27,29 @@ class CommandeController extends Controller
      */
     public function indexAction(Request $request)
     {
-        //TODO localisation
+        $session = $request->getSession();
+        $prix = $session->get('prix');
+        if($prix == 5 || $prix === null) //panier vide
+        {
+            return $this->redirectToRoute('index_panier');
+        }
+
         //TODO moyen de paiement
-
-
-        return $this->render('frontoffice/commande/index.html.twig', array(
-        ));
+        return $this->render('frontoffice/commande/index.html.twig');
     }
 
+    /**
+     * @Route("/results/{adresse}", name="commande_point_relais")
+     */
+    public function resultAction($adresse)
+    {
+        $geocoder = $this->container->get('app.geocoder_service');
+        $pointsRelais = $geocoder->getPointsRelais($adresse);
+
+        return $this->render('frontoffice/commande/results.html.twig', array(
+            'pointsRelais'=>$pointsRelais
+        ));
+    }
 
     /**
      * Succes de la commande
@@ -43,7 +58,11 @@ class CommandeController extends Controller
      */
     public function SuccesAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine();
+        $pointRelais = $request->cookies->get('pointRelais');
+        $pointRelais = $em->getRepository('AppBundle:PointRelais')->find($pointRelais);
+
+        $em = $em->getManager();
         $session = $request->getSession();
 
         $prix = $session->get('prix');
@@ -51,6 +70,8 @@ class CommandeController extends Controller
         $commande = new Commande();
         $commande->setUser($this->getUser());
         $commande->setPrix($prix);
+        $commande->setAdresse($pointRelais->getAdresse());
+
         $em->persist($commande);
         $em->flush();
 
@@ -98,7 +119,34 @@ class CommandeController extends Controller
         }
 
         /* ****** PAGE SUCCES ****** */
+        $page_succes = $this->preparePageSucces($session);
+        $produits_panier = $page_succes[0];
+        $menus = $page_succes[1];
+        /* */
 
+        /* reset le panier */
+        $session = $request->getSession();
+        $session->clear();
+
+        /* Triche pour regler un problème */
+        $badCommande = $em->getRepository('AppBundle:Commande')->findByPrix(null);
+        foreach ($badCommande as $bc){
+            $em->getManager()->remove($bc);
+            $em->getManager()->flush();
+        }
+
+        return $this->render('frontoffice/commande/succes.html.twig', array(
+            'commande'=>$commande,
+            'pointRelais'=>$pointRelais,
+            'produits'=>$produits_panier,
+            'menus'=>$menus,
+            'prix'=>$prix
+        ));
+    }
+
+    function preparePageSucces($session)
+    {
+        $em = $this->getDoctrine()->getManager();
         $panier = $session->all();
         $produits_panier = array();
         $menus = array();
@@ -137,21 +185,11 @@ class CommandeController extends Controller
                 } else {
                     $boisson = null;
                 }
-                array_push($menus, array('id' => $id, 'entree' => $entree, 'plat' => $plat, 'dessert' => $dessert, 'boisson' => $boisson, 'quantite' => $value['quantite'], 'prix' => $value['prix']));
+                array_push($menus, array('id' => $id, 'entree' => $entree, 'plat' => $plat, 'dessert' => $dessert, 'boisson' => $boisson, 'quantite' => $value['quantite'], 'prix' => $value['prix'], 'type' => $value['type']));
             }
         }
-        /* */
 
-
-        /* reset le panier */
-        $session = $request->getSession();
-        $session->clear();
-
-        return $this->render('frontoffice/commande/succes.html.twig', array(
-            'produits'=>$produits_panier,
-            'menus'=>$menus,
-            'prix'=>$prix
-        ));
+        return array($produits_panier, $menus);
     }
 
 }

@@ -31,52 +31,64 @@ class ProduitController extends Controller
         $categorie = null;
 
         $paginator  = $this->get('knp_paginator');
-        $maxPerPage = 6;
         $query = $em->getRepository('AppBundle:Produit')->findAll();
+        $maxPerPage = 9;
         $produits = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
             $maxPerPage/*limit per page*/
         );
 
-        /* RECHERCHE AVEC FILTRES */
+        $isAllergene = false;
+
+
         $form = $this->createForm('AppBundle\Form\RechercheType');
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid())
         {
-            $produits = $this->rechercheFiltre($form, $paginator, $maxPerPage, $query);
+            $isAllergene = $form->getData()['allergene'];
+
+            $search = $form->getData()['search'];
+            if($search !== null)
+            {
+                $produits = $this->recherchePersonnalisee($search, $paginator);
+            }
+            else
+            {
+                $produits = $this->rechercheFiltre($form, $paginator, $maxPerPage, $query);
+            }
 
         }
 
-        /* RECHERCHE PERSONNALISÉE */
-        $form2 = $this->createForm('AppBundle\Form\RecherchePersonnaliseeType');
-        $form2->handleRequest($request);
-        if ($form2->isSubmitted() && $form2->isValid())
+        if($this->getUser() === null)
         {
-            $produits = $this->recherchePersonnalisee($form2, $paginator);
-
+            $allergenes = array();
         }
+        else $allergenes = $this->getUser()->getAllergenes();
+
 
         return $this->render('frontoffice/produit/index.html.twig', array(
             'categories' => $categories,
             'categorie' => $categorie,
             'produits' => $produits,
             'form'=>$form->createView(),
-            'form_personnalise'=>$form2->createView()
+            //'form_personnalise'=>$form2->createView()
+            'isAllergene'=>$isAllergene,
+            'allergenes'=>$allergenes
         ));
     }
 
-    public function recherchePersonnalisee($form, $paginator)
+    public function recherchePersonnalisee($search, $paginator)
     {
-        $word = $form->getData()['search'];
-
         $repository = $this->getDoctrine()->getManager();
+
         $query = $repository->createQueryBuilder('p')
             ->select('p')
             ->from('AppBundle:Produit', 'p')
             ->where('p.nom LIKE :word')
-            ->setParameter('word', '%'.$word.'%')
+            ->setParameter('word', '%'.$search.'%')
             ->getQuery();
+
 
         $produits = $paginator->paginate(
             $query, /* query NOT result */
@@ -89,8 +101,10 @@ class ProduitController extends Controller
 
     public function rechercheFiltre($form, $paginator, $maxPerPage, $query)
     {
+       // $query = null;
         $type = $form->getData()['type'];
         $categorie = $form->getData()['categorie'];
+
 
         if($type == 'all' && $categorie->getNom() == 'Tous les produits')
         {
@@ -167,7 +181,59 @@ class ProduitController extends Controller
 
         return $this->render('frontoffice/produit/show.html.twig', array(
             'produit' => $produit,
-            'autre' => $autre
+            'autre' => $autre,
+            'avis'=>unserialize($produit->getAvis())
+        ));
+    }
+
+    /**
+     * @Route("/avis/{produit}")
+     */
+    public function avisAction(Request $request, Produit $produit)
+    {
+        $produitNotation = $produit->getNotation();
+        $form = $this->createForm('AppBundle\Form\AvisProduitType', $produit);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $note = $produit->getNotation();
+            $nbVotants = $produit->getNbVotants();
+
+            if($nbVotants != 0 || $nbVotants != null)
+            {
+                $p = $nbVotants * $produitNotation;
+                $produit->setNotation(($p+$note)/($nbVotants + 1));
+                $produit->setNbVotants($nbVotants + 1);
+            }
+           else
+           {
+               $produit->setNotation($note);
+               $produit->setNbVotants(1);
+           }
+
+           $avis = $produit->getAvisForm();
+           $allAvis = $produit->getAvis();
+
+           if($allAvis == null)
+           {
+               $produit->setAvis(serialize(array($avis)));
+           }
+           else
+           {
+               $allAvis = unserialize($allAvis);
+               array_push($allAvis, $avis);
+               $produit->setAvis(serialize($allAvis));
+           }
+
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($produit);
+           $em->flush();
+
+        }
+
+        return $this->render('frontoffice/produit/avis.html.twig', array(
+            'form'=>$form->createView(),
+            'produit'=>$produit
         ));
     }
 

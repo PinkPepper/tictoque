@@ -58,7 +58,7 @@ class Produit
     /**
      * @var int
      *
-     * @ORM\Column(name="prix", type="integer")
+     * @ORM\Column(name="prix", type="float")
      * @Assert\NotBlank()
      */
     private $prix;
@@ -95,6 +95,25 @@ class Produit
      */
     private $commande;
 
+    /**
+     * @ORM\Column(name="notation", type="float", nullable=true)
+     */
+    private $notation;
+
+    /**
+     * @ORM\Column(name="nbVotants", type="integer", nullable=true)
+     */
+    private $nbVotants;
+
+    /**
+     * @ORM\Column(name="avis", type="text", nullable=true)
+     */
+    private $avis;
+
+    /**
+     * @var string
+     */
+    private  $avisForm;
 
     use TraitUploadImage;
     public function getUploadDir()
@@ -430,6 +449,70 @@ class Produit
     public function __toString()
     {
        return "" . $this->id; //todo essayer avec $this->nom
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvis()
+    {
+        return $this->avis;
+    }
+
+    /**
+     * @param mixed $avis
+     */
+    public function setAvis($avis)
+    {
+        $this->avis = $avis;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNotation()
+    {
+        return $this->notation;
+    }
+
+    /**
+     * @param mixed $notation
+     */
+    public function setNotation($notation)
+    {
+        $this->notation = $notation;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNbVotants()
+    {
+        return $this->nbVotants;
+    }
+
+    /**
+     * @param mixed $nbVotants
+     */
+    public function setNbVotants($nbVotants)
+    {
+        $this->nbVotants = $nbVotants;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAvisForm()
+    {
+        return $this->avisForm;
+    }
+
+    /**
+     * @param mixed $avisForm
+     */
+    public function setAvisForm($avisForm)
+    {
+        $this->avisForm = $avisForm;
     }
 
 }
