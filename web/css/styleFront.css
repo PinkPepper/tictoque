@@ -1933,7 +1933,6 @@ body .container .recap-prix .livraison-total .prix-total {
   color: #ffffff;
   margin: 10px 0 10px 0;
   padding: 5px 5px 5px 20px;
-  width: 250px;
   border-radius: 3px; }
 .livraison_paiement .choix_relais div {
   display: inline-flex;
@@ -1960,6 +1959,8 @@ body .container .recap-prix .livraison-total .prix-total {
     padding: 1px 2px 2px 2px; }
   .livraison_paiement .choix_relais div input[type="checkbox"]:focus {
     outline: 0; }
+  .livraison_paiement .choix_relais div .relais_infos {
+    display: block; }
 
 .paiement_carte .carte_header {
   display: inline-flex;

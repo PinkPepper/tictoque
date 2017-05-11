@@ -3,7 +3,7 @@
     <div>
         <p>
             <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
-            <div>
+            <div class="relais_infos">
                 <h4>{{ point.nom }}</h4>
                 <p>{{ point.adresse }}</p>
             </div>

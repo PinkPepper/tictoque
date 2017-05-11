@@ -2142,7 +2142,6 @@ body {
     color: #ffffff;
     margin: 10px 0 10px 0;
     padding: 5px 5px 5px 20px;
-    width: 250px;
     border-radius: 3px;
   }
 
@@ -2180,6 +2179,11 @@ body {
 
       input[type="checkbox"]:focus{
           outline:0;
+      }
+
+      .relais_infos
+      {
+        display: block;
       }
     }
   }
