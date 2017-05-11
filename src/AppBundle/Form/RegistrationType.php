@@ -28,10 +28,14 @@ class RegistrationType extends AbstractType
             ->add('prenom', TextType::class, array('label'=>'Prénom '))
             ->add('allergenes', EntityType::class, array(
                 'class' => 'AppBundle:Allergene',
-                'choice_label' => 'nom',
+                'choice_label' => 'nomForm',
                 'expanded' => true,
                 'multiple' => true,
                 'choice_attr' => function($val, $key, $index) {
+                    if($key == "aucun")
+                    {
+                        return ['class' => 'unique-class', "style" => "display:none"];
+                    }
                     return ['class' => 'unique-class'];
                 },))
             ->add('adresse', TextType::class, array('label'=>'Adresse de votre lieu de travail '))

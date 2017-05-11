@@ -24,13 +24,18 @@
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 desc_prod">
                 <h1 class="produit_nom">{{ produit.nom }}</h1>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
-                <span class="glyphicon glyphicon-star"></span>
 
-                <span class="produit_avis">(12)</span>
+                {% if produit.nbVotants is not null %}
+                    {% set max = produit.notation %}
+                    {% if produit.notation >= 1 %}
+                        {% for i in 1..max %}
+                            <span class="glyphicon glyphicon-star"></span>
+                        {% endfor %}
+                    {% endif %}
+                    <span class="produit_avis">({{ produit.notation |number_format(2, '.', ',') }})</span>
+                {% else %}
+                    Aucune note
+                {% endif %}
 
                 <p class="produit_desc">{{ produit.description | raw }}</p>
                 <span class="produit_aller"><a>Allergenes</a></span>
@@ -82,7 +87,7 @@
                         {% if produit.allergenes|length>0 %}
                         <li id="aller_long">Allergènes</li>
                         {% endif %}
-                        <li id="avis_long">Avis <span class="produit_avis">(12)</span></li>
+                        <li id="avis_long">Avis <span class="produit_avis">({% if produit.nbVotants %}{{ produit.nbVotants }}{% else %} 0 {% endif %})</span></li>
                     </ul>
                 </div>
             </div>
@@ -91,7 +96,7 @@
                 <div id="afficher_desc_long" style="display:block;">
                 <h5>Nom du plat</h5>
                     <p class="produit_desc_long">
-                        Lorem itsumLorem itsumLorem itsumLorem itsumLoremLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLoremLorem itsumLorem itsumLorem itsumLorem
+                        {{ produit.description | raw }}
                     </p>
                 </div>
 
@@ -109,9 +114,15 @@
                 </div>
 
                 <div id="afficher_avis_long" style="display:none;">
+                    {% if avis != [] %}
+                    {% for a in avis %}
                     <p class="produit_desc_long" >
-                        itsumLorem itsumLorem itsumLorem itsumLorem itsumLoremLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLoremLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsumLorem itsum
+                        {{ a }}
                     </p>
+                    {% endfor %}
+                    {% else %}
+                        <p class="produit_desc_long" > Aucun avis </p>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -151,7 +162,7 @@
                             <div class="row">
                                 <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produitSup.nom|upper }}</h4>
                                 <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produitSup.prix }}€</span>
-                                <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produitSup.description|raw }}</span>
+                                <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produitSup.description|striptags|slice(0,60) }}...</span>
                             </div>
                         </div>
                     </div>

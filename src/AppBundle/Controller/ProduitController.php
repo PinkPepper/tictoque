@@ -181,7 +181,59 @@ class ProduitController extends Controller
 
         return $this->render('frontoffice/produit/show.html.twig', array(
             'produit' => $produit,
-            'autre' => $autre
+            'autre' => $autre,
+            'avis'=>unserialize($produit->getAvis())
+        ));
+    }
+
+    /**
+     * @Route("/avis/{produit}")
+     */
+    public function avisAction(Request $request, Produit $produit)
+    {
+        $produitNotation = $produit->getNotation();
+        $form = $this->createForm('AppBundle\Form\AvisProduitType', $produit);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $note = $produit->getNotation();
+            $nbVotants = $produit->getNbVotants();
+
+            if($nbVotants != 0 || $nbVotants != null)
+            {
+                $p = $nbVotants * $produitNotation;
+                $produit->setNotation(($p+$note)/($nbVotants + 1));
+                $produit->setNbVotants($nbVotants + 1);
+            }
+           else
+           {
+               $produit->setNotation($note);
+               $produit->setNbVotants(1);
+           }
+
+           $avis = $produit->getAvisForm();
+           $allAvis = $produit->getAvis();
+
+           if($allAvis == null)
+           {
+               $produit->setAvis(serialize(array($avis)));
+           }
+           else
+           {
+               $allAvis = unserialize($allAvis);
+               array_push($allAvis, $avis);
+               $produit->setAvis(serialize($allAvis));
+           }
+
+           $em = $this->getDoctrine()->getManager();
+           $em->persist($produit);
+           $em->flush();
+
+        }
+
+        return $this->render('frontoffice/produit/avis.html.twig', array(
+            'form'=>$form->createView(),
+            'produit'=>$produit
         ));
     }
 
