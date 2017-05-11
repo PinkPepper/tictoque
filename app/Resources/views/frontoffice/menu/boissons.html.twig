@@ -1,5 +1,7 @@
 {% extends 'frontoffice/base.html.twig' %}
 
+{% block title %}Menu - Boissons{% endblock %}
+
 {% block body %}
     <section>
         <div class="titleTop text-center">
@@ -21,8 +23,8 @@
                                 <p class="typeProduct">{{ produit.type|upper }}</p>
                                 <div class="row">
                                     <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
-                                    <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix }}€</span>
-                                    <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
+                                    <span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',')}}€</span>
+                                    <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
                                 </div>
                             </div>
                         </div>
