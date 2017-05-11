@@ -647,7 +647,6 @@ body .retour_haut {
   cursor: pointer; }
 
 .bg-grey {
-  margin-top: 40px;
   position: relative;
   background-color: #ffffff;
   max-width: none;
@@ -990,6 +989,10 @@ body .panier .container .commande .commander {
   height: 40px;
   margin-top: 30px;
   margin-bottom: 10px; }
+
+body .panier .container .commande .commander:hover,
+body .panier .container .commande .continue:hover {
+  text-decoration: none; }
 
 body .panier .container .commande .continue {
   color: white;
@@ -1534,7 +1537,7 @@ body .menuGlobal .menu {
     margin-bottom: 50px; } }
 body .menuGlobal .menu .boxShadow {
   border-radius: 5px;
-  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.3); }
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4); }
 
 body .menuGlobal .menu .menuTotal {
   border-radius: 5px;
@@ -1758,7 +1761,7 @@ body .container .recap-prix .livraison-total .prix-total {
   padding-bottom: 30px;
   border-bottom: 1px #CACACA solid;
   font-size: 24px;
-  color: black;
+  color: #5f5f5f;
   font-weight: 600; }
 
 .loginInput {
@@ -1794,7 +1797,7 @@ body .container .recap-prix .livraison-total .prix-total {
   cursor: pointer; }
 
 .loginSubmitNew {
-  padding-top: 110px; }
+  padding-top: 130px; }
 
 .overflowImg {
   height: 220px; }
@@ -1931,6 +1934,9 @@ body .container .recap-prix .livraison-total .prix-total {
 .showDescPlat a:hover {
   text-decoration: none; }
 
+.showPlat a:hover {
+  text-decoration: none; }
+
 #type_filtre_allergene label {
   display: block !important; }
 
@@ -2043,5 +2049,11 @@ body .container .recap-prix .livraison-total .prix-total {
   .paiement_carte .paiement_paypal img:last-child {
     margin: 10px 25px 10px 10px;
     margin-left: calc(70% - 10px); }
+
+.font5f {
+  color: #5f5f5f; }
+
+.deleteMenu {
+  cursor: pointer; }
 
 /*# sourceMappingURL=styleFront.css.map */
