@@ -16,11 +16,25 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getManager();
         $produits = $em->getRepository('AppBundle:Produit')->findAll();
         $articles = $em->getRepository('AppBundle:Article')->findAll();
-        // replace this example code with whatever you need
+
+        $produitsHP = $em->getRepository('AppBundle:ProduitHomePage')->findAll();
+        if($produitsHP == array())
+        {
+            $homepage = array($produits[0], $produits[1], $produits[3]);
+        }
+        else{
+            $homepage = array(
+                $em->getRepository('AppBundle:Produit')->find($produitsHP[0]->getProduit1()),
+                $em->getRepository('AppBundle:Produit')->find($produitsHP[0]->getProduit2()),
+                $em->getRepository('AppBundle:Produit')->find($produitsHP[0]->getProduit3()));
+        }
+
+
         return $this->render('frontoffice/default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
             'produits' => $produits,
             'articles' => $articles,
+            'homepage' => $homepage
         ]);
     }
 

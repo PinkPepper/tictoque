@@ -60,6 +60,12 @@ class CommandeController extends Controller
     {
         $em = $this->getDoctrine();
         $pointRelais = $request->cookies->get('pointRelais');
+
+        if($pointRelais == "" | $pointRelais === null)
+        {
+            return $this->redirectToRoute("commande_index");
+        }
+
         $pointRelais = $em->getRepository('AppBundle:PointRelais')->find($pointRelais);
 
         $em = $em->getManager();

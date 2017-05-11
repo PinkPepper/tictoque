@@ -254,9 +254,9 @@
                     sousTotal = sousTotal+element;
                 });
 
-                $('#sousTotal').text(sousTotal+"€");
+                $('#sousTotal').text(sousTotal.toFixed(2)+"€");
                 total = (sousTotal + livraison);
-                $('#total').text(total+"€");
+                $('#total').text(total.toFixed(2)+"€");
 
                 var isProduit = $(this).data("isproduit");
 
@@ -298,10 +298,10 @@
             tabPrice.forEach(function (element) {
                 sousTotal = sousTotal+element;
             });
-            $('#sousTotal').text(sousTotal+'€');
+            $('#sousTotal').text(sousTotal.toFixed(2)+'€');
             $('#produitId-'+id).fadeOut("slow");
             total = (sousTotal + livraison);
-            $('#total').text(total+'€');
+            $('#total').text(total.toFixed(2)+'€');
         });
 
 
@@ -312,16 +312,16 @@
             var res = $('.quantiteMenu-'+id).load(url,function () {
 
             });
-
+            $('#sousMenu-'+id).fadeOut();
             tabPrice[String(id)] = 0;
             sousTotal = 0;
             tabPrice.forEach(function (element) {
                 sousTotal = sousTotal+element;
             });
-            $('#sousTotal').text(sousTotal+'€');
+            $('#sousTotal').text(sousTotal.toFixed(2)+'€');
             $('#menuId-'+id).fadeOut("slow");
             total = (sousTotal + livraison);
-            $('#total').text(total+'€');
+            $('#total').text(total.toFixed(2)+'€');
         });
 
         $('.showMore').on('click',function(e){
