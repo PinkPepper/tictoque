@@ -2446,18 +2446,18 @@ body {
 
         .popup_home
         {
-          text-align: center;
-
-          #button
+          text-align: center!important;
+          a
           {
             background-color: #5f5f5f;
             border: none;
             padding: 5px 50px 5px 50px;
             color: #ffffff;
             border-radius: 5px;
+            text-decoration: none;
           }
 
-          button:hover
+          a:hover
           {
             color: #e52c65;
           }
