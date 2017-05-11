@@ -1925,4 +1925,111 @@ body .container .recap-prix .livraison-total .prix-total {
 #type_filtre_allergene_0 {
   float: left; }
 
+.livraison_paiement h4 {
+  color: black; }
+.livraison_paiement input {
+  border: none;
+  background-color: rgba(146, 146, 146, 0.4);
+  color: #ffffff;
+  margin: 10px 0 10px 0;
+  padding: 5px 5px 5px 20px;
+  width: 250px;
+  border-radius: 3px; }
+.livraison_paiement .choix_relais {
+  display: inline-flex;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 5px; }
+  .livraison_paiement .choix_relais input {
+    padding: 0;
+    border-radius: 10px;
+    margin: 35px;
+    cursor: pointer;
+    -ms-transform: scale(2);
+    -moz-transform: scale(2);
+    -webkit-transform: scale(2);
+    -o-transform: scale(2); }
+  .livraison_paiement .choix_relais input:checked::before {
+    font-family: FontAwesome;
+    content: '\f111';
+    display: block;
+    color: #e52c65;
+    font-size: 11px;
+    position: absolute;
+    padding: 1px 2px 2px 2px; }
+  .livraison_paiement .choix_relais input[type="checkbox"]:focus {
+    outline: 0; }
+
+.paiement_carte .carte_header {
+  display: inline-flex;
+  width: 100%;
+  border: 2px solid #e52c65;
+  border-radius: 5px;
+  padding: 20px; }
+  .paiement_carte .carte_header img:first-child {
+    width: 70px;
+    height: 40px;
+    margin: 5px; }
+  .paiement_carte .carte_header h4 {
+    margin: 15px; }
+  .paiement_carte .carte_header .carte_img {
+    margin-left: calc(50% - 120px);
+    padding: 10px; }
+    .paiement_carte .carte_header .carte_img img {
+      width: 50px;
+      height: 30px; }
+.paiement_carte .carte_details {
+  border: 2px solid #e52c65;
+  border-top: 0;
+  border-radius: 5px;
+  margin-bottom: 50px;
+  height: 40vh; }
+  .paiement_carte .carte_details div {
+    padding: 20px; }
+    .paiement_carte .carte_details div input {
+      border: none;
+      background-color: rgba(146, 146, 146, 0.4);
+      color: #ffffff;
+      margin: 10px 0px 10px 30px;
+      padding: 5px 5px 5px 20px;
+      border-radius: 3px; }
+  .paiement_carte .carte_details a {
+    background-color: #e52c65;
+    color: #ffffff;
+    padding: 12px 40px 12px 40px;
+    margin: calc(35% - 10px);
+    text-decoration: none; }
+  @media screen and (max-width: 768px) {
+    .paiement_carte .carte_details a {
+      margin: calc(35% - 50px); } }
+  @media screen and (max-width: 468px) {
+    .paiement_carte .carte_details a {
+      margin: calc(35% - 60px); } }
+  @media screen and (max-width: 461px) {
+    .paiement_carte .carte_details a {
+      margin: calc(32% - 70px); } }
+@media screen and (max-width: 760px) {
+  .paiement_carte .carte_details {
+    height: 50vh; } }
+@media screen and (max-width: 468px) {
+  .paiement_carte .carte_details {
+    height: 60vh; } }
+.paiement_carte .paiement_paypal {
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  margin-bottom: 100px;
+  padding: 20px;
+  display: inline-flex;
+  width: 100%; }
+  .paiement_carte .paiement_paypal h4 {
+    margin: 18px 0 0 0;
+    color: #999999; }
+  .paiement_carte .paiement_paypal img {
+    width: 30px;
+    height: 30px; }
+  .paiement_carte .paiement_paypal img:first-child {
+    margin: 10px 10px 10px 15px; }
+  .paiement_carte .paiement_paypal img:last-child {
+    margin: 10px 25px 10px 10px;
+    margin-left: calc(70% - 10px); }
+
 /*# sourceMappingURL=styleFront.css.map */

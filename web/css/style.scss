@@ -2128,5 +2128,196 @@ body {
   float:left;
 }
 
+.livraison_paiement
+{
+  h4 
+  {
+    color: black;
+  }
 
+  input
+  {
+    border: none;
+    background-color: rgba(146, 146, 146, 0.4);
+    color: #ffffff;
+    margin: 10px 0 10px 0;
+    padding: 5px 5px 5px 20px;
+    width: 250px;
+    border-radius: 3px;
+  }
 
+  .choix_relais
+  {
+    display: inline-flex;
+    width: 100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+
+    input
+    {
+      padding: 0;
+      border-radius: 10px;
+      margin: 35px;
+      cursor: pointer;
+      -ms-transform: scale(2);
+      -moz-transform: scale(2);
+      -webkit-transform: scale(2);
+      -o-transform: scale(2);
+    }
+
+    input:checked::before
+    {
+      font-family: FontAwesome;
+      content: '\f111';
+      display: block;
+      color: #e52c65;
+      font-size: 11px;
+      position: absolute;
+      padding: 1px 2px 2px 2px;
+    }
+
+    input[type="checkbox"]:focus{
+        outline:0;
+    }
+  }
+}
+
+.paiement_carte
+{
+  .carte_header
+  {
+    display: inline-flex;
+    width: 100%;
+    border: 2px solid #e52c65;
+    border-radius: 5px;
+    padding: 20px;
+
+    img:first-child
+    {
+      width: 70px;
+      height: 40px;
+      margin: 5px;
+    }
+
+    h4
+    {
+      margin: 15px;
+    }
+
+    .carte_img
+    {
+      margin-left: calc(50% - 120px);
+      padding: 10px;
+
+      img 
+      {
+        width: 50px;
+        height: 30px;
+      }
+    }
+  }
+
+  .carte_details
+  {
+    border: 2px solid #e52c65;
+    border-top: 0;
+    border-radius: 5px;
+    margin-bottom: 50px;
+    height: 40vh;
+
+    div
+    {
+      padding: 20px;
+
+      input
+      {
+        border: none;
+        background-color: rgba(146, 146, 146, 0.4);
+        color: #ffffff;
+        margin: 10px 0px 10px 30px;
+        padding: 5px 5px 5px 20px;
+        border-radius: 3px;
+      }
+    }
+
+    a 
+    {
+      background-color: #e52c65;
+      color: #ffffff;
+      padding: 12px 40px 12px 40px;
+      margin: calc(35% - 10px);
+      text-decoration: none;
+    }
+
+    @media screen and (max-width: 768px)
+    {
+      a 
+      {
+        margin: calc(35% - 50px);
+      }
+    }
+
+    @media screen and (max-width: 468px)
+    {
+      a 
+      {
+        margin: calc(35% - 60px);
+      }
+    }
+    @media screen and (max-width: 461px)
+    {
+      a 
+      {
+        margin: calc(32% - 70px);
+      }
+    }
+  }
+
+  @media screen and (max-width: 760px)
+  {
+    .carte_details
+    {
+      height: 50vh;
+    }
+  }
+
+  @media screen and (max-width: 468px)
+  {
+    .carte_details
+    {
+      height: 60vh;
+    }
+  }
+
+  .paiement_paypal
+  {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    margin-bottom: 100px;
+    padding: 20px;
+    display: inline-flex;
+    width: 100%;
+
+    h4
+    {
+      margin: 18px 0 0 0;
+      color: #999999;
+    }
+
+    img 
+    {
+      width: 30px;
+      height: 30px;
+    }
+
+    img:first-child
+    {
+      margin: 10px 10px 10px 15px;
+    }
+
+    img:last-child
+    {
+      margin: 10px 25px 10px 10px;
+      margin-left: calc(70% - 10px);
+    }
+  }
+}
