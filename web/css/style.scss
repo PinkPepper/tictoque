@@ -848,7 +848,7 @@ body {
       text-decoration: none; }
     body .fullDiv .article {
       background-color: white;
-      color: black;
+      color: #9a9a9a;
       padding: 50px;
       padding-left: 100px;
       padding-right: 100px;
@@ -891,7 +891,7 @@ body {
       body .fullDiv .commentaire .writeCommentaire {
         margin-bottom: 30px; }
         body .fullDiv .commentaire .writeCommentaire .zoneCommentaire {
-          border-color: grey;
+          border-color: #9a9a9a;
           padding: 20px;
           margin-top: 20px;
           border-radius: 5px;
@@ -1643,7 +1643,7 @@ body {
 
     h4{
       font-size: 24px;
-      color:#4a4a4a;
+      color:#5F5F5F;
     }
   }
 }
@@ -1980,6 +1980,8 @@ body {
 
 .ficheProduit{
   margin-top: 50px;
+  padding-left: 10%;
+  padding-right: 10%;
 }
 
 .topMargin{
@@ -1989,6 +1991,11 @@ body {
 
 .topMargin h4{
   color:#f32063;
+}
+
+.topMarginNav .row{
+  padding-right: 10%;
+  padding-left: 10%;
 }
 
 .produitSuccess,
@@ -2351,4 +2358,20 @@ body {
 
 .deleteMenu{
   cursor: pointer;
+}
+
+.article h1,h2,h3,h4,h5,h6{
+  color:#5F5F5F;
+}
+
+@media (max-width:1268px){
+  .topMarginNav .row{
+    padding-right: 0%;
+    padding-left: 0%;
+  }
+
+  .ficheProduit{
+    padding-right: 0%;
+    padding-left: 0%;
+  }
 }
