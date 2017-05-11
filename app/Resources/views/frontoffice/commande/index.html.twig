@@ -79,21 +79,21 @@
 
     <script>
         $(document).ready(function(){
-            var adresse = $('.results').data('adresse');
+            var adresse = $('.choix_relais').data('adresse');
 
             if(adresse != null){
-                const url = $(".results").data('url');
+                const url = $(".choix_relais").data('url');
                 $('#input').val(adresse);
                 adresse = adresse.replace(/ /g, '%20');
-                $('.results').load(url.replace(/_adresse_/, adresse));
+                $('.choix_relais').load(url.replace(/_adresse_/, adresse));
             }
 
             $('#input').keypress(function(e) {
                 if(e.which == 13) {
-                    const url = $(".results").data('url');
+                    const url = $(".choix_relais").data('url');
                     var adresse = $('#input').val();
                     adresse = adresse.replace(/ /g, '%20');
-                    $('.results').load(url.replace(/_adresse_/, adresse));
+                    $('.choix_relais').load(url.replace(/_adresse_/, adresse));
                 }
             });
 
