@@ -60,7 +60,7 @@
                 </select>
 
 
-                {% if produit.quantite == 0 %}
+                {% if produit.quantite <= 0 %}
                     <a class="produit_ajout">Indisponible</a>
                 {% else %}
                     {% if app.user is not null %}

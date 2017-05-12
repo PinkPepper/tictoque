@@ -62,7 +62,7 @@
                                                 <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
                                             </div>
                                         </a>
-                                        {% if produit.quantite == 0 %}
+                                        {% if produit.quantite <= 0 %}
                                             <a class="addToCart">Indisponible</a>
                                         {% else %}
                                             {% if app.user is not null %}
@@ -128,7 +128,7 @@
                                         </div>
                                     </a>
 
-                                {% if produit.quantite == 0 %}
+                                {% if produit.quantite <= 0 %}
                                     <a class="addToCart">Indisponible</a>
                                 {% else %}
                                     {% if app.user is not null %}
