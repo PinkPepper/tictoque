@@ -187,7 +187,7 @@ class CommandeController extends Controller
         $message = \Swift_Message::newInstance()
             ->setSubject('Confirmation de votre commande')
             ->setFrom('no-reply@lamourfood.fr')
-            ->setTo('maxime.detaille@gmail.com') //A REMPLACER PAR VARIABLE USER MAIL
+            ->setTo($this->getUser()->getEmail())
             ->setBody(
                 $this->renderView(
                 // app/Resources/views/Emails/registration.html.twig
@@ -202,16 +202,6 @@ class CommandeController extends Controller
                 ),
                 'text/html'
             )
-            /*
-             * If you also want to include a plaintext version of the message
-            ->addPart(
-                $this->renderView(
-                    'Emails/registration.txt.twig',
-                    array('name' => $name)
-                ),
-                'text/plain'
-            )
-            */
         ;
         $this->get('mailer')->send($message);
 
