@@ -19,7 +19,7 @@
                                     <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
                                     </a>
                                 </div>
-                                {% if produit.quantite == 0 %}
+                                {% if produit.quantite <= 0 %}
                                     <a class="addToCart">Indisponible</a>
                                 {% else %}
                                     <a class="addToCart" href="{{ path('menu_choix_boisson', { 'id': produit.id }) }}">Choisir</a>
