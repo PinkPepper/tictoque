@@ -1488,9 +1488,9 @@ body .Blog-droite {
   height: 300px;
   background-size: cover; }
 .sliderQualite .sliderRight {
-  padding-left: 10%;
+  padding-left: 21%;
   padding-right: 10%;
-  padding-top: 100px;
+  padding-top: 85px;
   text-align: center;
   float: left;
   height: 300px;
@@ -2130,6 +2130,9 @@ body .container .recap-prix .livraison-total .prix-total {
 .deleteMenu {
   cursor: pointer; }
 
+.deleteProd {
+  cursor: pointer; }
+
 .article h1, h2, h3, h4, h5, h6 {
   color: #5F5F5F; }
 
@@ -2141,5 +2144,7 @@ body .container .recap-prix .livraison-total .prix-total {
   .ficheProduit {
     padding-right: 0%;
     padding-left: 0%; } }
+.voir {
+  cursor: pointer; }
 
 /*# sourceMappingURL=styleFront.css.map */
