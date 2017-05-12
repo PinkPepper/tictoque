@@ -23,13 +23,10 @@
         {% for menu in menus %}
             {% if menu["quantite"] != 0 %}
                 <div style="padding-bottom:10px;font-size:14px;text-align:left; height:40px; display:block;"><img
-                            src="http://81.67.208.32/tictoque/web/img/menus/{% if menu["type"] == 1 %}
-                                    menu1.jpg
+                            src="http://81.67.208.32/tictoque/web/img/menus/{% if menu["type"] == 1 %}menu1.jpg
                                 {% else %}
-                                    {% if menu["type"] == 2 %}
-                                        menu2.jpg
-                                    {% else %}
-                                        menu3.jpg
+                                    {% if menu["type"] == 2 %}menu2.jpg
+                                    {% else %}menu3.jpg
                                     {% endif %}
                                 {% endif %}" width="30" height="30" style="vertical-align:middle;margin-right:10px">
                     <span style="line-height:40px">{% if menu["type"] == 1 %}
