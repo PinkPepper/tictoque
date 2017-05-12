@@ -59,7 +59,7 @@
                         {#</div>#}
                         <div class="quantiteMenu-{{ menu["id"] }}"></div>
                         <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">
-                            <h3 id="prixTotal-{{ menu["id"] }}">
+                            <h3 id="prixTotalMenu-{{ menu["id"] }}">
                                {# <script type="application/javascript">
                                     #}{#var prix = {{ menu["prix"] }};#}{#
                                     #}{#var qte = {{ menu["quantite"] }};#}{#
@@ -68,7 +68,9 @@
                                     tabPrice[String({{ menu["id"] }})] = total;
                                     $('#prixTotal-'+{{ menu["id"] }}).text(total+"€");
                                 </script>#}
-                                <script>tabPrice[String({{ menu["id"] }})] = {{ menu["prix"] }};</script>
+                                <script>
+                                    tabPrice['10'+String({{ menu["id"] }})] = {{ menu["prix"] }};
+                                </script>
                                 {{ menu["prix"] }}€
                             </h3>
                         </div>
@@ -137,6 +139,7 @@
                                 var prix = {{ produit[0].prix }};
                                 var qte = {{ produit[1] }};
                                 var total = prix*qte;
+                                console.log("DANS PRODUIT: "+tabPrice['105']);
                                 tabPrice[String({{ produit[0].id }})] = total;
                                 $('#prixTotal-'+{{ produit[0].id }}).text(total+"€");
                             </script>
@@ -315,7 +318,7 @@
 
             });
             $('#sousMenu-'+id).fadeOut();
-            tabPrice[String(id)] = 0;
+            tabPrice['m-'+String(id)] = 0;
             sousTotal = 0;
             tabPrice.forEach(function (element) {
                 sousTotal = sousTotal+element;
