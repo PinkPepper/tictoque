@@ -58,7 +58,11 @@
                         </li>
                         <li class="nav-panier"><a href="{{ path('index_panier') }}"><img src="{{ asset('img/panier.svg') }}"><span>Panier</span>
                                 {% if app.session.get('prix') %}
-                                    <span class="spanPrix"><b>{{ app.session.get('prix') }}€</b></span>
+                                    {% if app.session.get('prix') != 0 %}
+                                        <span class="spanPrix"><b>{{ (app.session.get('prix')-5) | number_format(2, '.', ',') }}€</b></span>
+                                    {% else %}
+                                        <span class="spanPrix"><b>0.00€</b></span>
+                                    {% endif %}
                                 {% else %}
                                     <span class="spanPrix"><b>0.00€</b></span>
                                 {% endif %}
