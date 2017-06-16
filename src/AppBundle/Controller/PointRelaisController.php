@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Pointrelais controller.
@@ -39,15 +40,15 @@ class PointRelaisController extends Controller
 
 
     /**
-     * @Route("/set", name="point_relais_set_index")
+     * @Route("/set/index", name="point_relais_set_index")
      */
     public function setPointRelaisIndexAction()
     {
-        return $this->render('frontoffice/default/setPointsRelais.html.twig');
+        return $this->render('frontoffice/default/setPointRelais.html.twig');
     }
 
     /**
-     * @Route("/resultst/set/{adresse}", name="point_relais_results_set")
+     * @Route("/results/set/{adresse}", name="point_relais_results_set")
      */
     public function resultSetAction($adresse)
     {
@@ -57,5 +58,26 @@ class PointRelaisController extends Controller
         return $this->render('frontoffice/default/setPointRelais_results.html.twig', array(
             'pointsRelais'=>$pointsRelais
         ));
+    }
+
+    /**
+     * @Route("/set", name="point_relais_set")
+     * @Method("POST")
+     */
+    public function setPointRelaisAction(Request $request)
+    {
+        $id = $request->get('pointRelais', null);
+        $response = new Response();
+
+        if($id !== null)
+        {
+            $session = $request->getSession();
+            $session->set("pointRelais", $id);
+        }
+        else{
+            $response->setStatusCode(502);
+        }
+
+        return $response;
     }
 }

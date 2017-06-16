@@ -24,21 +24,23 @@
     <div class="message"></div>
 {% endif %}
 
+<buttton class="choisir">Choisir</buttton>
 
 <script>
-    $( "input" ).on( "click", function() {
+    $( ".choisir" ).on( "click", function() {
         const id = $( "input:checked" ).val();
 
         $.ajax({
-            url : {{ path('point_relais_set') }},
+            url : '{{ path('point_relais_set') }}',
             type : 'POST',
-            data : 'point=' + id,
+            data : 'pointRelais=' + id,
 
             success : function(code_html, statut){
-                //pop up
                 console.log("succes");
+                document.location = '{{ path('produit_index') }}';
             },
             error : function(resultat, statut, erreur){
+                alert("Problème survenu");
                 console.log("error");
                 console.log(erreur);
             }

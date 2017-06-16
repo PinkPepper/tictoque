@@ -25,6 +25,12 @@ class ProduitController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $session = $request->getSession();
+        if($session->get("pointRelais") === null)
+        {
+            return $this->redirectToRoute("point_relais_set_index");
+        }
+
         $em = $this->getDoctrine()->getManager();
 
         $categories = $em->getRepository('AppBundle:Categorie')->findAll();

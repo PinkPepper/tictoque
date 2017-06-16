@@ -1,3 +1,8 @@
+{% extends 'frontoffice/footer.html.twig' %}
+
+{% block title %}Point relais{% endblock %}
+
+{% block body %}
 <div class="home_pop">
 
     <h4>Choisissez votre point relais</h4>
@@ -7,7 +12,7 @@
         <button href="#" id="button">Valider</button>
     </div>
 
-    <div class="results" data-url="{{ path('point_relais_results', {'adresse': '_adresse_'}) }}"></div>
+    <div class="results" data-url="{{ path('point_relais_results_set', {'adresse': '_adresse_'}) }}"></div>
 
 </div>
 <script>
@@ -27,3 +32,4 @@
         }
     });
 </script>
+{% endblock %}
