@@ -57,6 +57,19 @@ class PointRelais
     private $adresse;
 
     /**
+     * @var int
+     * @ORM\OneToMany(targetEntity="Produit", mappedBy="pointRelais", cascade={"remove"})
+     */
+    private $produits;
+
+    /**
+     * @var int
+     **@ORM\ManyToOne(targetEntity="User", inversedBy="pointsRelais")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
      * Get id
      *
      * @return int
@@ -144,6 +157,38 @@ class PointRelais
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
+    }
+
+    /**
+     * @return int
+     */
+    public function getProduits()
+    {
+        return $this->produits;
+    }
+
+    /**
+     * @param int $produits
+     */
+    public function setProduits($produits)
+    {
+        $this->produits = $produits;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointRelais()
+    {
+        return $this->pointRelais;
+    }
+
+    /**
+     * @param int $pointRelais
+     */
+    public function setPointRelais($pointRelais)
+    {
+        $this->pointRelais = $pointRelais;
     }
 }
 
