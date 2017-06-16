@@ -1,30 +1,41 @@
-{% if pointsRelais != [] %}
-    <p> {{ pointsRelais | length }} choix possibles en fonction de votre lieu de travail</p>
-{% endif %}
+    <div class="home_pop">
+        {% if pointsRelais != [] %}
+            <p> {{ pointsRelais | length }} choix possibles en fonction de votre lieu de travail</p>
+        {% endif %}
 
-{% for point in pointsRelais %}
-    {% if loop.index == 1 %}<script>const id = {{ point.id }};</script>{% endif %}
-    <div class="bcr">
-        <p>
-            <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
-            <div class="relais_infos">
-                <h4>{{ point.nom }}</h4>
-        <p>{{ point.adresse }}</p>
+        {% for point in pointsRelais %}
+            {% if loop.index == 1 %}<script>const id = {{ point.id }};</script>{% endif %}
+            <div class="bcr">
+
+                    <div class="relais_infos">
+                        <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
+                        <h4>{{ point.nom }}</h4>
+                        <p>{{ point.adresse }}</p>
+                    </div>
+            </div>
+        {% endfor %}
+
+        {% if pointsRelais == [] %}
+            Aucun point relais trouvé pour cette adresse
+            <script>
+                const id = null;
+            </script>
+        {% else %}
+            <div class="message"></div>
+        {% endif %}
+
+        <div class="popup_home">
+            <buttton class="choisir" style="
+            background-color: #e52c65; border: none;
+            padding: 5px 50px 5px 50px;
+            color: #ffffff;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;"
+            >Choisir</buttton>
+        </div>
     </div>
-    </p>
-    </div>
-{% endfor %}
 
-{% if pointsRelais == [] %}
-    Aucun point relais trouvé pour cette adresse
-    <script>
-        const id = null;
-    </script>
-{% else %}
-    <div class="message"></div>
-{% endif %}
-
-<buttton class="choisir">Choisir</buttton>
 
 <script>
     $( ".choisir" ).on( "click", function() {

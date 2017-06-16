@@ -3,18 +3,31 @@
 {% block title %}Point relais{% endblock %}
 
 {% block body %}
+    <div id="content_site" class="c_s_center">
 <div class="home_pop">
 
     <h4>Choisissez votre point relais</h4>
 
-    <input type="text" id="input" placeholder="Entrez une adresse">
-    <div class="popup_home">
-        <button href="#" id="button">Valider</button>
+    <div class="row">
+        <div class="col-md-8">
+        {% if app.user %}
+            <input type="text" id="input" value="{{ app.user.adresse }}">
+        {% else %}
+            <input type="text" id="input" placeholder="Entrez une adresse">
+        {% endif %}
+        </div>
+
+        <div class="popup_home col-md-2">
+            <button href="#" id="button">Rechercher</button>
+        </div>
     </div>
 
+    <div class="row">
     <div class="results" data-url="{{ path('point_relais_results_set', {'adresse': '_adresse_'}) }}"></div>
+    </div>
 
 </div>
+    </div>
 <script>
     $('#button').on('click', function(){
         const url = $(".results").data('url');
