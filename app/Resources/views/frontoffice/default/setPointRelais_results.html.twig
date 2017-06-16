@@ -1,0 +1,56 @@
+{% if pointsRelais != [] %}
+    <p> {{ pointsRelais | length }} choix possibles en fonction de votre lieu de travail</p>
+{% endif %}
+
+{% for point in pointsRelais %}
+    {% if loop.index == 1 %}<script>const id = {{ point.id }};</script>{% endif %}
+    <div class="bcr">
+        <p>
+            <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
+            <div class="relais_infos">
+                <h4>{{ point.nom }}</h4>
+        <p>{{ point.adresse }}</p>
+    </div>
+    </p>
+    </div>
+{% endfor %}
+
+{% if pointsRelais == [] %}
+    Aucun point relais trouvé pour cette adresse
+    <script>
+        const id = null;
+    </script>
+{% else %}
+    <div class="message"></div>
+{% endif %}
+
+
+<script>
+    $( "input" ).on( "click", function() {
+        const id = $( "input:checked" ).val();
+
+        $.ajax({
+            url : {{ path('point_relais_set') }},
+            type : 'POST',
+            data : 'point=' + id,
+
+            success : function(code_html, statut){
+                //pop up
+                console.log("succes");
+            },
+            error : function(resultat, statut, erreur){
+                console.log("error");
+                console.log(erreur);
+            }
+        });
+
+    });
+
+    $("div.choix_relais .bcr").on("click",function() {
+        if($(this).find('input[type="radio"]').is(':checked')) {
+            $("div.choix_relais .bcr").removeClass('sel_bk_color');
+            $(this).addClass('sel_bk_color');
+        }
+    });
+</script>
+
