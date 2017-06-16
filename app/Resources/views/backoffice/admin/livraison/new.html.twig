@@ -1,0 +1,41 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Ajouter un produit</h1>
+        <a class="btn_01" href="{{path('livraison_index')}}">Retour</a>
+
+        <div class="cellule_background_cms">
+
+            {{ form_start(form) }}
+
+            <br>
+            <label>Produit</label>
+            {{ form_widget(form.produit) }}
+            {{ form_errors(form.produit) }}
+
+            <br>
+            <label>Point relais</label>
+            {{ form_widget(form.pointRelais) }}
+            {{  form_errors(form.pointRelais) }}
+
+            <br>
+            <label>Quantite</label>
+            {{ form_widget(form.quantite) }}
+            {{  form_errors(form.quantite) }}
+
+            <br>
+            <label>Date livraison</label>
+            {{ form_widget(form.date) }}
+            {{  form_errors(form.date) }}
+
+            <br>
+            <button class="button_p" type="submit">Créer le produit</button>
+
+            {{ form_end(form) }}
+
+        </div>
+    </section>
+{% endblock %}
+
+

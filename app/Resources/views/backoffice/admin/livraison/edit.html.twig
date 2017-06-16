@@ -1,0 +1,47 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Modifier un utilisateur</h1>
+        <a class="btn_01" href="{{ path('livraison_index') }}" >Retour</a>
+
+        <div class="cellule_background_cms">
+            {{ form_start(edit_form, { 'attr': {'class': 'form-group' } }) }}
+
+            <br>
+            <label>Produit</label>
+            {{ form_widget(edit_form.produit) }}
+            {{ form_errors(edit_form.produit) }}
+
+            <br>
+            <label>Point relais</label>
+            {{ form_widget(edit_form.pointRelais) }}
+            {{  form_errors(edit_form.pointRelais) }}
+
+            <br>
+            <label>Quantite</label>
+            {{ form_widget(edit_form.quantite) }}
+            {{  form_errors(edit_form.quantite) }}
+
+            <br>
+            <label>Date livraison</label>
+            {{ form_widget(edit_form.date) }}
+            {{  form_errors(edit_form.date) }}
+
+
+            {{ form_end(edit_form) }}
+            <br><br>
+            <button class="button_p" type="submit"> Modifier l'utilisateur </button>
+            <br>
+            <br>
+            {{ form_start(delete_form) }}
+            <button class="button_p" type="submit" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</button>
+            {{ form_end(delete_form) }}
+
+        </div>
+    </section>
+
+{% endblock %}
+
+
+

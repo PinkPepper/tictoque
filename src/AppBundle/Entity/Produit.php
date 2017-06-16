@@ -123,6 +123,12 @@ class Produit
      */
     private $pointRelais;
 
+    /**
+     * @var int
+     * @ORM\OneToMany(targetEntity="Livraison", mappedBy="produit", cascade={"persist"})
+     */
+    private $livraison;
+
 
     use TraitUploadImage;
     public function getUploadDir()
@@ -538,6 +544,22 @@ class Produit
     public function setPointRelais($pointRelais)
     {
         $this->pointRelais = $pointRelais;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLivraison()
+    {
+        return $this->livraison;
+    }
+
+    /**
+     * @param int $livraison
+     */
+    public function setLivraison($livraison)
+    {
+        $this->livraison = $livraison;
     }
 
 

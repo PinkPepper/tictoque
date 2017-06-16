@@ -70,6 +70,28 @@ class PointRelais
     private $user;
 
     /**
+     * @var int
+     * @ORM\OneToMany(targetEntity="Livraison", mappedBy="pointRelais", cascade={"persist"})
+     */
+    private $livraison;
+
+    /**
+     * @return int
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param int $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -189,6 +211,22 @@ class PointRelais
     public function setPointRelais($pointRelais)
     {
         $this->pointRelais = $pointRelais;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLivraison()
+    {
+        return $this->livraison;
+    }
+
+    /**
+     * @param int $livraison
+     */
+    public function setLivraison($livraison)
+    {
+        $this->livraison = $livraison;
     }
 }
 

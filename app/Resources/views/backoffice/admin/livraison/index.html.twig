@@ -1,0 +1,47 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <div class="menu_top_cms">
+            <h1>Livraison - {{ livraisons|length }}</h1>
+            <a class="btn_01" href="{{ path('livraison_new') }}">Ajouter un produit</a>
+        </div>
+
+
+    <div class="cellule_background_cms">
+        <table>
+            <tr>
+                <td><strong>Id</strong></td>
+                <td><strong>nom produit</strong></td>
+                <td><strong>quantite</strong></td>
+                <td><strong>date livraison</strong></td>
+                <td><strong>nom point relais</strong></td>
+                <td><strong>Actions</strong></td>
+            </tr>
+            {% for livraison in livraisons %}
+                <tr>
+                    <td>{{ livraison.id }}</td>
+                    <td>{{ livraison.produit.nom }}</td>
+                    <td>{{ livraison.quantite }}</td>
+                    <td>{{ livraison.date|date('d-m-Y') }}</td>
+                    <td>{{ livraison.pointRelais.nom }}</td>
+
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('livraison_edit', { 'id': livraison.id }) }}"><img class="sizePicto" src="{{ asset('img/edit.svg') }}"></a>
+                            </li>
+                            <li>
+                                <a href="{{ path('livraison_show', { 'id': livraison.id }) }}"><img class="sizePicto" src="{{ asset('img/profile.svg') }}"></a>
+                            </li>
+                            <li>
+                                <a href="{{ path('livraison_delete', { 'id': livraison.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')"><img class="sizePicto" src="{{ asset('img/delete.svg') }}"></a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+    </section>
+{% endblock %}
