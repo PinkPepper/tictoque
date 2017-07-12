@@ -39,40 +39,110 @@ class CommandeController extends Controller
     }
 
     /**
-     * @Route("/results/{adresse}", name="commande_point_relais")
-     */
-    public function resultAction($adresse)
-    {
-        $geocoder = $this->container->get('app.geocoder_service');
-        $pointsRelais = $geocoder->getPointsRelais($adresse);
-
-        return $this->render('frontoffice/commande/results.html.twig', array(
-            'pointsRelais'=>$pointsRelais
-        ));
-    }
-
-    /**
      * Succes de la commande
      * @Route("/validation_panier/success", name="commande_succes")
      * @Method("GET")
      */
     public function SuccesAction(Request $request)
     {
+        $session = $request->getSession();
         $em = $this->getDoctrine();
-        $pointRelais = $request->cookies->get('pointRelais');
 
+        $pointRelais = $session->get("pointRelais");
         if($pointRelais == "" | $pointRelais === null)
         {
             return $this->redirectToRoute("commande_index");
         }
-
         $pointRelais = $em->getRepository('AppBundle:PointRelais')->find($pointRelais);
-
-        $em = $em->getManager();
-        $session = $request->getSession();
 
         $prix = $session->get('prix');
 
+        $commande = $this->setCommande($pointRelais, $prix);
+        $this->setContenuCommande($request, $commande);
+
+        //TODO informer le livreur
+        //TODO mettre à jour la quantité de produit dans la base selon la commande
+
+
+        /* ****** PAGE SUCCES ****** */
+        $page_succes = $this->preparePageSucces($session);
+        $produits_panier = $page_succes[0];
+        $menus = $page_succes[1];
+        /* */
+
+        /* reset le panier */
+        $session = $request->getSession();
+        $session->clear();
+
+        /* Triche pour regler un problème */
+        $badCommande = $em->getRepository('AppBundle:Commande')->findByPrix(null);
+        foreach ($badCommande as $bc){
+            $em->getManager()->remove($bc);
+            $em->getManager()->flush();
+        }
+
+        $this->setMessage($commande, $pointRelais, $produits_panier, $menus, $prix);
+
+        return $this->render('frontoffice/commande/succes.html.twig', array(
+            'commande'=>$commande,
+            'pointRelais'=>$pointRelais,
+            'produits'=>$produits_panier,
+            'menus'=>$menus,
+            'prix'=>$prix
+        ));
+    }
+
+    function preparePageSucces($session)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $panier = $session->all();
+        $produits_panier = array();
+        $menus = array();
+
+        foreach ($panier as $key => $value)
+        {
+            if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
+            {
+                $id = explode("_", $key);
+                $id = $id[1];
+                array_push($produits_panier, array($em->getRepository('AppBundle:Produit')->find($id), $value['quantite']));
+            }
+            else if ($key != "menu" && (strpos($key, 'menu') !== false) && (strpos($key, 'menu') == 0)) //menu
+            {
+                $id = explode("_", $key);
+                $id = $id[1];
+
+                if ($value['entree'] != null) {
+                    $entree = $em->getRepository('AppBundle:Produit')->find($value['entree']);
+                } else {
+                    $entree = null;
+                }
+                if ($value['plat'] != null) {
+                    $plat = $em->getRepository('AppBundle:Produit')->find($value['plat']);
+                } else {
+                    $plat = null;
+                }
+
+                if ($value['dessert'] != null) {
+                    $dessert = $em->getRepository('AppBundle:Produit')->find($value['dessert']);
+                } else {
+                    $dessert = null;
+                }
+                if ($value['boisson'] != null) {
+                    $boisson = $em->getRepository('AppBundle:Produit')->find($value['boisson']);
+                } else {
+                    $boisson = null;
+                }
+                array_push($menus, array('id' => $id, 'entree' => $entree, 'plat' => $plat, 'dessert' => $dessert, 'boisson' => $boisson, 'quantite' => $value['quantite'], 'prix' => $value['prix'], 'type' => $value['type']));
+            }
+        }
+
+        return array($produits_panier, $menus);
+    }
+
+
+    private function setCommande($pointRelais, $prix)
+    {
         $commande = new Commande();
         $commande->setUser($this->getUser());
         $commande->setPrix($prix);
@@ -88,12 +158,15 @@ class CommandeController extends Controller
             $commande->setDateLivraison((new \DateTime())->add(new \DateInterval('P1D')));
         }
 
-        $em->persist($commande);
-        $em->flush();
+        $this->getDoctrine()->getManager()->persist($commande);
+        $this->getDoctrine()->getManager()->flush();
 
-        //TODO informer le livreur
-        //TODO mettre à jour la quantité de produit dans la base selon la commande
+        return $commande;
+    }
 
+    private function setContenuCommande(Request $request, $commande)
+    {
+        $session = $request->getSession();
         $em = $this->getDoctrine();
         $panier = $session->all();
 
@@ -163,27 +236,12 @@ class CommandeController extends Controller
                 $em->getManager()->persist($commandeMenu);
 
                 $em->getManager()->flush();
-
             }
         }
+    }
 
-        /* ****** PAGE SUCCES ****** */
-        $page_succes = $this->preparePageSucces($session);
-        $produits_panier = $page_succes[0];
-        $menus = $page_succes[1];
-        /* */
-
-        /* reset le panier */
-        $session = $request->getSession();
-        $session->clear();
-
-        /* Triche pour regler un problème */
-        $badCommande = $em->getRepository('AppBundle:Commande')->findByPrix(null);
-        foreach ($badCommande as $bc){
-            $em->getManager()->remove($bc);
-            $em->getManager()->flush();
-        }
-
+    private function setMessage($commande, $pointRelais, $produits_panier, $menus, $prix)
+    {
         $message = \Swift_Message::newInstance()
             ->setSubject('Confirmation de votre commande')
             ->setFrom('no-reply@lamourfood.fr')
@@ -204,62 +262,5 @@ class CommandeController extends Controller
             )
         ;
         $this->get('mailer')->send($message);
-
-        return $this->render('frontoffice/commande/succes.html.twig', array(
-            'commande'=>$commande,
-            'pointRelais'=>$pointRelais,
-            'produits'=>$produits_panier,
-            'menus'=>$menus,
-            'prix'=>$prix
-        ));
     }
-
-    function preparePageSucces($session)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $panier = $session->all();
-        $produits_panier = array();
-        $menus = array();
-
-        foreach ($panier as $key => $value)
-        {
-            if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
-            {
-                $id = explode("_", $key);
-                $id = $id[1];
-                array_push($produits_panier, array($em->getRepository('AppBundle:Produit')->find($id), $value['quantite']));
-            }
-            else if ($key != "menu" && (strpos($key, 'menu') !== false) && (strpos($key, 'menu') == 0)) //menu
-            {
-                $id = explode("_", $key);
-                $id = $id[1];
-
-                if ($value['entree'] != null) {
-                    $entree = $em->getRepository('AppBundle:Produit')->find($value['entree']);
-                } else {
-                    $entree = null;
-                }
-                if ($value['plat'] != null) {
-                    $plat = $em->getRepository('AppBundle:Produit')->find($value['plat']);
-                } else {
-                    $plat = null;
-                }
-
-                if ($value['dessert'] != null) {
-                    $dessert = $em->getRepository('AppBundle:Produit')->find($value['dessert']);
-                } else {
-                    $dessert = null;
-                }
-                if ($value['boisson'] != null) {
-                    $boisson = $em->getRepository('AppBundle:Produit')->find($value['boisson']);
-                } else {
-                    $boisson = null;
-                }
-                array_push($menus, array('id' => $id, 'entree' => $entree, 'plat' => $plat, 'dessert' => $dessert, 'boisson' => $boisson, 'quantite' => $value['quantite'], 'prix' => $value['prix'], 'type' => $value['type']));
-            }
-        }
-
-        return array($produits_panier, $menus);
-    }
-
 }

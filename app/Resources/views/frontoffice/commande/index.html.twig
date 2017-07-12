@@ -7,10 +7,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12 livraison_paiement">
-                <h4>Livraison et paiement</h4>
+                <h3>Choisissez la date de livraison</h3>
 
-                <input type="text"  id="input" placeholder="Adresse de mon entreprise" required="">
-                <div class="choix_relais" data-adresse="{{ app.user.adresse }}" data-url="{{ path('commande_point_relais', {'adresse': '_adresse_'}) }}"></div>
             </div>
             <div class="col-lg-offset-1 col-lg-3 col-sm-12 col-md-12 col-xs-12 commande">
                 <h4>Commande</h4>
@@ -20,9 +18,10 @@
                     </span></p></b>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
-                <h3>Choisissez votre mode de paiement pour continuer</h3>
+                <h3>Choisissez votre mode de paiement</h3>
                 <div class="paiement_carte">
                     <div class="carte_header">
                         <img src="{{ asset('img/picto_carte_bancaire.png') }}"><h4>Paiement par carte</h4>
@@ -59,23 +58,6 @@
 
     <script>
         $(document).ready(function(){
-            var adresse = $('.choix_relais').data('adresse');
-
-            if(adresse != null){
-                const url = $(".choix_relais").data('url');
-                $('#input').val(adresse);
-                adresse = adresse.replace(/ /g, '%20');
-                $('.choix_relais').load(url.replace(/_adresse_/, adresse));
-            }
-
-            $('#input').keypress(function(e) {
-                if(e.which == 13) {
-                    const url = $(".choix_relais").data('url');
-                    var adresse = $('#input').val();
-                    adresse = adresse.replace(/ /g, '%20');
-                    $('.choix_relais').load(url.replace(/_adresse_/, adresse));
-                }
-            });
         });
 
     </script>
