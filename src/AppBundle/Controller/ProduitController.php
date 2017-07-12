@@ -27,7 +27,8 @@ class ProduitController extends Controller
     {
         $session = $request->getSession();
         $id_pt = $session->get("pointRelais");
-        if($id_pt === null)
+
+        if($id_pt === null) //si le point relais n'est pas defini, on redirige l'utilisateur
         {
             return $this->redirectToRoute("point_relais_set_index");
         }
