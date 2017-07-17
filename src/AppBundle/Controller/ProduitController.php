@@ -25,7 +25,17 @@ class ProduitController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $session = $request->getSession();
+        $id_pt = $session->get("pointRelais");
+
+        if($id_pt === null) //si le point relais n'est pas defini, on redirige l'utilisateur
+        {
+            return $this->redirectToRoute("point_relais_set_index");
+        }
+
         $em = $this->getDoctrine()->getManager();
+
+        $pointRelais = $em->getRepository('AppBundle:PointRelais')->find($id_pt);
 
         $categories = $em->getRepository('AppBundle:Categorie')->findAll();
         $categorie = null;
@@ -74,7 +84,8 @@ class ProduitController extends Controller
             'form'=>$form->createView(),
             //'form_personnalise'=>$form2->createView()
             'isAllergene'=>$isAllergene,
-            'allergenes'=>$allergenes
+            'allergenes'=>$allergenes,
+            'pointRelais'=>$pointRelais
         ));
     }
 

@@ -1,0 +1,69 @@
+    <div class="home_pop">
+        {% if pointsRelais != [] %}
+            <p> {{ pointsRelais | length }} choix possibles en fonction de votre lieu de travail</p>
+        {% endif %}
+
+        {% for point in pointsRelais %}
+            {% if loop.index == 1 %}<script>const id = {{ point.id }};</script>{% endif %}
+            <div class="bcr">
+
+                    <div class="relais_infos">
+                        <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
+                        <h4>{{ point.nom }}</h4>
+                        <p>{{ point.adresse }}</p>
+                    </div>
+            </div>
+        {% endfor %}
+
+        {% if pointsRelais == [] %}
+            Aucun point relais trouvé pour cette adresse
+            <script>
+                const id = null;
+            </script>
+        {% else %}
+            <div class="message"></div>
+        {% endif %}
+
+        <div class="popup_home">
+            <buttton class="choisir" style="
+            background-color: #e52c65; border: none;
+            padding: 5px 50px 5px 50px;
+            color: #ffffff;
+            border-radius: 5px;
+            text-decoration: none;
+            cursor: pointer;"
+            >Choisir</buttton>
+        </div>
+    </div>
+
+
+<script>
+    $( ".choisir" ).on( "click", function() {
+        const id = $( "input:checked" ).val();
+
+        $.ajax({
+            url : '{{ path('point_relais_set') }}',
+            type : 'POST',
+            data : 'pointRelais=' + id,
+
+            success : function(code_html, statut){
+                console.log("succes");
+                document.location = '{{ path('produit_index') }}';
+            },
+            error : function(resultat, statut, erreur){
+                alert("Problème survenu");
+                console.log("error");
+                console.log(erreur);
+            }
+        });
+
+    });
+
+    $("div.choix_relais .bcr").on("click",function() {
+        if($(this).find('input[type="radio"]').is(':checked')) {
+            $("div.choix_relais .bcr").removeClass('sel_bk_color');
+            $(this).addClass('sel_bk_color');
+        }
+    });
+</script>
+

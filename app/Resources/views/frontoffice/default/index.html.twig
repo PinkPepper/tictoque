@@ -24,24 +24,15 @@
 					<div class="col-lg-4 col-md-4 col-sm-4">
 						<div class="showPlat">
 							<div class="showImgPlat">
-								<a href="{{ path("produit_show", {'id': produit.id}) }}">
 								<img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
-								</a>
-                                {% if app.user is not null %}
-									<a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
-                                {% else %}
-									<a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
-                                {% endif %}
 							</div>
 							<div class="showDescPlat">
-								<a href="{{ path("produit_show", {'id': produit.id}) }}">
 								<p class="typeProduct">{{ produit.type|upper }}</p>
 								<div class="row">
 									<h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
 									<span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',')}}€</span>
 									<span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
 								</div>
-								</a>
 							</div>
 						</div>
 					</div>
@@ -178,11 +169,6 @@
 	</div>
 
 	<script>
-        $('.ajoutPanier').on('click', function (e) {
-            e.preventDefault();
-            var url = $(this).data('url');
-            $('#modal-body').load(url);
-        });
 
         $('.voir').on('click', function (e) {
             e.preventDefault();
