@@ -42,8 +42,13 @@ class PointRelaisController extends Controller
     /**
      * @Route("/set/index", name="point_relais_set_index")
      */
-    public function setPointRelaisIndexAction()
+    public function setPointRelaisIndexAction(Request $request)
     {
+        $session = $request->getSession();
+        $prix =$session->get('prix');
+        if($prix != null){
+            $session->clear();
+        }
         return $this->render('frontoffice/default/setPointRelais.html.twig');
     }
 
