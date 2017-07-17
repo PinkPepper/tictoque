@@ -91,6 +91,13 @@ class Produit
     private $all;
 
     /**
+     * @var int
+     **@ORM\ManyToMany(targetEntity="AppBundle\Entity\PointRelais", inversedBy="produits")
+     */
+    private $pointRelais;
+    private $pr;
+
+    /**
      * @ORM\OneToMany(targetEntity="CommandeProduit",  mappedBy="produits", cascade={"remove"})
      */
     private $commande;
@@ -116,13 +123,7 @@ class Produit
     private  $avisForm;
 
 
-    /**
-     * @var int
-     **@ORM\ManyToMany(targetEntity="PointRelais", inversedBy="produits")
-     * @ORM\JoinColumn(name="pointRelais", referencedColumnName="id")
-     */
-    private $pointRelais;
-    private $pr;
+
 
     /**
      * @var int

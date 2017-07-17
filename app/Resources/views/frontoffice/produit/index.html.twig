@@ -46,142 +46,149 @@
                 {% set foo = 'faux' %}
 
                 {% for produit in produits %}
-                    {% if isAllergene == true  %}
-                        {% for allergene in produit.allergenes if foo== 'faux' %}
-                            {% if allergene not in allergenes and foo=='faux' %}
-                                {% set foo = 'vrai' %}
-                            {% endif %}
-                        {% endfor %}
 
-                        {% if foo=="vrai" %}
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="showPlat">
-                                    <div class="showImgPlat">
-                                        <a href="{{ path("produit_show", {'id': produit.id}) }}">
-                                            <div class="overflowImg">
-                                                <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
-                                            </div>
-                                        </a>
-                                        {% if produit.quantite <= 0 %}
-                                            <a class="addToCart">Indisponible</a>
-                                        {% else %}
-                                            {% if app.user is not null %}
-                                                <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
-                                            {% else %}
-                                                <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
-                                            {% endif %}
+                    {% if (produit.pointRelais|length > 0) %}
+                        {% for pr in produit.pointRelais %}
+                            {% if pr.id == app.session.get('pointRelais') %}
+                                {% if isAllergene == true  %}
+                                    {% for allergene in produit.allergenes if foo== 'faux' %}
+                                        {% if allergene not in allergenes and foo=='faux' %}
+                                            {% set foo = 'vrai' %}
                                         {% endif %}
-                                    </div>
-                                    <a href="{{ path("produit_show", {'id': produit.id}) }}">
-                                        <div class="showDescPlat">
-                                            <p class="typeProduct">{{ produit.type|upper }}</p>
-                                            <div class="row">
-                                                <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
-                                                <span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',') }}€</span>
-                                                <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
+                                    {% endfor %}
 
-                            {% if loop.index == 5 %}
-                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                    <div class="showPlat">
-                                        <div class="dessert position_plat">
-                                            <div class="livraison_menu">
-                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                                <h4>CHOISSISEZ VOTRE POINT DE LIVRAISON</h4>
-                                                <p>Trouver le point de livraison qui vous convient le mieux</p>
-                                                <a class="add_livraison" href="#" style="background-color: #5f5f5f">Chercher un point de livraison</a>
+                                    {% if foo=="vrai" %}
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                            <div class="showPlat">
+                                                <div class="showImgPlat">
+                                                    <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                                        <div class="overflowImg">
+                                                            <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
+                                                        </div>
+                                                    </a>
+                                                    {% if produit.quantite <= 0 %}
+                                                        <a class="addToCart">Indisponible</a>
+                                                    {% else %}
+                                                        {% if app.user is not null %}
+                                                            <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                                                        {% else %}
+                                                            <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                </div>
+                                                <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                                    <div class="showDescPlat">
+                                                        <p class="typeProduct">{{ produit.type|upper }}</p>
+                                                        <div class="row">
+                                                            <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
+                                                            <span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',') }}€</span>
+                                                            <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
+                                                        </div>
+                                                    </div>
+                                                </a>
                                             </div>
                                         </div>
+
+                                        {% if loop.index == 5 %}
+                                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                                <div class="showPlat">
+                                                    <div class="dessert position_plat">
+                                                        <div class="livraison_menu">
+                                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                            <h4>CHOISSISEZ VOTRE POINT DE LIVRAISON</h4>
+                                                            <p>Trouver le point de livraison qui vous convient le mieux</p>
+                                                            <a class="add_livraison" href="#" style="background-color: #5f5f5f">Chercher un point de livraison</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        {% if loop.index == 10 %}
+                                            <div class="col-lg-4 col-md-6 col-sm-6">
+                                                <div class="showPlat">
+                                                    <div class="dessert position_plat">
+                                                        <div class="dessert position_plat">
+                                                            <div class="livraison_menu">
+                                                                <i class="fa fa-building-o" aria-hidden="true"></i>
+                                                                <h4>BREAKZONE</h4>
+                                                                <p>Zone dédiée à la promotion d'autre catégorie, aux différentes réductions,
+                                                                    mais aussi aux différents services de l'entreprise</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                        {% set foo = 'faux' %}
+                                    {% endif %}
+
+                                {% else %}
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <div class="showPlat">
+                                            <div class="showImgPlat">
+                                                <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                                    <div class="overflowImg">
+                                                        <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
+                                                    </div>
+                                                </a>
+
+                                                {% if produit.quantite <= 0 %}
+                                                    <a class="addToCart">Indisponible</a>
+                                                {% else %}
+                                                    {% if app.user is not null %}
+                                                        <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                                                    {% else %}
+                                                        <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
+                                                    {% endif %}
+                                                {% endif %}
+
+                                            </div>
+                                            <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                                <div class="showDescPlat">
+                                                    <p class="typeProduct">{{ produit.type|upper }}</p>
+                                                    <div class="row">
+                                                        <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
+                                                        <span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',') }}€</span>
+                                                        <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                            {% endif %}
-                            {% if loop.index == 10 %}
-                                <div class="col-lg-4 col-md-6 col-sm-6">
-                                    <div class="showPlat">
-                                        <div class="dessert position_plat">
-                                            <div class="dessert position_plat">
-                                                <div class="livraison_menu">
-                                                    <i class="fa fa-building-o" aria-hidden="true"></i>
-                                                    <h4>BREAKZONE</h4>
-                                                    <p>Zone dédiée à la promotion d'autre catégorie, aux différentes réductions,
-                                                        mais aussi aux différents services de l'entreprise</p>
+
+                                    {% if loop.index == 5 %}
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                            <div class="showPlat">
+                                                <div class="dessert position_plat">
+                                                    <div class="livraison_menu">
+                                                        <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                        <h4>CHOISISSEZ VOTRE POINT DE LIVRAISON</h4>
+                                                        <p>Trouver le point de livraison qui vous convient le mieux</p>
+                                                        <a class="add_livraison" href="#" style="background-color: #5f5f5f">Chercher un point de livraison</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            {% endif %}
-                            {% set foo = 'faux' %}
-                        {% endif %}
-
-                    {% else %}
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="showPlat">
-                                <div class="showImgPlat">
-                                    <a href="{{ path("produit_show", {'id': produit.id}) }}">
-                                        <div class="overflowImg">
-                                            <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
-                                        </div>
-                                    </a>
-
-                                {% if produit.quantite <= 0 %}
-                                    <a class="addToCart">Indisponible</a>
-                                {% else %}
-                                    {% if app.user is not null %}
-                                        <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
-                                    {% else %}
-                                        <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
                                     {% endif %}
-                                {% endif %}
-
-                            </div>
-                                <a href="{{ path("produit_show", {'id': produit.id}) }}">
-                                    <div class="showDescPlat">
-                                        <p class="typeProduct">{{ produit.type|upper }}</p>
-                                        <div class="row">
-                                            <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
-                                            <span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',') }}€</span>
-                                            <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-
-                        {% if loop.index == 5 %}
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="showPlat">
-                                    <div class="dessert position_plat">
-                                        <div class="livraison_menu">
-                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                            <h4>CHOISISSEZ VOTRE POINT DE LIVRAISON</h4>
-                                            <p>Trouver le point de livraison qui vous convient le mieux</p>
-                                            <a class="add_livraison" href="#" style="background-color: #5f5f5f">Chercher un point de livraison</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                        {% if loop.index == 10 %}
-                            <div class="col-lg-4 col-md-6 col-sm-6">
-                                <div class="showPlat">
-                                    <div class="dessert position_plat">
-                                        <div class="dessert position_plat">
-                                            <div class="livraison_menu">
-                                                <i class="fa fa-building-o" aria-hidden="true"></i>
-                                                <h4>BREAKZONE</h4>
-                                                <p>Zone dédiée à la promotion d'autre catégorie, aux différentes réductions,
-                                                    mais aussi aux différents services de l'entreprise</p>
+                                    {% if loop.index == 10 %}
+                                        <div class="col-lg-4 col-md-6 col-sm-6">
+                                            <div class="showPlat">
+                                                <div class="dessert position_plat">
+                                                    <div class="dessert position_plat">
+                                                        <div class="livraison_menu">
+                                                            <i class="fa fa-building-o" aria-hidden="true"></i>
+                                                            <h4>BREAKZONE</h4>
+                                                            <p>Zone dédiée à la promotion d'autre catégorie, aux différentes réductions,
+                                                                mais aussi aux différents services de l'entreprise</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
+                                    {% endif %}
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
                     {% endif %}
                 {% endfor %}
             </div>
