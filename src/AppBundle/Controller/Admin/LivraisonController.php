@@ -48,6 +48,31 @@ class LivraisonController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            $bool = false;
+
+            $produit = $form->getData()->getProduit();
+            $relais = $form->getData()->getPointRelais();
+
+            $tabRelais = $produit->getPointRelais();
+            for($i = 0;$i<sizeof($tabRelais);$i++){
+                if($tabRelais[$i]->getId() == $relais->getId()){
+                    $bool = true;
+                }
+            }
+
+            if(!$bool){
+
+                $relais->addProduit($produit);
+                $produit->addPointRelais($relais);
+
+                $em->persist($relais);
+                $em->flush();
+
+                $em->persist($produit);
+                $em->flush();
+            }
+
             $em->persist($livraison);
             $em->flush();
 

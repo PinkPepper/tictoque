@@ -63,7 +63,11 @@
     <script>
         $(document).ready(function() {
             $('.js-datepicker').datepicker({
-                format: 'yyyy-mm-dd'
+                dateFormat: "dd/mm/yy",
+                monthNames: [ "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre" ],
+                dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+                dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+
             });
         });
     </script>
