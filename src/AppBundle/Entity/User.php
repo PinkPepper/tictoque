@@ -112,6 +112,12 @@ class User extends BaseUser
      */
     private $adresse;
 
+    /**
+     * @var int
+     * @ORM\OneToMany(targetEntity="PointRelais", mappedBy="user", cascade={"persist"})
+     */
+    private $pointsRelais;
+
     use TraitUploadImage;
     public function getUploadDir()
     {
@@ -349,6 +355,22 @@ class User extends BaseUser
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointsRelais()
+    {
+        return $this->pointsRelais;
+    }
+
+    /**
+     * @param int $pointsRelais
+     */
+    public function setPointsRelais($pointsRelais)
+    {
+        $this->pointsRelais = $pointsRelais;
     }
 }
 

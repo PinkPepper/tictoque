@@ -115,6 +115,15 @@ class Produit
      */
     private  $avisForm;
 
+
+    /**
+     * @var int
+     **@ORM\ManyToOne(targetEntity="PointRelais", inversedBy="produits")
+     * @ORM\JoinColumn(name="pointRelais", referencedColumnName="id")
+     */
+    private $pointRelais;
+
+
     use TraitUploadImage;
     public function getUploadDir()
     {
@@ -515,6 +524,21 @@ class Produit
         $this->avisForm = $avisForm;
     }
 
+    /**
+     * @return int
+     */
+    public function getPointRelais()
+    {
+        return $this->pointRelais;
+    }
+
+    /**
+     * @param int $pointRelais
+     */
+    public function setPointRelais($pointRelais)
+    {
+        $this->pointRelais = $pointRelais;
+    }
 
 
 }

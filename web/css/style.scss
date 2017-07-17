@@ -2496,3 +2496,24 @@ body {
 .voir{
   cursor: pointer;
 }
+
+// LIVRAISON
+
+.livraison{
+  background-color:#383838 !important;
+
+  .blockLivraison{
+    background-color:white;
+    border-radius:5px;
+    text-align: center;
+    margin-top:20vh;
+    width:40%;
+    height:400px;
+    padding-top:15px;
+
+    .logo{
+      width:40%;
+    }
+  }
+
+}
