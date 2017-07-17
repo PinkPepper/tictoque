@@ -23,7 +23,7 @@ class CommandeController extends Controller
     /**
      * Choisir ses options de commande
      * @Route("/", name="commande_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request)
     {
@@ -34,8 +34,18 @@ class CommandeController extends Controller
             return $this->redirectToRoute('index_panier');
         }
 
-        //TODO moyen de paiement
-        return $this->render('frontoffice/commande/index.html.twig');
+
+        $form = $this->createForm('AppBundle\Form\DateType');
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $date = $form->getData()['date'];
+            $session = $request->getSession();
+            $session->set('dateLivraison', $date);
+            return $this->redirectToRoute('commande_succes');
+        }
+
+        return $this->render('frontoffice/commande/index.html.twig', array('form'=>$form->createView()));
     }
 
     /**
@@ -56,8 +66,16 @@ class CommandeController extends Controller
         $pointRelais = $em->getRepository('AppBundle:PointRelais')->find($pointRelais);
 
         $prix = $session->get('prix');
+        $date = $session->get('dateLivraison');
 
-        $commande = $this->setCommande($pointRelais, $prix);
+        $commande = $this->setCommande($pointRelais, $prix, $date);
+        if($commande === null){
+            $this->addFlash(
+                'notice',
+                'La date de livraison n\' est pas valide.'
+            );
+            return $this->redirectToRoute('commande_index');
+        }
         $this->setContenuCommande($request, $commande);
 
         //TODO informer le livreur
@@ -141,22 +159,33 @@ class CommandeController extends Controller
     }
 
 
-    private function setCommande($pointRelais, $prix)
+    private function setCommande($pointRelais, $prix, $date)
     {
         $commande = new Commande();
         $commande->setUser($this->getUser());
         $commande->setPrix($prix);
         $commande->setAdresse($pointRelais->getAdresse());
 
-        $hours = (new \DateTime())->format('H');
-        if($hours < 10)
-        {
-            $commande->setDateLivraison(new \DateTime());
+        $today = new \DateTime();
+        if($today->format('Y-m-d') == $date->format('Y-m-d')){
+            $hours = (new \DateTime())->format('H');
+
+            if($hours < 10)
+            {
+                $commande->setDateLivraison(new \DateTime());
+            }
+            else
+            {
+                $commande->setDateLivraison((new \DateTime())->add(new \DateInterval('P1D')));
+            }
         }
-        else
-        {
-            $commande->setDateLivraison((new \DateTime())->add(new \DateInterval('P1D')));
+        else if($date->format('Y-m-d') < $today->format('Y-m-d')){
+           return null;
         }
+        else{
+            $commande->setDateLivraison($date);
+        }
+
 
         $this->getDoctrine()->getManager()->persist($commande);
         $this->getDoctrine()->getManager()->flush();

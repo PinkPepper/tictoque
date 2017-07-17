@@ -5,10 +5,12 @@
 {% block body %}
     <div class="panier">
     <div class="container">
+        {{ form_start(form) }}
         <div class="row">
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12 livraison_paiement">
                 <h3>Choisissez la date de livraison</h3>
-
+                <p>Attention, Si vous choisissez la date du jour avant 10h, la commande sera reportée au lendemain.</p>
+                    {{ form_widget(form.date) }}
             </div>
             <div class="col-lg-offset-1 col-lg-3 col-sm-12 col-md-12 col-xs-12 commande">
                 <h4>Commande</h4>
@@ -42,7 +44,8 @@
                             <label>Cryptogramme</label>
                             <input type="text" name="crypto" class="crypto" placeholder="758">
                         </div>
-                        <a href="{{ path('commande_succes') }}" class="paimement_valider"  >Valider mon paiement</a>
+                   {#     <a href="{{ path('commande_succes') }}" class="paimement_valider"> Valider mon paiement</a>#}
+                        <input type="submit" value="envoyer" class="paimement_valider">
                     </div>
                     <a href="">
                     <div class="paiement_paypal">
@@ -53,12 +56,15 @@
                 </div>
             </div>
         </div>
+        {{ form_end(form) }}
     </div>
     </div>
 
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
+            $('.js-datepicker').datepicker({
+                format: 'yyyy-mm-dd'
+            });
         });
-
     </script>
 {% endblock %}
