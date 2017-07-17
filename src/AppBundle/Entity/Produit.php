@@ -118,10 +118,11 @@ class Produit
 
     /**
      * @var int
-     **@ORM\ManyToOne(targetEntity="PointRelais", inversedBy="produits")
+     **@ORM\ManyToMany(targetEntity="PointRelais", inversedBy="produits")
      * @ORM\JoinColumn(name="pointRelais", referencedColumnName="id")
      */
     private $pointRelais;
+    private $pr;
 
     /**
      * @var int
@@ -185,6 +186,26 @@ class Produit
         $this->allergenes->removeElement($allergene);
     }
 
+
+    /**
+     * @param \AppBundle\Entity\PointRelais $pointRelais
+     *
+     * @return Produit
+     */
+    public function addPointRelais(\AppBundle\Entity\PointRelais $pointRelais)
+    {
+        $this->pointRelais[] = $pointRelais;
+
+        return $this;
+    }
+
+    /**
+     * @param \AppBundle\Entity\PointRelais $pointRelais
+     */
+    public function removePointRelais(\AppBundle\Entity\PointRelais $pointRelais)
+    {
+        $this->pointRelais->removeElement($pointRelais);
+    }
 
     /**
      * Get id
@@ -402,6 +423,8 @@ class Produit
     public function __construct()
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->allergenes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pointRelais = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -560,6 +583,22 @@ class Produit
     public function setLivraison($livraison)
     {
         $this->livraison = $livraison;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPr()
+    {
+        return $this->pr;
+    }
+
+    /**
+     * @param mixed $pr
+     */
+    public function setPr($pr)
+    {
+        $this->pr = $pr;
     }
 
 

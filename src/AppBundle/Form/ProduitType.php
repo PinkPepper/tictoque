@@ -32,6 +32,12 @@ class ProduitType extends AbstractType
                         )
                     )
                 )
+            ->add('pr', EntityType::class, array(
+                'class' => 'AppBundle\Entity\PointRelais',
+                'choice_label' => 'nom',
+                'expanded' => false,
+                'multiple' => true,
+            ))
             ->add('datePeremption', DateType::class)
             ->add('prix')
             ->add('quantite')

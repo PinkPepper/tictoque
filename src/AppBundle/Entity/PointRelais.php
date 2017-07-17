@@ -58,7 +58,7 @@ class PointRelais
 
     /**
      * @var int
-     * @ORM\OneToMany(targetEntity="Produit", mappedBy="pointRelais", cascade={"remove"})
+     * @ORM\ManyToMany(targetEntity="Produit", mappedBy="pointRelais", cascade={"remove"})
      */
     private $produits;
 
@@ -227,6 +227,26 @@ class PointRelais
     public function setLivraison($livraison)
     {
         $this->livraison = $livraison;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Produit $produit
+     *
+     * @return PointRelais
+     */
+    public function addProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produits[] = $produit;
+
+        return $this;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Produit $produit
+     */
+    public function removeProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produits->removeElement($produit);
     }
 }
 

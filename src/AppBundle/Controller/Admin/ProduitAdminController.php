@@ -84,6 +84,14 @@ class ProduitAdminController extends Controller
                 $this->getDoctrine()->getManager()->flush();
             }
 
+            $tmp = $form["pr"]->getData();
+            for ($i=0; $i< sizeof($tmp); $i++)
+            {
+                $produit->addPointRelais($tmp[$i]);
+                $tmp[$i]->addProduit($produit);
+                $this->getDoctrine()->getManager()->persist($tmp[$i]);
+                $this->getDoctrine()->getManager()->flush();
+            }
             //TODO probleme catégories
             
             $em = $this->getDoctrine()->getManager();
@@ -181,7 +189,30 @@ class ProduitAdminController extends Controller
         $editForm = $this->createForm('AppBundle\Form\ProduitType', $produit);
         $editForm->handleRequest($request);
 
+        $points_relais = $produit->getPointRelais();
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $tmp = $editForm["pr"]->getData();
+            if($tmp != new ArrayCollection())
+            {
+                foreach ($produit->getPointRelais() as $pointRelais){
+                    $produit->removePointRelais($pointRelais);
+                }
+
+                for ($i=0; $i< sizeof($tmp); $i++)
+                {
+                    $produit->addPointRelais($tmp[$i]);
+                    $tmp[$i]->addProduit($produit);
+                    $this->getDoctrine()->getManager()->persist($tmp[$i]);
+                    $this->getDoctrine()->getManager()->flush();
+                }
+
+            }
+            else{
+                $produit->setPointRelais($points_relais);
+            }
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
