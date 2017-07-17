@@ -23,6 +23,30 @@ class LivreurController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('backoffice/admin/livreur/index.html.twig');
+        $produit = [];
+
+        $em = $this->getDoctrine()->getManager();
+
+        $usr = $this->getUser();
+
+        $pointRelais = $em->getRepository('AppBundle:PointRelais')->findBy(
+            array('user' => $usr)
+        );
+
+        for($i=0;$i<sizeof($pointRelais);$i++){
+            $tmp = $em->getRepository('AppBundle:Livraison')->findBy(
+                array('pointRelais' => $pointRelais[$i]->getId()));
+            array_push($produit,$tmp);
+        }
+
+
+
+
+        return $this->render('backoffice/admin/livreur/index.html.twig', array(
+            'relais' => $pointRelais,
+            'produits' => $produit,
+            'dateNow' => new \DateTime()
+        ));
+
     }
 }

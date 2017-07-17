@@ -22,9 +22,14 @@
 					</td>
 					<td>{% if user.roles.0=="ROLE_ADMIN" %}
 							Administrateur
+						{% else %}
+							{% if user.roles.0=="ROLE_LIVREUR" %}
+								Livreur
 							{% else %}
-							Utilisateur
-							{% endif %}</td>
+								Utilisateur
+							{% endif %}
+						{% endif  %}
+					</td>
 					<td>{% if user.lastLogin!=null %}{{ user.lastLogin.date|date('d/m/Y') }}
 					{% else %}
 					Jamais connecté

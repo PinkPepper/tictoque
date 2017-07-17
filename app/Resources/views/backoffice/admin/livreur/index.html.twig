@@ -24,7 +24,22 @@
     <body class="livraison">
         <div class="container-fluid">
             <div class="blockLivraison center-block">
-                <img class="logo" src="{{ asset('img/logo.svg') }}" alt="logo">
+                <img class="logo center-block" src="{{ asset('img/logo.svg') }}" alt="logo">
+                {% for pointRelais in relais %}
+                    {% set ite = loop.index %}
+                <ul>
+                    <li><h3><b>{{ pointRelais.nom }}</b></h3></li>
+                        {% for produit in produits %}
+                            {% if loop.index == ite %}
+                                {% for p in produit %}
+                                    {% if p.date|date('m/d/Y') == dateNow|date('m/d/Y') %}
+                                        <li>{{ p.produit.nom }} : {{ p.quantite }}</li>
+                                    {% endif %}
+                                {% endfor %}
+                            {% endif %}
+                        {% endfor %}
+                </ul><br>
+                {% endfor %}
             </div>
         </div>
     </body>

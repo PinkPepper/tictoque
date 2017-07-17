@@ -44,6 +44,8 @@ class User extends BaseUser
      */
     private $prenom;
 
+    private $role;
+
     /**
      * @var string
      *
@@ -371,6 +373,22 @@ class User extends BaseUser
     public function setPointsRelais($pointsRelais)
     {
         $this->pointsRelais = $pointsRelais;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 }
 
