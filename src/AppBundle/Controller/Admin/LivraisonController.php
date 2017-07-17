@@ -3,6 +3,7 @@
 namespace AppBundle\Controller\Admin;
 
 use AppBundle\Entity\Livraison;
+use AppBundle\Entity\PointRelais;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -25,9 +26,11 @@ class LivraisonController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $livraisons = $em->getRepository('AppBundle:Livraison')->findAll();
+        $pointRelais = $em->getRepository('AppBundle:PointRelais')->findAll();
 
         return $this->render('backoffice/admin/livraison/index.html.twig', array(
             'livraisons' => $livraisons,
+            'pointRelais' => $pointRelais,
         ));
     }
 
@@ -99,6 +102,54 @@ class LivraisonController extends Controller
     }
 
     /**
+     * Displays a form to edit an existing livraison entity.
+     *
+     * @Route("/{id}/relaisEdit", name="relais_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function relaisEditAction(Request $request, PointRelais $relais)
+    {
+        $deleteForm = $this->relaisCreateDeleteForm($relais);
+        $editForm = $this->createForm('AppBundle\Form\PointRelaisType', $relais);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+
+            return $this->redirectToRoute('relais_edit', array('id' => $relais->getId()));
+        }
+
+        return $this->render('backoffice/admin/relais/edit.html.twig', array(
+            'relais' => $relais,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+
+    /**
+     * Deletes a livraison entity.
+     *
+     * @Route("/relais/{id}", name="relais_delete")
+     * @Method("DELETE")
+     */
+    public function relaisDeleteAction(Request $request, PointRelais $pointRelais)
+    {
+        $form = $this->createDeleteForm($pointRelais);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($pointRelais);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('livraison_index');
+    }
+
+
+    /**
      * Deletes a livraison entity.
      *
      * @Route("/{id}", name="livraison_delete")
@@ -132,5 +183,14 @@ class LivraisonController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+
+    private function relaisCreateDeleteForm(PointRelais $pointRelais)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('relais_delete', array('id' => $pointRelais->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+            ;
     }
 }

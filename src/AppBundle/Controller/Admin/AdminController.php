@@ -55,7 +55,8 @@ class AdminController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-
+            //var_dump($form->getData()->getRole());
+            $user->addRole($form->getData()->getRole());
             if ($user->getImage() == "")
             {
                 $user->setImage('userdefault.svg');

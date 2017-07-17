@@ -4,25 +4,45 @@
     <section>
         <div class="menu_top_cms">
             <h1>Livraison - {{ livraisons|length }}</h1>
-            <a class="btn_01" href="{{ path('livraison_new') }}">Ajouter un produit</a>
+            <a class="btn_01" href="{{ path('livraison_new') }}">Ajouter une livraison</a>
         </div>
 
+        <div class="cellule_40_cms">
+            <table>
+                <tr>
+                    <td><strong>Livreur</strong></td>
+                    <td><strong>Point de livraison</strong></td>
+                </tr>
+                {% for point in pointRelais %}
+                    <tr>
+                        <td>{{ point.user.nom }}</td>
+                        <td>{{ point.nom }}</td>
+                        <td>
+                            <ul>
+                                <li>
+                                    <a href="{{ path('relais_edit', { 'id': point.id }) }}"><img class="sizePicto" src="{{ asset('img/edit.svg') }}"></a>
+                                </li>
+                                <li>
+                                    <a href="{{ path('relais_delete', { 'id': point.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')"><img class="sizePicto" src="{{ asset('img/delete.svg') }}"></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
 
-    <div class="cellule_background_cms">
+    <div class="cellule_60_cms">
         <table>
             <tr>
-                <td><strong>Id</strong></td>
                 <td><strong>nom produit</strong></td>
-                <td><strong>quantite</strong></td>
                 <td><strong>date livraison</strong></td>
                 <td><strong>nom point relais</strong></td>
                 <td><strong>Actions</strong></td>
             </tr>
             {% for livraison in livraisons %}
                 <tr>
-                    <td>{{ livraison.id }}</td>
                     <td>{{ livraison.produit.nom }}</td>
-                    <td>{{ livraison.quantite }}</td>
                     <td>{{ livraison.date|date('d-m-Y') }}</td>
                     <td>{{ livraison.pointRelais.nom }}</td>
 
@@ -30,9 +50,6 @@
                         <ul>
                             <li>
                                 <a href="{{ path('livraison_edit', { 'id': livraison.id }) }}"><img class="sizePicto" src="{{ asset('img/edit.svg') }}"></a>
-                            </li>
-                            <li>
-                                <a href="{{ path('livraison_show', { 'id': livraison.id }) }}"><img class="sizePicto" src="{{ asset('img/profile.svg') }}"></a>
                             </li>
                             <li>
                                 <a href="{{ path('livraison_delete', { 'id': livraison.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')"><img class="sizePicto" src="{{ asset('img/delete.svg') }}"></a>

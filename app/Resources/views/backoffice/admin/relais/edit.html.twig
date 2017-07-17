@@ -1,0 +1,40 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Modifier une affectation</h1>
+        <a class="btn_01" href="{{ path('livraison_index') }}" >Retour</a>
+
+        <div class="cellule_background_cms">
+            {{ form_start(edit_form, { 'attr': {'class': 'form-group' } }) }}
+
+            <br>
+            <label>Nom</label>
+            {{ form_widget(edit_form.nom) }}
+            {{ form_errors(edit_form.nom) }}
+
+            <br>
+            <label>Adresse</label>
+            {{ form_widget(edit_form.adresse) }}
+            {{  form_errors(edit_form.adresse) }}
+
+            <br>
+            <label>Livreur</label>
+            {{ form_widget(edit_form.user) }}
+            {{  form_errors(edit_form.user) }}
+
+            <br>
+
+            <br><br>
+            <button class="button_p" type="submit"> Modifier l'affectation </button>
+            {{ form_end(edit_form) }}
+            <br>
+            <br>
+            {{ form_start(delete_form) }}
+            <button class="button_p" type="submit" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</button>
+            {{ form_end(delete_form) }}
+
+        </div>
+    </section>
+
+{% endblock %}
