@@ -5,10 +5,10 @@
 
         {% for point in pointsRelais %}
             {% if loop.index == 1 %}<script>const id = {{ point.id }};</script>{% endif %}
-            <div class="bcr">
+            <div id="{{ point.id }}" class="bcr">
 
                     <div class="relais_infos">
-                        <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
+                        <input for"{{ point.id }}" type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
                         <div class="result_infos">
                             <h4>{{ point.nom }}</h4>
                             <p>{{ point.adresse }}</p>
