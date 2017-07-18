@@ -61,4 +61,24 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
         return $res->getResult();
     }
 
+    public function findByYear($year){
+        $date = new \DateTime('now');
+        $year = $date->format('Y');
+
+        $date = $dateOne = $year."-01-01".$day." 00:00:00";
+        $date1 = $dateOne = $year."-".$month."-".$day." 23:59:59";
+
+        $dateFrom = new \DateTime($date);
+        $dateTo =  new \DateTime($date1);
+
+        $res = $this->createQueryBuilder('e')
+            ->where('e.date >= :dateFrom')
+            ->andWhere('e.date < :dateTo')
+            ->setParameter('dateFrom',$dateFrom)
+            ->setParameter('dateTo',$dateTo)
+            ->getQuery();
+
+        return $res->getResult();
+    }
+
 }

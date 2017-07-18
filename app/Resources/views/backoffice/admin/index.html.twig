@@ -17,15 +17,21 @@
             {% endfor %}
         </div>
         <div class="dashboardRevenu">
-            <h4 class="dashboardTitre">Chiffre d'affaire du mois</h4>
+            <h4 class="dashboardTitre dashboardCA">Chiffre d'affaire du mois</h4>
             <div class="dashboardRevenuLeft">
                 <p class="dashboardRevenuP">Revenus</p>
-                <h4 class="dashboardMonthPrice">8.490€</h4>
+                <h4 class="dashboardMonthPrice">
+                    {% set revenu = 0 %}
+                    {% for cd in commandeMois %}
+                        {% set revenu = revenu + cd.prix %}
+                    {% endfor %}
+                    {{ revenu }}€
+                </h4>
                 <p class="dashboardMonthPercent">+ 87%</p>
             </div>
             <div class="dashboardRevenuRight">
                 <p class="dashboardRevenuP">Vente</p>
-                <h4 class="dashboardMonthPrice">574</h4>
+                <h4 class="dashboardMonthPrice">{{ commandeMois|length }}</h4>
                 <p class="dashboardMonthPercent">+ 102%</p>
             </div>
         </div>
