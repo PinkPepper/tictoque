@@ -1019,4 +1019,16 @@ section .cellule_60_cms .pagination_form li a:hover {
   margin: 0px;
 }
 
+.dashboardMonthPrice{
+  margin-top: 5px;
+  margin-bottom:0px;
+  font-size:22px;
+}
+
+.dashboardMonthPercent{
+  color:#73BB66;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
 /*# sourceMappingURL=style.css.map */
