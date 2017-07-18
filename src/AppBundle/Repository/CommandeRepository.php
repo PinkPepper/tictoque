@@ -118,15 +118,11 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
         $res1 = $this->createQueryBuilder('e')
             ->where('e.date >= :dateFrom')
             ->andWhere('e.date < :dateTo')
-            ->setParameter('dateFrom',$dateFrom2)
-            ->setParameter('dateTo',$dateTo2)
+            ->setParameter('dateFrom',$dateTo2)
+            ->setParameter('dateTo',$dateFrom2)
             ->getQuery();
 
         $res = $res->getResult();
-
-        dump($res);
-        dump($res1);
-        
         $res1 = $res1->getResult();
 
         return array($res,$res1);

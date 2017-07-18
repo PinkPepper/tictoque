@@ -27,8 +27,21 @@ class AdminController extends Controller
 
         $commandeMois = $em->getRepository('AppBundle:Commande')->findForMonth();
         $commandeJour = $em->getRepository('AppBundle:Commande')->findByDay();
-        $commandStat = $em->getRepository('AppBundle:Commande')->statsMonth();
+        $commandeStat = $em->getRepository('AppBundle:Commande')->statsMonth();
 
+        $prix1 = 0;
+        $prix2 = 0;
+
+        for($i=0;$i<sizeof($commandeStat[0]);$i++){
+            $prix1 += $commandeStat[0][$i]->getPrix();
+        }
+
+        for($i=0;$i<sizeof($commandeStat[1]);$i++){
+            $prix2 += $commandeStat[1][$i]->getPrix();
+        }
+
+        $statRevenu = ;
+        $statVente = 0;
 
         return $this->render('backoffice/admin/index.html.twig',array(
             'commandeMois' => $commandeMois,
