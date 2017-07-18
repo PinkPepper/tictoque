@@ -7,15 +7,27 @@
         <div class="dashboardCommande">
             <h4 class="dashboardTitre">Commande du jour<span class="dashboardNbCommande">{{ commandeJour|length }}</span></h4>
             {% for cd in commandeJour %}
-                {% if lopp.index <4 %}
-                    <p>{{ cd.user.nom }} {{ cd.user.prenom }}</p>
+                {% if loop.index <5 %}
+                    <div class="dashboardRemember">
+                        <p class="dashboardCommandeName">{{ cd.user.nom }} {{ cd.user.prenom }}</p>
+                        <span class="dashboardSpan">{{ cd.adresse }}</span>
+                        <span class="dashboardSpanPrix">{{ cd.prix }}€</span>
+                    </div>
                 {% endif %}
             {% endfor %}
         </div>
         <div class="dashboardRevenu">
-            {% for c in commandeMois %}
-                {{ c.prix }}
-            {% endfor %}
+            <h4 class="dashboardTitre">Chiffre d'affaire du mois</h4>
+            <div class="dashboardRevenuLeft">
+                <p>Revenus</p>
+                <h4>8.490€</h4>
+                <p>+ 87%</p>
+            </div>
+            <div class="dashboardRevenuRight">
+                <p>Vente</p>
+                <h4>574</h4>
+                <p>+ 102%</p>
+            </div>
         </div>
     </section>
 {% endblock %}
