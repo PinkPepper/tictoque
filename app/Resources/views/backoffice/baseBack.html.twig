@@ -6,10 +6,12 @@
     <title>{% block title %}L'Amour Food{% endblock %}</title>
     {% block stylesheets %}
         <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+        <link type="text/css" rel="stylesheet" href="{{ asset('js/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}"/>
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% endblock %}
     {% block javascripts %}
         <script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
         <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
         <script>tinymce.init({ selector:'.tiny',setup: function (editor) {
                 editor.on('change', function () {
