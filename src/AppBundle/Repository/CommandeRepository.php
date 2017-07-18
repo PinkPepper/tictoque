@@ -32,6 +32,7 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
        $res = $this->createQueryBuilder('e')
             ->where('e.date >= :dateFrom')
             ->andWhere('e.date < :dateTo')
+            ->orderBy('e.date','ASC')
             ->setParameter('dateFrom',$dateFrom)
             ->setParameter('dateTo',$dateTo)
             ->getQuery();
@@ -54,6 +55,7 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
         $res = $this->createQueryBuilder('e')
             ->where('e.date >= :dateFrom')
             ->andWhere('e.date < :dateTo')
+            ->orderBy('e.date','DESC')
             ->setParameter('dateFrom',$dateFrom)
             ->setParameter('dateTo',$dateTo)
             ->getQuery();
@@ -73,6 +75,7 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
         $res = $this->createQueryBuilder('e')
             ->where('e.date >= :dateFrom')
             ->andWhere('e.date < :dateTo')
+            ->orderBy('e.date','DESC')
             ->setParameter('dateFrom',$dateFrom)
             ->setParameter('dateTo',$dateTo)
             ->getQuery();
@@ -111,6 +114,7 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
         $res = $this->createQueryBuilder('e')
             ->where('e.date >= :dateFrom')
             ->andWhere('e.date < :dateTo')
+            ->orderBy('e.date','DESC')
             ->setParameter('dateFrom',$dateFrom)
             ->setParameter('dateTo',$dateTo)
             ->getQuery();
@@ -118,6 +122,7 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
         $res1 = $this->createQueryBuilder('e')
             ->where('e.date >= :dateFrom')
             ->andWhere('e.date < :dateTo')
+            ->orderBy('e.date','DESC')
             ->setParameter('dateFrom',$dateTo2)
             ->setParameter('dateTo',$dateFrom2)
             ->getQuery();
