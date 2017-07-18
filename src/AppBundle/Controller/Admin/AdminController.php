@@ -32,21 +32,33 @@ class AdminController extends Controller
         $prix1 = 0;
         $prix2 = 0;
 
+        $vente1 = 0;
+        $vente2 = 0;
+
         for($i=0;$i<sizeof($commandeStat[0]);$i++){
             $prix1 += $commandeStat[0][$i]->getPrix();
+        }
+
+        for($i=0;$i<sizeof($commandeStat[0]);$i++){
+            $vente1 += +1;
         }
 
         for($i=0;$i<sizeof($commandeStat[1]);$i++){
             $prix2 += $commandeStat[1][$i]->getPrix();
         }
 
+        for($i=0;$i<sizeof($commandeStat[1]);$i++){
+            $vente2 += +1;
+        }
+
         $statRevenu = $prix1*100/$prix2;
-        $statVente = 0;
+        $statVente = $vente1*100+$vente2;
 
         return $this->render('backoffice/admin/index.html.twig',array(
             'commandeMois' => $commandeMois,
             'commandeJour' => $commandeJour,
             'statRevenu' =>$statRevenu,
+            'statVente' => $statVente
         ));
     }
 

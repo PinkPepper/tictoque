@@ -27,12 +27,12 @@
                     {% endfor %}
                     {{ revenu }}€
                 </h4>
-                <p class="dashboardMonthPercent">+{{ statRevenu }}%</p>
+                <p class="dashboardMonthPercent">+{{ (statRevenu)|number_format(0, '.', ',') }}%</p>
             </div>
             <div class="dashboardRevenuRight">
                 <p class="dashboardRevenuP">Vente</p>
                 <h4 class="dashboardMonthPrice">{{ commandeMois|length }}</h4>
-                <p class="dashboardMonthPercent">+ 102%</p>
+                <p class="dashboardMonthPercent">+{{ (statVente)|number_format(0, '.', ',') }}%</p>
             </div>
         </div>
     </section>
