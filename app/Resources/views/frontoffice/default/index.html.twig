@@ -24,6 +24,15 @@
 					<div class="col-lg-4 col-md-4 col-sm-4">
 						<div class="showPlat">
 							<div class="showImgPlat">
+								<div class="pointLivraisonShow">
+									<img class="imgPictoPosition" src="{{ asset('img/picto_position.svg') }}">
+									<p>{% if produit.pointRelais.0.nom|length > 10 %}
+										  	{{ produit.pointRelais.0.nom|slice(0,10) }}...
+										{% else %}
+                                        	{{ produit.pointRelais.0.nom }}
+										{% endif %}
+									</p>
+								</div>
 								<img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
 							</div>
 							<div class="showDescPlat">
