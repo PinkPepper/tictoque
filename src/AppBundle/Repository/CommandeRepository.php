@@ -84,13 +84,29 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
         $date = new \DateTime('now');
         $year = $date->format('Y');
         $month = $date->format('m');
-        $day = $date->format('d');
+        $month1 = (int)$month+1;
+        if(sizeof($month1)<10){
+            $month1 = "0".$month1;
+        }
 
-        $date = $dateOne = $year."-".$month."-".$day." 00:00:00";
-        $date1 = $dateOne = $year."-".$month."-".$day." 23:59:59";
+        $month2 = $date->format('m');
+        $month12 = (int)$month2-1;
+        if(sizeof($month12)<10){
+            $month12 = "0".$month12;
+        }
 
-        $dateFrom = new \DateTime($date);
-        $dateTo =  new \DateTime($date1);
+        $dateOne = $year."-".$month1."-01 00:00:00"; //2017-08-01 00:00:00.000000
+        $dateTwo = $year."-".$month."-01 00:00:00"; // 2017-07-01 00:00:00.000000
+
+        $dateOne2 = $year."-".$month12."-01 00:00:00"; //2017-07-01 00:00:00.000000
+        $dateTwo2 = $year."-".$month2."-01 00:00:00"; // 2017-06-01 00:00:00.000000
+
+        $dateFrom  = new \DateTime($dateTwo);
+        $dateTo =  new \DateTime($dateOne);
+
+        $dateFrom2  = new \DateTime($dateTwo2);
+        $dateTo2 =  new \DateTime($dateOne2);
+
 
         $res = $this->createQueryBuilder('e')
             ->where('e.date >= :dateFrom')
@@ -99,7 +115,21 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter('dateTo',$dateTo)
             ->getQuery();
 
-        return $res->getResult();
+        $res1 = $this->createQueryBuilder('e')
+            ->where('e.date >= :dateFrom')
+            ->andWhere('e.date < :dateTo')
+            ->setParameter('dateFrom',$dateFrom2)
+            ->setParameter('dateTo',$dateTo2)
+            ->getQuery();
+
+        $res = $res->getResult();
+
+        dump($res);
+        dump($res1);
+        
+        $res1 = $res1->getResult();
+
+        return array($res,$res1);
     }
 
 }

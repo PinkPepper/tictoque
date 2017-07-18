@@ -27,6 +27,8 @@ class AdminController extends Controller
 
         $commandeMois = $em->getRepository('AppBundle:Commande')->findForMonth();
         $commandeJour = $em->getRepository('AppBundle:Commande')->findByDay();
+        $commandStat = $em->getRepository('AppBundle:Commande')->statsMonth();
+
 
         return $this->render('backoffice/admin/index.html.twig',array(
             'commandeMois' => $commandeMois,
