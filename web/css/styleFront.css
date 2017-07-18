@@ -1139,7 +1139,7 @@ body .Filtre ul form li:nth-child(3) a {
     font-size: 12px; }
 
   body .Filtre .filtre_menu form li:nth-child(5) {
-    padding: 10px 10px 0 0; }
+    padding: 5px 10px 0px 0px; }
 
   body .Filtre .filtre_menu form li:nth-child(5) input {
     border: none;
@@ -1147,10 +1147,11 @@ body .Filtre ul form li:nth-child(3) a {
     width: 270px; }
 
   body .Filtre .filtre_menu form li:last-child {
+    width: 710px;
     padding: 14px; }
 
   body .Filtre .filtre_menu form li:last-child div {
-    width: 250px; } }
+    padding: 15px; } }
 body .Filtre .filtre_menu li:first-child, body .Filtre .filtre_menu li:nth-child(2) {
   border-left: 1px solid #cacaca;
   display: flex; }
@@ -1177,7 +1178,7 @@ body .Filtre .filtre_menu li:first-child select .type_select, body .Filtre .filt
   padding: 15px; }
 
 body .Filtre .filtre_menu li:nth-child(3) {
-  width: 60%;
+  width: 35%;
   padding: 12px 0 0 20px;
   border-left: 1px solid #cacaca;
   line-height: 2;
