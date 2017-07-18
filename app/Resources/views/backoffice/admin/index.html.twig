@@ -7,8 +7,9 @@
         <div class="dashboardCommande">
             <h4 class="dashboardTitre">Commande du jour<span class="dashboardNbCommande">{{ commandeJour|length }}</span></h4>
             {% for cd in commandeJour %}
-                <p>{{ cd.user.nom }} {{ cd.user.prenom }}</p>
-                <p>{{ cd.user.nom }} {{ cd.user.prenom }}</p>
+                {% if lopp.index <4 %}
+                    <p>{{ cd.user.nom }} {{ cd.user.prenom }}</p>
+                {% endif %}
             {% endfor %}
         </div>
         <div class="dashboardRevenu">
