@@ -9,8 +9,10 @@
 
                     <div class="relais_infos">
                         <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
-                        <h4>{{ point.nom }}</h4>
-                        <p>{{ point.adresse }}</p>
+                        <div class="result_infos">
+                            <h4>{{ point.nom }}</h4>
+                            <p>{{ point.adresse }}</p>
+                        </div>
                     </div>
             </div>
         {% endfor %}
