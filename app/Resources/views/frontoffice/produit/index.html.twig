@@ -19,7 +19,8 @@
                     </li>
                     <li>
                         Point relais actif:  {{ pointRelais.nom }}
-                        <a href="{{ path("point_relais_set_index") }}">modifier</a>
+                        <a href="{{ path("point_relais_set_index") }}"
+                           onclick="return confirm('Cette action supprimera le contenu de votre panier. Continuer ?' )">modifier</a>
                     </li>
                     <li>
                         {{ form_widget(form.search, {attr: {class: "submitForm"}}) }}
@@ -218,7 +219,7 @@
 {% block javascripts %}
     {{ parent() }}
     <script type="application/javascript">
-        $(document).ready(function(){
+        $(document).ready(function() {
 
             $('.ajoutPanier').on('click', function (e) {
                 e.preventDefault();
@@ -230,13 +231,11 @@
                 $('#modal-body').load(url);
                 //$(this).load(url);
                 //$(this).prop('disabled', true);
-            }) ;
+            });
 
-            $(".submitForm").change(function(){
+            $(".submitForm").change(function () {
                 $('#formSearch').submit();
             });
         });
-
-
     </script>
 {% endblock %}
