@@ -10,4 +10,55 @@ namespace AppBundle\Repository;
  */
 class CommandeRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findForMonth(){
+        $date = new \DateTime('now');
+        $year = $date->format('Y');
+        $month = $date->format('m');
+        $month1 = (int)$month+1;
+        if(sizeof($month1)<10){
+            $month1 = "0".$month1;
+        }
+
+        $dateOne = $year."-".$month1."-01 00:00:00";
+        $dateTwo = $year."-".$month."-01 00:00:00";
+
+        $dateFrom  = new \DateTime($dateTwo);
+        $dateTo =  new \DateTime($dateOne);
+
+        //dump($dateFrom); // 2017-07-01 00:00:00.000000
+        //dump($dateTo); //2017-08-01 00:00:00.000000
+
+
+       $res = $this->createQueryBuilder('e')
+            ->where('e.date >= :dateFrom')
+            ->andWhere('e.date < :dateTo')
+            ->setParameter('dateFrom',$dateFrom)
+            ->setParameter('dateTo',$dateTo)
+            ->getQuery();
+
+        return $res->getResult();
+    }
+
+    public function findByDay(){
+        $date = new \DateTime('now');
+        $year = $date->format('Y');
+        $month = $date->format('m');
+        $day = $date->format('d');
+
+        $date = $dateOne = $year."-".$month."-".$day." 00:00:00";
+        $date1 = $dateOne = $year."-".$month."-".$day." 23:59:59";
+
+        $dateFrom = new \DateTime($date);
+        $dateTo =  new \DateTime($date1);
+
+        $res = $this->createQueryBuilder('e')
+            ->where('e.date >= :dateFrom')
+            ->andWhere('e.date < :dateTo')
+            ->setParameter('dateFrom',$dateFrom)
+            ->setParameter('dateTo',$dateTo)
+            ->getQuery();
+
+        return $res->getResult();
+    }
+
 }

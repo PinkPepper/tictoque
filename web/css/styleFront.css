@@ -2302,7 +2302,10 @@ body .container .recap-prix .livraison-total .prix-total {
   top: 190px;
   left: 30px;
   position: absolute;
-  color: white; }
+  color:white;
+  font-size:12px;
+  line-height:20px;
+}
 
 .imgPictoPosition {
   margin-left: 5px;
