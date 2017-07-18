@@ -2262,7 +2262,8 @@ body .container .recap-prix .livraison-total .prix-total {
   background-color: #f7f7f7;
   padding: 10px;
   border-radius: 5px;
-  width: 100%;
+  width: auto;
+  float: left;
   font-style: italic;
   font-size: 12px;
   box-shadow: 0px 1px 1px 0px; }
@@ -2326,6 +2327,15 @@ body .container .recap-prix .livraison-total .prix-total {
 .home_pop img {
   width: 100%;
   height: auto; }
+
+.bcr {
+  border: 2px solid #e52c65;
+  border-radius: 3px;
+  padding: 15px;
+  margin-bottom: 20px; }
+
+.home_pop p {
+  margin: 15px; }
 
 /*# sourceMappingURL=styleFront.css.map */
 
