@@ -1013,4 +1013,10 @@ section .cellule_60_cms .pagination_form li a:hover {
   float: left;
 }
 
+.dashboardRevenuP{
+  font-size:10px;
+  color:#909090;
+  margin: 0px;
+}
+
 /*# sourceMappingURL=style.css.map */
