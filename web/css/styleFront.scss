@@ -2094,7 +2094,7 @@ body .container .recap-prix .livraison-total .prix-total {
     padding: 15px 15px 0 0;
     border-bottom: 0; }
   .modal-content .modal-body {
-    padding: 30px 110px 30px 115px; }
+    padding: 0px 110px 30px 115px; }
     .modal-content .modal-body img {
       width: 100px;
       height: 70px;
@@ -2180,6 +2180,12 @@ body .container .recap-prix .livraison-total .prix-total {
     padding-left: 0%; } }
 .voir {
   cursor: pointer; }
+
+.home_pop img 
+{
+  width: 100%;
+  height: auto; 
+}
 
 
 
