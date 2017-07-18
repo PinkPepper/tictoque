@@ -38,9 +38,6 @@
         </div>
 
         <ul>
-            <li><a href="{{ path('blog_index') }}">Blog</a></li>
-            <li><img src="{{ asset('img/information-ico.svg') }}" type="svg"></li>
-            <li><img src="{{ asset('img/notification-ico.svg') }}" type="svg"></li>
             <li><a href="{{ path('fos_user_security_logout') }}"><img src="{{ asset('img/deconnexion-ico.svg') }}" type="svg"></a></li>
         </ul>
     {% endif %}
@@ -54,6 +51,12 @@
     {% endif %}
 
 </header>
+
+{% for flash_message in app.session.flashBag.get('notice') %}
+    <div class="flash-notice">
+        {{ flash_message }}
+    </div>
+{% endfor %}
 
 {% block menuAdmin %}{% endblock %}
 {% block body %}{% endblock %}

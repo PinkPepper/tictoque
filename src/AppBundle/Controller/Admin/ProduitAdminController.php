@@ -62,8 +62,6 @@ class ProduitAdminController extends Controller
 
         if ($form->isSubmitted() && $form->isValid())
         {
-           // $produit->setAllergenes(null);
-
             $tmp = $form["cat"]->getData();
             for ($i=0; $i< sizeof($tmp); $i++)
             {
@@ -92,7 +90,7 @@ class ProduitAdminController extends Controller
                 $this->getDoctrine()->getManager()->persist($tmp[$i]);
                 $this->getDoctrine()->getManager()->flush();
             }
-            //TODO probleme catégories
+
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($produit);
@@ -185,64 +183,58 @@ class ProduitAdminController extends Controller
      */
     public function editAction(Request $request, Produit $produit)
     {
+        $points_relais = $produit->getPointRelais();
+        $les_allergenes = $produit->getAllergenes();
+        $les_categories = $produit->getCategories();
+
+        $produit->setAll($les_allergenes);
+        $produit->setCat($les_categories);
+        $produit->setPr($points_relais);
+
         $deleteForm = $this->createDeleteForm($produit);
         $editForm = $this->createForm('AppBundle\Form\ProduitType', $produit);
+
         $editForm->handleRequest($request);
-
-        $points_relais = $produit->getPointRelais();
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+            $tmp = $editForm["cat"]->getData();
+            if($tmp != new ArrayCollection())
+            {
+                $produit->setCategories($produit->getCat());
+            }
+            else{
+                $produit->setCategories($les_categories);
+            }
+
+
+            $tmp = $editForm["all"]->getData();
+            if($tmp != new ArrayCollection())
+            {
+                $produit->setAllergenes($produit->getAll());
+            }
+            else{
+                $produit->setAllergenes($les_allergenes);
+            }
+
 
             $tmp = $editForm["pr"]->getData();
             if($tmp != new ArrayCollection())
             {
-                foreach ($produit->getPointRelais() as $pointRelais){
-                    $produit->removePointRelais($pointRelais);
-                }
-
-                for ($i=0; $i< sizeof($tmp); $i++)
-                {
-                    $produit->addPointRelais($tmp[$i]);
-                    $tmp[$i]->addProduit($produit);
-                    $this->getDoctrine()->getManager()->persist($tmp[$i]);
-                    $this->getDoctrine()->getManager()->flush();
-                }
-
+                $produit->setPointRelais($produit->getPr());
             }
             else{
                 $produit->setPointRelais($points_relais);
             }
 
+            $this->getDoctrine()->getManager()->persist($produit);
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
         }
 
-        $allergeneForm = $this->createForm('AppBundle\Form\AllergeneType');
-        $allergeneForm->handleRequest($request);
-
-        if ($allergeneForm->isSubmitted() && $allergeneForm->isValid()) {
-            if($produit->getAllergenes() === null )
-            {
-                $produit->setAllergenes(array());
-            }
-
-            $produit->setAllergenes(array_unique(array_merge(array($allergeneForm->getData()['nom']), $produit->getAllergenes())));
-
-            $this->getDoctrine()->getManager()->flush();
-
-            return $this->redirectToRoute('produit_edit', array('id' => $produit->getId()));
-        }
-
-        $em = $this->getDoctrine()->getEntityManager();
-        $categories = $em->getRepository('AppBundle\Entity\Categorie')->findAll();
-        $allergenes = $em->getRepository('AppBundle\Entity\Allergene')->findAll();
 
         return $this->render('backoffice/admin/produit/edit.html.twig', array(
-            'categories' => $categories,
-            'allergenes'=> $allergenes,
             'produit' => $produit,
-            'allergeneForm'=>$allergeneForm->createView(),
             'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
@@ -350,6 +342,11 @@ class ProduitAdminController extends Controller
      */
     public function deleteIndexAction(Request $request, Produit $produit)
     {
+        $is_on_homePage = $this->getDoctrine()->getRepository('AppBundle:ProduitHomePage')->find($produit->getId());
+        if($is_on_homePage != null){
+            $this->addFlash('notice', 'Ce produit ne peut pas être supprimé car il apparait sur la homepage');
+            return $this->redirectToRoute('produit_index_admin');
+        }
         $categories = $produit->getCategories();
         foreach($categories as $cat)
         {

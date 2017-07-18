@@ -1139,7 +1139,11 @@ body .Filtre ul form li:nth-child(3) a {
     font-size: 12px; }
 
   body .Filtre .filtre_menu form li:nth-child(5) {
+<<<<<<< HEAD
     padding: 5px 10px 0px 0px; }
+=======
+    padding: 10px 10px 0 0; }
+>>>>>>> 09c4f3f7d7593557685c9e91f59940d98b34a2c1
 
   body .Filtre .filtre_menu form li:nth-child(5) input {
     border: none;
@@ -1147,11 +1151,18 @@ body .Filtre ul form li:nth-child(3) a {
     width: 270px; }
 
   body .Filtre .filtre_menu form li:last-child {
+<<<<<<< HEAD
     width: 710px;
     padding: 14px; }
 
   body .Filtre .filtre_menu form li:last-child div {
     padding: 15px; } }
+=======
+    padding: 14px; }
+
+  body .Filtre .filtre_menu form li:last-child div {
+    width: 250px; } }
+>>>>>>> 09c4f3f7d7593557685c9e91f59940d98b34a2c1
 body .Filtre .filtre_menu li:first-child, body .Filtre .filtre_menu li:nth-child(2) {
   border-left: 1px solid #cacaca;
   display: flex; }
@@ -2303,7 +2314,10 @@ body .container .recap-prix .livraison-total .prix-total {
   top: 190px;
   left: 30px;
   position: absolute;
-  color: white; }
+  color:white;
+  font-size:12px;
+  line-height:20px;
+}
 
 .imgPictoPosition {
   margin-left: 5px;

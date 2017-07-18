@@ -23,7 +23,15 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('backoffice/admin/index.html.twig');
+        $em = $this->getDoctrine();
+
+        $commandeMois = $em->getRepository('AppBundle:Commande')->findForMonth();
+        $commandeJour = $em->getRepository('AppBundle:Commande')->findByDay();
+
+        return $this->render('backoffice/admin/index.html.twig',array(
+            'commandeMois' => $commandeMois,
+            'commandeJour' => $commandeJour
+        ));
     }
 
     /**

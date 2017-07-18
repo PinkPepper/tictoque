@@ -19,7 +19,8 @@ class DateType extends AbstractType
                     'widget' => 'single_text',
                     'html5' => false,
                     // add a class that can be selected in JavaScript
-                    'attr' => ['class' => 'js-datepicker']
+                    'attr' => ['class' => 'js-datepicker'],
+                    'format' => 'dd/M/yyyy',
                 )
             )
         ;

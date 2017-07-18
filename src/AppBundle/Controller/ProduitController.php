@@ -42,7 +42,7 @@ class ProduitController extends Controller
 
         $paginator  = $this->get('knp_paginator');
         $query = $em->getRepository('AppBundle:Produit')->findAll();
-        $maxPerPage = 8;
+        $maxPerPage = 20;
         $produits = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1)/*page number*/,
