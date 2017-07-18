@@ -35,54 +35,21 @@
                 <label>Image</label>
                 {{ form_widget(form.file) }}
                 {{  form_errors(form.file) }}
-{#
-                 <h2>Les allergènes</h2>
 
-                {% for all in produit.allergenes %}
-                    <ul>
-                        <li>
-                            {{ all }} <a href="{{ path('produit_delete_allergene', { 'id': produit.id, 'allergene': all }) }}">Supprimer</a>
-                        </li>
-                    </ul>
-                {% endfor %}
-                <br>
-                {{ form_start(allergeneForm) }}
-                    {{ form_widget(allergeneForm) }}
-                    <button class="button_p" type="submit">Ajout d'un allergene</button>
-                {{ form_end(allergeneForm) }}
-#}
-                <h2>Les catégories</h2>
+                <label>Allergènes</label>
+                {{ form_widget(form.all) }}
+                {{  form_errors(form.all) }}
 
-                <h3>Ajouter une catégorie</h3>
-                {% for all in categories %}
-                    {% if all not in produit.categories %}
-                        <p>{{ all.nom }}<a href="{{ path('ajout_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">ajouter</a></p>
-                    {% endif %}
-                {% endfor %}
+                <label>Catégories</label>
+                {{ form_widget(form.cat) }}
+                {{  form_errors(form.cat) }}
 
-                <h3>Supprimer une catégorie</h3>
-                {% for all in produit.categories %}
-                    <p>{{ all.nom }} <a href="{{ path('supprimer_categorie_produit', {'produit': produit.id, 'categorie': all.id }) }}">enlever</a></p>
-                {% endfor %}
-
-            <h2>Les allergènes</h2>
-
-            <h3>Ajouter un allergène</h3>
-            {% for all in allergenes %}
-                {% if all not in produit.allergenes %}
-                    <p>{{ all.nom }}<a href="{{ path('ajout_allergene_produit', {'produit': produit.id, 'allergene': all.id }) }}">ajouter</a></p>
-                {% endif %}
-            {% endfor %}
-
-            <h3>Supprimer un allergène</h3>
-            {% for all in produit.allergenes %}
-                <p>{{ all.nom }} <a href="{{ path('supprimer_allergene_produit', {'produit': produit.id, 'allergene': all.id }) }}">enlever</a></p>
-            {% endfor %}
+                <label>Points Relais</label>
+                {{ form_widget(form.pr) }}
+                {{ form_errors(form.pr) }}
 
                 <button class="button_p" type="submit">Modifier le produit</button>
-
             {{ form_end(form) }}
-
         </div>
     </section>
 {% endblock %}

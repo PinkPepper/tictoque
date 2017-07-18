@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -32,6 +33,18 @@ class ProduitType extends AbstractType
                         )
                     )
                 )
+            ->add('cat', EntityType::class, array(
+                // query choices from this entity
+                'class' => 'AppBundle:Categorie',
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'expanded' => true))
+            ->add('all', EntityType::class, array(
+                // query choices from this entity
+                'class' => 'AppBundle:Allergene',
+                'choice_label' => 'nom',
+                'multiple' => true,
+                'expanded' => true))
             ->add('pr', EntityType::class, array(
                 'class' => 'AppBundle\Entity\PointRelais',
                 'choice_label' => 'nom',
