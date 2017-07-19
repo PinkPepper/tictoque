@@ -2341,6 +2341,9 @@ body .container .recap-prix .livraison-total .prix-total {
   .fleche_haut
   {
     cursor: pointer;
+    position: fixed;
+    right: 48px;
+    top: 270px;
   }
 }
 

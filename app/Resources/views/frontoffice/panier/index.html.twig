@@ -12,21 +12,22 @@
 <div class="panier">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
                 <h1>Votre panier</h1>
-                <div class="col-lg-offset-4" style="margin-top: 20px">
-                <a class="btn" style="  color: white;
-                                        display: inline;
-                                        background-color: #CF2861;
-                                        text-align: center;
-                                        padding: 10px;
-                                        width: 100%;
-                                        height: 40px;
-                                        margin-top: 30px;
-                                        margin-bottom: 10px;
-                                        border-radius: 0px;"
-                   href="{{ path('do_menus') }}">
-                    Transformer mes produits en menus</a>
+                <div class="produit">
+                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                        <img class="pictoGift" src="{{ asset('img/gift.svg') }}">
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <p class="phraseToMenu"><strong>Passez vos produits en menu et faites des économies sur votre commande</strong></p>
+                    </div>
+                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <a class="passToMenuButton" href="{{ path('do_menus') }}">
+                            <div>
+                                Passer en menu
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
