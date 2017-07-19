@@ -1393,13 +1393,13 @@ body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle .detai
   width: 185px;
   overflow: hidden;
   height: 15vh;
-  white-space: pre-wrap;
   margin-bottom: 8vh;
-  margin-top: 3vh;
+  margin-top: 6vh;
+  margin-right: 15px;
   text-align: center; }
 
 body .blogContent .blogArticle .blocArticle .showArticle .showDescArticle .detailArticle .openArticle {
-  margin-top: 10vh;
+  margin-top: 9vh;
   height: 30px;
   width: 150px;
   float: none;
