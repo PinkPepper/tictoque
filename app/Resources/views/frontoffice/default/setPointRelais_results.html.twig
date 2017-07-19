@@ -5,7 +5,7 @@
 
         {% for point in pointsRelais %}
             {% if loop.index == 1 %}<script>const id = {{ point.id }};</script>{% endif %}
-            <label class="result_border" onClick="borderR()">
+            <label class="result_border" onClick="borderR(this)">
             <div class="bcr">
 
                     <div class="relais_infos">

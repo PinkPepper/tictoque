@@ -2334,7 +2334,7 @@ body .container .recap-prix .livraison-total .prix-total {
   margin-bottom: 20px; }
 
 .home_pop p {
-  margin: 15px; }
+  margin: 15px !important; }
 
 .relais_check {
   float: left;
