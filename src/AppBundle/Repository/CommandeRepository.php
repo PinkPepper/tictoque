@@ -69,7 +69,7 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
         $tabResult = [];
 
 
-        for($i=0;$i<12;$i++){
+        for($i=1;$i<13;$i++){
             if($i>9){
                 $date = $year."-".$i."-01 00:00:00";
                 $date1 = $year."-".$i."-30 23:59:59";
