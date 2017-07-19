@@ -162,18 +162,24 @@
               return false;
             });
 
+            $('.fleche_haut').style.display = "none";
+
             $(window).scroll( function(){
                
-                if ($(document).scrollTop() > 300) {
-                    $('.fleche_haut').fadeIn("slow");
-                };
-                if ($(document).scrollTop() < 300) {
-                    $('.fleche_haut').fadeOut("slow");
-                };
+                
+                if( $('.fleche_haut').offset().top < 300){
 
-            }
+                    $('.fleche_haut').style.display = "initial";
+                    $('.fleche_haut').animate({'opacity':'1'},500);
+                        
+                }
+                else if ($('.fleche_haut').offset().top > 200)
+                {
+                    $('.fleche_haut').animate({'opacity':'0'},500);
+                }
 
 
+            });
 
             $('.ajoutPanier').on('click', function (e) {
                 e.preventDefault();
