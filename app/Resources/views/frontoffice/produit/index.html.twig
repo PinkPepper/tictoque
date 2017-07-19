@@ -163,17 +163,18 @@
             });
 
             $(window).scroll( function(){
-                if($(window).scrollTop() < 300)
-                {
-                    $('.fleche_haut').fadeIn( "slow", function() {
-                    });
+               
+
+                var bottom_of_object = $('.fleche_haut').offset().top + $('.fleche_haut').outerHeight();
+                var bottom_of_window = $(window).scrollTop() + $(window).height();
+                
+                /* If the object is completely visible in the window, fade it it */
+                if( bottom_of_window > bottom_of_object ){
+                    
+                    $('.fleche_haut').animate({'opacity':'1'},500);
+                        
                 }
 
-                if($(window).scrollTop() > 500)
-                {
-                    $('.fleche_haut').fadeOut( "slow", function() {
-                    });
-                }
             }
 
             $('.ajoutPanier').on('click', function (e) {
