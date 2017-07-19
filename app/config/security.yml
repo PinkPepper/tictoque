@@ -32,7 +32,7 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/menu, role: ROLE_USER }
         - { path: ^/panier, role: ROLE_USER }
-        - { path: ^/admin/, role: ROLE_ADMIN }
+        - { path: ^/admin/, role: ROLE_LIVREUR }
         - { path: ^/blog/new, role: ROLE_ADMIN }
         - { path: ^/blog/edit, role: ROLE_ADMIN }
 

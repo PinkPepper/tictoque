@@ -44,6 +44,13 @@ class Livraison
     private $quantite;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="statut", type="string")
+     */
+    private $statut;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
@@ -139,6 +146,22 @@ class Livraison
     public function setProduit($produit)
     {
         $this->produit = $produit;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatut()
+    {
+        return $this->statut;
+    }
+
+    /**
+     * @param string $statut
+     */
+    public function setStatut($statut)
+    {
+        $this->statut = $statut;
     }
 }
 

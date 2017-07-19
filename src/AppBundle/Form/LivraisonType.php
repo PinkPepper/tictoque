@@ -19,7 +19,8 @@ class LivraisonType extends AbstractType
                 ->add('date',DateType::class,array(
                     'widget' => 'single_text',
                     'html5' => false,
-                    'attr' => ['class' => 'js-datepicker']
+                    'attr' => ['class' => 'js-datepicker'],
+                    'format' => 'dd/M/yyyy',
                 ))
                 ->add('pointRelais',EntityType::class,array(
                     'class' => 'AppBundle:PointRelais',

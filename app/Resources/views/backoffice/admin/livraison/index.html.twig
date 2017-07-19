@@ -7,46 +7,25 @@
             <a class="btn_01" href="{{ path('livraison_new') }}">Ajouter une livraison</a>
         </div>
 
-        <div class="cellule_40_cms">
-            <table>
-                <tr>
-                    <td><strong>Livreur</strong></td>
-                    <td><strong>Point de livraison</strong></td>
-                    <td><strong>Actions</strong></td>
-                </tr>
-                {% for point in pointRelais %}
-                    <tr>
-                        <td>{{ point.user.nom }}</td>
-                        <td>{{ point.nom }}</td>
-                        <td>
-                            <ul>
-                                <li>
-                                    <a href="{{ path('relais_edit', { 'id': point.id }) }}"><img class="sizePicto" src="{{ asset('img/edit.svg') }}"></a>
-                                </li>
-                                <li>
-                                    <a href="{{ path('relais_delete', { 'id': point.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')"><img class="sizePicto" src="{{ asset('img/delete.svg') }}"></a>
-                                </li>
-                            </ul>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        </div>
-
-    <div class="cellule_60_cms">
+    <div class="cellule_background_cms">
         <table>
             <tr>
-                <td><strong>nom produit</strong></td>
-                <td><strong>date livraison</strong></td>
-                <td><strong>nom point relais</strong></td>
+                <td><strong>Produit</strong></td>
+                <td><strong>Point Relais</strong></td>
+                <td><strong>Statut</strong></td>
+                <td><strong>Date de livraison</strong></td>
                 <td><strong>Actions</strong></td>
             </tr>
-            {% for livraison in livraisons %}
+            {% for livraison in livraisons|sort|reverse %}
                 <tr>
                     <td>{{ livraison.produit.nom }}</td>
-                    <td>{{ livraison.date|date('d-m-Y') }}</td>
                     <td>{{ livraison.pointRelais.nom }}</td>
-
+                    {% if livraison.statut == "livré" %}
+                        <td style="color:green"><strong>{{ livraison.statut }}</strong></td>
+                    {% else %}
+                        <td style="color:red"><strong>{{ livraison.statut }}</strong></td>
+                    {% endif %}
+                    <td>{{ livraison.date|date('d/m/Y') }}</td>
                     <td>
                         <ul>
                             <li>

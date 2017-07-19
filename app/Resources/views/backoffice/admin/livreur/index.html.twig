@@ -22,18 +22,35 @@
     </head>
 
     <body class="livraison">
+        <script>
+                function sendRequest(id){
+                    console.log(id);
+                    $.ajax({
+                        url : '{{ path('admin_livreur_validation') }}',
+                        type : 'POST',
+                        data : 'id='+id,
+                        dataType : 'html',
+                        success : function(code_html, statut){ // success est toujours en place, bien sûr !
+                            console.log("ok")//mettre le tick a la place du ok
+                        },
+                        error : function(resultat, statut, erreur){
+                            console.log("Erreur ajax");
+                        }
+                    });
+                }
+        </script>
         <div class="container-fluid">
             <div class="blockLivraison center-block">
                 <img class="logo center-block" src="{{ asset('img/logo.svg') }}" alt="logo">
                 {% for pointRelais in relais %}
                     {% set ite = loop.index %}
-                <ul>
+                <ul style="clear: both;">
                     <li><h3><b>{{ pointRelais.nom }}</b></h3></li>
                         {% for produit in produits %}
                             {% if loop.index == ite %}
                                 {% for p in produit %}
                                     {% if p.date|date('m/d/Y') == dateNow|date('m/d/Y') %}
-                                        <li>{{ p.produit.nom }} : {{ p.quantite }}</li>
+                                        <li><p class="titleLivreurProduit">{{ p.produit.nom }} : {{ p.quantite }}</p><span onclick="sendRequest({{ p.id }})" class="okButton">OK</span></li>
                                     {% endif %}
                                 {% endfor %}
                             {% endif %}
