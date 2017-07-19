@@ -2262,8 +2262,7 @@ body .container .recap-prix .livraison-total .prix-total {
   background-color: #f7f7f7;
   padding: 10px;
   border-radius: 5px;
-  width: auto;
-  float: left;
+  width: 100%;
   font-style: italic;
   font-size: 12px;
   box-shadow: 0px 1px 1px 0px; }
