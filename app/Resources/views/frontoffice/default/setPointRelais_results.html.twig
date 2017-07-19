@@ -5,11 +5,11 @@
 
         {% for point in pointsRelais %}
             {% if loop.index == 1 %}<script>const id = {{ point.id }};</script>{% endif %}
-            <label class="result_border">
+            <label class="result_border" onClick="borderR()">
             <div class="bcr">
 
                     <div class="relais_infos">
-                        <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}checked{% endif %}>
+                        <input type="radio" class="relais_check" name="pointRelais" value="{{ point.id }}" {% if loop.index == 1 %}{% endif %}>
                         <div class="result_infos">
                             <h4>{{ point.nom }}</h4>
                             <p>{{ point.adresse }}</p>
@@ -43,8 +43,11 @@
 
 <script>
 
-    document.querySelector('.result_border').onclick = function(){
-        document.querySelector('.result_border').children.style.border = "2px solid #e52c65";
+    function borderR(){
+        if(document.queyrSelector(".relais_check").checked == true)
+        {
+            this.parentNodes.style.border = "2px solid #e52c65";
+        }
     }
 
     $( ".choisir" ).on( "click", function() {
