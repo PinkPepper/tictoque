@@ -2427,6 +2427,22 @@ body .container .recap-prix .livraison-total .prix-total {
     background-color:#EFF0F4;
   }
 
+  .popUpError{
+    display: none;
+    margin-top: 20px;
+    height: 50px;
+    width: 20%;
+    background-color: #e52c65;
+    opacity: 0.9;
+    position: fixed;
+    z-index: 999999;
+    right:20px;
+    border-radius: 5px;
+    text-align: center;
+    padding-top: 15px;
+    color:white;
+  }
+
 /*# sourceMappingURL=styleFront.css.map */
 
 /*# sourceMappingURL=styleFront.css.map */

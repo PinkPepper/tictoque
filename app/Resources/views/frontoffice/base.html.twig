@@ -42,11 +42,7 @@
 
     <body>
 
-    {% for flash_message in app.session.flashBag.get('notice') %}
-        <div class="flash-notice">
-            {{ flash_message }}
-        </div>
-    {% endfor %}
+
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -99,8 +95,19 @@
             </div><!-- /.container-fluid -->
         </nav>
 
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="popUpError">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+
         {% block body %}{% endblock %}
         {% block fos_user_content %}{% endblock %}
+        <script>
+            $(document).ready(function(){
+                $('.popUpError').fadeIn();
+            })
+        </script>
         {% block footer %}{% endblock %}
     </body>
 </html>
