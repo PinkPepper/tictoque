@@ -2325,8 +2325,8 @@ body .container .recap-prix .livraison-total .prix-total {
   cursor: pointer; }
 
 .home_pop img {
-  width: 100%;
-  height: auto; }
+  width: 100% !important;
+  height: auto !important; }
 
 .bcr {
   border: 2px solid #e52c65;
