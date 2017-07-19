@@ -2407,7 +2407,7 @@ body .container .recap-prix .livraison-total .prix-total {
 
 .plat_list {
   text-align: center; }
-  .plat_list .retour_haut {
+  .plat_list .fleche_haut {
     cursor: pointer; }
 
   .passToMenuButton{
