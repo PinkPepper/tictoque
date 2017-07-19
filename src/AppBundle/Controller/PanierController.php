@@ -71,7 +71,8 @@ class PanierController extends Controller
                 else{
                     $boisson = null;
                 }
-                    array_push($menus, array('id'=>$id, 'entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>$value['quantite'], 'prix'=>$value['prix'], 'type'=>$value['type']));
+
+                array_push($menus, array('id'=>$id, 'entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>$value['quantite'], 'prix'=>$value['prix'], 'type'=>$value['type']));
 
             }
         }
@@ -286,4 +287,146 @@ class PanierController extends Controller
 
         return $this->render('frontoffice/panier/nombre.html.twig', array('nombre'=>$nombre));
     }
+
+    /**
+     * @Route("/doMenus", name="do_menus")
+     */
+    public function doMenusAction(Request $request)
+    {
+        $session = $request->getSession();
+        $menus = $this->getMenus($request);
+
+        for ($i = 0 ; $i < sizeof($menus) ; $i++)
+        {
+            $number = $i;
+            while($session->get('menu_'.$number) !== null){
+                $number++;
+            }
+
+            $session->set('menu_'.$number, $menus[$i]);
+
+        }
+
+        dump($session->all());
+
+        return $this->redirectToRoute("index_panier");
+    }
+
+    public function getMenus(Request $request)
+    {
+        $session = $request->getSession();
+        $obj = $session->all();
+
+        $menus = [];
+
+        $entrees = $this->getDoctrine()->getRepository('AppBundle:Produit')->findBy(array('type'=>'entree'));
+        $plats = $this->getDoctrine()->getRepository('AppBundle:Produit')->findBy(array('type'=>'plat'));
+        $boissons = $this->getDoctrine()->getRepository('AppBundle:Produit')->findBy(array('type'=>'boisson'));
+        $desserts = $this->getDoctrine()->getRepository('AppBundle:Produit')->findBy(array('type'=>'dessert'));
+        $produits = [];
+
+        foreach ($obj as $name=>$o) {
+            preg_match('/^produit_/', $name, $matches);
+            if($matches != null)
+            {
+                $produits[$name] = $o;
+            }
+        }
+
+        while($this->verifyData($produits))
+        {
+            $entree = null; $plat = null; $dessert = null; $boisson = null;
+            $prix = 0;
+            $produits_copy = $produits;
+
+            foreach ($produits_copy as $i => $produit)
+            {
+                $id = explode("_", $i);
+                $id = $id[1];
+
+                if($entree == null && (in_array($id, $entrees)))
+                {
+                    $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
+                    $session->set($i, $produits[$i]);
+                    $prix = $prix + $produits[$i]['prix'];
+                    if($produits[$i]['quantite'] == 0){
+                        unset($produits[$i]);
+                        $session->remove($i);
+                    }
+                    $entree = $id;
+                }
+                else if($plat == null && (in_array($id, $plats)))
+                {
+                    $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
+                    $session->set($i, $produits[$i]);
+                    $prix = $prix + $produits[$i]['prix'];
+                    if($produits[$i]['quantite'] == 0){
+                        unset($produits[$i]);
+                        $session->remove($i);
+                    }
+                    $plat = $id;
+                }
+                else if($dessert == null && (in_array($id, $desserts)))
+                {
+                    $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
+                    $session->set($i, $produits[$i]);
+                    $prix = $prix + $produits[$i]['prix'];
+                    if($produits[$i]['quantite'] == 0){
+                        unset($produits[$i]);
+                        $session->remove($i);
+                    }
+                    $dessert = $id;
+                }
+                else if($boisson == null && (in_array($id, $boissons))){
+                    $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
+                    $session->set($i, $produits[$i]);
+                    $prix = $prix + $produits[$i]['prix'];
+                    if($produits[$i]['quantite'] == 0){
+                        unset($produits[$i]);
+                        $session->remove($i);
+                    }
+                    $boisson = $id;
+                }
+            }
+
+            $prix = $prix - (0.2*$prix);
+            array_push($menus, ['entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>1, 'type'=>1, 'prix' => $prix]);
+        }
+
+        $session->save();
+        return $menus;
+    }
+
+    public function verifyData($produits)
+    {
+        $entree = false; $plat = false; $dessert = false; $boisson = false;
+        foreach ($produits as $name=>$value)
+        {
+            $id = explode("_", $name);
+            $id = $id[1];
+
+            $pr = $this->getDoctrine()->getRepository('AppBundle:Produit')->find($id);
+
+            if($pr->getType() == 'entree')
+            {
+              $entree = true;
+            }
+            else if($pr->getType() == 'plat')
+            {
+                $plat = true;
+            }
+            else if($pr->getType() == 'dessert')
+            {
+                $dessert = true;
+            }
+            else if($pr->getType() == 'boisson')
+            {
+                $boisson = true;
+            }
+        }
+
+      return ($entree && $plat && $dessert && $boisson);
+    }
+
+
 }
