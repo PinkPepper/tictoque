@@ -157,26 +157,23 @@
     <script type="application/javascript">
         $(document).ready(function() {
 
-            
+            $(".fleche_haut").click(function() {
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+              return false;
+            });
+
             $(window).scroll( function(){
                
-                $(".fleche_haut").click(function() {
-                  $("html, body").animate({ scrollTop: 0 }, "slow");
-                  return false;
-                });
-
-                if( $('.fleche_haut').offset().top < 300){
-                    
-                    $('.fleche_haut').animate({'opacity':'1'},500);
-                        
-                }
-                else
-                {
-                    $('.fleche_haut').animate({'opacity':'0'},500);
-                }
-
+                if ($(document).scrollTop() > 300) {
+                    $('.fleche_haut').fadeIn("slow");
+                };
+                if ($(document).scrollTop() < 300) {
+                    $('.fleche_haut').fadeOut("slow");
+                };
 
             }
+
+
 
             $('.ajoutPanier').on('click', function (e) {
                 e.preventDefault();
