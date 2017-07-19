@@ -2336,6 +2336,10 @@ body .container .recap-prix .livraison-total .prix-total {
 .home_pop p {
   margin: 15px; }
 
+.relais_check {
+  float: left;
+  width: auto; }
+
 /*# sourceMappingURL=styleFront.css.map */
 
 /*# sourceMappingURL=styleFront.css.map */
