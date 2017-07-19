@@ -13,6 +13,11 @@
 
 </div>
 <script>
+    if(document.querySelector('.relais_check'))
+    {
+        document.querySelector('.bcr').style.border = "1px solid black";
+    }
+
     $('#button').on('click', function(){
         const url = $(".results").data('url');
         var adresse = $('#input').val();
