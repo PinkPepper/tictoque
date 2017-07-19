@@ -306,9 +306,6 @@ class PanierController extends Controller
             $session->set('menu_'.$number, $menus[$i]);
 
         }
-
-        dump($session->all());
-
         return $this->redirectToRoute("index_panier");
     }
 
