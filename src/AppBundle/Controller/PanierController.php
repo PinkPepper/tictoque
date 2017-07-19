@@ -336,6 +336,7 @@ class PanierController extends Controller
         while($this->verifyData($produits))
         {
             $entree = null; $plat = null; $dessert = null; $boisson = null;
+            $prix = 0;
             $produits_copy = $produits;
 
             foreach ($produits_copy as $i => $produit)
@@ -347,6 +348,7 @@ class PanierController extends Controller
                 {
                     $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
                     $session->set($i, $produits[$i]);
+                    $prix = $prix + $produits[$i]['prix'];
                     if($produits[$i]['quantite'] == 0){
                         unset($produits[$i]);
                         $session->remove($i);
@@ -357,6 +359,7 @@ class PanierController extends Controller
                 {
                     $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
                     $session->set($i, $produits[$i]);
+                    $prix = $prix + $produits[$i]['prix'];
                     if($produits[$i]['quantite'] == 0){
                         unset($produits[$i]);
                         $session->remove($i);
@@ -367,6 +370,7 @@ class PanierController extends Controller
                 {
                     $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
                     $session->set($i, $produits[$i]);
+                    $prix = $prix + $produits[$i]['prix'];
                     if($produits[$i]['quantite'] == 0){
                         unset($produits[$i]);
                         $session->remove($i);
@@ -376,6 +380,7 @@ class PanierController extends Controller
                 else if($boisson == null && (in_array($id, $boissons))){
                     $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
                     $session->set($i, $produits[$i]);
+                    $prix = $prix + $produits[$i]['prix'];
                     if($produits[$i]['quantite'] == 0){
                         unset($produits[$i]);
                         $session->remove($i);
@@ -384,7 +389,8 @@ class PanierController extends Controller
                 }
             }
 
-            array_push($menus, ['entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>1, 'type'=>1, 'prix' => 2]);
+            $prix = $prix - (0.2*$prix);
+            array_push($menus, ['entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>1, 'type'=>1, 'prix' => $prix]);
         }
 
         $session->save();
