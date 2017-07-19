@@ -2408,7 +2408,10 @@ body .container .recap-prix .livraison-total .prix-total {
 .plat_list {
   text-align: center; }
   .plat_list .fleche_haut {
-    cursor: pointer; }
+    cursor: pointer;
+    position: fixed;
+    right: 48px;
+    top: 270px; }
 
   .passToMenuButton div{
     margin-top: 25px;
