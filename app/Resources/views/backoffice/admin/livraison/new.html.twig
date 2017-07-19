@@ -38,11 +38,15 @@
     </section>
     <script>
         $(document).ready(function() {
+            var dateToday = new Date();
             $('.js-datepicker').datepicker({
                 dateFormat: "dd/mm/yy",
                 monthNames: [ "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre" ],
                 dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
                 dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+                numberOfMonths: 1,
+                showButtonPanel: true,
+                minDate: dateToday
             });
         });
     </script>
