@@ -5,7 +5,7 @@
 
         {% for point in pointsRelais %}
             {% if loop.index == 1 %}<script>const id = {{ point.id }};</script>{% endif %}
-            <label class="result_border" onClick="borderR(this)">
+            <label class="result_border">
             <div class="bcr">
 
                     <div class="relais_infos">
@@ -43,12 +43,12 @@
 
 <script>
 
-    function borderR(){
+    /*function borderR(){
         if(document.querySelector(".relais_check").checked == true)
         {
             this.parentNode.style.border = "2px solid #e52c65";
         }
-    }
+    }*/
 
     $( ".choisir" ).on( "click", function() {
         const id = $( "input:checked" ).val();
