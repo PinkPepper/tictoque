@@ -2411,7 +2411,9 @@ body .container .recap-prix .livraison-total .prix-total {
     cursor: pointer;
     position: fixed;
     right: 48px;
-    top: 270px; }
+    top: 270px;
+    width: 30px;
+    height: 34px; }
 
   .passToMenuButton div{
     margin-top: 25px;

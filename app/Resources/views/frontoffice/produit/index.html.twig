@@ -162,6 +162,21 @@
               return false;
             });
 
+            $(window).scroll( function(){
+               
+
+                var bottom_of_object = $('.fleche_haut').offset().top + $('.fleche_haut').outerHeight();
+                var bottom_of_window = $(window).scrollTop() + $(window).height();
+                
+                /* If the object is completely visible in the window, fade it it */
+                if( bottom_of_window > bottom_of_object ){
+                    
+                    $('.fleche_haut').animate({'opacity':'1'},500);
+                        
+                }
+
+            }
+
             $('.ajoutPanier').on('click', function (e) {
                 e.preventDefault();
                 var url = $(this).data('url');
