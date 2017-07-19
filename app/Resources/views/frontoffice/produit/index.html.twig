@@ -162,6 +162,20 @@
               return false;
             });
 
+            $(window).scroll( function(){
+                if($(window).scrollTop() < 300)
+                {
+                    $('.fleche_haut').fadeIn( "slow", function() {
+                    });
+                }
+
+                if($(window).scrollTop() > 500)
+                {
+                    $('.fleche_haut').fadeOut( "slow", function() {
+                    });
+                }
+            }
+
             $('.ajoutPanier').on('click', function (e) {
                 e.preventDefault();
                 var url = $(this).data('url');
