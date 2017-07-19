@@ -23,6 +23,10 @@ class AdminController extends Controller
      */
     public function indexAction()
     {
+        if($this->getUser()->getRoles()[0] == "ROLE_LIVREUR"){
+            return $this->redirectToRoute('admin_livreur_index');
+        }
+
         $em = $this->getDoctrine();
 
         $commandeMois = $em->getRepository('AppBundle:Commande')->findForMonth();
