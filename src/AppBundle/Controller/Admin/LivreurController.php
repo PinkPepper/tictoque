@@ -59,11 +59,13 @@ class LivreurController extends Controller
     {
         $id = $request->get('id');
 
-        $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine();
 
         $livraison = $em->getRepository('AppBundle:Livraison')->find($id);
 
-        $livraison
+        $livraison->setStatut("livré");
+        $em->getManager()->persist($livraison);
+        $em->getManager()->flush();
 
         $response = new Response();
         $response->setStatusCode(200);

@@ -31,7 +31,8 @@
                         data : 'id='+id,
                         dataType : 'html',
                         success : function(code_html, statut){ // success est toujours en place, bien sûr !
-                            console.log("ok")//mettre le tick a la place du ok
+                            $('#livraison-'+id).empty()
+                            $('#livraison-'+id).html('<img class="tickValidation" src="{{ asset('img/tick_livraison.svg') }}">')//mettre le tick a la place du ok
                         },
                         error : function(resultat, statut, erreur){
                             console.log("Erreur ajax");
@@ -44,18 +45,18 @@
                 <img class="logo center-block" src="{{ asset('img/logo.svg') }}" alt="logo">
                 {% for pointRelais in relais %}
                     {% set ite = loop.index %}
-                <ul style="clear: both;">
-                    <li><h3><b>{{ pointRelais.nom }}</b></h3></li>
-                        {% for produit in produits %}
-                            {% if loop.index == ite %}
-                                {% for p in produit %}
-                                    {% if p.date|date('m/d/Y') == dateNow|date('m/d/Y') %}
-                                        <li><p class="titleLivreurProduit">{{ p.produit.nom }} : {{ p.quantite }}</p><span onclick="sendRequest({{ p.id }})" class="okButton">OK</span></li>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endif %}
-                        {% endfor %}
-                </ul><br>
+                    <ul style="clear: both;">
+                        <li style="margin-top: 50px;"><h3><b>{{ pointRelais.nom }}</b></h3></li>
+                            {% for produit in produits %}
+                                {% if loop.index == ite %}
+                                    {% for p in produit %}
+                                        {% if p.date|date('m/d/Y') == dateNow|date('m/d/Y') %}
+                                            <li style="clear: both;"><p class="titleLivreurProduit">{{ p.produit.nom }} : {{ p.quantite }}</p>{% if p.statut =="non livré" %}<span id="livraison-{{ p.id }}" onclick="sendRequest({{ p.id }})" class="okButton">OK</span>{% else %}<span class="okButton"><img class="tickValidation" src="{{ asset('img/tick_livraison.svg') }}"></span>{% endif %}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                    </ul><br>
                 {% endfor %}
             </div>
         </div>

@@ -44,6 +44,7 @@ class LivraisonController extends Controller
     {
         $livraison = new Livraison();
         $form = $this->createForm('AppBundle\Form\LivraisonType', $livraison);
+        $livraison->setStatut("non livré");
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
