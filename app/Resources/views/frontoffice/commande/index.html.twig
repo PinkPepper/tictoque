@@ -72,6 +72,10 @@
                 showButtonPanel: true,
                 minDate: dateToday
             });
+
+            $('.carte_header').click(function(){
+                $('.carte_details').slideToggle(400);
+            })
         });
     </script>
 {% endblock %}

@@ -2153,6 +2153,7 @@ body .container .recap-prix .livraison-total .prix-total {
   height: 30px; }
 
 .paiement_carte .carte_details {
+  display: none;
   border: 2px solid #e52c65;
   border-top: 0;
   border-radius: 5px;
@@ -2198,12 +2199,14 @@ body .container .recap-prix .livraison-total .prix-total {
   .paiement_carte .carte_details {
     height: 60vh; } }
 .paiement_carte .paiement_paypal {
+  margin-top: 30px;
   border: 1px solid rgba(0, 0, 0, 0.15);
   margin-bottom: 100px;
   padding: 20px;
   display: inline-flex;
   width: 100%;
   background-color: #ffffff; }
+
 
 .paiement_carte .paiement_paypal h4 {
   margin: 18px 0 0 0;
@@ -2438,6 +2441,17 @@ body .container .recap-prix .livraison-total .prix-total {
     width: 70px;
     height:70px;
     margin-top: 10px;
+  }
+
+  .timerPanier{
+    padding-top: 15px;
+    margin-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 5px;
+    height: 70px;
+    color:#ADADAF;
+    background-color:#EFF0F4;
   }
 
 /*# sourceMappingURL=styleFront.css.map */

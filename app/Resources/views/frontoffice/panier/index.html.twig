@@ -9,11 +9,53 @@
     var total = 0.0;
     var livraison = 5.0;
 </script>
+    <script>
+        $(document).ready(function(){
+            secondes = -1
+            heures = -1
+            minutes = -1
+            seconds = 36000 ;
+            now = new Date();
+            h = now.getHours();
+            m = now.getMinutes();
+            s = now.getSeconds();
+            sTotal = s + 60*m + h*3600 ;
+            seconds = seconds - sTotal;
+            interval = setInterval(function(){
+                secondes = seconds;
+                heures = Math.floor(secondes / 60 / 60 % 60);
+                minutes = Math.floor(secondes / 60 % 60);
+                secondes = secondes % 60;
+                seconds--;
+                if(secondes < 0){
+                    $('#reboursBase').html("Vous êtes en retard ! Vous ne pouvez plus commander pour aujourd'hui, nous vous invitons à choisir une autre date dans l'étape suivante !")
+                }
+                if(heures == 0){
+                    $('#rebours').html(minutes+" minutes "+secondes+" secondes")
+                }else{
+                    if(minutes == 0){
+                        $('#rebours').html(secondes+" secondes")
+                    }else{
+                        $('#rebours').html(heures+" heures "+minutes+" minutes "+secondes+" secondes")
+                    }
+                }
+            },1000);
+
+
+        })
+
+
+    </script>
 <div class="panier">
     <div class="container">
         <div class="row">
+            <h1 style="margin-left: 15px;">Votre panier</h1>
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
-                <h1>Votre panier</h1>
+                <div class="timerPanier">
+                    <p id="reboursBase">Vous souhaitez commander pour aujourd'hui ? Il ne vous reste plus que <strong id="rebours"></strong> pour commander !</p>
+                </div>
+            </div>
+            <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
                 <div class="produit">
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
                         <img class="pictoGift" src="{{ asset('img/gift.svg') }}">
@@ -30,6 +72,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="row">
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
