@@ -17,99 +17,18 @@
                 <p>Contacter le service client</p>
             </div>
             <div class="col-lg-2 col-md-12 col-sm-12">
-                <a>
                     <div class="buttonPerso text-center">
-                        <a href="{{ path('profile_edit_index') }}" >Modifier mon profil</a><br/>
+                        <a href="{{ path('fos_user_change_password') }}" >Modifier mon mot de passe</a><br/>
                     </div>
-                </a>
+                    <div class="buttonPerso text-center">
+                        <a href="{{ path('fos_user_resetting_check_email') }}" >Modifier mon adresse mail et/ou pseudo</a>
+                    </div>
+                    <div class="buttonPerso text-center">
+                        <a href="{{ path('profile_edit_show') }}">Modifier mes informations</a>
+                    </div>
             </div>
         </div>
     </div>
-
-    <div class="container histoCommandeVide">
-        <h1>Historique des commandes</h1>
-    </div>
-
-    <div class="container">
-    {% for commande in user.commandes %}
-        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-            <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="headingOne">
-                    <h4 class="panel-title">
-                        <a role="button" class="commande" data-id="{{ commande.id }}">
-                            Commande n°{{ commande.id }} | {{ commande.date | date('d-m-y') }} | {{ commande.prix }}€
-                        </a>
-                    </h4>
-                </div>
-                <div id="{{ commande.id }}" class="panel-collapse collapse in" role="tabpanel"
-                     aria-labelledby="headingOne" style="display:none">
-                    <div class="panel-body">
-
-                        <h2>Produits</h2>
-
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Nom</th>
-                                <th>Quantité commandée</th>
-                                <th>Prix</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for commandeProduit in commande.commandesProduit %}
-                                <tr>
-                                    <td>{{ commandeProduit.produits.nom }}</td>
-                                    <td>{{ commandeProduit.quantiteCommandee }}</td>
-                                    <td>{{ commandeProduit.produits.prix }}</td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
-
-
-                        <h2>Menus</h2>
-
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>entree</th>
-                                <th>plat</th>
-                                <th>dessert</th>
-                                <th>boisson</th>
-                                <th>Quantité commandée</th>
-                                <th>Prix</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            {% for commandeMenu in commande.commandesMenu %}
-                                {% for menu in array %}
-                                    {% if commandeMenu.id == menu.id_commandeMenu %}
-                                        <tr>
-                                            <td>{% if menu.entree is not null %}{{ menu.entree.nom }}{% else %} NULL {% endif %}</td>
-                                            <td>{% if menu.plat is not null %}{{ menu.plat.nom }}{% else %} NULL {% endif %}</td>
-                                            <td>{% if menu.dessert is not null %}{{ menu.dessert.nom }}{% else %} NULL {% endif %}</td>
-                                            <td>{% if menu.boisson is not null %}{{ menu.boisson.nom }}{% else %} NULL {% endif %}</td>
-                                            <td>{{ commandeMenu.menus.quantite }}</td>
-                                            <td>{{ commandeMenu.menus.prix }}</td>
-                                        </tr>
-                                    {% endif %}
-                                {% endfor %}
-                            {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-    </div>
-
-    <script>
-        $('.commande').on('click', function () {
-            var id = $(this).data('id');
-            $('#' + id).toggle(300);
-        })
-    </script>
 {% endblock %}
 
 

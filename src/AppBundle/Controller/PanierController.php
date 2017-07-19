@@ -324,6 +324,8 @@ class PanierController extends Controller
         $boissons = $this->getDoctrine()->getRepository('AppBundle:Produit')->findBy(array('type'=>'boisson'));
         $desserts = $this->getDoctrine()->getRepository('AppBundle:Produit')->findBy(array('type'=>'dessert'));
         $produits = [];
+        $prixPanier = $session->get('prix');
+        $economies = 0;
 
         foreach ($obj as $name=>$o) {
             preg_match('/^produit_/', $name, $matches);
@@ -347,6 +349,7 @@ class PanierController extends Controller
                 if($entree == null && (in_array($id, $entrees)))
                 {
                     $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
+                    $prixPanier = $prixPanier - $produits[$i]['prix'];
                     $session->set($i, $produits[$i]);
                     $prix = $prix + $produits[$i]['prix'];
                     if($produits[$i]['quantite'] == 0){
@@ -358,6 +361,7 @@ class PanierController extends Controller
                 else if($plat == null && (in_array($id, $plats)))
                 {
                     $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
+                    $prixPanier = $prixPanier - $produits[$i]['prix'];
                     $session->set($i, $produits[$i]);
                     $prix = $prix + $produits[$i]['prix'];
                     if($produits[$i]['quantite'] == 0){
@@ -369,6 +373,7 @@ class PanierController extends Controller
                 else if($dessert == null && (in_array($id, $desserts)))
                 {
                     $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
+                    $prixPanier = $prixPanier - $produits[$i]['prix'];
                     $session->set($i, $produits[$i]);
                     $prix = $prix + $produits[$i]['prix'];
                     if($produits[$i]['quantite'] == 0){
@@ -379,6 +384,7 @@ class PanierController extends Controller
                 }
                 else if($boisson == null && (in_array($id, $boissons))){
                     $produits[$i]['quantite'] = $produits[$i]['quantite']-1;
+                    $prixPanier = $prixPanier - $produits[$i]['prix'];
                     $session->set($i, $produits[$i]);
                     $prix = $prix + $produits[$i]['prix'];
                     if($produits[$i]['quantite'] == 0){
@@ -389,11 +395,16 @@ class PanierController extends Controller
                 }
             }
 
+            $economies = $economies + ($prix - ($prix - (0.2*$prix)));
             $prix = $prix - (0.2*$prix);
+            $prixPanier = $prixPanier + $prix;
+
+            $session->set('prix', $prixPanier);
             array_push($menus, ['entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>1, 'type'=>1, 'prix' => $prix]);
         }
 
         $session->save();
+        $this->addFlash('notice', 'Vous venez d\'économiser ' . $economies . '€');
         return $menus;
     }
 

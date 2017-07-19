@@ -43,8 +43,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ path('produit_index') }}">Nos plats</a></li>
-                    <li><a href="{{ path('menu') }}">Créer un menu</a></li>
-                    <li><a href="{{ path('blog_index') }}">Blog</a></li>
+                  {#  <li><a href="{{ path('menu') }}">Créer un menu</a></li>#}
+                    <li><a href="{{ path('blog_index') }}">Le blog</a></li>
                     {% if app.user %}
                         {% if app.user.roles.0=="ROLE_ADMIN" %}
                             <li><a href="{{ path('admin_index') }}">Backoffice</a></li>
@@ -52,7 +52,8 @@
                         <li class="hoverCompte">
                             <a href="{{ path('fos_user_profile_show') }}">Mon compte</a>
                             <ul class="hideHoverCompte">
-                                <a href="{{ path('fos_user_profile_show') }}"><li>Historique des commandes</li></a>
+                                <a href="{{ path('fos_user_profile_show') }}"><li>Mes informations</li></a>
+                                <a href="{{ path('historique_commande') }}"><li>Historique des commandes</li></a>
                                 <a href="{{ path('fos_user_security_logout') }}"><li>Déconnexion</li></a>
                             </ul>
                         </li>
