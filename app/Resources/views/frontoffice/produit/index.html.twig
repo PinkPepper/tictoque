@@ -157,14 +157,14 @@
     <script type="application/javascript">
         $(document).ready(function() {
 
-            $(".fleche_haut").click(function() {
-              $("html, body").animate({ scrollTop: 0 }, "slow");
-              return false;
-            });
-
+            
             $(window).scroll( function(){
                
-                
+                $(".fleche_haut").click(function() {
+                  $("html, body").animate({ scrollTop: 0 }, "slow");
+                  return false;
+                });
+
                 if( $('.fleche_haut').offset().top < 300){
                     
                     $('.fleche_haut').animate({'opacity':'1'},500);
