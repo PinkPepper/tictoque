@@ -1,4 +1,5 @@
 {% trans_default_domain 'FOSUserBundle' %}
+<div id="content_site" class="c_s_center">
 
 <form action="{{ path('fos_user_resetting_send_email') }}" method="POST" class="fos_user_resetting_request">
     <div>
@@ -9,3 +10,5 @@
         <input type="submit" value="{{ 'resetting.request.submit'|trans }}" />
     </div>
 </form>
+
+</div>

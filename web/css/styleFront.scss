@@ -2219,4 +2219,118 @@ body .container .recap-prix .livraison-total .prix-total {
 }
 
 
+.fos_user_change_password
+{
+  #fos_user_change_password_form
+  {
+    padding: 0 140px 0 128px;
+
+    div
+    {
+      clear: both;
+
+      label
+      {
+        float: left;
+      }
+
+      input
+      {
+        float: right;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  div:last-child
+  {
+    clear: both;
+
+    input
+    {
+      white-space: nowrap;
+      padding: 12px 35px 12px 35px;
+      color: #ffffff;
+      background-color: #ea6878;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      margin-top: 35px;
+    }
+  }
+}
+
+.fos_user_resetting_request
+{
+  div:last-child
+  {
+    input
+    {
+      white-space: nowrap;
+      padding: 12px 35px 12px 35px;
+      color: #ffffff;
+      background-color: #ea6878;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      margin-top: 35px;
+    }
+  }
+}
+
+.c_s_center
+{
+  form
+  {
+    input[type="submit"]
+    {
+      white-space: nowrap;
+      padding: 12px 35px 12px 35px;
+      color: #ffffff;
+      background-color: #ea6878;
+      text-decoration: none;
+      border: none;
+      border-radius: 5px;
+      margin-top: 35px;
+    }
+  }
+}
+
+#user_profile_edit
+{
+  div
+  {
+    clear: both;
+    padding: 0 130px 0 180px;
+
+    label
+    {
+      float: left;
+    }
+
+    input
+    {
+      float: right;
+      margin-bottom: 20px;
+    }
+  }
+
+  div:nth-child(5),div:last-child
+  {
+    padding: 0;
+
+    label
+    {
+      float: none;
+    }
+
+    input
+    {
+      float: none;
+      margin-bottom: 0;
+    }
+  }
+}
+
+
 /*# sourceMappingURL=styleFront.css.map */

@@ -2347,6 +2347,63 @@ body .container .recap-prix .livraison-total .prix-total {
 #button {
   height: 38px; }
 
+.fos_user_change_password #fos_user_change_password_form {
+  padding: 0 140px 0 128px; }
+  .fos_user_change_password #fos_user_change_password_form div {
+    clear: both; }
+    .fos_user_change_password #fos_user_change_password_form div label {
+      float: left; }
+    .fos_user_change_password #fos_user_change_password_form div input {
+      float: right;
+      margin-bottom: 20px; }
+.fos_user_change_password div:last-child {
+  clear: both; }
+  .fos_user_change_password div:last-child input {
+    white-space: nowrap;
+    padding: 12px 35px 12px 35px;
+    color: #ffffff;
+    background-color: #ea6878;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    margin-top: 35px; }
+
+.fos_user_resetting_request div:last-child input {
+  white-space: nowrap;
+  padding: 12px 35px 12px 35px;
+  color: #ffffff;
+  background-color: #ea6878;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  margin-top: 35px; }
+
+.c_s_center form input[type="submit"] {
+  white-space: nowrap;
+  padding: 12px 35px 12px 35px;
+  color: #ffffff;
+  background-color: #ea6878;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  margin-top: 35px; }
+
+#user_profile_edit div {
+  clear: both;
+  padding: 0 130px 0 180px; }
+  #user_profile_edit div label {
+    float: left; }
+  #user_profile_edit div input {
+    float: right;
+    margin-bottom: 20px; }
+#user_profile_edit div:nth-child(5), #user_profile_edit div:last-child {
+  padding: 0; }
+  #user_profile_edit div:nth-child(5) label, #user_profile_edit div:last-child label {
+    float: none; }
+  #user_profile_edit div:nth-child(5) input, #user_profile_edit div:last-child input {
+    float: none;
+    margin-bottom: 0; }
+
 /*# sourceMappingURL=styleFront.css.map */
 
 /*# sourceMappingURL=styleFront.css.map */
