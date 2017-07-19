@@ -1035,4 +1035,19 @@ section .cellule_60_cms .pagination_form li a:hover {
   font-size: 12px;
 }
 
+.dashboardLine{
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
+  margin-top: 15px;
+  margin-left: 5px;
+  margin-bottom: 40px;
+  background-color: white;
+  padding-left:15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  background-color: white;
+  float:left;
+  width: 94.5%;
+  height: 400px;
+}
+
 /*# sourceMappingURL=style.css.map */

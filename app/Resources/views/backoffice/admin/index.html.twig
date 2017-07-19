@@ -35,5 +35,42 @@
                 <p class="dashboardMonthPercent">+{{ (statVente)|number_format(0, '.', ',') }}%</p>
             </div>
         </div>
+        <div class="dashboardLine">
+            <h4 class="dashboardTitre">Résumé sur l'année</h4>
+            <canvas id="myChart" height="120px"></canvas>
+        </div>
     </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js"></script>
+    <script>
+        $(document).ready(function(){
+            stringRevenu = "{{ stringRevenu }}"
+            stringRevenu = stringRevenu.substring(0,stringRevenu.length-1);
+            stringVentes = "{{ stringVentes }}"
+            stringVentes = stringVentes.substring(0,stringVentes.length-1);
+
+            stringRevenu = stringRevenu.split("-");
+            stringVentes = stringVentes.split("-");
+
+            console.log(stringRevenu);
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre','Novembre', 'Décembre'],
+                    datasets: [{
+                        label: 'Revenu',
+                        data: stringRevenu,
+                        backgroundColor: "transparent",
+                        borderColor : "#f32063"
+                    }, {
+                        label: 'Ventes',
+                        data: stringVentes,
+                        backgroundColor: "transparent",
+                        borderColor : "#4BC0C0"
+                    }]
+                }
+            });
+        })
+    </script>
 {% endblock %}

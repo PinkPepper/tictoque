@@ -66,21 +66,33 @@ class CommandeRepository extends \Doctrine\ORM\EntityRepository
     public function findByYear($year){
         $date = new \DateTime('now');
 
-        $date = $dateOne = $year."-01-01 00:00:00";
-        $date1 = $dateOne = $year."-12-31 23:59:59";
+        $tabResult = [];
 
-        $dateFrom = new \DateTime($date);
-        $dateTo =  new \DateTime($date1);
 
-        $res = $this->createQueryBuilder('e')
-            ->where('e.date >= :dateFrom')
-            ->andWhere('e.date < :dateTo')
-            ->orderBy('e.date','DESC')
-            ->setParameter('dateFrom',$dateFrom)
-            ->setParameter('dateTo',$dateTo)
-            ->getQuery();
+        for($i=0;$i<12;$i++){
+            if($i>9){
+                $date = $year."-".$i."-01 00:00:00";
+                $date1 = $year."-".$i."-30 23:59:59";
+            }else{
+                $date = $year."-0".$i."-01 00:00:00";
+                $date1 = $year."-0".$i."-30 23:59:59";
+            }
 
-        return $res->getResult();
+            $dateFrom = new \DateTime($date);
+            $dateTo =  new \DateTime($date1);
+
+            $res = $this->createQueryBuilder('e')
+                ->where('e.date >= :dateFrom')
+                ->andWhere('e.date < :dateTo')
+                ->orderBy('e.date','DESC')
+                ->setParameter('dateFrom',$dateFrom)
+                ->setParameter('dateTo',$dateTo)
+                ->getQuery();
+
+            array_push($tabResult,$res->getResult());
+        }
+
+        return $tabResult;
     }
 
     public function statsMonth(){
