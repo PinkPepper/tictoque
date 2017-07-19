@@ -1050,4 +1050,20 @@ section .cellule_60_cms .pagination_form li a:hover {
   height: 400px;
 }
 
+.okButton{
+  border:1px #f32063 solid;
+  background-color:#f32063;
+  float: left;
+  color:White;
+  padding:11px;
+  cursor: pointer;
+}
+
+.titleLivreurProduit{
+  border:1px #f32063 solid;
+  padding:10px;
+  float: left;
+  font-size:16px;
+}
+
 /*# sourceMappingURL=style.css.map */

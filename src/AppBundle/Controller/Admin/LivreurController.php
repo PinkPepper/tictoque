@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Livreur controller.
@@ -35,11 +36,10 @@ class LivreurController extends Controller
 
         for($i=0;$i<sizeof($pointRelais);$i++){
             $tmp = $em->getRepository('AppBundle:Livraison')->findBy(
-                array('pointRelais' => $pointRelais[$i]->getId()));
+                array('pointRelais' => $pointRelais[$i]->getId())
+            );
             array_push($produit,$tmp);
         }
-
-
 
 
         return $this->render('backoffice/admin/livreur/index.html.twig', array(
@@ -47,6 +47,28 @@ class LivreurController extends Controller
             'produits' => $produit,
             'dateNow' => new \DateTime()
         ));
+
+    }
+
+    /**
+     *
+     * @Route("/confirmationLivreur", name="admin_livreur_validation")
+     * @Method("POST")
+     */
+    public function livraisonAction(Request $request)
+    {
+        $id = $request->get('id');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $livraison = $em->getRepository('AppBundle:Livraison')->find($id);
+
+        $livraison
+
+        $response = new Response();
+        $response->setStatusCode(200);
+
+        return $response;
 
     }
 }
