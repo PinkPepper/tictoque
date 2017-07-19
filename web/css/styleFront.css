@@ -291,7 +291,15 @@ body .desc_prod .produit_stock {
   font-size: 11px;
   color: green; }
 
+body .desc_prod .produit_hors_stock {
+  font-size: 11px;
+  color: red; }
+
 body .desc_prod .produit_stock .fa.fa-circle {
+  margin-right: 5px; }
+
+
+body .desc_prod .produit_hors_stock .fa.fa-circle {
   margin-right: 5px; }
 
 body .desc_prod .produit_info {
@@ -1458,7 +1466,8 @@ body .Blog-droite input {
   box-shadow: 0 0 3px 0px; }
 
 body .Blog-droite img {
-  width: 100%; }
+  width: 30%;
+  margin: 3px; }
 
 body .Blog-droite ul {
   list-style: none;
