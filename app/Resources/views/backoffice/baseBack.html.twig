@@ -53,14 +53,18 @@
 </header>
 
 {% for flash_message in app.session.flashBag.get('notice') %}
-    <div class="flash-notice">
+    <div class="popUpError">
         {{ flash_message }}
     </div>
 {% endfor %}
 
 {% block menuAdmin %}{% endblock %}
 {% block body %}{% endblock %}
-
+<script>
+    $(document).ready(function(){
+        $('.popUpError').fadeIn();
+    })
+</script>
 </body>
 </html>
 
