@@ -58,6 +58,68 @@
                             {% endfor %}
                     </ul><br>
                 {% endfor %}
+                <div id="lienMap">
+                </div>
+                <div id="map" style="height: 400px;margin-top:50px;"></div>
+                <script>
+                    function initMap() {
+                        var directionsService = new google.maps.DirectionsService;
+                        var directionsDisplay = new google.maps.DirectionsRenderer;
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 14,
+                            center: {lat: 50.6333, lng: 3.0667}
+                        });
+                        directionsDisplay.setMap(map);
+
+                        var infoWindow = new google.maps.InfoWindow({map: map});
+
+                        calculateAndDisplayRoute(directionsService, directionsDisplay);
+
+
+                    }
+
+                    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                        var waypts = [
+                            {% for pt in relais %}
+                                {% if loop.index == relais|length %}
+                                    {location: "{{ pt.adresse }}", stopover: true}
+                                {% else %}
+                                    {location: "{{ pt.adresse }}", stopover: true},
+                                {% endif %}
+                            {% endfor %}
+                            ];
+
+                        directionsService.route({
+                            origin: "Lille",
+                            destination: "Lille",
+                            waypoints: waypts,
+                            optimizeWaypoints: true,
+                            travelMode: 'DRIVING'
+                        }, function (response, status) {
+                            if (status === 'OK') {
+                                directionsDisplay.setDirections(response);
+                                var route = response.routes[0];
+                            } else {
+                                window.alert('Directions request failed due to ' + status);
+                            }
+                        })
+                    }
+                </script>
+                <script>
+                    $(document).ready(function(){
+                        navigator.geolocation.getCurrentPosition(function (pos) {
+                            var lat = pos.coords.latitude;
+                            var lng = pos.coords.longitude;
+                            if (lat == null) {
+                                alert("GPS not activated");
+                            }
+                            $('#lienMap').html('<a id="linkMap" href="https://www.google.fr/maps/dir/'+lat+','+lng+'/{% for pt in relais %}{{ pt.adresse }}/{% endfor %}Lille/@50.632886,3.0506506,14z/">Lancer l\'itinéraire sur mobile</a>');
+                        });
+                    })
+                </script>
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_bL2BjFSPMIrlqHzNzT1hme7eyTfDMI&callback=initMap">
+                </script>
             </div>
         </div>
     </body>

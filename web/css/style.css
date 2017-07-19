@@ -1089,4 +1089,22 @@ section .cellule_60_cms .pagination_form li a:hover {
   color:white;
 }
 
+.itineraireGoogleMaps{
+  margin-top: 60px;
+}
+
+#lienMap{
+  padding-top: 15px;
+  height: 50px;
+  text-align: center;
+  margin-top: 50px;
+  width: 95%;
+  background-color: #f32063;
+}
+
+#lienMap a{
+  color:white
+}
+
+
 /*# sourceMappingURL=style.css.map */
