@@ -2410,6 +2410,12 @@ body .container .recap-prix .livraison-total .prix-total {
   .plat_list .retour_haut {
     cursor: pointer; }
 
+  .passToMenuButton{
+    background-color:#f32063;
+    color:white;
+    height: 40px;
+  }
+
 /*# sourceMappingURL=styleFront.css.map */
 
 /*# sourceMappingURL=styleFront.css.map */

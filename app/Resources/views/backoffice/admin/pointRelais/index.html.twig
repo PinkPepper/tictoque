@@ -15,7 +15,7 @@
                     <td>adresse</td>
                     <td>latitude</td>
                     <td>longitude</td>
-                    <td>Créer le</td>
+                    <td>Livreur</td>
                     <td>Actions</td>
                 </tr>
                 <tbody>
@@ -26,7 +26,7 @@
                         <td>{{ point.adresse }}</td>
                         <td>{{ point.latitude }}</td>
                         <td>{{ point.longitude }}</td>
-                        <td>{% if point.createdAt %}{{ point.createdAt|date('d/m/Y') }}{% endif %}</td>
+                        <td>{{ point.user.nom }}</td>
                         <td>
                             <ul>
                                 <li>
