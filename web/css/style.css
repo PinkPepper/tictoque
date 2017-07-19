@@ -943,7 +943,7 @@ section .cellule_60_cms .pagination_form li a:hover {
   padding-bottom: 15px;
   float: left;
   margin-right: 30px;
-  width: 60%;
+  width: 50%;
   height: 300px;
   margin-bottom: 5px;
   margin-left: 5px;
@@ -955,11 +955,18 @@ section .cellule_60_cms .pagination_form li a:hover {
 }
 
 .dashboardRevenu{
+  padding-left:15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
   background-color: white;
   float:left;
-  width: 30%;
+  width: 38%;
   height: 300px;
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
+}
+
+.dashboardCA{
+  margin-bottom: 25%;
 }
 
 .dashboardNbCommande{
@@ -972,4 +979,75 @@ section .cellule_60_cms .pagination_form li a:hover {
   background-color:#f32063;
   float:right;
 }
+
+.dashboardSpan{
+  margin-top:0px;
+  margin-bottom: 10px;
+  font-size:12px;
+  color:#909090;
+}
+
+.dashboardCommandeName{
+  margin: 0px;
+}
+
+.dashboardRemember{
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom:1px #EEE solid;
+
+}
+
+.dashboardSpanPrix{
+  float: right;
+  color:#909090;
+  font-weight: 600;
+}
+
+.dashboardRevenuLeft{
+  border-right:1px #909090 solid;
+  text-align: center;
+  width: 49.5%;
+  float: left;
+}
+
+.dashboardRevenuRight{
+  text-align: center;
+  width: 49.5%;
+  float: left;
+}
+
+.dashboardRevenuP{
+  font-size:10px;
+  color:#909090;
+  margin: 0px;
+}
+
+.dashboardMonthPrice{
+  margin-top: 5px;
+  margin-bottom:0px;
+  font-size:22px;
+}
+
+.dashboardMonthPercent{
+  color:#73BB66;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.dashboardLine{
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
+  margin-top: 15px;
+  margin-left: 5px;
+  margin-bottom: 40px;
+  background-color: white;
+  padding-left:15px;
+  padding-right: 15px;
+  padding-bottom: 15px;
+  background-color: white;
+  float:left;
+  width: 94.5%;
+  height: 400px;
+}
+
 /*# sourceMappingURL=style.css.map */

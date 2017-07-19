@@ -27,10 +27,57 @@ class AdminController extends Controller
 
         $commandeMois = $em->getRepository('AppBundle:Commande')->findForMonth();
         $commandeJour = $em->getRepository('AppBundle:Commande')->findByDay();
+        $commandeStat = $em->getRepository('AppBundle:Commande')->statsMonth();
+        $commandeYear = $em->getRepository('AppBundle:Commande')->findByYear("2017");
+
+
+        $prix1 = 0;
+        $prix2 = 0;
+
+        $vente1 = 0;
+        $vente2 = 0;
+
+        for($i=0;$i<sizeof($commandeStat[0]);$i++){
+            $prix1 += $commandeStat[0][$i]->getPrix();
+        }
+
+        for($i=0;$i<sizeof($commandeStat[0]);$i++){
+            $vente1 += +1;
+        }
+
+        for($i=0;$i<sizeof($commandeStat[1]);$i++){
+            $prix2 += $commandeStat[1][$i]->getPrix();
+        }
+
+        for($i=0;$i<sizeof($commandeStat[1]);$i++){
+            $vente2 += +1;
+        }
+
+        $statRevenu = $prix1*100/$prix2;
+        $statVente = $vente1*100+$vente2;
+
+        $stringRevenu = "";
+        $stringVentes = "";
+
+        for($i=0;$i<12;$i++){
+            $somme = 0;
+            $nbVentes = 0;
+            for($y=0;$y<sizeof($commandeYear[$i]);$y++){
+                $somme += $commandeYear[$i][$y]->getPrix();
+                $nbVentes += 1;
+            }
+            $stringRevenu .=  $somme."-";
+            $stringVentes .=  $nbVentes."-";
+        }
+
 
         return $this->render('backoffice/admin/index.html.twig',array(
             'commandeMois' => $commandeMois,
-            'commandeJour' => $commandeJour
+            'commandeJour' => $commandeJour,
+            'statRevenu' =>$statRevenu,
+            'statVente' => $statVente,
+            'stringRevenu' => $stringRevenu,
+            'stringVentes' => $stringVentes
         ));
     }
 
