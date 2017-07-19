@@ -16,15 +16,17 @@
                 <h1>Votre panier</h1>
                 <div class="produit">
                     <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-                        picto
+                        <img class="pictoGift" src="{{ asset('img/gift.svg') }}">
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <p>Passez vos produits en menu et faites des économies sur votre commande</p>
+                        <p class="phraseToMenu"><strong>Passez vos produits en menu et faites des économies sur votre commande</strong></p>
                     </div>
                     <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <div>
-                            <a class="passToMenuButton" href="{{ path('do_menus') }}">Passer en menu</a>
-                        </div>
+                        <a class="passToMenuButton" href="{{ path('do_menus') }}">
+                            <div>
+                                Passer en menu
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

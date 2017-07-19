@@ -2410,10 +2410,29 @@ body .container .recap-prix .livraison-total .prix-total {
   .plat_list .fleche_haut {
     cursor: pointer; }
 
-  .passToMenuButton{
-    background-color:#f32063;
+  .passToMenuButton div{
+    margin-top: 25px;
+    padding-top: 10px;
+    text-align: center;
     color:white;
+    background-color:#f32063;
     height: 40px;
+    width: 100%;
+  }
+
+.passToMenuButton:hover{
+  text-decoration: none;
+}
+
+  .phraseToMenu{
+    margin-top: 25px;
+    color:#D1D1D1;
+  }
+
+  .pictoGift{
+    width: 70px;
+    height:70px;
+    margin-top: 10px;
   }
 
 /*# sourceMappingURL=styleFront.css.map */
