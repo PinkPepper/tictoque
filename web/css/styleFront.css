@@ -291,15 +291,7 @@ body .desc_prod .produit_stock {
   font-size: 11px;
   color: green; }
 
-body .desc_prod .produit_hors_stock {
-  font-size: 11px;
-  color: red; }
-
 body .desc_prod .produit_stock .fa.fa-circle {
-  margin-right: 5px; }
-
-
-body .desc_prod .produit_hors_stock .fa.fa-circle {
   margin-right: 5px; }
 
 body .desc_prod .produit_info {
@@ -2412,6 +2404,11 @@ body .container .recap-prix .livraison-total .prix-total {
   #user_profile_edit div:nth-child(5) input, #user_profile_edit div:last-child input {
     float: none;
     margin-bottom: 0; }
+
+.plat_list {
+  text-align: center; }
+  .plat_list .retour_haut {
+    cursor: pointer; }
 
 /*# sourceMappingURL=styleFront.css.map */
 
