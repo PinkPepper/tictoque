@@ -401,7 +401,13 @@ class PanierController extends Controller
         }
 
         $session->save();
-        $this->addFlash('notice', 'Vous venez d\'économiser ' . $economies . '€');
+        if($economies == 0){
+            $this->addFlash('notice', 'Aucun menu n\'a pu être crée');
+        }
+        else{
+            $this->addFlash('notice', 'Vous venez d\'économiser ' . $economies . '€');
+        }
+
         return $menus;
     }
 
