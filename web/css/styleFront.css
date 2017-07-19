@@ -2408,40 +2408,13 @@ body .container .recap-prix .livraison-total .prix-total {
     float: none;
     margin-bottom: 0; }
 
-.plat_list {
-  text-align: center; }
-  .plat_list .fleche_haut {
-    cursor: pointer;
-    position: fixed;
-    right: 48px;
-    top: 270px;
-    width: 30px;
-    height: 34px; }
-
-  .passToMenuButton div{
-    margin-top: 25px;
-    padding-top: 10px;
-    text-align: center;
-    color:white;
-    background-color:#f32063;
-    height: 40px;
-    width: 100%;
-  }
-
-.passToMenuButton:hover{
-  text-decoration: none;
-}
-
-  .phraseToMenu{
-    margin-top: 25px;
-    color:#D1D1D1;
-  }
-
-  .pictoGift{
-    width: 70px;
-    height:70px;
-    margin-top: 10px;
-  }
+.plat_list .fleche_haut {
+  cursor: pointer;
+  position: fixed;
+  right: 48px;
+  top: 270px;
+  width: 30px;
+  height: 34px; }
 
   .timerPanier{
     padding-top: 15px;

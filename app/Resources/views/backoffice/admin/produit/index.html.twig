@@ -5,16 +5,15 @@
         <div class="menu_top_cms">
                 <h1>Produits - {{ produits|length }}</h1> 
                 <a class="btn_01" href="{{ path('produit_new') }}">Ajouter un produit</a>
-        </div>   
-            
+        </div>
 
         <div class="cellule_background_cms" style="margin-bottom: 20px;">
             <table>
                     <tr>
                         <td><strong>Id</strong></td>
                         <td><strong>Nom</strong></td>
-                        <td><strong>Date Peremption</strong></td>
                         <td><strong>Prix</strong></td>
+                        <td><strong>Gastronomie</strong></td>
                         <td><strong>Quantite</strong></td>
                         <td><strong>Actions</strong></td>
                     </tr>
@@ -22,8 +21,8 @@
                     <tr>
                         <td>{{ produit.id }}</td>
                         <td>{{ produit.nom|length > 20 ? produit.nom|slice(0, 20) ~ '...' : produit.nom }}</td>
-                        <td>{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</td>
                         <td>{{ produit.prix }}</td>
+                        <td>{{ produit.prixGastronomique }}</td>
                         <td>{{ produit.quantite }}</td>
                         <td>
                             <ul>
@@ -52,8 +51,8 @@
                     <tr>
                         <td><strong>Id</strong></td>
                         <td><strong>Nom</strong></td>
-                        <td><strong>Date Peremption</strong></td>
                         <td><strong>Prix</strong></td>
+                        <td><strong>Gastronomie</strong></td>
                         <td><strong>Quantite</strong></td>
                         <td><strong>Actions</strong></td>
                     </tr>
@@ -61,8 +60,8 @@
                         <tr>
                             <td>{{ produit.id }}</td>
                             <td>{{ produit.nom|length > 20 ? produit.nom|slice(0, 20) ~ '...' : produit.nom }}</td>
-                            <td>{% if produit.datePeremption %}{{ produit.datePeremption|date('Y-m-d') }}{% endif %}</td>
                             <td>{{ produit.prix }}</td>
+                            <td>{{ produit.prixGastronomique }}</td>
                             <td>{{ produit.quantite }}</td>
                             <td>
                                 <ul>

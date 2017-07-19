@@ -47,13 +47,6 @@ class Produit
      */
     private $type;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="datePeremption", type="date")
-     *
-     */
-    private $datePeremption;
 
     /**
      * @var int
@@ -62,6 +55,13 @@ class Produit
      * @Assert\NotBlank()
      */
     private $prix;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="prix_gastronomique", type="float")
+     */
+    private $prixGastronomique;
 
     /**
      * @var int
@@ -426,6 +426,7 @@ class Produit
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
         $this->allergenes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->pointRelais = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prixGastronomique = 0;
     }
 
     /**
@@ -600,6 +601,22 @@ class Produit
     public function setPr($pr)
     {
         $this->pr = $pr;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrixGastronomique()
+    {
+        return $this->prixGastronomique;
+    }
+
+    /**
+     * @param int $prixGastronomique
+     */
+    public function setPrixGastronomique($prixGastronomique)
+    {
+        $this->prixGastronomique = $prixGastronomique;
     }
 
 

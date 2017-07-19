@@ -47,7 +47,7 @@
                     <li><a href="{{ path('blog_index') }}">Le blog</a></li>
                     {% if app.user %}
                         {% if app.user.roles.0=="ROLE_ADMIN" %}
-                            <li><a href="{{ path('admin_index') }}">Backoffice</a></li>
+                            <li><a href="{{ path('admin_index') }}">Administration</a></li>
                         {% endif %}
                         <li class="hoverCompte">
                             <a href="{{ path('fos_user_profile_show') }}">Mon compte</a>
