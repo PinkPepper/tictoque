@@ -43,8 +43,8 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="{{ path('produit_index') }}">Nos plats</a></li>
-                    <li><a href="{{ path('menu') }}">Créer un menu</a></li>
-                    <li><a href="{{ path('blog_index') }}">Blog</a></li>
+                  {#  <li><a href="{{ path('menu') }}">Créer un menu</a></li>#}
+                    <li><a href="{{ path('blog_index') }}">Le blog</a></li>
                     {% if app.user %}
                         {% if app.user.roles.0=="ROLE_ADMIN" %}
                             <li><a href="{{ path('admin_index') }}">Backoffice</a></li>

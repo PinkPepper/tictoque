@@ -49,6 +49,9 @@ class ProfileCustomController extends Controller
         ));
     }
 
+    public function historiqueCommandeAction(){
+        
+    }
 }
 
 
