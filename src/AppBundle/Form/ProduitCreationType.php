@@ -32,8 +32,8 @@ class ProduitCreationType extends AbstractType
                         )
                 )
             )
-            ->add('datePeremption', DateType::class)
             ->add('prix')
+            ->add('prixGastronomique')
             ->add('quantite')
             ->add('pr', EntityType::class, array(
                 'class' => 'AppBundle\Entity\PointRelais',

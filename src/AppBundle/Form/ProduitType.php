@@ -51,8 +51,8 @@ class ProduitType extends AbstractType
                 'expanded' => false,
                 'multiple' => true,
             ))
-            ->add('datePeremption', DateType::class)
             ->add('prix')
+            ->add('prixGastronomique')
             ->add('quantite')
             ->add('file',  FileType::class,
                 array(
