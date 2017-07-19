@@ -111,7 +111,10 @@ class PanierController extends Controller
             if($quantiteFutur <= $produit->getQuantite())
             {
                 $pProduit['quantite'] = $quantiteFutur;
+                $pProduit['prix_gastronomique'] = $produit->getPrixGastronomique();
+
                 $session->set('produit_' . $produit->getId(), $pProduit);
+
                 $prix = $prix + $produit->getPrix();
                 $session->set('prix', $prix);
             }
@@ -124,7 +127,8 @@ class PanierController extends Controller
         {
             $session->set('produit_' . $produit->getId(), array(
                 'quantite'=>1,
-                'prix'=>$produit->getPrix()
+                'prix'=>$produit->getPrix(),
+                'prix_gastronomique'=>$produit->getPrixGastronomique()
             ));
             $prix = $prix + $produit->getPrix();
             $session->set('prix', $prix);
@@ -336,6 +340,7 @@ class PanierController extends Controller
         {
             $entree = null; $plat = null; $dessert = null; $boisson = null;
             $prix = 0;
+            $prixMenu = 10;
             $produits_copy = $produits;
 
             foreach ($produits_copy as $i => $produit)
@@ -349,6 +354,10 @@ class PanierController extends Controller
                     $prixPanier = $prixPanier - $produits[$i]['prix'];
                     $session->set($i, $produits[$i]);
                     $prix = $prix + $produits[$i]['prix'];
+                    if($produits[$i]['prix_gastronomique'] > 0)
+                    {
+                        $prixMenu = $prixMenu + $produits[$i]['prix_gastronomique'];
+                    }
                     if($produits[$i]['quantite'] == 0){
                         unset($produits[$i]);
                         $session->remove($i);
@@ -361,6 +370,10 @@ class PanierController extends Controller
                     $prixPanier = $prixPanier - $produits[$i]['prix'];
                     $session->set($i, $produits[$i]);
                     $prix = $prix + $produits[$i]['prix'];
+                    if($produits[$i]['prix_gastronomique'] > 0)
+                    {
+                        $prixMenu = $prixMenu + $produits[$i]['prix_gastronomique'];
+                    }
                     if($produits[$i]['quantite'] == 0){
                         unset($produits[$i]);
                         $session->remove($i);
@@ -373,6 +386,10 @@ class PanierController extends Controller
                     $prixPanier = $prixPanier - $produits[$i]['prix'];
                     $session->set($i, $produits[$i]);
                     $prix = $prix + $produits[$i]['prix'];
+                    if($produits[$i]['prix_gastronomique'] > 0)
+                    {
+                        $prixMenu = $prixMenu + $produits[$i]['prix_gastronomique'];
+                    }
                     if($produits[$i]['quantite'] == 0){
                         unset($produits[$i]);
                         $session->remove($i);
@@ -384,6 +401,10 @@ class PanierController extends Controller
                     $prixPanier = $prixPanier - $produits[$i]['prix'];
                     $session->set($i, $produits[$i]);
                     $prix = $prix + $produits[$i]['prix'];
+                    if($produits[$i]['prix_gastronomique'] > 0)
+                    {
+                        $prixMenu = $prixMenu + $produits[$i]['prix_gastronomique'];
+                    }
                     if($produits[$i]['quantite'] == 0){
                         unset($produits[$i]);
                         $session->remove($i);
@@ -392,12 +413,11 @@ class PanierController extends Controller
                 }
             }
 
-            $economies = $economies + ($prix - ($prix - (0.2*$prix)));
-            $prix = $prix - (0.2*$prix);
-            $prixPanier = $prixPanier + $prix;
+            $economies = $prix - $prixMenu;
+            $prixPanier = $prixPanier + $prixMenu;
 
             $session->set('prix', $prixPanier);
-            array_push($menus, ['entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>1, 'type'=>1, 'prix' => $prix]);
+            array_push($menus, ['entree'=>$entree, 'plat'=>$plat, 'dessert'=>$dessert, 'boisson'=>$boisson, 'quantite'=>1, 'type'=>1, 'prix' => $prixMenu]);
         }
 
         $session->save();
