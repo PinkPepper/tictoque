@@ -133,7 +133,7 @@
             {{ knp_pagination_render(produits) }}
         </div>
 
-        <img src=" {{ asset('img/arrows.png' ) }} " class="fleche_haut" onClick="GoTop()">
+        <img src=" {{ asset('img/arrows.png' ) }} " class="fleche_haut">
 
     </section>
 
@@ -157,10 +157,10 @@
     <script type="application/javascript">
         $(document).ready(function() {
 
-            function GoTop()
-            {
-                scrollTop(0);
-            }
+            $(".fleche_haut").click(function() {
+              $("html, body").animate({ scrollTop: 0 }, "slow");
+              return false;
+            });
 
             $('.ajoutPanier').on('click', function (e) {
                 e.preventDefault();
