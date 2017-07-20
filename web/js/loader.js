@@ -17,6 +17,4 @@ var params = {
     animationData: animationData
 };
 
-console.log("ok");
-
 

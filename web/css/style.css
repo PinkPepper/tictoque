@@ -1055,7 +1055,7 @@ section .cellule_60_cms .pagination_form li a:hover {
 .okButton{
   border:1px #f32063 solid;
   background-color:#f32063;
-  float: left;
+  float: right;
   color:White;
   padding:11px;
   cursor: pointer;
@@ -1064,7 +1064,7 @@ section .cellule_60_cms .pagination_form li a:hover {
 .titleLivreurProduit{
   border:1px #f32063 solid;
   padding:10px;
-  width: 90%;
+  width: 80%;
   float: left;
   font-size:16px;
 }
