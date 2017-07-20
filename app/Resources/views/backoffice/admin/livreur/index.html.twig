@@ -17,11 +17,19 @@
                     editor.on('change', function () {
                         editor.save();
                     });
-                }});</script>
+                }});
+            </script>
         {% endblock %}
     </head>
 
     <body class="livraison">
+        <div id="bodymovin"></div>
+        <script src="{{ asset('js/loader.js') }}"></script>
+        <script>
+            var anim;
+
+            anim = bodymovin.loadAnimation(params);
+        </script>
         <script>
                 function sendRequest(id){
                     console.log(id);
@@ -62,20 +70,29 @@
                 </div>
                 <div id="map" style="height: 400px;margin-top:50px;"></div>
                 <script>
+                    $(document).ready(function(){
+                        navigator.geolocation.getCurrentPosition(function (pos) {
+                            lat = pos.coords.latitude;
+                            lng = pos.coords.longitude;
+                            if (lat == null) {
+                                alert("GPS not activated");
+                            }
+                            $('#lienMap').html('<a id="linkMap" href="https://www.google.fr/maps/dir/'+lat+','+lng+'/{% for pt in relais %}{{ pt.adresse }}/{% endfor %}Lille/@50.632886,3.0506506,14z/">Lancer l\'itinéraire sur mobile</a>');
+                        });
+                    })
+                </script>
+                <script>
                     function initMap() {
                         var directionsService = new google.maps.DirectionsService;
                         var directionsDisplay = new google.maps.DirectionsRenderer;
                         var map = new google.maps.Map(document.getElementById('map'), {
-                            zoom: 14,
+                            zoom: 8,
                             center: {lat: 50.6333, lng: 3.0667}
                         });
                         directionsDisplay.setMap(map);
 
-                        var infoWindow = new google.maps.InfoWindow({map: map});
 
                         calculateAndDisplayRoute(directionsService, directionsDisplay);
-
-
                     }
 
                     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -89,33 +106,37 @@
                             {% endfor %}
                             ];
 
-                        directionsService.route({
-                            origin: "Lille",
-                            destination: "Lille",
-                            waypoints: waypts,
-                            optimizeWaypoints: true,
-                            travelMode: 'DRIVING'
-                        }, function (response, status) {
-                            if (status === 'OK') {
-                                directionsDisplay.setDirections(response);
-                                var route = response.routes[0];
-                            } else {
-                                window.alert('Directions request failed due to ' + status);
-                            }
-                        })
-                    }
-                </script>
-                <script>
-                    $(document).ready(function(){
                         navigator.geolocation.getCurrentPosition(function (pos) {
-                            var lat = pos.coords.latitude;
-                            var lng = pos.coords.longitude;
+                            lat = pos.coords.latitude;
+                            lng = pos.coords.longitude;
                             if (lat == null) {
                                 alert("GPS not activated");
                             }
-                            $('#lienMap').html('<a id="linkMap" href="https://www.google.fr/maps/dir/'+lat+','+lng+'/{% for pt in relais %}{{ pt.adresse }}/{% endfor %}Lille/@50.632886,3.0506506,14z/">Lancer l\'itinéraire sur mobile</a>');
+
+                            directionsService.route({
+                                origin: lat+","+lng,
+                                destination: lat+","+lng,
+                                waypoints: waypts,
+                                optimizeWaypoints: true,
+                                travelMode: 'DRIVING'
+                            }, function (response, status) {
+                                if (status === 'OK') {
+                                    directionsDisplay.setDirections(response);
+                                    var route = response.routes[0];
+                                } else {
+                                    window.alert('Directions request failed due to ' + status);
+                                }
+                            })
+
+                            $('#lienMap').html('<a id="linkMap" target="_blank" href="https://www.google.fr/maps/dir/'+lat+','+lng+'/{% for pt in relais %}{{ pt.adresse }}/{% endfor %}Lille/@50.632886,3.0506506,14z/">Lancer l\'itinéraire sur mobile</a>');
+                            $('#bodymovin').fadeOut(600,function(){
+                                $('.livraison').css({'overflow-y':'auto'});
+                                anim.destroy();
+                                $('.blockLivraison').css({'margin-top':'5vh'});
+                            });
+
                         });
-                    })
+                    }
                 </script>
                 <script async defer
                         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_bL2BjFSPMIrlqHzNzT1hme7eyTfDMI&callback=initMap">
