@@ -1117,6 +1117,135 @@ section .cellule_60_cms .pagination_form li a:hover {
   opacity: 1;
 }
 
-#map
+.showUser{
+  padding-top: 60px;
+  margin-left: 210px;
+  top: 80px;
+  width: 100%;
+  height: 100%;
+}
 
+.showUserParentDiv{
+  margin-left: 20px;
+}
+
+.showUserReturnButton{
+  margin-right: 15px;
+  background-color:#e3004f ;
+  padding-left:10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color:white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.showUserFirstDiv{
+  background-color: white;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
+  width:40%;
+  margin-top: 20px;
+  border-radius: 2px;
+  padding: 25px;
+  margin-bottom: 50px;
+}
+
+.showUserImage{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.showUserImgDiv{
+  float: left;
+  margin-right: 30px;
+}
+
+.showUserDesc span{
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+.showUserDesc p{
+  margin: 0px;
+}
+
+.showUserHistoCommande{
+  margin-top: 60px;
+}
+
+.showUserTable{
+  border-radius:2px;
+  padding: 10px;
+  width: 100%;
+  background-color:#F7F8FA;
+  border:1px darkgrey solid;
+  border-collapse: collapse;
+}
+
+.showUserTable th{
+  padding:10px;
+  border-bottom: 1px grey solid;
+  text-align: left;
+}
+
+.showUserTable tr {
+  padding: 10px;
+  border:1px lightgray solid;
+}
+
+.showUserTableTrHover:hover{
+  color:white;
+  background-color: #e3004f;
+  border: 1px #e3004f solid;
+}
+
+.showUserTableTrHover:visited{
+  color:white;
+  background-color: #e3004f;
+  border: 1px #e3004f solid;
+}
+
+
+.showUserTable td{
+  border-collapse: collapse;
+  cursor: pointer;
+  border-bottom: 1px lightgray solid;
+  padding:10px;
+}
+
+.showUserSecondDiv{
+  float: right;
+  margin-right: 250px;
+  margin-top: -408px;
+  width: 30%;
+  background-color: white;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
+  border-radius: 2px;
+  padding: 25px;
+  margin-bottom: 50px;
+}
+
+.showUserHiddenDiv{
+  display: none;
+}
+
+.showHistoProduitImg{
+  width: 120px;
+  height: 120px;
+  float: left;
+  margin-right: 15px;
+}
+
+.showHistoDiv{
+  min-height: 120px;
+  height: 100%;
+  width:100%;
+}
+
+.showHistoDiv p{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
 /*# sourceMappingURL=style.css.map */
