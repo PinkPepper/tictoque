@@ -67,6 +67,9 @@
                             {% if app.user.roles.0=="ROLE_ADMIN" %}
                                 <li><a href="{{ path('admin_index') }}">Administration</a></li>
                             {% endif %}
+                            {% if app.user.roles.0=="ROLE_LIVREUR" %}
+                                <li><a href="{{ path('admin_livreur_index') }}">Livraison</a></li>
+                            {% endif %}
                             <li class="hoverCompte">
                                 <a href="{{ path('fos_user_profile_show') }}">Mon compte</a>
                                 <ul class="hideHoverCompte">
