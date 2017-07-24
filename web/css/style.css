@@ -1248,4 +1248,11 @@ section .cellule_60_cms .pagination_form li a:hover {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+
+.blankSquare{
+  background-color: white;
+  height: 15px;
+  width: 30px;
+  cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */

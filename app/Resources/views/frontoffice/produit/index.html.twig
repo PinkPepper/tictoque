@@ -163,18 +163,15 @@
             });
 
 
-            $(window).scroll( function(){
-               
-                
-                if( $('.fleche_haut').offset().top < 300){
 
-                    $('.fleche_haut').animate({'opacity':'1'},500);
-                        
+            $(window).scroll(function() {
+                if ($(document).scrollTop() > 300) {
+                    console.log('ok');
+                    $('.fleche_haut').fadeIn("slow");
                 }
-                else
-                {
-                    $('.fleche_haut').css("display","initial");
-                    $('.fleche_haut').animate({'opacity':'0'},500);
+
+                if ($(document).scrollTop() < 300) {
+                    $('.fleche_haut').fadeOut("slow");
                 }
             });
 
