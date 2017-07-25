@@ -34,18 +34,7 @@ class CommandeController extends Controller
             return $this->redirectToRoute('index_panier');
         }
 
-
-        $form = $this->createForm('AppBundle\Form\DateType');
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $date = $form->getData()['date'];
-            $session = $request->getSession();
-            $session->set('dateLivraison', $date);
-            return $this->redirectToRoute('commande_succes');
-        }
-
-        return $this->render('frontoffice/commande/index.html.twig', array('form'=>$form->createView()));
+        return $this->render('frontoffice/commande/index.html.twig');
     }
 
     /**
@@ -58,6 +47,9 @@ class CommandeController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine();
 
+        $cookies = $request->cookies;
+        $date = $cookies->get('date');
+
         $pointRelais = $session->get("pointRelais");
         if($pointRelais == "" | $pointRelais === null)
         {
@@ -66,7 +58,7 @@ class CommandeController extends Controller
         $pointRelais = $em->getRepository('AppBundle:PointRelais')->find($pointRelais);
 
         $prix = $session->get('prix');
-        $date = $session->get('dateLivraison');
+       // $date = $session->get('dateLivraison');
 
         $commande = $this->setCommande($pointRelais, $prix, $date);
         if($commande === null){
@@ -167,9 +159,11 @@ class CommandeController extends Controller
         $commande->setAdresse($pointRelais->getAdresse());
 
         $today = new \DateTime();
+        $date = new \DateTime($date);
+
+
         if($today->format('Y-m-d') == $date->format('Y-m-d')){
             $hours = (new \DateTime())->format('H');
-
             if($hours < 10)
             {
                 $commande->setDateLivraison(new \DateTime());
@@ -179,11 +173,12 @@ class CommandeController extends Controller
                 $commande->setDateLivraison((new \DateTime())->add(new \DateInterval('P1D')));
             }
         }
-        else if($date->format('Y-m-d') < $today->format('Y-m-d')){
-           return null;
+        else if($today->format('Y-m-d') < $date->format('Y-m-d'))
+        {
+            $commande->setDateLivraison($date);
         }
         else{
-            $commande->setDateLivraison($date);
+            return null;
         }
 
 
