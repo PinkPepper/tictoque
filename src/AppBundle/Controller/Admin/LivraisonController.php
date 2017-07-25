@@ -178,6 +178,20 @@ class LivraisonController extends Controller
     /**
      * Deletes a livraison entity.
      *
+     * @Route("/livraison/delete/delete/{id}", name="livraison_delete_link")
+     */
+    public function deleteLinkAction(Request $request, Livraison $livraison)
+    {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($livraison);
+            $em->flush();
+
+        return $this->redirectToRoute('livraison_index');
+    }
+
+    /**
+     * Deletes a livraison entity.
+     *
      * @Route("/livraison/delete/{id}", name="livraison_delete")
      * @Method("DELETE")
      */
@@ -185,8 +199,6 @@ class LivraisonController extends Controller
     {
         $form = $this->createDeleteForm($livraison);
         $form->handleRequest($request);
-
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();

@@ -32,7 +32,7 @@
                                 <a href="{{ path('livraison_edit', { 'id': livraison.id }) }}"><img class="sizePicto" src="{{ asset('img/edit.svg') }}"></a>
                             </li>
                             <li>
-                                <a href="{{ path('livraison_delete', { 'id': livraison.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')"><img class="sizePicto" src="{{ asset('img/delete.svg') }}"></a>
+                                <a href="{{ path('livraison_delete_link', { 'id': livraison.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')"><img class="sizePicto" src="{{ asset('img/delete.svg') }}"></a>
                             </li>
                         </ul>
                     </td>
