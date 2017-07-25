@@ -19,6 +19,10 @@ class DefaultController extends Controller
             {
                 return $this->redirectToRoute('admin_index');
             }
+            if($this->getUser()->getRoles()[0] == "ROLE_LIVREUR")
+            {
+                return $this->redirectToRoute('admin_livreur_index');
+            }
         }
 
 
