@@ -2409,9 +2409,11 @@ body .container .recap-prix .livraison-total .prix-total {
     margin-bottom: 0; }
 
 .plat_list .fleche_haut {
+  z-index: 9999999;
+  display: none;
   cursor: pointer;
   position: fixed;
-  right: 48px;
+  right: 65px;
   top: 270px;
   width: 30px;
   height: 34px; }
@@ -2443,6 +2445,31 @@ body .container .recap-prix .livraison-total .prix-total {
     color:white;
   }
 
+
+.passToMenuButton div{
+    margin-top: 25px;
+    padding-top: 10px;
+    text-align: center;
+  color:white;
+    background-color:#f32063;
+  height: 40px;
+    width: 100%;
+  }
+
+.passToMenuButton:hover{
+  text-decoration: none;
+ }
+
+  .phraseToMenu{
+       margin-top: 25px;
+       color:#D1D1D1;
+     }
+
+  .pictoGift{
+       width: 70px;
+       height:70px;
+       margin-top: 10px;
+   }
 /*# sourceMappingURL=styleFront.css.map */
 
 /*# sourceMappingURL=styleFront.css.map */

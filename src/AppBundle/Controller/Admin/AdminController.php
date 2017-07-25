@@ -143,8 +143,16 @@ class AdminController extends Controller
     public function showAction(User $user)
     {
         $deleteForm = $this->createDeleteForm($user);
+        $em = $this->getDoctrine();
+        $commandes = $em->getRepository('AppBundle:Commande')->findBy(
+            array('user' => $user->getId()),
+            array('date' => 'DESC')
+        );
+
+        dump($commandes);
 
         return $this->render('backoffice/admin/user/show.html.twig', array(
+            'commandes'=>$commandes,
             'user' => $user,
             'delete_form' => $deleteForm->createView(),
         ));

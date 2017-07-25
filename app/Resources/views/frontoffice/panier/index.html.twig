@@ -49,8 +49,38 @@
 <div class="panier">
     <div class="container">
         <div class="row">
-            <h1 style="margin-left: 15px;">Votre panier</h1>
+            <div style="float: right;width: 25%;margin-top: 30px;">
+                <div class="commande">
+                    <p>Commandez avant 10h pour être livré le jour même, sinon vous serez livré le lendemain.</p>
+                    <h4>Commande</h4>
+                    <p>Sous-total : <span id="sousTotal" class="total">
+                    <script type="application/javascript">
+                        tabPrice.forEach(function (element) {
+                            console.log(element);
+                            sousTotal = sousTotal+element;
+                        });
+                        $('#sousTotal').text(sousTotal.toFixed(2)+"€");
+                    </script> </span>
+                    </p>
+                    <p>Livraison : <span id="livraison" class="total">
+                    <script type="application/javascript">
+                        $('#livraison').text(livraison+"€");
+                    </script>
+                </span></p>
+                    <div class="bar"></div>
+                    <b><p>Total <span id="total"  class="total">
+                    <script type="application/javascript">
+                        total = (sousTotal + livraison);
+                        $('#total').text(total.toFixed(2)+"€");
+                    </script>
+                </span></p></b>
+
+                    <a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>
+                    <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
+                </div>
+            </div>
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
+                <h1>Votre panier</h1>
                 <div class="timerPanier">
                     <p id="reboursBase">Vous souhaitez commander pour aujourd'hui ? Il ne vous reste plus que <strong id="rebours"></strong> pour commander !</p>
                 </div>
@@ -72,9 +102,6 @@
                     </div>
                 </div>
             </div>
-
-        </div>
-        <div class="row">
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
                 {% if menus|length != 0 %}
                 <h2>Menus</h2>
@@ -213,34 +240,6 @@
                 </div>
                     {% endif %}
                 {% endfor %}
-            </div>
-            <div class="col-lg-offset-1 col-lg-3 col-sm-12 col-md-12 col-xs-12 commande">
-                <p>Commandez avant 10h pour être livré le jour même, sinon vous serez livré le lendemain.</p>
-                <h4>Commande</h4>
-                <p>Sous-total : <span id="sousTotal" class="total">
-                        <script type="application/javascript">
-                            tabPrice.forEach(function (element) {
-                                console.log(element);
-                                sousTotal = sousTotal+element;
-                            });
-                            $('#sousTotal').text(sousTotal.toFixed(2)+"€");
-                        </script> </span>
-                </p>
-                <p>Livraison : <span id="livraison" class="total">
-                        <script type="application/javascript">
-                            $('#livraison').text(livraison+"€");
-                        </script>
-                    </span></p>
-                <div class="bar"></div>
-                <b><p>Total <span id="total"  class="total">
-                        <script type="application/javascript">
-                            total = (sousTotal + livraison);
-                            $('#total').text(total.toFixed(2)+"€");
-                        </script>
-                    </span></p></b>
-
-                <a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>
-                <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
             </div>
         </div>
     </div>

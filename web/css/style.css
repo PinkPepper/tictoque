@@ -918,20 +918,21 @@ section .cellule_60_cms .pagination_form li a:hover {
   margin: 0 25px 0 5px; }
 
 .livraison {
+  overflow-y:hidden;
   background-color: #383838; }
   .livraison .blockLivraison {
+    margin-top: 100%;
     padding-top: 10px;
-    padding-left: 50px;
-    padding-right: 30px;
+    padding-left: 40px;
+    padding-right: 40px;
     padding-bottom: 40px;
     background-color: white;
     border-radius: 5px;
-    margin-top: 20vh;
-    width: 60%;
+    width: 90%;
     height: 100%;}
     .livraison .blockLivraison .logo {
       margin-bottom: 20px;
-      width: 40%; }
+      width: 250px; }
 
 .dashboard{
   overflow-x:hidden;
@@ -1054,7 +1055,7 @@ section .cellule_60_cms .pagination_form li a:hover {
 .okButton{
   border:1px #f32063 solid;
   background-color:#f32063;
-  float: left;
+  float: right;
   color:White;
   padding:11px;
   cursor: pointer;
@@ -1063,7 +1064,7 @@ section .cellule_60_cms .pagination_form li a:hover {
 .titleLivreurProduit{
   border:1px #f32063 solid;
   padding:10px;
-  width: 90%;
+  width: 80%;
   float: left;
   font-size:16px;
 }
@@ -1073,4 +1074,185 @@ section .cellule_60_cms .pagination_form li a:hover {
   height: 18px;
 }
 
+.popUpError{
+  display: none;
+  margin-top: 20px;
+  height: 50px;
+  width: 20%;
+  background-color: #e52c65;
+  opacity: 0.9;
+  position: fixed;
+  z-index: 999999;
+  right:20px;
+  border-radius: 5px;
+  text-align: center;
+  padding-top: 15px;
+  color:white;
+}
+
+.itineraireGoogleMaps{
+  margin-top: 60px;
+}
+
+#lienMap{
+  padding-top: 15px;
+  height: 50px;
+  text-align: center;
+  margin-top: 50px;
+  width: 100%;
+  background-color: #f32063;
+}
+
+#lienMap a{
+  color:white
+}
+
+#bodymovin{
+  width:100%;
+  height:100%;
+  display:block;
+  overflow: hidden;
+  transform: translate3d(0,0,0);
+  text-align: center;
+  opacity: 1;
+}
+
+.showUser{
+  padding-top: 60px;
+  margin-left: 210px;
+  top: 80px;
+  width: 100%;
+  height: 100%;
+}
+
+.showUserParentDiv{
+  margin-left: 20px;
+}
+
+.showUserReturnButton{
+  margin-right: 15px;
+  background-color:#e3004f ;
+  padding-left:10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  color:white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.showUserFirstDiv{
+  background-color: white;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
+  width:40%;
+  margin-top: 20px;
+  border-radius: 2px;
+  padding: 25px;
+  margin-bottom: 50px;
+}
+
+.showUserImage{
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+}
+
+.showUserImgDiv{
+  float: left;
+  margin-right: 30px;
+}
+
+.showUserDesc span{
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+.showUserDesc p{
+  margin: 0px;
+}
+
+.showUserHistoCommande{
+  margin-top: 60px;
+}
+
+.showUserTable{
+  border-radius:2px;
+  padding: 10px;
+  width: 100%;
+  background-color:#F7F8FA;
+  border:1px darkgrey solid;
+  border-collapse: collapse;
+}
+
+.showUserTable th{
+  padding:10px;
+  border-bottom: 1px grey solid;
+  text-align: left;
+}
+
+.showUserTable tr {
+  padding: 10px;
+  border:1px lightgray solid;
+}
+
+.showUserTableTrHover:hover{
+  color:white;
+  background-color: #e3004f;
+  border: 1px #e3004f solid;
+}
+
+.showUserTableTrHover:visited{
+  color:white;
+  background-color: #e3004f;
+  border: 1px #e3004f solid;
+}
+
+
+.showUserTable td{
+  border-collapse: collapse;
+  cursor: pointer;
+  border-bottom: 1px lightgray solid;
+  padding:10px;
+}
+
+.showUserSecondDiv{
+  float: right;
+  margin-right: 250px;
+  margin-top: -408px;
+  width: 30%;
+  background-color: white;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
+  border-radius: 2px;
+  padding: 25px;
+  margin-bottom: 50px;
+}
+
+.showUserHiddenDiv{
+  display: none;
+}
+
+.showHistoProduitImg{
+  width: 120px;
+  height: 120px;
+  float: left;
+  margin-right: 15px;
+}
+
+.showHistoDiv{
+  min-height: 120px;
+  height: 100%;
+  width:100%;
+}
+
+.showHistoDiv p{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.blankSquare{
+  background-color: white;
+  height: 15px;
+  width: 30px;
+  cursor: pointer;
+}
 /*# sourceMappingURL=style.css.map */
