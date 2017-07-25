@@ -53,14 +53,7 @@
                 <div class="commande">
                     <p>Commandez avant 10h pour être livré le jour même, sinon vous serez livré le lendemain.</p>
                     <h4>Commande</h4>
-                    <p>Sous-total : <span id="sousTotal" class="total">
-                    <script type="application/javascript">
-                        tabPrice.forEach(function (element) {
-                            console.log(element);
-                            sousTotal = sousTotal+element;
-                        });
-                        $('#sousTotal').text(sousTotal.toFixed(2)+"€");
-                    </script> </span>
+                    <p>Sous-total : <span id="sousTotal" class="total"></span>
                     </p>
                     <p>Livraison : <span id="livraison" class="total">
                     <script type="application/javascript">
@@ -248,9 +241,9 @@
                                 var prix = {{ produit[0].prix }};
                                 var qte = {{ produit[1] }};
                                 var total = prix*qte;
-                                console.log("DANS PRODUIT: "+tabPrice['105']);
-                                tabPrice[String({{ produit[0].id }})] = total;
-                                $('#prixTotal-'+{{ produit[0].id }}).text(total.toFixed(2)+"€");
+                                tabPrice[String({{ produit.0.id }})] = total;
+                                console.log("DANS PRODUIT: "+tabPrice[{{ produit.0.id }}]);
+                                $('#prixTotal-'+{{ produit.0.id }}).text(total.toFixed(2)+"€");
                             </script>
                         </h3>
                     </div>
@@ -280,6 +273,14 @@
     </div>
 
     <script type="application/javascript">
+
+        tabPrice.forEach(function (element) {
+            console.log(element);
+            sousTotal = sousTotal+element;
+        });
+        $('#sousTotal').text(sousTotal.toFixed(2)+"€");
+        sousTotal = sousTotal+5;
+        $('#total').text(sousTotal.toFixed(2)+"€");
 
         $(".qte").each(function(){
 
@@ -400,7 +401,7 @@
 
             });
             $('#sousMenu-'+id).fadeOut();
-            tabPrice['m-'+String(id)] = 0;
+            tabPrice['10'+String(id)] = 0;
             sousTotal = 0;
             tabPrice.forEach(function (element) {
                 sousTotal = sousTotal+element;
