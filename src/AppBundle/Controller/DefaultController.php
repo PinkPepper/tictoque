@@ -13,6 +13,15 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if($this->getUser() !== null)
+        {
+            if($this->getUser()->getRoles()[0] == "ROLE_ADMIN")
+            {
+                return $this->redirectToRoute('admin_index');
+            }
+        }
+
+
         $em = $this->getDoctrine()->getManager();
         $produits = $em->getRepository('AppBundle:Produit')->findAll();
         $articles = $em->getRepository('AppBundle:Article')->findAll();
