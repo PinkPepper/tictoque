@@ -99,13 +99,13 @@
                 {% endfor %}
                 {% if (entree=='1') and (plat=='1') and (dessert=='1') and (boisson=='1') %}
                 <div id="passToMenu" class="produit">
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
                         <img class="pictoGift" src="{{ asset('img/gift.svg') }}">
                     </div>
-                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                    <div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">
                         <p class="phraseToMenu"><strong>Passez vos produits en menu et faites des économies sur votre commande.<br>Il vous suffit d'avoir une entrée un plat un dessert et une boisson !</strong></p>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
                         <a class="passToMenuButton" href="{{ path('do_menus') }}">
                             <div>
                                 Passer en menu

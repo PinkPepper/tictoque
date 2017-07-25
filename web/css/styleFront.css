@@ -2497,6 +2497,10 @@ body .container .recap-prix .livraison-total .prix-total {
   .timerPanier{
     height: 90px;
   }
+
+  #passToMenu{
+    height:220px !important;
+  }
 }
 
 /*# sourceMappingURL=styleFront.css.map */
