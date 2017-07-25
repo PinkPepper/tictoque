@@ -2461,7 +2461,7 @@ body .container .recap-prix .livraison-total .prix-total {
  }
 
   .phraseToMenu{
-       margin-top: 25px;
+       margin-top: 10px;
        color:#D1D1D1;
      }
 
@@ -2470,6 +2470,13 @@ body .container .recap-prix .livraison-total .prix-total {
        height:70px;
        margin-top: 10px;
    }
+
+@media (max-width: 767px) {
+  .hideImgProduitSmall{
+    display: none;
+  }
+}
+
 /*# sourceMappingURL=styleFront.css.map */
 
 /*# sourceMappingURL=styleFront.css.map */
