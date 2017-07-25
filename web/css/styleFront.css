@@ -2475,6 +2475,28 @@ body .container .recap-prix .livraison-total .prix-total {
   .hideImgProduitSmall{
     display: none;
   }
+
+  .productShow{
+    display: none;
+  }
+
+  .produit{
+    height: 110px !important;
+    padding: 5px !important;
+  }
+
+  .colReduced{
+    padding: 5px;
+  }
+
+  .commandeParent{
+    width:100% !important;
+    float: left !important;
+  }
+
+  .timerPanier{
+    height: 90px;
+  }
 }
 
 /*# sourceMappingURL=styleFront.css.map */

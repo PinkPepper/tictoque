@@ -49,7 +49,7 @@
 <div class="panier">
     <div class="container">
         <div class="row">
-            <div style="float: right;width: 25%;margin-top: 30px;">
+            <div class="commandeParent" style="float: right;width: 25%;margin-top: 30px;">
                 <div class="commande">
                     <p>Commandez avant 10h pour être livré le jour même, sinon vous serez livré le lendemain.</p>
                     <h4>Commande</h4>
@@ -219,23 +219,23 @@
                 {% for produit in produits %}
                     {% if produit[1] != 0 %}
                 <div id="produitId-{{ produit[0].id }}" class="produit produitMargin">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 hideImgProduitSmall">
+                    <div class="colReduced col-xs-3 col-sm-3 col-md-3 col-lg-3 hideImgProduitSmall">
                         <img class="imgProduit voir" src="{{ asset('produits/'~produit[0].image) }}"/>
                     </div>
-                    <div class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
-                        <h5>{{ produit[0].type | upper }}</h5>
-                        <h4>{{ produit[0].nom }}</h4>
-                        <h5>{{ produit[0].prix | number_format(2, '.', ',') }}€</h5>
-                        <h5><a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
+                    <div class="colReduced col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h5 class="productType">{{ produit[0].type | upper }}</h5>
+                        <h4 class="productName">{{ produit[0].nom }}</h4>
+                        <h5 class="productPrice">{{ produit[0].prix | number_format(2, '.', ',') }}€</h5>
+                        <h5 class="productShow"><a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
                     </div>
-                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2 divQuantite">
+                    <div class="colReduced col-xs-3 col-sm-2 col-md-2 col-lg-2 divQuantite">
                         <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
                         <div class="quantite">
                             <i id="qte" class=" qte quantite-{{ produit[0].id }}" data-isproduit="true" data-id="{{ produit[0].id }}" data-quantite="{{ produit[0].quantite }}" data-quantitecurrent="{{ produit[1] }}">{{ produit[1] }}</i>
                         </div>
                         <img id="chevronSup-{{ produit[0].id }}" width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
                     </div>
-                    <div class="col-xs-1 col-sm-2 col-md-2 col-lg-2 divPrix">
+                    <div class="colReduced col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">
                         <h3 id="prixTotal-{{ produit[0].id }}">
                             <script type="application/javascript">
                                 var prix = {{ produit[0].prix }};
@@ -247,7 +247,7 @@
                             </script>
                         </h3>
                     </div>
-                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 divDelete">
+                    <div class="colReduced col-xs-2 col-sm-1 col-md-1 col-lg-1 divDelete">
                         <img class="deleteProd" width="20px" data-id="{{ produit[0].id }}" data-url="{{ path('delete_produit', {'produit': produit[0].id}) }}" src="{{ asset('img/cross.svg') }}"/>
                     </div>
                 </div>
