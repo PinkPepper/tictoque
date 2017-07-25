@@ -178,13 +178,15 @@ class LivraisonController extends Controller
     /**
      * Deletes a livraison entity.
      *
-     * @Route("/{id}", name="livraison_delete")
+     * @Route("/livraison/delete/{id}", name="livraison_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Livraison $livraison)
     {
         $form = $this->createDeleteForm($livraison);
         $form->handleRequest($request);
+
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
