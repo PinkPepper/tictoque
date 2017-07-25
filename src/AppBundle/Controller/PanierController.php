@@ -141,6 +141,61 @@ class PanierController extends Controller
     }
 
     /**
+     * @Route("/ajoutQuantiteProduitAuPanier/{produit}/{nombre}", name="ajout_quantite_panier")
+     */
+    public function ajouterProduitQuantiteAuPanier(Request $request, Produit $produit, $nombre)
+    {
+        $reponse = "a été ajouté au panier avec succès en " . $nombre . " exemplaire(s).";
+
+        $session = $request->getsession();
+
+        if($session->get('prix') == null)
+        {
+            $session->set('prix', 5); //5 -> frais de livraison
+            $prix = 5;
+        }
+        else
+        {
+            $prix = $session->get('prix');
+        }
+
+        $pProduit = $session->get('produit_' . $produit->getId());
+        if( $pProduit != null) //doublon
+        {
+            $quantiteFutur = $pProduit['quantite'] + $nombre;
+            if($quantiteFutur <= $produit->getQuantite())
+            {
+                $pProduit['quantite'] = $quantiteFutur;
+                $pProduit['prix_gastronomique'] = $produit->getPrixGastronomique();
+
+                $session->set('produit_' . $produit->getId(), $pProduit);
+
+                $prix = $prix + $produit->getPrix();
+                $session->set('prix', $prix);
+            }
+            else
+            {
+                $reponse = "n'est plus disponible, et n'a pas pu être ajouté à votre panier.";
+            }
+        }
+        else
+        {
+            $session->set('produit_' . $produit->getId(), array(
+                'quantite'=>$nombre,
+                'prix'=>$produit->getPrix(),
+                'prix_gastronomique'=>$produit->getPrixGastronomique()
+            ));
+            $prix = $prix + $produit->getPrix();
+            $session->set('prix', $prix);
+        }
+
+        return $this->render('frontoffice/produit/success.html.twig', array(
+            "reponse"=>$reponse,
+            "produit"=>$produit
+        ));
+    }
+
+    /**
      * @Route("/ajoutExemplaireProduitAuPanier/{produit}", name="ajout_exemplaire_panier")
      */
     public function ajoutExemplaireProduit(Request $request, Produit $produit)
