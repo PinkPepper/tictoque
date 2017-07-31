@@ -1216,9 +1216,9 @@ section .cellule_60_cms .pagination_form li a:hover {
 }
 
 .showUserSecondDiv{
-  float: right;
-  margin-right: 250px;
-  margin-top: -408px;
+  top: 167px;
+  left: 810px;
+  position: absolute;
   width: 30%;
   background-color: white;
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
