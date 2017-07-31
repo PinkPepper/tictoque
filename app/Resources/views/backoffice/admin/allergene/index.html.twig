@@ -24,9 +24,6 @@
                                     <a href="{{ path('admin_allergene_edit',{'id': allergene.id})}}"><img class="sizePicto" src="{{ asset('img/edit.svg') }}"></a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('admin_allergene_show',{'id': allergene.id})}}"><img class="sizePicto" src="{{ asset('img/profile.svg') }}"></a>
-                                </li>
-                                <li>
                                     <a href="{{ path('admin_allergene_delete_index',{'id': allergene.id})}}" onclick="return confirm('Voulez-vous vraiment supprimer cette catégorie ? (Les produits associés ne seront pas supprimés.)')"><img class="sizePicto" src="{{ asset('img/delete.svg') }}"></a>
                                 </li>
                             </ul>

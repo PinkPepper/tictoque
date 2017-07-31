@@ -46,6 +46,10 @@
             {{ form_widget(form.all) }}
             {{ form_errors(form.all) }}
 
+            <label>Point relais</label>
+            {{ form_widget(form.pr) }}
+            {{ form_errors(form.pr) }}
+
             <button class="button_p" type="submit">Créer le produit</button>
 
             {{ form_end(form) }}

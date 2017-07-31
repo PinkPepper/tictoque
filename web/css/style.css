@@ -901,10 +901,19 @@ section .cellule_60_cms .pagination_form li a:hover {
 .pictoNavbar {
   border-radius: 50%; }
 
+#appbundle_produit_pr input {
+  margin: 0;
+  vertical-align: middle;
+  width: auto; }
+
+#appbundle_produit_pr label {
+  margin: 0 25px 0 5px; }
+
 #appbundle_produit_all input {
   margin: 0;
   vertical-align: middle;
   width: auto; }
+
 
 #appbundle_produit_all label {
   margin: 0 25px 0 5px; }

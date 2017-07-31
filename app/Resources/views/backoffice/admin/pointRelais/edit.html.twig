@@ -16,6 +16,12 @@
                 {{ form_widget(edit_form.adresse) }}
                 {{ form_errors(edit_form.adresse) }}
 
+                <label>Livreur</label>
+                {{ form_widget(edit_form.user) }}
+                {{ form_errors(edit_form.user) }}
+
+                <br>
+
                 <button class="button_p" type="submit">Modifier le point relais</button>
 
             {{ form_end(edit_form) }}

@@ -36,9 +36,9 @@ class ProduitCreationType extends AbstractType
             ->add('prixGastronomique')
             ->add('quantite')
             ->add('pr', EntityType::class, array(
-                'class' => 'AppBundle\Entity\PointRelais',
+                'class' => 'AppBundle:PointRelais',
                 'choice_label' => 'nom',
-                'expanded' => false,
+                'expanded' => true,
                 'multiple' => true,
             ))
             ->add('file',  FileType::class)

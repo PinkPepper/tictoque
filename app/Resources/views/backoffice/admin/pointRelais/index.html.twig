@@ -30,10 +30,10 @@
                         <td>
                             <ul>
                                 <li>
-                                    <a href="{{ path('admin_point_relais_edit', { 'id': point.id }) }}">Modifier</a>
+                                    <a href="{{ path('admin_point_relais_edit', { 'id': point.id }) }}"><img class="sizePicto" src="{{ asset('img/edit.svg') }}"></a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('admin_point_relais_delete', { 'id': point.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</a>
+                                    <a href="{{ path('admin_point_relais_delete', { 'id': point.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')"><img class="sizePicto" src="{{ asset('img/delete.svg')}}"></a>
                                 </li>
                             </ul>
                         </td>

@@ -21,9 +21,9 @@
                     <td>{{ livraison.produit.nom }}</td>
                     <td>{{ livraison.pointRelais.nom }}</td>
                     {% if livraison.statut == "livré" %}
-                        <td style="color:green"><strong>{{ livraison.statut }}</strong></td>
+                        <td style="color:green"><strong>Livré</strong></td>
                     {% else %}
-                        <td style="color:red"><strong>{{ livraison.statut }}</strong></td>
+                        <td style="color:red"><strong>Non livré</strong></td>
                     {% endif %}
                     <td>{{ livraison.date|date('d/m/Y') }}</td>
                     <td>
