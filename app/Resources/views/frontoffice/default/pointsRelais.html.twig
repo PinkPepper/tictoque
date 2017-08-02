@@ -9,9 +9,14 @@
     <button href="#" id="button">Valider</button>
 </div>
 
+<div id="bodymovin"></div>
 <div class="results" data-url="{{ path('point_relais_results', {'adresse': '_adresse_'}) }}"></div>
 
 </div>
+
+<script src="{{ asset('js/loader.js') }}"></script>
+
+
 <script>
     if(document.querySelector('.relais_check'))
     {
@@ -19,18 +24,26 @@
     }
 
     $('#button').on('click', function(){
+        var anim;
+        anim = bodymovin.loadAnimation(params);
         const url = $(".results").data('url');
         var adresse = $('#input').val();
         adresse = adresse.replace(/ /g, '%20');
-        $('.results').load(url.replace(/_adresse_/, adresse));
+        $('.results').load(url.replace(/_adresse_/, adresse),function(){
+            anim.destroy();
+        });
     })
 
     $('#input').keypress(function(e) {
         if(e.which == 13) {
+            var anim;
+            anim = bodymovin.loadAnimation(params);
             const url = $(".results").data('url');
             var adresse = $('#input').val();
             adresse = adresse.replace(/ /g, '%20');
-            $('.results').load(url.replace(/_adresse_/, adresse));
+            $('.results').load(url.replace(/_adresse_/, adresse),function(){
+                anim.destroy();
+            });
         }
     });
 </script>
