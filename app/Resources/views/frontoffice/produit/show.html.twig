@@ -118,11 +118,43 @@
                 <div id="afficher_aller_long" style="display:none;">
                     <p class="produit_desc_long">
                         {% for all in produit.allergenes %}
-                        <ul>
-                            <li>
-                                {{all.nom}}
-                            </li>
-                        </ul>
+                            <div class="divEachAllergene">
+                                {% if all.nom == "Gluten" %}
+                                <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/gluten.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Lactose" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/lactose.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Viande" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/viande.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Poisson" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/poisson.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Noix" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/nuts.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Oeuf" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/oeufs.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Sel" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/salt.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Sucre" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/sugar.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Soja" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/soybean.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Lupin" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/lupin.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Moutarde" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/mustard.svg') }}">
+                                {% endif %}
+                                <br>
+                                <span>{{all.nom}}</span>
+                            </div>
                         {% endfor %}
                     </p>
                 </div>
