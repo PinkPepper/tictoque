@@ -14,7 +14,6 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="container">
         <div class="row ficheProduit">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
@@ -111,6 +110,7 @@
                 <h5>{{ produit.nom }}</h5>
                     <p class="produit_desc_long">
                         {{ produit.description | raw }}
+
                     </p>
                 </div>
 
@@ -118,6 +118,17 @@
                 <div id="afficher_aller_long" style="display:none;">
                     <p class="produit_desc_long">
                         {% for all in produit.allergenes %}
+                            {% for allUser in app.user.allergenes %}
+                                {% if allUser.id == all.id %}
+                                <script>
+                                    $(document).ready(function(){
+                                        $('.container').css({'opacity':'0.1'});
+                                        $('.popUpAllergene').css({'opacity':'1'});
+                                        $('.popUpAllergene').fadeIn();
+                                    })
+                                </script>
+                                {% endif %}
+                            {% endfor %}
                             <div class="divEachAllergene">
                                 {% if all.nom == "Gluten" %}
                                 <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/gluten.svg') }}">
@@ -229,7 +240,11 @@
             </div>
         </div>
     </div>
-
+    <div class="popUpAllergene">
+        <img id="closePopUpAller" style="width: 20px;height:20px;float: right;cursor:pointer;" src="{{ asset('img/cross.svg') }}">
+        <h3>Attention !</h3>
+        <p>Ce produit contient un ingrédient auxquel vous êtes allergique, faites-attention !</p>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -282,6 +297,13 @@
                 //$(this).load(url);
                 //$(this).prop('disabled', true);
             }) ;
+
+            $('#closePopUpAller').click(function(){
+                $('.popUpAllergene').fadeOut(function(){
+                    $('.container').css({'opacity':'1'})
+                });
+            })
         });
     </script>
+
 {% endblock %}
