@@ -2634,5 +2634,34 @@ body .container .recap-prix .livraison-total .prix-total {
   color:white;
 }
 
+.buttonReturn{
+  text-align: center;
+  height: 40px;
+  padding-top: 10px;
+  background-color: #f32063;
+  width: 80px;
+  border-radius: 5px;
+  color:white;
+}
+
+.aReturnHisto:hover{
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.aReturnHisto{
+  display: inline-block;
+  width: 80px;
+  height: 40px;
+}
+
+.histoCommandeContainer{
+  margin-top: 30px !important;
+}
+
+.marginTopHistoCommande{
+  margin-top: 20px;
+}
+
 /*# sourceMappingURL=styleFront.css.map */
 
