@@ -2538,7 +2538,7 @@ body .container .recap-prix .livraison-total .prix-total {
   background-color: white;
   border-radius: 3px;
   padding: 15px;
-  padding-top: 35px;
+  padding-top: 30px;
 }
 
 .boxAccountLong{
@@ -2557,13 +2557,11 @@ body .container .recap-prix .livraison-total .prix-total {
 }
 
 .imgAccount{
+  margin-top: 10px;
   float: left;
-  width: 80px;
-  height: 80px;
-}
-
-.boxTextAccount{
-
+  width: 60px;
+  height: 60px;
+  margin-right: 15px;
 }
 
 .noStyleHoverA{
