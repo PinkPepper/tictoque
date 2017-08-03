@@ -18,6 +18,30 @@ class ProfileCustomController extends Controller
 {
     /**
      * @param Request $request
+     * @Route("/", name="profile_base")
+     */
+    public function showAction()
+    {
+
+        $user = $this->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $articles = $em->getRepository('AppBundle:Article')->findAll();
+        $produits = $em->getRepository('AppBundle:Produit')->findAll();
+
+        $finalTab = array_merge($produits,$articles);
+        shuffle($finalTab);
+
+        return $this->render('@FOSUser/Profile/show.html.twig', array(
+            'user' => $user,
+            'tableauSuggestion' => $finalTab
+        ));
+    }
+
+
+    /**
+     * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/edit", name="profile_edit_show")
      */
