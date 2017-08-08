@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Commande;
 use AppBundle\Entity\CommandeMenu;
 use AppBundle\Entity\CommandeProduit;
+use AppBundle\Entity\Livraison;
 use AppBundle\Entity\Menu;
+use AppBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -34,18 +36,7 @@ class CommandeController extends Controller
             return $this->redirectToRoute('index_panier');
         }
 
-
-        $form = $this->createForm('AppBundle\Form\DateType');
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid())
-        {
-            $date = $form->getData()['date'];
-            $session = $request->getSession();
-            $session->set('dateLivraison', $date);
-            return $this->redirectToRoute('commande_succes');
-        }
-
-        return $this->render('frontoffice/commande/index.html.twig', array('form'=>$form->createView()));
+        return $this->render('frontoffice/commande/index.html.twig');
     }
 
     /**
@@ -58,6 +49,9 @@ class CommandeController extends Controller
         $session = $request->getSession();
         $em = $this->getDoctrine();
 
+        $cookies = $request->cookies;
+        $date = $cookies->get('date');
+
         $pointRelais = $session->get("pointRelais");
         if($pointRelais == "" | $pointRelais === null)
         {
@@ -66,7 +60,7 @@ class CommandeController extends Controller
         $pointRelais = $em->getRepository('AppBundle:PointRelais')->find($pointRelais);
 
         $prix = $session->get('prix');
-        $date = $session->get('dateLivraison');
+       // $date = $session->get('dateLivraison');
 
         $commande = $this->setCommande($pointRelais, $prix, $date);
         if($commande === null){
@@ -76,10 +70,8 @@ class CommandeController extends Controller
             );
             return $this->redirectToRoute('commande_index');
         }
-        $this->setContenuCommande($request, $commande);
+        $this->setContenuCommande($request, $commande, $pointRelais);
 
-        //TODO informer le livreur
-        //TODO mettre à jour la quantité de produit dans la base selon la commande
 
 
         /* ****** PAGE SUCCES ****** */
@@ -167,9 +159,11 @@ class CommandeController extends Controller
         $commande->setAdresse($pointRelais->getAdresse());
 
         $today = new \DateTime();
+        $date = new \DateTime($date);
+
+
         if($today->format('Y-m-d') == $date->format('Y-m-d')){
             $hours = (new \DateTime())->format('H');
-
             if($hours < 10)
             {
                 $commande->setDateLivraison(new \DateTime());
@@ -179,11 +173,12 @@ class CommandeController extends Controller
                 $commande->setDateLivraison((new \DateTime())->add(new \DateInterval('P1D')));
             }
         }
-        else if($date->format('Y-m-d') < $today->format('Y-m-d')){
-           return null;
+        else if($today->format('Y-m-d') < $date->format('Y-m-d'))
+        {
+            $commande->setDateLivraison($date);
         }
         else{
-            $commande->setDateLivraison($date);
+            return null;
         }
 
 
@@ -193,7 +188,7 @@ class CommandeController extends Controller
         return $commande;
     }
 
-    private function setContenuCommande(Request $request, $commande)
+    private function setContenuCommande(Request $request, $commande, $pointRelais)
     {
         $session = $request->getSession();
         $em = $this->getDoctrine();
@@ -218,6 +213,7 @@ class CommandeController extends Controller
                 $commandeProduit->setQuantiteCommandee($quantite);
 
                 $produit->setQuantite($produit->getQuantite()-$quantite);
+                $this->updateLivraison($produit, $pointRelais, $quantite);
 
                 $em->getManager()->persist($commandeProduit);
                 $em->getManager()->persist($produit);
@@ -234,6 +230,7 @@ class CommandeController extends Controller
                 {
                     $produit = $em->getRepository('AppBundle:Produit')->find($value['entree']);
                     $produit->setQuantite($produit->getQuantite()-1);
+                    $this->updateLivraison($produit, $pointRelais, 1);
                     $em->getManager()->persist($produit);
                 }
 
@@ -241,6 +238,7 @@ class CommandeController extends Controller
                 {
                     $produit = $em->getRepository('AppBundle:Produit')->find($value['plat']);
                     $produit->setQuantite($produit->getQuantite()-1);
+                    $this->updateLivraison($produit, $pointRelais, 1);
                     $em->getManager()->persist($produit);
                 }
 
@@ -248,6 +246,7 @@ class CommandeController extends Controller
                 {
                     $produit = $em->getRepository('AppBundle:Produit')->find($value['dessert']);
                     $produit->setQuantite($produit->getQuantite()-1);
+                    $this->updateLivraison($produit, $pointRelais, 1);
                     $em->getManager()->persist($produit);
                 }
 
@@ -255,6 +254,7 @@ class CommandeController extends Controller
                 {
                     $produit = $em->getRepository('AppBundle:Produit')->find($value['boisson']);
                     $produit->setQuantite($produit->getQuantite()-1);
+                    $this->updateLivraison($produit, $pointRelais, 1);
                     $em->getManager()->persist($produit);
                 }
 
@@ -291,5 +291,40 @@ class CommandeController extends Controller
             )
         ;
         $this->get('mailer')->send($message);
+    }
+
+    private function updateLivraison(Produit $produit, $pointRelais, $quantite){
+        $hours = (new \DateTime())->format('H');
+        $em = $this->getDoctrine();
+        if($hours < 10)
+        {
+            $livraison = $em->getRepository("AppBundle:Livraison")->findByProduitAndPointRelaisAndDate($produit->getId(), $pointRelais, (new \DateTime())->format('Y-m-d'));
+            $livraison[0]->setQuantiteRestante($livraison[0]->getQuantite()-$quantite);
+            $em->getManager()->flush();
+        }
+        else //livraison pour demain
+        {
+            $tomorrow = (new \DateTime())->add(new \DateInterval('P1D'));
+            $livraison = $em->getRepository("AppBundle:Livraison")->findByProduitAndPointRelaisAndDate($produit->getId(), $pointRelais, $tomorrow->format('Y-m-d'));
+
+            if($livraison == null){
+
+                $livraison = new Livraison();
+                $livraison->setQuantite($quantite);
+                $livraison->setQuantiteRestante($quantite);
+                $livraison->setStatut("non livré");
+                $livraison->setProduit($produit);
+                $livraison->setDate(new \DateTime($tomorrow->format("Y-m-d")));
+                $livraison->setPointRelais($pointRelais);
+
+                $em->getManager()->persist($livraison);
+                $em->getManager()->flush();
+            }
+            else{
+                $livraison[0]->setQuantiteRestante($livraison[0]->getQuantite()+$quantite);
+                $livraison[0]->setQuantite($livraison[0]->getQuantite()+$quantite);
+                $em->getManager()->flush();
+            }
+        }
     }
 }

@@ -44,6 +44,13 @@ class Livraison
     private $quantite;
 
     /**
+     * @var int
+     *
+     * @ORM\Column(name="quantite_restante", type="integer")
+     */
+    private $quantiteRestante;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="statut", type="string")
@@ -57,6 +64,10 @@ class Livraison
      */
     private $date;
 
+    public function __construct()
+    {
+        $this->quantiteRestante = $this->quantite;
+    }
 
     /**
      * Get id
@@ -162,6 +173,22 @@ class Livraison
     public function setStatut($statut)
     {
         $this->statut = $statut;
+    }
+
+    /**
+     * @return int
+     */
+    public function getQuantiteRestante()
+    {
+        return $this->quantiteRestante;
+    }
+
+    /**
+     * @param int $quantiteRestante
+     */
+    public function setQuantiteRestante($quantiteRestante)
+    {
+        $this->quantiteRestante = $quantiteRestante;
     }
 }
 

@@ -5,12 +5,9 @@
 {% block body %}
     <div class="panier">
     <div class="container">
-        {{ form_start(form) }}
         <div class="row">
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12 livraison_paiement">
-                <h3>Choisissez la date de livraison</h3>
                 <p>Attention, Si vous choisissez la date du jour avant 10h, la commande sera reportée au lendemain.</p>
-                    {{ form_widget(form.date) }}
             </div>
             <div class="col-lg-offset-1 col-lg-3 col-sm-12 col-md-12 col-xs-12 commande">
                 <h4>Commande</h4>
@@ -39,13 +36,12 @@
                             <input type="text" name="carte_numero" class="carte_numero" placeholder="4111 1111 1111 1111">
                         </div>
                         <div class="chiffre_cb">
-                            <label>Date d'éxpritation</label>
+                            <label>Date d'expiration</label>
                             <input type="text" name="date_expiration" class="date_expiration" placeholder="MM/YY">
                             <label>Cryptogramme</label>
                             <input type="text" name="crypto" class="crypto" placeholder="758">
                         </div>
-                   {#     <a href="{{ path('commande_succes') }}" class="paimement_valider"> Valider mon paiement</a>#}
-                        <input type="submit" value="envoyer" class="paimement_valider">
+                        <a {#href="{{ path('commande_succes') }}"#} class="paimement_valider" onclick="commander()"> Valider mon paiement</a>
                     </div>
                     <a href="">
                     <div class="paiement_paypal">
@@ -56,26 +52,37 @@
                 </div>
             </div>
         </div>
-        {{ form_end(form) }}
     </div>
     </div>
+
+    <a href="{{ path('commande_succes') }}" style="display: none" id="commande_link">Commande link</a>
 
     <script>
         $(document).ready(function() {
-            var dateToday = new Date();
-            $('.js-datepicker').datepicker({
-                dateFormat: "dd/mm/yy",
-                monthNames: [ "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre" ],
-                dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
-                dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
-                numberOfMonths: 1,
-                showButtonPanel: true,
-                minDate: dateToday
-            });
-
             $('.carte_header').click(function(){
                 $('.carte_details').slideToggle(400);
-            })
+            });
         });
+
+        function commander(){
+            var now = new Date();
+            if(now.getHours() < 10){
+                document.cookie = "date=" + now.getFullYear() +"-"+ (now.getMonth()+1) +"-"+ now.getDate();
+                document.getElementById('commande_link').click();
+            }
+            else{
+                var tomorrow = new Date();
+                tomorrow.setDate(now.getDate() + 1);
+
+                document.cookie = "date=" + tomorrow.getFullYear() +"-"+ (tomorrow.getMonth()+1) +"-"+ tomorrow.getDate();
+                //console.log(tomorrow.getFullYear() +"-"+ (tomorrow.getMonth()+1) +"-"+ tomorrow.getDate());
+                if(confirm('La date de cette commande correspond à demain. Continuer ?'))
+                {
+                    document.getElementById('commande_link').click();
+                }
+            }
+
+
+        }
     </script>
 {% endblock %}

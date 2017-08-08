@@ -56,7 +56,7 @@ class ProduitSelectListener implements EventSubscriber
                }
                else
                {
-                   $entity->setQuantite($livraison->getQuantite());
+                   $entity->setQuantite($livraison->getQuantiteRestante());
                }
             }
         }

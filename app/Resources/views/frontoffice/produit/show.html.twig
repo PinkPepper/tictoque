@@ -53,9 +53,11 @@
                 <p class="produit_prix_solde">{{ produit.prix|number_format(2, '.', ',') }}€</p>
 
                 <select class="produit_quantite">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                    {% for i in 1..produit.quantite %}
+                        {% if i < 6 %} <!-- On peut commander au max 5 exemplaires -->
+                            <option value="{{ i }}">{{ i }}</option>
+                        {% endif %}
+                    {% endfor %}
                 </select>
 
 
@@ -63,7 +65,7 @@
                     <a class="produit_ajout">Indisponible</a>
                 {% else %}
                     {% if app.user is not null %}
-                        <button class="ajoutPanier produit_ajout" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}" >Ajouter au panier</button>
+                        <button class="ajoutPanier produit_ajout" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_quantite_panier', {'produit': produit.id, 'nombre': 'nbquantite'}) }}" data-id="{{ produit.id }}" >Ajouter au panier</button>
                     {% else %}
                         <a class="produit_ajout" href="{{ path('fos_user_security_login') }}">Ajouter au panier</a>
                     {% endif %}
@@ -208,7 +210,7 @@
                         <div class="showImgPlat">
                             <img class="img-responsive imgPlat" src="{{ asset('produits/'~produitSup.image) }}">
                             {% if app.user is not null %}
-                                <a class="ajoutPanier addToCart" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_panier', {'produit': produitSup.id}) }}" data-id="{{ produitSup.id }}" >Ajouter</a>
+                                <a class="ajoutPanier addToCart" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_quantite_panier', {'produit': produitSup.id, 'nombre': 'nbquantite'}) }}" data-id="{{ produitSup.id }}" >Ajouter</a>
                             {% else %}
                                 <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
                             {% endif %}
@@ -290,12 +292,14 @@
                 e.preventDefault();
                 var url = $(this).data('url');
                 var id = $(this).data('id');
+                var quantite = $('.produit_quantite').val();
+                console.log(quantite);
 
-                console.log('click');
                 console.log(url);
+                url = url.replace('nbquantite', quantite);
+                console.log(url);
+
                 $('#modal-body').load(url);
-                //$(this).load(url);
-                //$(this).prop('disabled', true);
             }) ;
 
             $('#closePopUpAller').click(function(){
