@@ -53,6 +53,7 @@ class Produit
      *
      * @ORM\Column(name="prix", type="float")
      * @Assert\NotBlank()
+     * @Assert\GreaterThan(2.99)
      */
     private $prix;
 
@@ -92,7 +93,7 @@ class Produit
 
     /**
      * @var int
-     **@ORM\ManyToMany(targetEntity="AppBundle\Entity\PointRelais", inversedBy="produits")
+     **@ORM\ManyToMany(targetEntity="AppBundle\Entity\PointRelais", inversedBy="produits", cascade={"remove", "persist"})
      */
     private $pointRelais;
     private $pr;
