@@ -42,7 +42,6 @@ class DefaultController extends Controller
                 $em->getRepository('AppBundle:Produit')->find($produitsHP[0]->getProduit3()));
         }
 
-
         return $this->render('frontoffice/default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
             'produits' => $produits,

@@ -59,8 +59,8 @@ class PointRelais
     /**
     @ORM\ManyToMany(targetEntity="Produit", inversedBy="pointRelais")
      *  @ORM\JoinTable(name="RelationProduitPointRelais",
-     *  joinColumns={@ORM\JoinColumn(name="pointRelais_id", referencedColumnName="id", onDelete="CASCADE")},
-     *  inverseJoinColumns={@ORM\JoinColumn(name="produit_id", referencedColumnName="id", onDelete="CASCADE")})
+     *  joinColumns={@ORM\JoinColumn(name="pointRelais_id", referencedColumnName="id")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="produit_id", referencedColumnName="id")})
      */
     private $produits;
 

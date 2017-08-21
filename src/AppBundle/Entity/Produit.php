@@ -93,7 +93,7 @@ class Produit
 
     /**
      * @var int
-     **@ORM\ManyToMany(targetEntity="AppBundle\Entity\PointRelais", inversedBy="produits", cascade={"remove", "persist"})
+     **@ORM\ManyToMany(targetEntity="AppBundle\Entity\PointRelais", inversedBy="produits", cascade={"persist"})
      */
     private $pointRelais;
     private $pr;

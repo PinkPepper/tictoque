@@ -4,12 +4,14 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Commande
  *
  * @ORM\Table(name="commande")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\CommandeRepository")
+ * @UniqueEntity("identifiant")
  */
 class Commande
 {
@@ -21,6 +23,12 @@ class Commande
      * @ORM\GeneratedValue(strategy="UUID")
      */
     private $id;
+
+    /**
+     * @var string
+     * @ORM\Column(name="identifiant", type="string", length=255, nullable=true)
+     */
+    private $identifiant;
 
     /**
      * @var \DateTime
@@ -65,6 +73,18 @@ class Commande
     public function __construct()
     {
         $this->date = new \DateTime();
+        $this->setIdentifiant();
+    }
+
+    private function setIdentifiant()
+    {
+        $chaine='0123456789abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWYXZ-';
+        $melange = str_shuffle($chaine);
+        $this->identifiant = str_shuffle(substr($melange, 0, 15));
+    }
+
+    public function getIdentifiant(){
+        return $this->identifiant;
     }
 
     /**
