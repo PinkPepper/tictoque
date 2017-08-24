@@ -2129,12 +2129,17 @@ body .container .recap-prix .livraison-total .prix-total {
   border: 2px solid #e52c65; }
 
 .paiement_carte .carte_header {
+  cursor: pointer;
   display: inline-flex;
   width: 100%;
   border: 2px solid #e52c65;
   border-radius: 5px;
   padding: 20px;
   background-color: #ffffff; }
+
+.paimement_valider{
+  cursor: pointer;
+}
 
 .paiement_carte .carte_header img:first-child {
   width: 60px;
@@ -2543,7 +2548,7 @@ body .container .recap-prix .livraison-total .prix-total {
 
 .boxAccountLong{
   box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.4);
-  height: 300px;
+  height: 200px;
   background-color: white;
   border-radius: 3px;
   padding: 30px;
@@ -2661,6 +2666,7 @@ body .container .recap-prix .livraison-total .prix-total {
 
 .marginTopHistoCommande{
   margin-top: 20px;
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=styleFront.css.map */
@@ -2668,4 +2674,20 @@ body .container .recap-prix .livraison-total .prix-total {
 
 .roseColor{
   color:#f32063;
+}
+
+.productInCommande{
+  display: none;
+  border-top: hidden;
+  box-shadow:0px 0px 3px 0px rgba(0, 0, 0, 0.4);
+  background-color: white;
+  padding: 15px;
+}
+
+.titleProductHisto{
+padding-left: 15px;
+}
+
+.showMore{
+  cursor: pointer;
 }
