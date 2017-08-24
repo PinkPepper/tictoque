@@ -52,7 +52,8 @@
                                 <p><b>{{ product.produits.nom }}</b></p>
                             </div>
                         {% endfor %}
-
+                    </div>
+                    <div class="row">
                         {% if c.commandesMenu|length > 0 %}<h3 class="titleProductHisto">Menus</h3>{% endif %}
                         {% for commandeMenu in c.commandesMenu %}
                             <p style="padding-left: 15px">Prix du menu : <b>{{ commandeMenu.menus.prix }}€</b></p>
