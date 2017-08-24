@@ -188,28 +188,28 @@
                     <div class="row sousMenu" id="sousMenu-{{ menu["id"] }}" style="display: none">
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Entrée</h5>
-                            <h5>{% if menu["entree"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["entree"].id}) }}">{{ menu["entree"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["entree"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["entree"].id}) }}">{{ menu["entree"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["entree"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["entree"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Plat</h5>
-                            <h5>{% if menu["plat"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["plat"].id}) }}">{{ menu["plat"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["plat"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["plat"].id}) }}">{{ menu["plat"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["plat"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["plat"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Dessert</h5>
-                            <h5>{% if menu["dessert"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["dessert"].id}) }}">{{ menu["dessert"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["dessert"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["dessert"].id}) }}">{{ menu["dessert"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["dessert"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["dessert"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Boisson</h5>
-                            <h5>{% if menu["boisson"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["boisson"].id}) }}">{{ menu["boisson"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["boisson"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["boisson"].id}) }}">{{ menu["boisson"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["boisson"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["boisson"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
