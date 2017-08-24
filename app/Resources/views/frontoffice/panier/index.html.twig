@@ -67,8 +67,7 @@
                         $('#total').text(total.toFixed(2)+"€");
                     </script>
                 </span></p></b>
-
-                    <a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>
+                    {% if panier.prix > 5 %}<a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>{% endif %}
                     <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
                 </div>
             </div>
@@ -97,7 +96,6 @@
                         {% set boisson = '1' %}
                     {% endif %}
                 {% endfor %}
-                {% if (entree=='1') and (plat=='1') and (dessert=='1') and (boisson=='1') %}
                 <div id="passToMenu" class="produit">
                     <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
                         <img class="pictoGift" src="{{ asset('img/gift.svg') }}">
@@ -106,14 +104,21 @@
                         <p class="phraseToMenu"><strong>Passez vos produits en menu et faites des économies sur votre commande.<br>Il vous suffit d'avoir une entrée un plat un dessert et une boisson !</strong></p>
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        {% if (entree=='1') and (plat=='1') and (dessert=='1') and (boisson=='1') %}
                         <a class="passToMenuButton" href="{{ path('do_menus') }}">
                             <div>
                                 Passer en menu
                             </div>
                         </a>
+                        {% else %}
+                            <a class="passToMenuButton">
+                                <div style="background-color:#939495">
+                                    Passer en menu
+                                </div>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
-                {% endif %}
             </div>
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
                 {% if menus|length != 0 %}
