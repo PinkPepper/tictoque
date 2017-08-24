@@ -231,7 +231,7 @@
                         <h5 class="productType">{{ produit[0].type | upper }}</h5>
                         <h4 class="productName">{{ produit[0].nom }}</h4>
                         <h5 class="productPrice">{{ produit[0].prix | number_format(2, '.', ',') }}€</h5>
-                        <h5 class="productShow"><a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
+                        <h5 class="productShow"><a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
                     </div>
                     <div class="colReduced col-xs-3 col-sm-2 col-md-2 col-lg-2 divQuantite">
                         <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
@@ -271,7 +271,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body" id="modal-body">
-                    ...
+                    <div id="bodymovin">
+                    </div>
+                    <script src="{{ asset('js/loader.js') }}"></script>
+                    <script>
+                        var anim;
+                        anim = bodymovin.loadAnimation(params);
+                    </script>
                 </div>
             </div>
         </div>
@@ -320,7 +326,10 @@
         $('.voir').on('click', function (e) {
             e.preventDefault();
             var url = $(this).data('url');
-            $('#modal-body').load(url);
+            $('#modal-body').load(url,function(){
+                console.log('ok');
+                $('#myModal').modal('toggle')
+            });
         });
 
         $('.gestion_panier').on('click', function (e) {
