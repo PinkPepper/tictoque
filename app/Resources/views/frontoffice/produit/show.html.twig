@@ -120,17 +120,17 @@
                 <div id="afficher_aller_long" style="display:none;">
                     <p class="produit_desc_long">
                         {% for all in produit.allergenes %}
-                            {% for allUser in app.user.allergenes %}
-                                {% if allUser.id == all.id %}
-                                <script>
-                                    $(document).ready(function(){
-                                        $('.container').css({'opacity':'0.1'});
-                                        $('.popUpAllergene').css({'opacity':'1'});
-                                        $('.popUpAllergene').fadeIn();
-                                    })
-                                </script>
-                                {% endif %}
-                            {% endfor %}
+                                {% for allUser in app.user.allergenes %}
+                                    {% if allUser.id == all.id %}
+                                    <script>
+                                        $(document).ready(function(){
+                                            $('.container').css({'opacity':'0.1'});
+                                            $('.popUpAllergene').css({'opacity':'1'});
+                                            $('.popUpAllergene').fadeIn();
+                                        })
+                                    </script>
+                                    {% endif %}
+                                {% endfor %}
                             <div class="divEachAllergene">
                                 {% if all.nom == "Gluten" %}
                                 <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/gluten.svg') }}">
