@@ -120,17 +120,17 @@
                 <div id="afficher_aller_long" style="display:none;">
                     <p class="produit_desc_long">
                         {% for all in produit.allergenes %}
-                            {% for allUser in app.user.allergenes %}
-                                {% if allUser.id == all.id %}
-                                <script>
-                                    $(document).ready(function(){
-                                        $('.container').css({'opacity':'0.1'});
-                                        $('.popUpAllergene').css({'opacity':'1'});
-                                        $('.popUpAllergene').fadeIn();
-                                    })
-                                </script>
-                                {% endif %}
-                            {% endfor %}
+                                {% for allUser in app.user.allergenes %}
+                                    {% if allUser.id == all.id %}
+                                    <script>
+                                        $(document).ready(function(){
+                                            $('.container').css({'opacity':'0.1'});
+                                            $('.popUpAllergene').css({'opacity':'1'});
+                                            $('.popUpAllergene').fadeIn();
+                                        })
+                                    </script>
+                                    {% endif %}
+                                {% endfor %}
                             <div class="divEachAllergene">
                                 {% if all.nom == "Gluten" %}
                                 <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/gluten.svg') }}">
@@ -245,7 +245,7 @@
     <div class="popUpAllergene">
         <img id="closePopUpAller" style="width: 20px;height:20px;float: right;cursor:pointer;" src="{{ asset('img/cross.svg') }}">
         <h3>Attention !</h3>
-        <p>Ce produit contient un ingrédient auxquel vous êtes allergique, faites-attention !</p>
+        <p>Ce produit contiens un produit dont vous êtes allergique ! Soucieux de votre santé, nous souhaitons vous alerter sur les ingrédients de notre produit.</p>
     </div>
 {% endblock %}
 

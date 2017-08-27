@@ -75,7 +75,7 @@
                         <div class="row sousMenu sousMenuSuccess" id="sousMenu-{{ menu["id"] }}" style="display: none">
                             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                                 <h5>Entrée</h5>
-                                <h5>{% if menu["entree"] is not null %}<a class="voir" data-toggle="modal"
+                                <h5>{% if menu["entree"] is not null %}<a class="voir"
                                                                           data-target="#myModal"
                                                                           data-url="{{ path('produit_panier_show', {'id': menu["entree"].id}) }}">{{ menu["entree"].nom }}</a>{% else %}Non spécifié{% endif %}
                                 </h5>
@@ -85,7 +85,7 @@
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                                 <h5>Plat</h5>
-                                <h5>{% if menu["plat"] is not null %}<a class="voir" data-toggle="modal"
+                                <h5>{% if menu["plat"] is not null %}<a class="voir"
                                                                         data-target="#myModal"
                                                                         data-url="{{ path('produit_panier_show', {'id': menu["plat"].id}) }}">{{ menu["plat"].nom }}</a>{% else %}Non spécifié{% endif %}
                                 </h5>
@@ -95,7 +95,7 @@
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                                 <h5>Dessert</h5>
-                                <h5>{% if menu["dessert"] is not null %}<a class="voir" data-toggle="modal"
+                                <h5>{% if menu["dessert"] is not null %}<a class="voir"
                                                                            data-target="#myModal"
                                                                            data-url="{{ path('produit_panier_show', {'id': menu["dessert"].id}) }}">{{ menu["dessert"].nom }}</a>{% else %}Non spécifié{% endif %}
                                 </h5>
@@ -105,7 +105,7 @@
                             </div>
                             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                                 <h5>Boisson</h5>
-                                <h5>{% if menu["boisson"] is not null %}<a class="voir" data-toggle="modal"
+                                <h5>{% if menu["boisson"] is not null %}<a class="voir"
                                                                            data-target="#myModal"
                                                                            data-url="{{ path('produit_panier_show', {'id': menu["boisson"].id}) }}">{{ menu["boisson"].nom }}</a>{% else %}Non spécifié{% endif %}
                                 </h5>
@@ -125,7 +125,7 @@
                             <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                                 <h5>{{ produit[0].type | upper }}</h5>
                                 <h4>{{ produit[0].nom }}</h4>
-                                <h5><a class="voir" data-toggle="modal" data-target="#myModal"
+                                <h5><a class="voir" data-target="#myModal"
                                        data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir
                                         plus ...</a></h5>
                             </div>
@@ -189,7 +189,10 @@
         $('.voir').on('click', function (e) {
             e.preventDefault();
             var url = $(this).data('url');
-            $('#modal-body').load(url);
+            $('#modal-body').load(url,function(){
+                console.log('ok');
+                $('#myModal').modal('toggle')
+            });
         });
 
         $('.showMore').on('click', function (e) {

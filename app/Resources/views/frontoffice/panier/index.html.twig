@@ -67,8 +67,7 @@
                         $('#total').text(total.toFixed(2)+"€");
                     </script>
                 </span></p></b>
-
-                    <a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>
+                    {% if panier.prix > 5 %}<a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>{% endif %}
                     <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
                 </div>
             </div>
@@ -97,7 +96,6 @@
                         {% set boisson = '1' %}
                     {% endif %}
                 {% endfor %}
-                {% if (entree=='1') and (plat=='1') and (dessert=='1') and (boisson=='1') %}
                 <div id="passToMenu" class="produit">
                     <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
                         <img class="pictoGift" src="{{ asset('img/gift.svg') }}">
@@ -106,14 +104,21 @@
                         <p class="phraseToMenu"><strong>Passez vos produits en menu et faites des économies sur votre commande.<br>Il vous suffit d'avoir une entrée un plat un dessert et une boisson !</strong></p>
                     </div>
                     <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        {% if (entree=='1') and (plat=='1') and (dessert=='1') and (boisson=='1') %}
                         <a class="passToMenuButton" href="{{ path('do_menus') }}">
                             <div>
                                 Passer en menu
                             </div>
                         </a>
+                        {% else %}
+                            <a class="passToMenuButton">
+                                <div style="background-color:#939495">
+                                    Passer en menu
+                                </div>
+                            </a>
+                        {% endif %}
                     </div>
                 </div>
-                {% endif %}
             </div>
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
                 {% if menus|length != 0 %}
@@ -183,28 +188,28 @@
                     <div class="row sousMenu" id="sousMenu-{{ menu["id"] }}" style="display: none">
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Entrée</h5>
-                            <h5>{% if menu["entree"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["entree"].id}) }}">{{ menu["entree"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["entree"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["entree"].id}) }}">{{ menu["entree"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["entree"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["entree"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Plat</h5>
-                            <h5>{% if menu["plat"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["plat"].id}) }}">{{ menu["plat"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["plat"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["plat"].id}) }}">{{ menu["plat"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["plat"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["plat"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Dessert</h5>
-                            <h5>{% if menu["dessert"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["dessert"].id}) }}">{{ menu["dessert"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["dessert"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["dessert"].id}) }}">{{ menu["dessert"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["dessert"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["dessert"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Boisson</h5>
-                            <h5>{% if menu["boisson"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["boisson"].id}) }}">{{ menu["boisson"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["boisson"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["boisson"].id}) }}">{{ menu["boisson"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["boisson"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["boisson"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
@@ -226,7 +231,7 @@
                         <h5 class="productType">{{ produit[0].type | upper }}</h5>
                         <h4 class="productName">{{ produit[0].nom }}</h4>
                         <h5 class="productPrice">{{ produit[0].prix | number_format(2, '.', ',') }}€</h5>
-                        <h5 class="productShow"><a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
+                        <h5 class="productShow"><a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
                     </div>
                     <div class="colReduced col-xs-3 col-sm-2 col-md-2 col-lg-2 divQuantite">
                         <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
@@ -266,7 +271,13 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body" id="modal-body">
-                    ...
+                    <div id="bodymovin">
+                    </div>
+                    <script src="{{ asset('js/loader.js') }}"></script>
+                    <script>
+                        var anim;
+                        anim = bodymovin.loadAnimation(params);
+                    </script>
                 </div>
             </div>
         </div>
@@ -315,7 +326,10 @@
         $('.voir').on('click', function (e) {
             e.preventDefault();
             var url = $(this).data('url');
-            $('#modal-body').load(url);
+            $('#modal-body').load(url,function(){
+                console.log('ok');
+                $('#myModal').modal('toggle')
+            });
         });
 
         $('.gestion_panier').on('click', function (e) {
