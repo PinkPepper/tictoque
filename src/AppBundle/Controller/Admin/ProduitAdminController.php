@@ -314,24 +314,8 @@ class ProduitAdminController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-
-            $categories = $produit->getCategories();
-            foreach($categories as $cat)
-            {
-                $cat->removeProduit($produit);
-                $produit->removeCategorie($cat);
-            }
-
-            $allergenes = $produit->getAllergenes();
-            foreach($allergenes as $all)
-            {
-                $all->removeProduit($produit);
-                $produit->removeAllergene($all);
-            }
-
-            $this->getDoctrine()->getEntityManager()->flush();
             $em->remove($produit);
-            $em->flush($produit);
+            $em->flush();
         }
 
         return $this->redirectToRoute('produit_index_admin');
@@ -343,26 +327,11 @@ class ProduitAdminController extends Controller
     public function deleteIndexAction(Request $request, Produit $produit)
     {
         $is_on_homePage = $this->getDoctrine()->getRepository('AppBundle:ProduitHomePage')->find($produit->getId());
+
         if($is_on_homePage != null){
             $this->addFlash('notice', 'Ce produit ne peut pas être supprimé car il apparait sur la homepage');
             return $this->redirectToRoute('produit_index_admin');
         }
-        $categories = $produit->getCategories();
-        foreach($categories as $cat)
-        {
-            $cat->removeProduit($produit);
-            $produit->removeCategorie($cat);
-        }
-
-        $allergenes = $produit->getAllergenes();
-        foreach($allergenes as $all)
-        {
-            $all->removeProduit($produit);
-            $produit->removeAllergene($all);
-        }
-
-        $this->getDoctrine()->getEntityManager()->flush();
-
         $em = $this->getDoctrine()->getManager();
         $em->remove($produit);
         $em->flush($produit);

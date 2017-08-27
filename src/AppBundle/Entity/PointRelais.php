@@ -184,7 +184,7 @@ class PointRelais
     }
 
     /**
-     * @return int
+     *
      */
     public function getProduits()
     {
@@ -204,7 +204,7 @@ class PointRelais
      */
     public function getPointRelais()
     {
-        return $this->pointRelais;
+        return $this->id;
     }
 
     /**
@@ -249,6 +249,11 @@ class PointRelais
     public function removeProduit(\AppBundle\Entity\Produit $produit)
     {
         $this->produits->removeElement($produit);
+    }
+
+    public function __construct()
+    {
+        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }
 

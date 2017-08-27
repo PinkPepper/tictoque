@@ -55,7 +55,7 @@ trait TraitUploadImage
      */
     public function preUpload()
     {
-        if(null !== $this->getFile())
+        if(null !== $this->getFile() && !is_string($this->getFile()))
         {
             $this->image = sha1(uniqid(mt_rand(), true)) . '.' . $this->getFile()->guessExtension();
         }
@@ -68,7 +68,7 @@ trait TraitUploadImage
 
     public function upload()
     {
-        if(null === $this->getFile()) {
+        if(null === $this->getFile() || is_string($this->getFile())) {
             return;
         }
 

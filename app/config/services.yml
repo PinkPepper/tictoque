@@ -8,8 +8,14 @@ services:
         class: AppBundle\Service\GeocodeService
         autowire: true
 
-    app.doctrine.produit:
+    app.doctrine.produit_affichage_client:
         class: AppBundle\Listener\ProduitSelectListener
+        autowire: true
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+    app.doctrine.produit:
+        class: AppBundle\Listener\ProduitListener
         autowire: true
         tags:
             - { name: doctrine.event_subscriber, connection: default }
