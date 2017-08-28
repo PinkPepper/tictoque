@@ -75,6 +75,14 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/newsletter", name="newsletter")
+     */
+    public function NewsletterAction()
+    {
+        return $this->render("frontoffice/default/newsletter.html.twig");
+    }
+
+    /**
      * @Route("/qualite-produit", name="qualite_produit")
      */
     public function qualiteProduitAction()

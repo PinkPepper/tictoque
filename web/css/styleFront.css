@@ -1340,7 +1340,8 @@ body .blogContent .blogArticle .blocArticle {
   border: 1px solid #a0a0a0;
   border-radius: 5px;
   box-shadow: 0px 0px 10px -2px;
-  padding-left: 0; }
+  padding-left: 0;
+background-color: white}
 
 body .blogContent .blogArticle .blocArticle .showArticle {
   display: inline-flex; }
@@ -2446,7 +2447,7 @@ body .container .recap-prix .livraison-total .prix-total {
 
   .phraseToMenu{
        margin-top: 10px;
-       color:#D1D1D1;
+       color:#939495;
      }
 
   .pictoGift{
@@ -2454,6 +2455,27 @@ body .container .recap-prix .livraison-total .prix-total {
        height:70px;
        margin-top: 10px;
    }
+
+
+  .produit_hors_stock{
+    color:red;
+  }
+
+  .starGastro{
+    position: absolute;
+    width: 25px;
+    height:25px;
+    padding: 5px;
+    border-radius: 50%;
+    background-color:#f32063;
+  }
+
+  .divGastro{
+    position: absolute;
+    width: 15px;
+    height:15px;
+    background-color:#f32063;
+  }
 
 @media (max-width: 767px) {
   .hideImgProduitSmall{

@@ -1,0 +1,23 @@
+{% extends 'frontoffice/footer.html.twig' %}
+
+{% block title %}Newsletter{% endblock %}
+
+{% block body %}
+
+<div id="content_site" class="c_s_center">
+
+    <img src="{{ asset('img/picto_succes.svg') }}"><br/>
+    <span id="mailAdresse" class="content_site_title">
+    </span>
+    <h1>Votre adresse mail à bien été ajoutée</h1>
+    <p>vous allez recevoir nos mails et recettes très bientôt !</p>
+    <script>
+        $(document).ready(function(){
+            console.log(document.cookie);
+            $('#mailAdresse').html(document.cookie);
+            document.cookie = "";
+        })
+    </script>
+</div>
+
+{% endblock %}
