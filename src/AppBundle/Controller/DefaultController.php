@@ -67,6 +67,14 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/paiement", name="paiement")
+     */
+    public function PaiementAction()
+    {
+        return $this->render("frontoffice/default/paiement.html.twig");
+    }
+
+    /**
      * @Route("/qualite-produit", name="qualite_produit")
      */
     public function qualiteProduitAction()

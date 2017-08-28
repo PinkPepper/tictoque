@@ -74,7 +74,7 @@
                                             <a class="addToCart">Indisponible</a>
                                         {% else %}
                                             {% if app.user is not null %}
-                                                <a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
+                                                <a class="addToCart ajoutPanier" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
                                             {% else %}
                                                 <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
                                             {% endif %}
@@ -182,7 +182,10 @@
 
                 console.log('click');
                 console.log(url);
-                $('#modal-body').load(url);
+                $('#modal-body').load(url,function(){
+                    console.log('ok');
+                    $('#myModal').modal('toggle')
+                });
                 //$(this).load(url);
                 //$(this).prop('disabled', true);
             //    $("#myModal").modal('show');
