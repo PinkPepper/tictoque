@@ -1,14 +1,13 @@
 {% extends 'frontoffice/base.html.twig' %}
 
+{% block title %}Paiement{% endblock %}
+
 {% block body %}
     <div class="panier">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12 livraison_paiement">
-                <h4>Livraison et paiement</h4>
-
-                <input type="text"  id="input" placeholder="Adresse de mon entreprise" required="">
-                <div class="choix_relais" data-adresse="{{ app.user.adresse }}" data-url="{{ path('commande_point_relais', {'adresse': '_adresse_'}) }}"></div>
+                <p>Attention, Si vous choisissez la date du jour avant 10h, la commande sera reportée au lendemain.</p>
             </div>
             <div class="col-lg-offset-1 col-lg-3 col-sm-12 col-md-12 col-xs-12 commande">
                 <h4>Commande</h4>
@@ -18,9 +17,10 @@
                     </span></p></b>
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
-                <h4>Choissisez votre mode de paiement pour continuer</h4>
+                <h3>Choisissez votre mode de paiement</h3>
                 <div class="paiement_carte">
                     <div class="carte_header">
                         <img src="{{ asset('img/picto_carte_bancaire.png') }}"><h4>Paiement par carte</h4>
@@ -36,12 +36,12 @@
                             <input type="text" name="carte_numero" class="carte_numero" placeholder="4111 1111 1111 1111">
                         </div>
                         <div class="chiffre_cb">
-                            <label>Date d'éxpritation</label>
+                            <label>Date d'expiration</label>
                             <input type="text" name="date_expiration" class="date_expiration" placeholder="MM/YY">
                             <label>Cryptogramme</label>
                             <input type="text" name="crypto" class="crypto" placeholder="758">
                         </div>
-                        <a href="{{ path('commande_succes') }}" class="paimement_valider"  >Valider mon paiement</a>
+                        <a {#href="{{ path('commande_succes') }}"#} class="paimement_valider" onclick="commander()"> Valider mon paiement</a>
                     </div>
                     <a href="">
                     <div class="paiement_paypal">
@@ -55,26 +55,34 @@
     </div>
     </div>
 
+    <a href="{{ path('commande_succes') }}" style="display: none" id="commande_link">Commande link</a>
+
     <script>
-        $(document).ready(function(){
-            var adresse = $('.choix_relais').data('adresse');
-
-            if(adresse != null){
-                const url = $(".choix_relais").data('url');
-                $('#input').val(adresse);
-                adresse = adresse.replace(/ /g, '%20');
-                $('.choix_relais').load(url.replace(/_adresse_/, adresse));
-            }
-
-            $('#input').keypress(function(e) {
-                if(e.which == 13) {
-                    const url = $(".choix_relais").data('url');
-                    var adresse = $('#input').val();
-                    adresse = adresse.replace(/ /g, '%20');
-                    $('.choix_relais').load(url.replace(/_adresse_/, adresse));
-                }
+        $(document).ready(function() {
+            $('.carte_header').click(function(){
+                $('.carte_details').slideToggle(400);
             });
         });
 
+        function commander(){
+            var now = new Date();
+            if(now.getHours() < 10){
+                document.cookie = "date=" + now.getFullYear() +"-"+ (now.getMonth()+1) +"-"+ now.getDate();
+                document.getElementById('commande_link').click();
+            }
+            else{
+                var tomorrow = new Date();
+                tomorrow.setDate(now.getDate() + 1);
+
+                document.cookie = "date=" + tomorrow.getFullYear() +"-"+ (tomorrow.getMonth()+1) +"-"+ tomorrow.getDate();
+                //console.log(tomorrow.getFullYear() +"-"+ (tomorrow.getMonth()+1) +"-"+ tomorrow.getDate());
+                if(confirm('La date de cette commande correspond à demain. Continuer ?'))
+                {
+                    document.getElementById('commande_link').click();
+                }
+            }
+
+
+        }
     </script>
 {% endblock %}

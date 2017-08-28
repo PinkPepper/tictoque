@@ -1,0 +1,22 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Livraison : {{livraison.id}}</h1>
+        <a class="btn_01" href="{{path('livraison_index')}}">Retour</a>
+        <div class="cellule_background_cms">
+
+            <h3>Nom produit</h3>
+            {{livraison.produit.nom}}
+
+            <h3>Nom du point relais</h3>
+            {{livraison.pointRelais.nom}}
+
+            <h3>Date de livraison</h3>
+            {{ livraison.date|date('d-m-Y') }}
+
+            <h3>Quantite</h3>
+            {{livraison.quantite}}
+        </div>
+    </section>
+{% endblock %}

@@ -5,7 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Commande;
 use AppBundle\Entity\CommandeMenu;
 use AppBundle\Entity\CommandeProduit;
+use AppBundle\Entity\Livraison;
 use AppBundle\Entity\Menu;
+use AppBundle\Entity\Produit;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -23,7 +25,7 @@ class CommandeController extends Controller
     /**
      * Choisir ses options de commande
      * @Route("/", name="commande_index")
-     * @Method("GET")
+     * @Method({"GET", "POST"})
      */
     public function indexAction(Request $request)
     {
@@ -34,21 +36,7 @@ class CommandeController extends Controller
             return $this->redirectToRoute('index_panier');
         }
 
-        //TODO moyen de paiement
         return $this->render('frontoffice/commande/index.html.twig');
-    }
-
-    /**
-     * @Route("/results/{adresse}", name="commande_point_relais")
-     */
-    public function resultAction($adresse)
-    {
-        $geocoder = $this->container->get('app.geocoder_service');
-        $pointsRelais = $geocoder->getPointsRelais($adresse);
-
-        return $this->render('frontoffice/commande/results.html.twig', array(
-            'pointsRelais'=>$pointsRelais
-        ));
     }
 
     /**
@@ -58,71 +46,33 @@ class CommandeController extends Controller
      */
     public function SuccesAction(Request $request)
     {
+        $session = $request->getSession();
         $em = $this->getDoctrine();
-        $pointRelais = $request->cookies->get('pointRelais');
 
+        $cookies = $request->cookies;
+        $date = $cookies->get('date');
+
+        $pointRelais = $session->get("pointRelais");
         if($pointRelais == "" | $pointRelais === null)
         {
             return $this->redirectToRoute("commande_index");
         }
-
         $pointRelais = $em->getRepository('AppBundle:PointRelais')->find($pointRelais);
 
-        $em = $em->getManager();
-        $session = $request->getSession();
-
         $prix = $session->get('prix');
+       // $date = $session->get('dateLivraison');
 
-        $commande = new Commande();
-        $commande->setUser($this->getUser());
-        $commande->setPrix($prix);
-        $commande->setAdresse($pointRelais->getAdresse());
-
-        $em->persist($commande);
-        $em->flush();
-
-        //TODO informer le livreur
-        //TODO mettre à jour la quantité de produit dans la base selon la commande
-
-        $em = $this->getDoctrine();
-        $panier = $session->all();
-
-        $produits = array();
-
-        foreach ($panier as $key => $value)
-        {
-            if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
-            {
-                    $quantite = $value['quantite'];
-                    $id = explode("_", $key);
-                    $id = $id[1];
-                    array_push($produits, array($em->getRepository('AppBundle:Produit')->find($id), $quantite));
-
-                    $commandeProduit = new CommandeProduit();
-                    $commandeProduit->setCommande($commande);
-                    $commandeProduit->setProduits($em->getRepository('AppBundle:Produit')->find($id));
-                    $commandeProduit->setQuantiteCommandee($quantite);
-                    $em->getManager()->persist($commandeProduit);
-                    $em->getManager()->flush();
-            }
-
-            else if ($key != "menu" && (strpos($key, 'menu') !== false) && (strpos($key, 'menu') == 0)) //menu
-            {
-                $menu = new Menu();
-                $menu->setMenu($value['entree'], $value['plat'], $value['dessert'], $value['boisson'], $value['prix'], $value['quantite'], $this->getUser());
-
-                $em->getManager()->persist($menu);
-                $em->getManager()->flush();
-
-                /* Création commandeMenu */
-                $commandeMenu = new CommandeMenu();
-                $commandeMenu->setCommande($commande);
-                $commandeMenu->setMenus($menu);
-                $em->getManager()->persist($commandeMenu);
-                $em->getManager()->flush();
-
-            }
+        $commande = $this->setCommande($pointRelais, $prix, $date);
+        if($commande === null){
+            $this->addFlash(
+                'notice',
+                'La date de livraison n\' est pas valide.'
+            );
+            return $this->redirectToRoute('commande_index');
         }
+        $this->setContenuCommande($request, $commande, $pointRelais);
+
+
 
         /* ****** PAGE SUCCES ****** */
         $page_succes = $this->preparePageSucces($session);
@@ -140,6 +90,8 @@ class CommandeController extends Controller
             $em->getManager()->remove($bc);
             $em->getManager()->flush();
         }
+
+        $this->setMessage($commande, $pointRelais, $produits_panier, $menus, $prix);
 
         return $this->render('frontoffice/commande/succes.html.twig', array(
             'commande'=>$commande,
@@ -198,4 +150,163 @@ class CommandeController extends Controller
         return array($produits_panier, $menus);
     }
 
+
+    private function setCommande($pointRelais, $prix, $date)
+    {
+        $commande = new Commande();
+        $commande->setUser($this->getUser());
+        $commande->setPrix($prix);
+        $commande->setAdresse($pointRelais->getAdresse());
+
+        $today = new \DateTime();
+        $date = new \DateTime($date);
+
+
+        if($today->format('Y-m-d') == $date->format('Y-m-d')){
+            $hours = (new \DateTime())->format('H');
+            if($hours < 10)
+            {
+                $commande->setDateLivraison(new \DateTime());
+            }
+            else
+            {
+                $commande->setDateLivraison((new \DateTime())->add(new \DateInterval('P1D')));
+            }
+        }
+        else if($today->format('Y-m-d') < $date->format('Y-m-d'))
+        {
+            $commande->setDateLivraison($date);
+        }
+        else{
+            return null;
+        }
+
+
+        $this->getDoctrine()->getManager()->persist($commande);
+        $this->getDoctrine()->getManager()->flush();
+
+        return $commande;
+    }
+
+    private function setContenuCommande(Request $request, $commande, $pointRelais)
+    {
+        $session = $request->getSession();
+        $em = $this->getDoctrine();
+        $panier = $session->all();
+
+        $produits = array();
+
+        foreach ($panier as $key => $value)
+        {
+            if (strpos($key, 'produit') !== false && (strpos($key, 'produit') == 0)) //produit
+            {
+                $quantite = $value['quantite'];
+                $id = explode("_", $key);
+                $id = $id[1];
+
+                $produit = $em->getRepository('AppBundle:Produit')->find($id);
+                array_push($produits, array($produit, $quantite));
+
+                $commandeProduit = new CommandeProduit();
+                $commandeProduit->setCommande($commande);
+                $commandeProduit->setProduits($produit);
+                $commandeProduit->setQuantiteCommandee($quantite);
+
+                $produit->setQuantite($produit->getQuantite()-$quantite);
+                $this->updateLivraison($produit, $pointRelais, $quantite);
+
+                $em->getManager()->persist($commandeProduit);
+                $em->getManager()->persist($produit);
+                $em->getManager()->flush();
+            }
+
+            else if ($key != "menu" && (strpos($key, 'menu') !== false) && (strpos($key, 'menu') == 0)) //menu
+            {
+                $menu = new Menu();
+                $menu->setMenu($value['entree'], $value['plat'], $value['dessert'], $value['boisson'], $value['prix'], $value['quantite'], $this->getUser());
+                $em->getManager()->persist($menu);
+
+                if($value['entree'] !== null)
+                {
+                    $produit = $em->getRepository('AppBundle:Produit')->find($value['entree']);
+                    $produit->setQuantite($produit->getQuantite()-1);
+                    $this->updateLivraison($produit, $pointRelais, 1);
+                    $em->getManager()->persist($produit);
+                }
+
+                if($value['plat'] !== null)
+                {
+                    $produit = $em->getRepository('AppBundle:Produit')->find($value['plat']);
+                    $produit->setQuantite($produit->getQuantite()-1);
+                    $this->updateLivraison($produit, $pointRelais, 1);
+                    $em->getManager()->persist($produit);
+                }
+
+                if($value['dessert'] !== null)
+                {
+                    $produit = $em->getRepository('AppBundle:Produit')->find($value['dessert']);
+                    $produit->setQuantite($produit->getQuantite()-1);
+                    $this->updateLivraison($produit, $pointRelais, 1);
+                    $em->getManager()->persist($produit);
+                }
+
+                if($value['boisson'] !== null)
+                {
+                    $produit = $em->getRepository('AppBundle:Produit')->find($value['boisson']);
+                    $produit->setQuantite($produit->getQuantite()-1);
+                    $this->updateLivraison($produit, $pointRelais, 1);
+                    $em->getManager()->persist($produit);
+                }
+
+                /* Création commandeMenu */
+                $commandeMenu = new CommandeMenu();
+                $commandeMenu->setCommande($commande);
+                $commandeMenu->setMenus($menu);
+                $em->getManager()->persist($commandeMenu);
+
+                $em->getManager()->flush();
+            }
+        }
+    }
+
+    private function setMessage($commande, $pointRelais, $produits_panier, $menus, $prix)
+    {
+        $message = \Swift_Message::newInstance()
+            ->setSubject('Confirmation de votre commande')
+            ->setFrom('no-reply@lamourfood.fr')
+            ->setTo($this->getUser()->getEmail())
+            ->setBody(
+                $this->renderView(
+                // app/Resources/views/Emails/registration.html.twig
+                    'Emails/confirmation.html.twig',
+                    array(
+                        'commande'=>$commande,
+                        'pointRelais'=>$pointRelais,
+                        'produits'=>$produits_panier,
+                        'menus'=>$menus,
+                        'prix'=>$prix
+                    )
+                ),
+                'text/html'
+            )
+        ;
+        $this->get('mailer')->send($message);
+    }
+
+    private function updateLivraison(Produit $produit, $pointRelais, $quantite){
+        $hours = (new \DateTime())->format('H');
+        $em = $this->getDoctrine();
+        if($hours < 10)
+        {
+            $livraison = $em->getRepository("AppBundle:Livraison")->findByProduitAndPointRelaisAndDate($produit->getId(), $pointRelais, (new \DateTime())->format('Y-m-d'));
+        }
+        else //livraison pour demain
+        {
+            $tomorrow = (new \DateTime())->add(new \DateInterval('P1D'));
+            $livraison = $em->getRepository("AppBundle:Livraison")->findByProduitAndPointRelaisAndDate($produit->getId(), $pointRelais, $tomorrow->format('Y-m-d'));
+        }
+
+        $livraison[0]->setQuantiteRestante($livraison[0]->getQuantiteRestante()-$quantite);
+        $em->getManager()->flush();
+    }
 }

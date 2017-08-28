@@ -14,6 +14,12 @@
         {{ form_widget(form.adresse) }}
         {{ form_errors(form.adresse) }}
 
+        <label>Livreur</label>
+        {{ form_widget(form.user) }}
+        {{ form_errors(form.user) }}
+        <br>
+        <br>
+
         <button class="button_p" type="submit">Créer</button>
 
         {{ form_end(form) }}

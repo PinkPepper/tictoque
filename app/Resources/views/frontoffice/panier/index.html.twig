@@ -1,5 +1,7 @@
 {% extends 'frontoffice/footer.html.twig' %}
 
+{% block title %}Panier{% endblock %}
+
 {% block body %}
     <script type="application/javascript">
     var sousTotal = 0.0;
@@ -7,15 +9,117 @@
     var total = 0.0;
     var livraison = 5.0;
 </script>
+    <script>
+        $(document).ready(function(){
+            secondes = -1
+            heures = -1
+            minutes = -1
+            seconds = 36000 ;
+            now = new Date();
+            h = now.getHours();
+            m = now.getMinutes();
+            s = now.getSeconds();
+            sTotal = s + 60*m + h*3600 ;
+            seconds = seconds - sTotal;
+            interval = setInterval(function(){
+                secondes = seconds;
+                heures = Math.floor(secondes / 60 / 60 % 60);
+                minutes = Math.floor(secondes / 60 % 60);
+                secondes = secondes % 60;
+                seconds--;
+                if(secondes < 0){
+                    $('#reboursBase').html("Vous êtes en retard ! Vous ne pouvez plus commander pour aujourd'hui, nous vous invitons à prendre cette commande pour demain !")
+                }
+                if(heures == 0){
+                    $('#rebours').html(minutes+" minutes "+secondes+" secondes")
+                }else{
+                    if(minutes == 0){
+                        $('#rebours').html(secondes+" secondes")
+                    }else{
+                        $('#rebours').html(heures+" heures "+minutes+" minutes "+secondes+" secondes")
+                    }
+                }
+            },1000);
+
+
+        })
+
+
+    </script>
 <div class="panier">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <h1>Votre panier</h1>
-                <p>Encore quelques clics et vous pourrez enfin déguster nos plats</p>
+            <div class="commandeParent" style="float: right;width: 25%;margin-top: 30px;">
+                <div class="commande">
+                    <p>Commandez avant 10h pour être livré le jour même, sinon vous serez livré le lendemain.</p>
+                    <h4>Commande</h4>
+                    <p>Sous-total : <span id="sousTotal" class="total"></span>
+                    </p>
+                    <p>Livraison : <span id="livraison" class="total">
+                    <script type="application/javascript">
+                        $('#livraison').text(livraison+"€");
+                    </script>
+                </span></p>
+                    <div class="bar"></div>
+                    <b><p>Total <span id="total"  class="total">
+                    <script type="application/javascript">
+                        total = (sousTotal + livraison);
+                        $('#total').text(total.toFixed(2)+"€");
+                    </script>
+                </span></p></b>
+                    {% if panier.prix > 5 %}<a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>{% endif %}
+                    <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
+                </div>
             </div>
-        </div>
-        <div class="row">
+            <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
+                <h1>Votre panier</h1>
+                <div class="timerPanier">
+                    <p id="reboursBase">Vous souhaitez commander pour aujourd'hui ? Il ne vous reste plus que <strong id="rebours"></strong> pour commander !</p>
+                </div>
+            </div>
+            <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
+                {% set entree = '0' %}
+                {% set plat = '0' %}
+                {% set dessert = '0' %}
+                {% set boisson = '0' %}
+                {% for p in produits %}
+                    {% if p.0.0.type == "entree" %}
+                        {% set entree = '1' %}
+                    {% endif %}
+                    {% if p.0.0.type == "plat" %}
+                        {% set plat = '1' %}
+                    {% endif %}
+                    {% if p.0.0.type == "dessert" %}
+                        {% set dessert = '1' %}
+                    {% endif %}
+                    {% if p.0.0.type == "entree" %}
+                        {% set boisson = '1' %}
+                    {% endif %}
+                {% endfor %}
+                <div id="passToMenu" class="produit">
+                    <div class="col-xs-4 col-sm-2 col-md-2 col-lg-2">
+                        <img class="pictoGift" src="{{ asset('img/gift.svg') }}">
+                    </div>
+                    <div class="col-xs-8 col-sm-6 col-md-6 col-lg-6">
+                        <p class="phraseToMenu"><strong>Passez vos produits en menu et faites des économies sur votre commande.<br>Il vous suffit d'avoir une entrée un plat un dessert et une boisson !</strong></p>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+                        {% if (entree=='1') and (plat=='1') and (dessert=='1') and (boisson=='1') %}
+                        <a class="passToMenuButton" href="{{ path('do_menus') }}">
+                            <div>
+                                Passer en menu
+                            </div>
+                        </a>
+                        {% else %}
+                            <a class="passToMenuButton">
+                                <div style="background-color:#939495">
+                                    Passer en menu
+                                </div>
+                            </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
                 {% if menus|length != 0 %}
                 <h2>Menus</h2>
@@ -26,7 +130,11 @@
                     <div id="menuId-{{ menu["id"] }}" class="produit">
                         <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                             {% if menu["type"] == 1 %}
-                                <img class="imgSousProduit" src="{{ asset('img/menus/menu1.jpg') }}"/>
+                                {#<img class="imgSousProduit" src="{{ asset('img/menus/menu1.jpg') }}"/>#}
+                                <img class="" style="width: 43%" src="{{ asset('produits/'~menu["entree"].image) }}"/>
+                                <img class="" style="width: 43%"src="{{ asset('produits/'~menu["plat"].image) }}"/>
+                                <img class="" style="width: 43%"src="{{ asset('produits/'~menu["dessert"].image) }}"/>
+                                <img class="" style="width: 43%" src="{{ asset('produits/'~menu["boisson"].image) }}"/>
                             {% else %}
                                 {% if menu["type"] == 2 %}
                                     <img class="imgSousProduit" src="{{ asset('img/menus/menu2.jpg') }}"/>
@@ -37,7 +145,8 @@
                         </div>
                         <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
                             {% if menu["type"] == 1 %}
-                                <h5>Menu petite faim</h5>
+                                {#<h5>Menu petite faim</h5>#}
+                                <h5>Menu</h5>
                             {% else %}
                                 {% if menu["type"] == 2 %}
                                     <h5>Menu classique</h5>
@@ -57,7 +166,7 @@
                         {#</div>#}
                         <div class="quantiteMenu-{{ menu["id"] }}"></div>
                         <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">
-                            <h3 id="prixTotal-{{ menu["id"] }}">
+                            <h3 id="prixTotalMenu-{{ menu["id"] }}">
                                {# <script type="application/javascript">
                                     #}{#var prix = {{ menu["prix"] }};#}{#
                                     #}{#var qte = {{ menu["quantite"] }};#}{#
@@ -66,8 +175,10 @@
                                     tabPrice[String({{ menu["id"] }})] = total;
                                     $('#prixTotal-'+{{ menu["id"] }}).text(total+"€");
                                 </script>#}
-                                <script>tabPrice[String({{ menu["id"] }})] = {{ menu["prix"] }};</script>
-                                {{ menu["prix"] }}€
+                                <script>
+                                    tabPrice['10'+String({{ menu["id"] }})] = {{ menu["prix"] }};
+                                </script>
+                                {{ menu["prix"] |number_format(2, '.', ',') }}€
                             </h3>
                         </div>
                         <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 divDelete">
@@ -77,28 +188,28 @@
                     <div class="row sousMenu" id="sousMenu-{{ menu["id"] }}" style="display: none">
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Entrée</h5>
-                            <h5>{% if menu["entree"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["entree"].id}) }}">{{ menu["entree"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["entree"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["entree"].id}) }}">{{ menu["entree"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["entree"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["entree"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Plat</h5>
-                            <h5>{% if menu["plat"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["plat"].id}) }}">{{ menu["plat"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["plat"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["plat"].id}) }}">{{ menu["plat"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["plat"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["plat"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Dessert</h5>
-                            <h5>{% if menu["dessert"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["dessert"].id}) }}">{{ menu["dessert"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["dessert"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["dessert"].id}) }}">{{ menu["dessert"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["dessert"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["dessert"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
                         </div>
                         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
                             <h5>Boisson</h5>
-                            <h5>{% if menu["boisson"] is not null %}<a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["boisson"].id}) }}">{{ menu["boisson"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
+                            <h5>{% if menu["boisson"] is not null %}<a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': menu["boisson"].id}) }}">{{ menu["boisson"].nom }}</a>{% else %}Non spécifié{% endif %}</h5>
                             {% if menu["boisson"] is not null %}
                                 <img class="imgSousProduit" src="{{ asset('produits/'~menu["boisson"].image) }}"/>
                             {% else %}Non spécifié{% endif %}
@@ -113,66 +224,40 @@
                 {% for produit in produits %}
                     {% if produit[1] != 0 %}
                 <div id="produitId-{{ produit[0].id }}" class="produit produitMargin">
-                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                    <div class="colReduced col-xs-3 col-sm-3 col-md-3 col-lg-3 hideImgProduitSmall">
                         <img class="imgProduit voir" src="{{ asset('produits/'~produit[0].image) }}"/>
                     </div>
-                    <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-                        <h5>{{ produit[0].type }}</h5>
-                        <h4>{{ produit[0].nom }}</h4>
-                        <h5>{{ produit[0].prix }}€</h5>
-                        <h5><a class="voir" data-toggle="modal" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
+                    <div class="colReduced col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <h5 class="productType">{{ produit[0].type | upper }}</h5>
+                        <h4 class="productName">{{ produit[0].nom }}</h4>
+                        <h5 class="productPrice">{{ produit[0].prix | number_format(2, '.', ',') }}€</h5>
+                        <h5 class="productShow"><a class="voir" data-target="#myModal" data-url="{{ path('produit_panier_show', {'id': produit[0].id}) }}">En savoir plus ...</a></h5>
                     </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divQuantite">
+                    <div class="colReduced col-xs-3 col-sm-2 col-md-2 col-lg-2 divQuantite">
                         <img width="10px" src="{{ asset('img/chevronLeft.svg') }}" class="spanLeft gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('retrait_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
                         <div class="quantite">
                             <i id="qte" class=" qte quantite-{{ produit[0].id }}" data-isproduit="true" data-id="{{ produit[0].id }}" data-quantite="{{ produit[0].quantite }}" data-quantitecurrent="{{ produit[1] }}">{{ produit[1] }}</i>
                         </div>
                         <img id="chevronSup-{{ produit[0].id }}" width="10px" src="{{ asset('img/chevronRight.svg') }}" class="spanRight gestion_panier" data-prix="{{ produit[0].prix }}" data-url="{{ path('ajout_exemplaire_panier', {'produit': produit[0].id}) }}" data-id="{{ produit[0].id }}"/>
                     </div>
-                    <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2 divPrix">
+                    <div class="colReduced col-xs-3 col-sm-2 col-md-2 col-lg-2 divPrix">
                         <h3 id="prixTotal-{{ produit[0].id }}">
                             <script type="application/javascript">
                                 var prix = {{ produit[0].prix }};
                                 var qte = {{ produit[1] }};
                                 var total = prix*qte;
-                                tabPrice[String({{ produit[0].id }})] = total;
-                                $('#prixTotal-'+{{ produit[0].id }}).text(total+"€");
+                                tabPrice[String({{ produit.0.id }})] = total;
+                                console.log("DANS PRODUIT: "+tabPrice[{{ produit.0.id }}]);
+                                $('#prixTotal-'+{{ produit.0.id }}).text(total.toFixed(2)+"€");
                             </script>
                         </h3>
                     </div>
-                    <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1 divDelete">
+                    <div class="colReduced col-xs-2 col-sm-1 col-md-1 col-lg-1 divDelete">
                         <img class="deleteProd" width="20px" data-id="{{ produit[0].id }}" data-url="{{ path('delete_produit', {'produit': produit[0].id}) }}" src="{{ asset('img/cross.svg') }}"/>
                     </div>
                 </div>
                     {% endif %}
                 {% endfor %}
-            </div>
-            <div class="col-lg-offset-1 col-lg-3 col-sm-12 col-md-12 col-xs-12 commande">
-                <h4>Commande</h4>
-                <p>Sous-total : <span id="sousTotal" class="total">
-                        <script type="application/javascript">
-                            tabPrice.forEach(function (element) {
-                                console.log(element);
-                                sousTotal = sousTotal+element;
-                            });
-                            $('#sousTotal').text(sousTotal.toFixed(2)+"€");
-                        </script> </span>
-                </p>
-                <p>Livraison : <span id="livraison" class="total">
-                        <script type="application/javascript">
-                            $('#livraison').text(livraison+"€");
-                        </script>
-                    </span></p>
-                <div class="bar"></div>
-                <b><p>Total <span id="total"  class="total">
-                        <script type="application/javascript">
-                            total = (sousTotal + livraison);
-                            $('#total').text(total.toFixed(2)+"€");
-                        </script>
-                    </span></p></b>
-
-                <a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>
-                <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
             </div>
         </div>
     </div>
@@ -186,13 +271,27 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body" id="modal-body">
-                    ...
+                    <div id="bodymovin">
+                    </div>
+                    <script src="{{ asset('js/loader.js') }}"></script>
+                    <script>
+                        var anim;
+                        anim = bodymovin.loadAnimation(params);
+                    </script>
                 </div>
             </div>
         </div>
     </div>
 
     <script type="application/javascript">
+
+        tabPrice.forEach(function (element) {
+            console.log(element);
+            sousTotal = sousTotal+element;
+        });
+        $('#sousTotal').text(sousTotal.toFixed(2)+"€");
+        sousTotal = sousTotal+5;
+        $('#total').text(sousTotal.toFixed(2)+"€");
 
         $(".qte").each(function(){
 
@@ -227,7 +326,10 @@
         $('.voir').on('click', function (e) {
             e.preventDefault();
             var url = $(this).data('url');
-            $('#modal-body').load(url);
+            $('#modal-body').load(url,function(){
+                console.log('ok');
+                $('#myModal').modal('toggle')
+            });
         });
 
         $('.gestion_panier').on('click', function (e) {
@@ -313,7 +415,7 @@
 
             });
             $('#sousMenu-'+id).fadeOut();
-            tabPrice[String(id)] = 0;
+            tabPrice['10'+String(id)] = 0;
             sousTotal = 0;
             tabPrice.forEach(function (element) {
                 sousTotal = sousTotal+element;

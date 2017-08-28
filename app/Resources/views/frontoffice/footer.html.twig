@@ -1,6 +1,7 @@
 {% extends 'frontoffice/base.html.twig'%}
 
 {% block head %}{% endblock %}
+{% block title %}{% endblock %}
 
 {% block footer %}
     <div class="bg-grey">
@@ -54,10 +55,11 @@
                 <div class="col-lg-2 col-md-8 col-xs-6 infos_footer hideMobile">
                     <h3>Catégories</h3>
                     <ul class="Categories">
-                        <li><a href="#">Entrées</a></li>
-                        <li><a href="#">Plats</a></li>
-                        <li><a href="#">Desserts</a></li>
-                        <li><a href="#">Boissons</a></li>
+                        <li><a href="{{ path('qualite_produit') }}">Produits de qualité</a></li>
+                        <li><a href="{{ path('produit_index') }}">Nos Plats</a></li>
+                        {#<li><a href="{{ path('menu') }}">Créer un menu</a></li>#}
+                        <li><a href="#">Livraison</a></li>
+                        <li><a href="#">Paiement</a></li>
                     </ul>
                 </div>
 

@@ -44,6 +44,8 @@ class User extends BaseUser
      */
     private $prenom;
 
+    private $role;
+
     /**
      * @var string
      *
@@ -111,6 +113,12 @@ class User extends BaseUser
      * @ORM\Column(name="adresse", type="string", length=255, nullable=true)
      */
     private $adresse;
+
+    /**
+     * @var int
+     * @ORM\OneToMany(targetEntity="PointRelais", mappedBy="user", cascade={"persist"})
+     */
+    private $pointsRelais;
 
     use TraitUploadImage;
     public function getUploadDir()
@@ -349,6 +357,38 @@ class User extends BaseUser
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointsRelais()
+    {
+        return $this->pointsRelais;
+    }
+
+    /**
+     * @param int $pointsRelais
+     */
+    public function setPointsRelais($pointsRelais)
+    {
+        $this->pointsRelais = $pointsRelais;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return $this->role;
+    }
+
+    /**
+     * @param mixed $role
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
     }
 }
 

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <title>{% block title %}L'Amour Food{% endblock %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="{{ asset('/bootstrap/css/bootstrap.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('/bootstrap/css/bootstrap-theme.min.css') }}">
+            <link type="text/css" rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+            <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        {% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
+            <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
+            <script>tinymce.init({ selector:'.tiny',setup: function (editor) {
+                    editor.on('change', function () {
+                        editor.save();
+                    });
+                }});
+            </script>
+        {% endblock %}
+    </head>
+
+    <body class="livraison">
+        <div id="bodymovin">
+
+        </div>
+        <script src="{{ asset('js/loader.js') }}"></script>
+        <script>
+            var anim;
+
+            anim = bodymovin.loadAnimation(params);
+        </script>
+        <script>
+                function sendRequest(id){
+                    console.log(id);
+                    $.ajax({
+                        url : '{{ path('admin_livreur_validation') }}',
+                        type : 'POST',
+                        data : 'id='+id,
+                        dataType : 'html',
+                        success : function(code_html, statut){ // success est toujours en place, bien sûr !
+                            $('#livraison-'+id).empty()
+                            $('#livraison-'+id).html('<img class="tickValidation" src="{{ asset('img/tick_livraison.svg') }}">')//mettre le tick a la place du ok
+                        },
+                        error : function(resultat, statut, erreur){
+                            console.log("Erreur ajax");
+                        }
+                    });
+                }
+        </script>
+        <div class="container-fluid">
+            <div class="blockLivraison center-block">
+                <img class="logo center-block" src="{{ asset('img/logo.svg') }}" alt="logo">
+                {% for pointRelais in relais %}
+                    {% set ite = loop.index %}
+                    <ul style="clear: both;">
+                        <li style="margin-top: 50px;"><h3><b>{{ pointRelais.nom }}</b></h3></li>
+                            {% for produit in produits %}
+                                {% if loop.index == ite %}
+                                    {% for p in produit %}
+                                        {% if p.date|date('m/d/Y') == dateNow|date('m/d/Y') %}
+                                            <li style="clear: both;"><p class="titleLivreurProduit">{{ p.produit.nom }} : {{ p.quantite }}</p>{% if p.statut =="non livré" %}<span id="livraison-{{ p.id }}" onclick="sendRequest({{ p.id }})" class="okButton">OK</span>{% else %}<span class="okButton"><img class="tickValidation" src="{{ asset('img/tick_livraison.svg') }}"></span>{% endif %}</li>
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                            {% endfor %}
+                    </ul><br>
+                {% endfor %}
+                <div id="lienMap">
+                </div>
+                <div id="map" style="height: 400px;margin-top:50px;"></div>
+                <script>
+                    $(document).ready(function(){
+                        navigator.geolocation.getCurrentPosition(function (pos) {
+                            lat = pos.coords.latitude;
+                            lng = pos.coords.longitude;
+                            if (lat == null) {
+                                alert("GPS not activated");
+                            }else{
+                            $('#lienMap').html('<a id="linkMap" href="https://www.google.fr/maps/dir/'+lat+','+lng+'/{% for pt in relais %}{{ pt.adresse }}/{% endfor %}'+lat+','+lng+'/">" + "Lancer l\'itinéraire sur mobile ! erfzrfqr</a>');
+                            }
+                        });
+                    })
+                </script>
+                <script>
+                    function initMap() {
+                        var directionsService = new google.maps.DirectionsService;
+                        var directionsDisplay = new google.maps.DirectionsRenderer;
+                        var map = new google.maps.Map(document.getElementById('map'), {
+                            zoom: 8,
+                            center: {lat: 50.6333, lng: 3.0667}
+                        });
+                        directionsDisplay.setMap(map);
+
+
+                        calculateAndDisplayRoute(directionsService, directionsDisplay);
+                    }
+
+                    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+                        var waypts = [
+                            {% for pt in relais %}
+                                {% if loop.index == relais|length %}
+                                    {location: "{{ pt.adresse }}", stopover: true}
+                                {% else %}
+                                    {location: "{{ pt.adresse }}", stopover: true},
+                                {% endif %}
+                            {% endfor %}
+                            ];
+
+                        navigator.geolocation.getCurrentPosition(function (pos) {
+                            lat = pos.coords.latitude;
+                            lng = pos.coords.longitude;
+                            if (lat == null) {
+                                alert("GPS not activated");
+                            }
+
+                            directionsService.route({
+                                origin: lat+","+lng,
+                                destination: lat+","+lng,
+                                waypoints: waypts,
+                                optimizeWaypoints: true,
+                                travelMode: 'DRIVING'
+                            }, function (response, status) {
+                                if (status === 'OK') {
+                                    directionsDisplay.setDirections(response);
+                                    var route = response.routes[0];
+                                } else {
+                                    window.alert('Directions request failed due to ' + status);
+                                }
+                            })
+
+                            $('#lienMap').html('<a id="linkMap" target="_blank" href="https://www.google.fr/maps/dir/'+lat+','+lng+'/{% for pt in relais %}{{ pt.adresse }}/{% endfor %}—'+lat+','+lng+'/">Lancer l\'itinéraire sur mobile</a>');
+                            $('#bodymovin').fadeOut(600,function(){
+                                $('.livraison').css({'overflow-y':'auto'});
+                                anim.destroy();
+                                $('.blockLivraison').css({'margin-top':'5vh'});
+                            });
+
+                        });
+                    }
+                </script>
+                <script async defer
+                        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz_bL2BjFSPMIrlqHzNzT1hme7eyTfDMI&callback=initMap">
+                </script>
+            </div>
+        </div>
+    </body>
+</html>
+
+

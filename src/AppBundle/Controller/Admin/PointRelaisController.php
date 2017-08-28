@@ -93,9 +93,10 @@ class PointRelaisController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $geocoder = $this->container->get('app.geocoder_service');
+
             $coord = $geocoder->adresseToCoord($pointRelai->getAdresse());
-            $pointRelai->setLatitude($coord[0]);
-            $pointRelai->setLongitude($coord[1]);
+            $pointRelai->setLatitude($coord[1]);
+            $pointRelai->setLongitude($coord[0]);
 
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('admin_point_relais_edit', array('id' => $pointRelai->getId()));

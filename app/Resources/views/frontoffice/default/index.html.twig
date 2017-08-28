@@ -1,5 +1,7 @@
 {% extends 'frontoffice/footer.html.twig' %}
 
+{% block title %}Accueil{% endblock %}
+
 {% block body %}
 	<div class="row home">
 		<div class="col-lg-12 col-md-12 col-xs-12 Bandeau">
@@ -7,7 +9,7 @@
 			<p>L'amour Food, permet aux estomacs exigeants d'être livrés sur leur lieu de travail.</p>
 			<div>
 				<a href="{{ path('produit_index') }}">Découvrir les plats</a>
-				<a href="{{ path('menu') }}">Créer mon menu</a>
+				{#<a href="{{ path('menu') }}">Créer mon menu</a>#}
 			</div>
 		</div>
 	</div>
@@ -22,24 +24,24 @@
 					<div class="col-lg-4 col-md-4 col-sm-4">
 						<div class="showPlat">
 							<div class="showImgPlat">
-								<a href="{{ path("produit_show", {'id': produit.id}) }}">
+								<div class="pointLivraisonShow">
+									<img class="imgPictoPosition" src="{{ asset('img/picto_position.svg') }}">
+									<p>{% if produit.pointRelais.0.nom|length > 10 %}
+										  	{{ produit.pointRelais.0.nom|slice(0,10) }}...
+										{% else %}
+                                        	{{ produit.pointRelais.0.nom }}
+										{% endif %}
+									</p>
+								</div>
 								<img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
-								</a>
-                                {% if app.user is not null %}
-									<a class="addToCart ajoutPanier" data-toggle="modal" data-target="#myModal" data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}">Ajouter</a>
-                                {% else %}
-									<a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
-                                {% endif %}
 							</div>
 							<div class="showDescPlat">
-								<a href="{{ path("produit_show", {'id': produit.id}) }}">
 								<p class="typeProduct">{{ produit.type|upper }}</p>
 								<div class="row">
 									<h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
-									<span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',')}}€</span>
-									<span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw }}</span>
+									<span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',')}}€</span>
+									<span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
 								</div>
-								</a>
 							</div>
 						</div>
 					</div>
@@ -86,7 +88,8 @@
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 espaceResp" >
 						<img class="picto" src="{{ asset('img/livraison.svg') }}">
 						<h3>Livraison chez vous</h3>
-						<p class="text">Nous livrons directement à votre porte.</p>
+						<p class="text">Commandez avant 10h pour être livré le jour même !<br>
+							Nous livrons directement à votre porte.</p>
 					</div>
 					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 espaceResp" >
 						<img class="picto" src="{{ asset('img/food.svg') }}">
@@ -103,7 +106,7 @@
 			<div class="col-lg-3 col-md-3 col-sm-2 sliderLeft"></div>
 			<div class="col-lg-9 col-md-9 col-sm-10 col-xs-12 sliderRight">
 				<h4>Des produits de qualité</h4>
-				<p>Pour le chef Bénédicte, la qualité des produits travaillés est un élément essentiel de sa cuisine. C’est la raison pour laquelle le Chef est particulièrement vigilant sur le choix des produits, leurs qualité et leur origine. Ainsi les plats que vous dégusterez seront toujours d’une qualité irréprochable et d’un fraicheur absolue.</p>
+				<p>Pour le chef Bénédicte, la qualité des produits travaillés est un élément essentiel de sa cuisine. C’est la raison pour laquelle le Chef est particulièrement vigilant sur le choix des produits, leur qualité et leur origine. Ainsi, les plats que vous dégusterez seront toujours d’une qualité irréprochable et d’une fraicheur absolue.</p>
 			</div>
 		</div>
 	</div>
@@ -125,7 +128,7 @@
 							<a href="{{ path('article_show',{'id' :article.id,'titre':article.slug}) }}">
 							<div class="row">
 								<h4 class="text-center titleProduct noMargin col-lg-12 col-md-12 col-sm-12 col-xs-12">{{ article.titre }}</h4>
-								<p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ article.contenu|striptags|slice(0,60) }}...</p>
+								<p class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ article.contenu|striptags|slice(0,60)|raw }}...</p>
 								<a href="{{ path('article_show',{'id' :article.id,'titre':article.titre}) }}"><p class="plusActu col-lg-5 col-md-8 col-sm-10 col-xs-12">En savoir plus</p></a>
 							</div>
 							</a>
@@ -145,13 +148,13 @@
 
 			<div class="row">
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-					<img class="img-responsive" src="{{ asset('img/logo-willemse.jpg') }}">
+					<img class="img-responsive" src="{{ asset('img/logo-willemse.png') }}">
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 					<img class="img-responsive" src="{{ asset('img/scottage_logo-sans-fond.png') }}">
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
-					<img class="img-responsive" src="{{ asset('img/3Suisses.jpg') }}">
+					<img class="img-responsive" src="{{ asset('img/3suisses.png') }}">
 				</div>
 				<div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
 					<img class="img-responsive" src="{{ asset('img/locasun.png') }}">
@@ -175,11 +178,7 @@
 	</div>
 
 	<script>
-        $('.ajoutPanier').on('click', function (e) {
-            e.preventDefault();
-            var url = $(this).data('url');
-            $('#modal-body').load(url);
-        });
+
         $('.voir').on('click', function (e) {
             e.preventDefault();
             var url = $(this).data('url');

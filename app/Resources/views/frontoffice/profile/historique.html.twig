@@ -1,0 +1,98 @@
+{% extends 'frontoffice/footer.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+
+{% block body %}
+<div class="container histoCommandeContainer">
+    <a class="aReturnHisto" href="{{ path('profile_base') }}">
+        <div class="buttonReturn">
+           <span>Retour</span>
+        </div>
+    </a>
+    <h3 style="margin-left: 0px" class="titleMonCompte">Historique de commande</h3>
+
+    <div class="row">
+        {% for c in user.commandes %}
+            <div class="marginTopHistoCommande col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="boxAccountLong">
+                    <p>Commande : <b>{{ c.identifiant }}</b>, livré le <b>{{ c.dateLivraison|date('d/m/Y') }}</b> au point relais <b>{{ c.adresse }}</b></p>
+                    <div class="row bs-wizard" style="border-bottom:0;">
+                        <div class="col-xs-3 bs-wizard-step complete">
+                            <div class="text-center bs-wizard-stepnum">Commande</div>
+                            <div class="progress"><div class="progress-bar"></div></div>
+                            <a class="bs-wizard-dot"></a>
+                        </div>
+
+                        <div class="col-xs-3 bs-wizard-step complete"><!-- complete -->
+                            <div class="text-center bs-wizard-stepnum">Paiement</div>
+                            <div class="progress"><div class="progress-bar"></div></div>
+                            <a class="bs-wizard-dot"></a>
+                        </div>
+
+                        <div class="col-xs-3 bs-wizard-step complete"><!-- active -->
+                            <div class="text-center bs-wizard-stepnum">Livraison</div>
+                            <div class="progress"><div class="progress-bar"></div></div>
+                            <a class="bs-wizard-dot"></a>
+                        </div>
+
+                        <div class="col-xs-3 bs-wizard-step complete"><!-- active -->
+                            <div class="text-center bs-wizard-stepnum">Livré</div>
+                            <div class="progress"><div class="progress-bar"></div></div>
+                            <a class="bs-wizard-dot"></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="productInCommande">
+                    <div class="row">
+                        {% if c.commandesProduit|length > 0 %}<h3 class="titleProductHisto">Produits</h3>{% endif %}
+                        {% for product in c.commandesProduit %}
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                <img class="imgProduitCut" src="{{ asset('produits/'~product.produits.image) }}">
+                                <p>{{ product.produits.type }}</p>
+                                <p><b>{{ product.produits.nom }}</b></p>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="row">
+                        {% if c.commandesMenu|length > 0 %}<h3 class="titleProductHisto">Menus</h3>{% endif %}
+                        {% for commandeMenu in c.commandesMenu %}
+                            <p style="padding-left: 15px">Prix du menu : <b>{{ commandeMenu.menus.prix }}€</b></p>
+                            {% for menu in array %}
+                                {% if commandeMenu.id == menu.id_commandeMenu %}
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                        <img class="imgProduitCut" src="{{ asset('produits/'~menu.entree.image) }}">
+                                        <p>{{ menu.entree.type }}</p>
+                                        <p><b>{{ menu.entree.nom }}</b></p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                        <img class="imgProduitCut" src="{{ asset('produits/'~menu.plat.image) }}">
+                                        <p>{{ menu.plat.type }}</p>
+                                        <p><b>{{ menu.plat.nom }}</b></p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                        <img class="imgProduitCut" src="{{ asset('produits/'~menu.dessert.image) }}">
+                                        <p>{{ menu.dessert.type }}</p>
+                                        <p><b>{{ menu.dessert.nom }}</b></p>
+                                    </div>
+                                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                                        <img class="imgProduitCut" src="{{ asset('produits/'~menu.boisson.image) }}">
+                                        <p>{{ menu.boisson.type }}</p>
+                                        <p><b>{{ menu.boisson.nom }}</b></p>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+    <script>
+        $(document).ready(function(){
+            $('.marginTopHistoCommande').click(function(){
+                $(this).children('.productInCommande').toggle('1000');
+            })
+        })
+    </script>
+{% endblock %}

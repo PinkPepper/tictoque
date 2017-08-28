@@ -57,6 +57,43 @@ class PointRelais
     private $adresse;
 
     /**
+    @ORM\ManyToMany(targetEntity="Produit", inversedBy="pointRelais")
+     *  @ORM\JoinTable(name="RelationProduitPointRelais",
+     *  joinColumns={@ORM\JoinColumn(name="pointRelais_id", referencedColumnName="id")},
+     *  inverseJoinColumns={@ORM\JoinColumn(name="produit_id", referencedColumnName="id")})
+     */
+    private $produits;
+
+    /**
+     * @var int
+     **@ORM\ManyToOne(targetEntity="User", inversedBy="pointsRelais")
+     * @ORM\JoinColumn(name="user", referencedColumnName="id")
+     */
+    private $user;
+
+    /**
+     * @var int
+     * @ORM\OneToMany(targetEntity="Livraison", mappedBy="pointRelais", cascade={"persist"})
+     */
+    private $livraison;
+
+    /**
+     * @return int
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param int $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
+    }
+
+    /**
      * Get id
      *
      * @return int
@@ -144,6 +181,79 @@ class PointRelais
     public function setAdresse($adresse)
     {
         $this->adresse = $adresse;
+    }
+
+    /**
+     *
+     */
+    public function getProduits()
+    {
+        return $this->produits;
+    }
+
+    /**
+     * @param int $produits
+     */
+    public function setProduits($produits)
+    {
+        $this->produits = $produits;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPointRelais()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $pointRelais
+     */
+    public function setPointRelais($pointRelais)
+    {
+        $this->pointRelais = $pointRelais;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLivraison()
+    {
+        return $this->livraison;
+    }
+
+    /**
+     * @param int $livraison
+     */
+    public function setLivraison($livraison)
+    {
+        $this->livraison = $livraison;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Produit $produit
+     *
+     * @return PointRelais
+     */
+    public function addProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produits[] = $produit;
+
+        return $this;
+    }
+
+    /**
+     * @param \AppBundle\Entity\Produit $produit
+     */
+    public function removeProduit(\AppBundle\Entity\Produit $produit)
+    {
+        $this->produits->removeElement($produit);
+    }
+
+    public function __construct()
+    {
+        $this->produits = new \Doctrine\Common\Collections\ArrayCollection();
     }
 }
 

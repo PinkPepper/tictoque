@@ -47,21 +47,22 @@ class Produit
      */
     private $type;
 
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="datePeremption", type="date")
-     *
-     */
-    private $datePeremption;
 
     /**
      * @var int
      *
      * @ORM\Column(name="prix", type="float")
      * @Assert\NotBlank()
+     * @Assert\GreaterThan(2.99)
      */
     private $prix;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="prix_gastronomique", type="float")
+     */
+    private $prixGastronomique;
 
     /**
      * @var int
@@ -91,6 +92,13 @@ class Produit
     private $all;
 
     /**
+     * @var int
+     **@ORM\ManyToMany(targetEntity="AppBundle\Entity\PointRelais", inversedBy="produits", cascade={"persist"})
+     */
+    private $pointRelais;
+    private $pr;
+
+    /**
      * @ORM\OneToMany(targetEntity="CommandeProduit",  mappedBy="produits", cascade={"remove"})
      */
     private $commande;
@@ -114,6 +122,16 @@ class Produit
      * @var string
      */
     private  $avisForm;
+
+
+
+
+    /**
+     * @var int
+     * @ORM\OneToMany(targetEntity="Livraison", mappedBy="produit", cascade={"persist"})
+     */
+    private $livraison;
+
 
     use TraitUploadImage;
     public function getUploadDir()
@@ -170,6 +188,26 @@ class Produit
         $this->allergenes->removeElement($allergene);
     }
 
+
+    /**
+     * @param \AppBundle\Entity\PointRelais $pointRelais
+     *
+     * @return Produit
+     */
+    public function addPointRelais(\AppBundle\Entity\PointRelais $pointRelais)
+    {
+        $this->pointRelais[] = $pointRelais;
+
+        return $this;
+    }
+
+    /**
+     * @param \AppBundle\Entity\PointRelais $pointRelais
+     */
+    public function removePointRelais(\AppBundle\Entity\PointRelais $pointRelais)
+    {
+        $this->pointRelais->removeElement($pointRelais);
+    }
 
     /**
      * Get id
@@ -387,6 +425,9 @@ class Produit
     public function __construct()
     {
         $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->allergenes = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->pointRelais = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->prixGastronomique = 0;
     }
 
     /**
@@ -515,6 +556,69 @@ class Produit
         $this->avisForm = $avisForm;
     }
 
+    /**
+     * @return int
+     */
+    public function getPointRelais()
+    {
+        return $this->pointRelais;
+    }
+
+    /**
+     * @param int $pointRelais
+     */
+    public function setPointRelais($pointRelais)
+    {
+        $this->pointRelais = $pointRelais;
+    }
+
+    /**
+     * @return int
+     */
+    public function getLivraison()
+    {
+        return $this->livraison;
+    }
+
+    /**
+     * @param int $livraison
+     */
+    public function setLivraison($livraison)
+    {
+        $this->livraison = $livraison;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPr()
+    {
+        return $this->pr;
+    }
+
+    /**
+     * @param mixed $pr
+     */
+    public function setPr($pr)
+    {
+        $this->pr = $pr;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPrixGastronomique()
+    {
+        return $this->prixGastronomique;
+    }
+
+    /**
+     * @param int $prixGastronomique
+     */
+    public function setPrixGastronomique($prixGastronomique)
+    {
+        $this->prixGastronomique = $prixGastronomique;
+    }
 
 
 }

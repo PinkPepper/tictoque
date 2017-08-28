@@ -14,7 +14,6 @@
 {% endblock %}
 
 {% block body %}
-
     <div class="container">
         <div class="row ficheProduit">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
@@ -51,28 +50,33 @@
 
                 <span class="produit_aller"><a>Allergenes</a></span>
 
-                {#<p class="produit_prix">5.95€</p>#}
                 <p class="produit_prix_solde">{{ produit.prix|number_format(2, '.', ',') }}€</p>
 
                 <select class="produit_quantite">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
+                    {% for i in 1..produit.quantite %}
+                        {% if i < 6 %} <!-- On peut commander au max 5 exemplaires -->
+                            <option value="{{ i }}">{{ i }}</option>
+                        {% endif %}
+                    {% endfor %}
                 </select>
 
-                {% if app.user is not null %}
-                    <button class="ajoutPanier produit_ajout" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_panier', {'produit': produit.id}) }}" data-id="{{ produit.id }}" >Ajouter au panier</button>
-                {% else %}
-                    <a class="produit_ajout" href="{{ path('fos_user_security_login') }}">Ajouter au panier</a>
-                {% endif %}
 
+                {% if produit.quantite <= 0 %}
+                    <a class="produit_ajout">Indisponible</a>
+                {% else %}
+                    {% if app.user is not null %}
+                        <button class="ajoutPanier produit_ajout" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_quantite_panier', {'produit': produit.id, 'nombre': 'nbquantite'}) }}" data-id="{{ produit.id }}" >Ajouter au panier</button>
+                    {% else %}
+                        <a class="produit_ajout" href="{{ path('fos_user_security_login') }}">Ajouter au panier</a>
+                    {% endif %}
+                {% endif %}
 
 
                 </br>
                 {% if produit.quantite>0 %}
                 <span class="produit_stock"><i class="fa fa-circle"></i>PRODUIT EN STOCK</span>
                 {% else %}
-                <span class="produit_stock"><i class="fa fa-circle"></i>PRODUIT HORS STOCK</span>
+                <span class="produit_hors_stock"><i class="fa fa-circle"></i>PRODUIT HORS STOCK</span>
                 {% endif %}
 
 
@@ -108,6 +112,7 @@
                 <h5>{{ produit.nom }}</h5>
                     <p class="produit_desc_long">
                         {{ produit.description | raw }}
+
                     </p>
                 </div>
 
@@ -115,11 +120,56 @@
                 <div id="afficher_aller_long" style="display:none;">
                     <p class="produit_desc_long">
                         {% for all in produit.allergenes %}
-                        <ul>
-                            <li>
-                                {{all.nom}}
-                            </li>
-                        </ul>
+                        {% if app.user %}
+                                {% for allUser in app.user.allergenes %}
+                                    {% if allUser.id == all.id %}
+                                    <script>
+                                        $(document).ready(function(){
+                                            $('.container').css({'opacity':'0.1'});
+                                            $('.popUpAllergene').css({'opacity':'1'});
+                                            $('.popUpAllergene').fadeIn();
+                                        })
+                                    </script>
+                                    {% endif %}
+                                {% endfor %}
+                        {% endif %}
+                            <div class="divEachAllergene">
+                                {% if all.nom == "Gluten" %}
+                                <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/gluten.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Lactose" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/lactose.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Viande" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/viande.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Poisson" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/poisson.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Noix" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/nuts.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Oeuf" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/oeufs.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Sel" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/salt.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Sucre" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/sugar.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Soja" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/soybean.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Lupin" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/lupin.svg') }}">
+                                {% endif %}
+                                {% if all.nom == "Moutarde" %}
+                                    <img class="pictoAllergeneFP" src="{{ asset('img/picto_allergenes/mustard.svg') }}">
+                                {% endif %}
+                                <br>
+                                <span>{{all.nom}}</span>
+                            </div>
                         {% endfor %}
                     </p>
                 </div>
@@ -142,7 +192,7 @@
     <div class="container topMargin">
         <div class="row">
             <div class="col-lg-12 col-md-8 col-xs-6 menu_choix">
-                <h4>
+                <h3 class="text-center">
                     {% if produit.type == 'entree' %}
                         Associez votre {{ produit.nom }} avec un plat
                     {% elseif produit.type == 'plat'%}
@@ -150,7 +200,7 @@
                     {% else %}
                         Découvrez de nouveaux plats
                     {% endif %}
-                </h4>
+                </h3>
             </div>
         </div>
     </div>
@@ -162,7 +212,7 @@
                         <div class="showImgPlat">
                             <img class="img-responsive imgPlat" src="{{ asset('produits/'~produitSup.image) }}">
                             {% if app.user is not null %}
-                                <a class="ajoutPanier addToCart" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_panier', {'produit': produitSup.id}) }}" data-id="{{ produitSup.id }}" >Ajouter</a>
+                                <a class="ajoutPanier addToCart" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_quantite_panier', {'produit': produitSup.id, 'nombre': 'nbquantite'}) }}" data-id="{{ produitSup.id }}" >Ajouter</a>
                             {% else %}
                                 <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
                             {% endif %}
@@ -172,8 +222,8 @@
                             <p class="typeProduct">{{ produitSup.type|upper }}</p>
                             <div class="row">
                                 <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produitSup.nom|upper }}</h4>
-                                <span class="prixProduct col-lg-2 col-md-6 col-md-6  col-xs-12 prix">{{ produitSup.prix }}€</span>
-                                <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produitSup.description|striptags|slice(0,60) }}...</span>
+                                <span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produitSup.prix|number_format(2, '.', ',') }}€</span>
+                                <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
                             </div>
                         </div>
                     </div>
@@ -194,7 +244,11 @@
             </div>
         </div>
     </div>
-
+    <div class="popUpAllergene">
+        <img id="closePopUpAller" style="width: 20px;height:20px;float: right;cursor:pointer;" src="{{ asset('img/cross.svg') }}">
+        <h3>Attention !</h3>
+        <p>Ce produit contiens un produit dont vous êtes allergique ! Soucieux de votre santé, nous souhaitons vous alerter sur les ingrédients de notre produit.</p>
+    </div>
 {% endblock %}
 
 {% block javascripts %}
@@ -240,13 +294,22 @@
                 e.preventDefault();
                 var url = $(this).data('url');
                 var id = $(this).data('id');
+                var quantite = $('.produit_quantite').val();
+                console.log(quantite);
 
-                console.log('click');
                 console.log(url);
+                url = url.replace('nbquantite', quantite);
+                console.log(url);
+
                 $('#modal-body').load(url);
-                //$(this).load(url);
-                //$(this).prop('disabled', true);
             }) ;
+
+            $('#closePopUpAller').click(function(){
+                $('.popUpAllergene').fadeOut(function(){
+                    $('.container').css({'opacity':'1'})
+                });
+            })
         });
     </script>
+
 {% endblock %}

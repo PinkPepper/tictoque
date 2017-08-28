@@ -1,72 +1,99 @@
 {% extends 'backoffice/menuAdmin.html.twig' %}
 
 {% block body %}
-    <section class="user_content" id="user_profile">
-        <content>
-            <div class="nav_pos">
-                <h1>{{user.username}}</h1> 
+    <div class="showUser">
+        <div class="showUserParentDiv">
+            <h2>Profil : {{ user.nom }} {{ user.prenom }}</h2>
+            <a href="{{ path('admin_user') }}" class="showUserReturnButton">
+                Retour
+            </a>
+            <a href="{{ path('user_edit' ,{ 'id': user.id }) }}" class="showUserReturnButton">
+                Modifier
+            </a>
+            <div class="showUserFirstDiv">
+                <div class="showUserImgDiv">
+                    <img class="showUserImage" src="{{ asset('users/'~user.image) }}">
+                </div>
+                <div class="showUserDesc">
+                    <p>ID : {{ user.id }}
+                        <span>{% if user.roles.0 == "ROLE_ADMIN" %}Administrateur
+                              {% else %}
+                                  {% if user.roles.0 == "ROLE_LIVREUR" %}Livreur
+                                  {% else %}Utilisateur
+                                  {% endif %}
+                              {% endif %}
+                        </span>
+                    </p>
+                    <p>{{ user.nom }} {{ user.prenom }}</p>
+                    <p>{{ user.email }}</p>
+                    <p>{{ user.telephone }}</p>
+                    <p>{{ user.adresse }}</p>
+                </div>
+                <div class="showUserHistoCommande">
+                    <h3>Historique des commandes</h3>
+                    <table class="showUserTable">
+                        <tr>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Statut</th>
+                        </tr>
+                        {% for cmd in commandes %}
+                            <tr class="clickHisto" data-id="{{ cmd.id }}" class="showUserTableTrHover">
+                                <td>{{ cmd.date|date('d/m/y') }}</td>
+                                <td>{{ cmd.prix }}</td>
+                                <td>Livré</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
             </div>
-            <div class="user_interact">
-                <a href="{{path('admin_index')}}"><button class="button_p">Retour<img type="svg" src="{{ asset('img/puce-right.svg') }}"></button></a>
+            <div class="showUserSecondDiv">
+                {% for cmd in commandes %}
+                    <div id="showHisto-{{ cmd.id }}" class="showUserHiddenDiv">
+                        {% for produit in cmd.commandesProduit %}
+                        <div class="showHistoDiv">
+                            <img class="showHistoProduitImg" src="{{ asset('produits/'~produit.produits.image) }}">
+                            <p><strong>{{ produit.produits.nom }}</strong></p>
+                            <p>Quantité : {{ produit.quantiteCommandee }}</p>
+                            <p>Id : {{ produit.produits.id }}</p>
+                            <p>Prix : {{ produit.produits.prix }}</p>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% endfor %}
             </div>
-        </content>
-
-        <container>
-            <div class="user_tab">
-                <div class="user_pic"><img src=" {{ asset('users/' ~ user.image ) }} " style="height: 120px; width: 120px"></div>
-
-                <div class="user_info">
-                    <ul>
-                        <li>ID : {{user.id}}</li>
-                        <li>{% if user.roles.0=="ROLE_ADMIN" %}
-                            Administrateur
-                            {% else %}
-                            Utilisateur
-                            {% endif %}</li>
-                        <li>Nom, prénom :{{user.prenom}} {{user.prenom}}</li>
-                        <li>Mail : {{user.email}}</li>
-                        <li>Tél. {{user.telephone}}</li>
-                        <li>Adresses : ???</li>
-                    </ul>
-                </div>
-                <div class="user_order">
-                    <h2>Historique des commandes</h2>
-                    <!--- Historique des commandes à integrer -->
-                </div>
-            </div>
-            <div class="user_tab_menu">
-                <div class="user_pic_menu"></div>   
-                <div class="user_menu">
-                    <ul>
-                        <li>Menu vegetarien</li>
-                        <li>Qte : 1</li>
-                        <li>id : 10</li>
-                        <li>prix : 12€50</li>
-                    </ul>
-                </div>
-
-                <div class="user_pic_menu"></div>   
-                <div class="user_menu">
-                    <ul>
-                        <li>Soupe aux trois légumes</li>
-                        <li>Qte : 2</li>
-                        <li>id : 8</li>
-                        <li>prix : 13€50</li>
-                    </ul>
-                </div>
-
-                <div class="user_menu_list">
-                    <ul>
-                        <div class="user_pic_menu_list"></div>
-                        <li class="ig1">Bruchetta</li>
-                        <div class="user_pic_menu_list"></div>
-                        <li class="ig2">Soupe poireaux</li>
-                        <div class="user_pic_menu_list"></div>
-                        <li class="ig3">Gâteau chocolat</li>
-                    </ul>
-                </div> 
         </div>
-        </container>
-    </section>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            function showHisto(theOne){
+                theOne.css({'background-color':'#e3004f'})
+                $('#showHisto-'+theOne.attr('data-id')).fadeIn();
+            }
+
+            function hideHisto(theOne,callback){
+                theOne.css({'background-color':'white'})
+                $('#showHisto-'+theOne.attr('data-id')).fadeOut(function(){
+                    callback();
+                });
+
+            }
+
+            clicked = "";
+            $('.clickHisto').click(function(){
+                if(clicked!=""){
+                    wait = $(this)
+                    hideHisto(clicked,function(){
+                        showHisto(wait);
+                    });
+                    clicked = $(this);
+                }else{
+                    showHisto($(this));
+                    clicked = $(this);
+                }
+            })
+        })
+    </script>
     
 {% endblock %}

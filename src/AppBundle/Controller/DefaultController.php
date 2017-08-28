@@ -13,6 +13,19 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        if($this->getUser() !== null)
+        {
+            if($this->getUser()->getRoles()[0] == "ROLE_ADMIN")
+            {
+                return $this->redirectToRoute('admin_index');
+            }
+            if($this->getUser()->getRoles()[0] == "ROLE_LIVREUR")
+            {
+                return $this->redirectToRoute('admin_livreur_index');
+            }
+        }
+
+
         $em = $this->getDoctrine()->getManager();
         $produits = $em->getRepository('AppBundle:Produit')->findAll();
         $articles = $em->getRepository('AppBundle:Article')->findAll();
@@ -28,7 +41,6 @@ class DefaultController extends Controller
                 $em->getRepository('AppBundle:Produit')->find($produitsHP[0]->getProduit2()),
                 $em->getRepository('AppBundle:Produit')->find($produitsHP[0]->getProduit3()));
         }
-
 
         return $this->render('frontoffice/default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..').DIRECTORY_SEPARATOR,
@@ -53,4 +65,13 @@ class DefaultController extends Controller
     {
         return $this->render("frontoffice/default/conditions.html.twig");
     }
+
+    /**
+     * @Route("/qualite-produit", name="qualite_produit")
+     */
+    public function qualiteProduitAction()
+    {
+        return $this->render("frontoffice/default/qualite.html.twig");
+    }
+
 }

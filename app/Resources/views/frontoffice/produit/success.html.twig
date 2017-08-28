@@ -1,5 +1,8 @@
-{{ reponse }}
+<img src="{{ asset("produits/" ~ produit.image) }}">
+<h4>{{ produit.nom }}</h4>
+<span>{{ reponse }}</span>
 
-<a class="btn" data-dismiss="modal">Continuer mes achats</a>
-
-<a class="btn" href="{{ path('index_panier') }}">Voir mon panier</a>
+<div>
+	<a class="btn" data-dismiss="modal">Continuer mes achats</a>
+	<a class="btn" href="{{ path('index_panier') }}">Voir mon panier</a>
+</div>

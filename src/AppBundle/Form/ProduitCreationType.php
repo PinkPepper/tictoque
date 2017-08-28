@@ -32,9 +32,15 @@ class ProduitCreationType extends AbstractType
                         )
                 )
             )
-            ->add('datePeremption', DateType::class)
             ->add('prix')
+            ->add('prixGastronomique')
             ->add('quantite')
+            ->add('pr', EntityType::class, array(
+                'class' => 'AppBundle:PointRelais',
+                'choice_label' => 'nom',
+                'expanded' => true,
+                'multiple' => true,
+            ))
             ->add('file',  FileType::class)
             ->add('cat', EntityType::class, array(
                 // query choices from this entity

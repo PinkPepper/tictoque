@@ -4,13 +4,24 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
     app.geocoder_service:
         class: AppBundle\Service\GeocodeService
         autowire: true
-#    twig.extension.text:
-#          class: Twig_Extensions_Extension_Text
-#          tags:
-#              - { name: twig.extension }
+
+    app.doctrine.produit_affichage_client:
+        class: AppBundle\Listener\ProduitSelectListener
+        autowire: true
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+    app.doctrine.produit:
+        class: AppBundle\Listener\ProduitListener
+        autowire: true
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }
+
+    app.doctrine.livraison:
+        class: AppBundle\Listener\LivraisonListener
+        autowire: true
+        tags:
+            - { name: doctrine.event_subscriber, connection: default }

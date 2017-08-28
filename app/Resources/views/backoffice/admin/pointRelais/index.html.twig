@@ -15,7 +15,7 @@
                     <td>adresse</td>
                     <td>latitude</td>
                     <td>longitude</td>
-                    <td>Créer le</td>
+                    <td>Livreur</td>
                     <td>Actions</td>
                 </tr>
                 <tbody>
@@ -26,14 +26,14 @@
                         <td>{{ point.adresse }}</td>
                         <td>{{ point.latitude }}</td>
                         <td>{{ point.longitude }}</td>
-                        <td>{% if point.createdAt %}{{ point.createdAt|date('d/m/Y') }}{% endif %}</td>
+                        <td>{{ point.user.nom }}</td>
                         <td>
                             <ul>
                                 <li>
-                                    <a href="{{ path('admin_point_relais_edit', { 'id': point.id }) }}">Modifier</a>
+                                    <a href="{{ path('admin_point_relais_edit', { 'id': point.id }) }}"><img class="sizePicto" src="{{ asset('img/edit.svg') }}"></a>
                                 </li>
                                 <li>
-                                    <a href="{{ path('admin_point_relais_delete', { 'id': point.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</a>
+                                    <a href="{{ path('admin_point_relais_delete', { 'id': point.id }) }}" onclick="return confirm('Voulez-vous vraiment le supprimer ?')"><img class="sizePicto" src="{{ asset('img/delete.svg')}}"></a>
                                 </li>
                             </ul>
                         </td>

@@ -1,0 +1,74 @@
+<html>
+<body style="background: #f2f2f2;-webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;">
+
+<div style="max-width: 560px;padding: 20px;background: #ffffff;border-radius: 5px;margin:40px auto;font-family: Open Sans,Helvetica,Arial;font-size: 15px;color: #666;">
+
+    <div style="color: #444444;font-weight: normal;">
+        <div style="text-align: center;font-weight:600;font-size:26px;padding: 10px 0;border-bottom: solid 3px #eeeeee;">
+            <a href="http://81.67.208.32/web/app_dev.php"><img height="60px"
+                                                               src="http://81.67.208.32/tictoque/web/img/logo.png"></a>
+        </div>
+
+        <div style="clear:both"></div>
+    </div>
+
+    <div style="padding: 0 30px 30px 30px;border-bottom: 3px solid #eeeeee;">
+
+        <div style="padding:20px 0;font-size: 24px;text-align: center;line-height:28px;">Merci de votre confiance <br/>Votre
+            commande est prise en compte</span></div>
+
+        <div style="font-size: 16px;text-align: center;line-height:20px;margin-bottom:20px;">Livraison pr&eacute;vue le
+            <strong>{{ commande.dateLivraison|date('d/m/Y') }}</strong>
+            le<br/><strong>{{ commande.adresse }}</strong></span></div>
+        {% for menu in menus %}
+            {% if menu["quantite"] != 0 %}
+                <div style="padding-bottom:10px;font-size:14px;text-align:left; height:40px; display:block;">
+                    {% set url = "http://81.67.208.32/tictoque/web/img/menus/" %}
+                    {% if menu["type"] == 1 %}
+                        {% set url = url ~ "menu1.jpg" %}
+                    {% else %}
+                        {% if menu["type"] == 2 %}
+                            {% set url = url ~ "menu2.jpg" %}
+                        {% else %}
+                            {% set url = url ~ "menu3.jpg" %}
+                        {% endif %}
+                    {% endif %}
+                    <img
+                            src="{{ url }}" width="30" height="30" style="vertical-align:middle;margin-right:10px">
+                    <span style="line-height:40px">{% if menu["type"] == 1 %}
+                                    Menu petite faim
+                                {% else %}
+                            {% if menu["type"] == 2 %}
+                                Menu classique
+                            {% else %}
+                                Menu complet
+                            {% endif %}
+                        {% endif %} : {{ menu["prix"] }}€</span></div>
+            {% endif %}
+        {% endfor %}
+
+        {% for produit in produits %}
+            {% if produit[1] != 0 %}
+                <div style="padding-bottom:10px;font-size:14px;text-align:left; height:40px; display:block;"><img
+                            src="http://81.67.208.32/tictoque/web/produits/{{ produit[0].image }}" width="30"
+                            height="30" style="vertical-align:middle;margin-right:10px"> <span
+                            style="line-height:40px">{{ produit[0].nom }} : {{ produit[0].prix }}€</span></div>
+            {% endif %}
+        {% endfor %}
+
+        <div style="font-size: 14px;text-align:left;line-height:20px;margin-bottom:20px;border-top: solid 3px #eeeeee;padding-top:16px;">
+            <br/>Livraison : 5.00€<br/>Total : {{ commande.prix }}€
+        </div>
+
+    </div>
+
+    <div style="color: #999;padding: 20px 30px">
+
+        <div style="">En vous remerciant pour votre confiance, toute l'&eacute;quipe !</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

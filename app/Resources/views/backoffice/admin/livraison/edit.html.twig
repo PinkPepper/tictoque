@@ -1,0 +1,61 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Modifier une livraison</h1>
+        <a class="btn_01" href="{{ path('livraison_index') }}" >Retour</a>
+
+        <div class="cellule_background_cms">
+            {{ form_start(edit_form, { 'attr': {'class': 'form-group' } }) }}
+
+            <br>
+            <label>Produit</label>
+            {{ form_widget(edit_form.produit) }}
+            {{ form_errors(edit_form.produit) }}
+
+            <br>
+            <label>Point relais</label>
+            {{ form_widget(edit_form.pointRelais) }}
+            {{  form_errors(edit_form.pointRelais) }}
+
+            <br>
+            <label>Quantite</label>
+            {{ form_widget(edit_form.quantite) }}
+            {{  form_errors(edit_form.quantite) }}
+
+            <br>
+            <label>Date livraison</label>
+            {{ form_widget(edit_form.date) }}
+            {{  form_errors(edit_form.date) }}
+
+            <br><br>
+            <button class="button_p" type="submit"> Modifier la livraison </button>
+
+            {{ form_end(edit_form) }}
+
+            <br>
+            <br>
+            {{ form_start(delete_form) }}
+            <button class="button_p" type="submit" onclick="return confirm('Voulez-vous vraiment le supprimer ?')">Supprimer</button>
+            {{ form_end(delete_form) }}
+
+        </div>
+    </section>
+    <script>
+        $(document).ready(function() {
+            var dateToday = new Date();
+            $('.js-datepicker').datepicker({
+                dateFormat: "dd/mm/yy",
+                monthNames: [ "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre" ],
+                dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+                dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+                numberOfMonths: 1,
+                showButtonPanel: true,
+                minDate: dateToday
+            });
+        });
+    </script>
+{% endblock %}
+
+
+

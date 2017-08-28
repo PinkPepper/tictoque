@@ -103,7 +103,7 @@ class AllergeneController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('admin_allergene_edit', array('id' => $allergene->getId()));
+            return $this->redirectToRoute('admin_allergene_index');
         }
 
         return $this->render('backoffice/admin/allergene/edit.html.twig', array(

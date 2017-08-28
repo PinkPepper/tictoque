@@ -1,0 +1,55 @@
+{% extends 'backoffice/menuAdmin.html.twig' %}
+
+{% block body %}
+    <section>
+        <h1>Ajouter une livraison</h1>
+        <a class="btn_01" href="{{path('livraison_index')}}">Retour</a>
+
+        <div class="cellule_background_cms">
+
+            {{ form_start(form) }}
+
+            <br>
+            <label>Produit</label>
+            {{ form_widget(form.produit) }}
+            {{ form_errors(form.produit) }}
+
+            <br>
+            <label>Point relais</label>
+            {{ form_widget(form.pointRelais) }}
+            {{  form_errors(form.pointRelais) }}
+
+            <br>
+            <label>Quantite</label>
+            {{ form_widget(form.quantite) }}
+            {{  form_errors(form.quantite) }}
+
+            <br>
+            <label>Date livraison</label>
+            {{ form_widget(form.date) }}
+            {{  form_errors(form.date) }}
+
+            <br>
+            <button class="button_p" type="submit">Créer la livraison</button>
+
+            {{ form_end(form) }}
+
+        </div>
+    </section>
+    <script>
+        $(document).ready(function() {
+            var dateToday = new Date();
+            $('.js-datepicker').datepicker({
+                dateFormat: "dd/mm/yy",
+                monthNames: [ "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Décembre" ],
+                dayNames: [ "Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi" ],
+                dayNamesMin: [ "Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa" ],
+                numberOfMonths: 1,
+                showButtonPanel: true,
+                minDate: dateToday
+            });
+        });
+    </script>
+{% endblock %}
+
+

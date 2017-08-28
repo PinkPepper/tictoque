@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon.png') }}" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta property="og:locale" content="fr_FR" />
         <meta property="og:type" content="website" />
@@ -19,13 +19,17 @@
             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
             <link type="text/css" rel="stylesheet" href="{{ asset('css/styleFront.css') }}"/>
+            <link type="text/css" rel="stylesheet" href="{{ asset('js/jquery-ui-1.12.1.custom/jquery-ui.min.css') }}"/>
+
         {% endblock %}
 
         {% block javascripts %}
             <script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
+            <script src="{{ asset('js/jquery-ui-1.12.1.custom/jquery-ui.min.js') }}"></script>
             <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
             <script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
-            <script>tinymce.init({ selector:'.tiny',setup: function (editor) {
+            <script>
+                tinymce.init({ selector:'.tiny',setup: function (editor) {
                     editor.on('change', function () {
                         editor.save();
                     });
@@ -38,11 +42,7 @@
 
     <body>
 
-    {% for flash_message in app.session.flashBag.get('notice') %}
-        <div class="flash-notice">
-            {{ flash_message }}
-        </div>
-    {% endfor %}
+
 
     <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -61,23 +61,31 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="{{ path('produit_index') }}">Nos plats</a></li>
-                        <li><a href="{{ path('menu') }}">Créer un menu</a></li>
-                        <li><a href="{{ path('blog_index') }}">Blog</a></li>
+                        {#<li><a href="{{ path('menu') }}">Créer un menu</a></li>#}
+                        <li><a href="{{ path('blog_index') }}">Le blog</a></li>
                         {% if app.user %}
                             {% if app.user.roles.0=="ROLE_ADMIN" %}
-                                <li><a href="{{ path('admin_index') }}">Backoffice</a></li>
+                                <li><a href="{{ path('admin_index') }}">Administration</a></li>
+                            {% endif %}
+                            {% if app.user.roles.0=="ROLE_LIVREUR" %}
+                                <li><a href="{{ path('admin_livreur_index') }}">Livraison</a></li>
                             {% endif %}
                             <li class="hoverCompte">
                                 <a href="{{ path('fos_user_profile_show') }}">Mon compte</a>
                                 <ul class="hideHoverCompte">
-                                    <a href="{{ path('fos_user_profile_show') }}"><li>Historique des commandes</li></a>
+                                    <a href="{{ path('fos_user_profile_show') }}"><li>Mes informations</li></a>
+                                    <a href="{{ path('historique_commande') }}"><li>Historique des commandes</li></a>
                                     <a href="{{ path('fos_user_security_logout') }}"><li>Déconnexion</li></a>
                                 </ul>
                             </li>
                             <li><a class="onMobile" href="{{ path('fos_user_security_logout') }}">Déconnexion</a></li>
                             <li class="nav-panier"><a href="{{ path('index_panier') }}"><img src="{{ asset('img/panier.svg') }}"><span>Panier</span>
                                     {% if app.session.get('prix') %}
-                                        <span class="spanPrix"><b>{{ app.session.get('prix') }}€</b></span>
+                                        {% if app.session.get('prix') != 0 %}
+                                            <span class="spanPrix"><b>{{ (app.session.get('prix')-5) | number_format(2, '.', ',') }}€</b></span>
+                                        {% else %}
+                                            <span class="spanPrix"><b>0.00€</b></span>
+                                        {% endif %}
                                     {% else %}
                                         <span class="spanPrix"><b>0.00€</b></span>
                                     {% endif %}
@@ -90,8 +98,19 @@
             </div><!-- /.container-fluid -->
         </nav>
 
+        {% for flash_message in app.session.flashBag.get('notice') %}
+            <div class="popUpError">
+                {{ flash_message }}
+            </div>
+        {% endfor %}
+
         {% block body %}{% endblock %}
         {% block fos_user_content %}{% endblock %}
+        <script>
+            $(document).ready(function(){
+                $('.popUpError').fadeIn();
+            })
+        </script>
         {% block footer %}{% endblock %}
     </body>
 </html>

@@ -3,8 +3,16 @@
 {% block fos_user_content %}
 
     {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        <div class="popUpError">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
+        </div>
     {% endif %}
+
+    <script>
+        $(document).ready(function(){
+            $('.popUpError').fadeIn();
+        })
+    </script>
 
     <div class="container login">
         <div class="row">
@@ -23,7 +31,7 @@
                         <br>
                         <input type="password" id="password" name="_password" required="required" class="loginInput">
                         <div class="text-right">
-                            <a>Mot de passe oublié ?</a>
+                            <a href="{{ path('fos_user_resetting_request') }}">Mot de passe oublié ?</a>
                         </div>
                     </div>
                     <button class="loginSubmit text-center">
