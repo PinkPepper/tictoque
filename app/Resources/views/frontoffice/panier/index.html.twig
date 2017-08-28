@@ -67,8 +67,10 @@
                         $('#total').text(total.toFixed(2)+"€");
                     </script>
                 </span></p></b>
+                    {% if panier.prix is defined %}
                     {% if panier.prix > 5 %}<a href="{{ path('commande_index') }}" class="commander">Passer la commande</a>{% endif %}
                     <a class="continue" href="{{ path('produit_index') }}">Continuer mes achats</a>
+                    {% endif %}
                 </div>
             </div>
             <div class="col-lg-8 col-sm-12 col-md-12 col-xs-12">
