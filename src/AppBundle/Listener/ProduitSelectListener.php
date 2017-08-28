@@ -34,16 +34,24 @@ class ProduitSelectListener implements EventSubscriber
             $session = $this->container->get('session');
             if($user === "anon." || $user->getRoles()[0] == "ROLE_USER") // pas un admin ou un livreur
             {
+                $hours = (new \DateTime())->format('H');
+                $date = (new \DateTime());
+
+                if($hours >= 10)
+                {
+                    $date = (new \DateTime())->add(new \DateInterval('P1D'));
+                }
+
                 $em = $this->container->get('doctrine.orm.entity_manager');
                 $livraisons = $em->getRepository("AppBundle:Livraison")->findBy(
                     array('produit'=>$entity->getId(),
                           'pointRelais'=>$session->get('pointRelais'),
-                          'statut'=>'livré')); //Bravo Maxime pour ce manque d'intelligence <3
+                          /*'statut'=>'livré'*/)); //Bravo Maxime pour ce manque d'intelligence <3
                 $livraison = null;
 
                 foreach($livraisons as $livr)
                 {
-                    if($livr->getDate()->format("yyyy-M-d") === (new \DateTime())->format('yyyy-M-d')) //on regarde si le produit livré est à la date du jour
+                    if($livr->getDate()->format("yyyy-M-d") === $date->format('yyyy-M-d'))
                     {
                         $livraison = $livr;
                         break;

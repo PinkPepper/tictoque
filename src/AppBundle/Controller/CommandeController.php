@@ -299,32 +299,14 @@ class CommandeController extends Controller
         if($hours < 10)
         {
             $livraison = $em->getRepository("AppBundle:Livraison")->findByProduitAndPointRelaisAndDate($produit->getId(), $pointRelais, (new \DateTime())->format('Y-m-d'));
-            $livraison[0]->setQuantiteRestante($livraison[0]->getQuantite()-$quantite);
-            $em->getManager()->flush();
         }
         else //livraison pour demain
         {
             $tomorrow = (new \DateTime())->add(new \DateInterval('P1D'));
             $livraison = $em->getRepository("AppBundle:Livraison")->findByProduitAndPointRelaisAndDate($produit->getId(), $pointRelais, $tomorrow->format('Y-m-d'));
-
-            if($livraison == null){
-
-                $livraison = new Livraison();
-                $livraison->setQuantite($quantite);
-                $livraison->setQuantiteRestante($quantite);
-                $livraison->setStatut("non livré");
-                $livraison->setProduit($produit);
-                $livraison->setDate(new \DateTime($tomorrow->format("Y-m-d")));
-                $livraison->setPointRelais($pointRelais);
-
-                $em->getManager()->persist($livraison);
-                $em->getManager()->flush();
-            }
-            else{
-                $livraison[0]->setQuantiteRestante($livraison[0]->getQuantite()+$quantite);
-                $livraison[0]->setQuantite($livraison[0]->getQuantite()+$quantite);
-                $em->getManager()->flush();
-            }
         }
+
+        $livraison[0]->setQuantiteRestante($livraison[0]->getQuantiteRestante()-$quantite);
+        $em->getManager()->flush();
     }
 }
