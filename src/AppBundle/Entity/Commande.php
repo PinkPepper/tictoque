@@ -78,9 +78,7 @@ class Commande
 
     private function setIdentifiant()
     {
-        $chaine='0123456789abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWYXZ-';
-        $melange = str_shuffle($chaine);
-        $this->identifiant = str_shuffle(substr($melange, 0, 15));
+        $this->identifiant = uniqid();
     }
 
     public function getIdentifiant(){
