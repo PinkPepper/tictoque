@@ -170,7 +170,7 @@ class PanierController extends Controller
 
                 $session->set('produit_' . $produit->getId(), $pProduit);
 
-                $prix = $prix + $produit->getPrix();
+                $prix = $prix + ($produit->getPrix() * $nombre);
                 $session->set('prix', $prix);
             }
             else
@@ -185,7 +185,7 @@ class PanierController extends Controller
                 'prix'=>$produit->getPrix(),
                 'prix_gastronomique'=>$produit->getPrixGastronomique()
             ));
-            $prix = $prix + $produit->getPrix();
+            $prix = $prix + ($produit->getPrix() * $nombre);
             $session->set('prix', $prix);
         }
 
