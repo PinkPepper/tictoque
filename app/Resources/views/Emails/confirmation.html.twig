@@ -5,8 +5,7 @@
 
     <div style="color: #444444;font-weight: normal;">
         <div style="text-align: center;font-weight:600;font-size:26px;padding: 10px 0;border-bottom: solid 3px #eeeeee;">
-            <a href="http://81.67.208.32/web/app_dev.php"><img height="60px"
-                                                               src="http://81.67.208.32/tictoque/web/img/logo.png"></a>
+            <a href="{{ path('homepage') }}"><img height="60px" src="http://tictoque.pe.hu/tictoque/web/img/logo.png"></a>
         </div>
 
         <div style="clear:both"></div>
@@ -19,11 +18,11 @@
 
         <div style="font-size: 16px;text-align: center;line-height:20px;margin-bottom:20px;">Livraison pr&eacute;vue le
             <strong>{{ commande.dateLivraison|date('d/m/Y') }}</strong>
-            le<br/><strong>{{ commande.adresse }}</strong></span></div>
+            le<br/><strong>{{ commande.adresse }}</strong></span> numéro de commande : <strong>{{ commande.identifiant }}</strong></div>
         {% for menu in menus %}
             {% if menu["quantite"] != 0 %}
                 <div style="padding-bottom:10px;font-size:14px;text-align:left; height:40px; display:block;">
-                    {% set url = "http://81.67.208.32/tictoque/web/img/menus/" %}
+                    {% set url = 'http://tictoque.pe.hu/tictoque/web/img/menus/' %}
                     {% if menu["type"] == 1 %}
                         {% set url = url ~ "menu1.jpg" %}
                     {% else %}
@@ -50,7 +49,7 @@
         {% for produit in produits %}
             {% if produit[1] != 0 %}
                 <div style="padding-bottom:10px;font-size:14px;text-align:left; height:40px; display:block;"><img
-                            src="http://81.67.208.32/tictoque/web/produits/{{ produit[0].image }}" width="30"
+                            src="{{ asset('http://tictoque.pe.hu/tictoque/web/produits/'~produit[0].image) }}" width="30"
                             height="30" style="vertical-align:middle;margin-right:10px"> <span
                             style="line-height:40px">{{ produit[0].nom }} : {{ produit[0].prix }}€</span></div>
             {% endif %}
