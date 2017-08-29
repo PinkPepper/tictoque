@@ -114,7 +114,6 @@ class AdminController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //var_dump($form->getData()->getRole());
             $user->addRole($form->getData()->getRole());
             if ($user->getImage() == "")
             {
@@ -148,8 +147,6 @@ class AdminController extends Controller
             array('user' => $user->getId()),
             array('date' => 'DESC')
         );
-
-        dump($commandes);
 
         return $this->render('backoffice/admin/user/show.html.twig', array(
             'commandes'=>$commandes,

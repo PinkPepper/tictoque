@@ -18,7 +18,7 @@
 
         <div style="font-size: 16px;text-align: center;line-height:20px;margin-bottom:20px;">Livraison pr&eacute;vue le
             <strong>{{ commande.dateLivraison|date('d/m/Y') }}</strong>
-            le<br/><strong>{{ commande.adresse }}</strong></span></div>
+            le<br/><strong>{{ commande.adresse }}</strong></span> numéro de commande : <strong>{{ commande.identifiant }}</strong></div>
         {% for menu in menus %}
             {% if menu["quantite"] != 0 %}
                 <div style="padding-bottom:10px;font-size:14px;text-align:left; height:40px; display:block;">
