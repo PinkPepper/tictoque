@@ -468,7 +468,7 @@ class PanierController extends Controller
                 }
             }
 
-            $economies = $prix - $prixMenu;
+            $economies = $economies + ($prix - $prixMenu);
             $prixPanier = $prixPanier + $prixMenu;
 
             $session->set('prix', $prixPanier);
