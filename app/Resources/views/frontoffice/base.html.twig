@@ -109,6 +109,10 @@
         <script>
             $(document).ready(function(){
                 $('.popUpError').fadeIn();
+
+                setTimeout(function(){
+                    $('.popUpError').fadeOut();
+                },3000)
             })
         </script>
         {% block footer %}{% endblock %}

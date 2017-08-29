@@ -58,8 +58,7 @@
                         <li><a href="{{ path('qualite_produit') }}">Produits de qualité</a></li>
                         <li><a href="{{ path('produit_index') }}">Nos Plats</a></li>
                         {#<li><a href="{{ path('menu') }}">Créer un menu</a></li>#}
-                        <li><a href="#">Livraison</a></li>
-                        <li><a href="#">Paiement</a></li>
+                        <li><a href="{{ path('paiement') }}">Paiement</a></li>
                     </ul>
                 </div>
 
@@ -73,13 +72,23 @@
 
                     <h4>Newsletter</h4>
 
-                    <input type="email" name="Mail" placeholder="Email">
+                    <input id="inputNews" type="email" name="Mail" placeholder="Email">
+                    <a id="submitNews">OK</a>
 
-                    <a href="#">OK</a>
+                    <script>
+                        $(document).ready(function(){
+                            $('#submitNews').click(function(){
+                                document.cookie = $('#inputNews').val();
+                                document.location = "{{ path('newsletter') }}"
+                            })
 
+                        })
+
+                    </script>
                     <p>Recevez toutes les informations, les recettes, etc...</p>
                 </div>
             </div>
+
 
             <div class="row">
                 <div class="col-lg-12 col-md-8 col-xs-12">

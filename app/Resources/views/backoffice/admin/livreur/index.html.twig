@@ -51,6 +51,11 @@
                 }
         </script>
         <div class="container-fluid">
+            <div class="logoutLivreurDiv">
+                <a class="logoutLivreur" href="{{ path('fos_user_security_logout') }}">
+                    Deconnexion
+                </a>
+            </div>
             <div class="blockLivraison center-block">
                 <img class="logo center-block" src="{{ asset('img/logo.svg') }}" alt="logo">
                 {% for pointRelais in relais %}
