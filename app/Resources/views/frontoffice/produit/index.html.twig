@@ -19,8 +19,12 @@
                     </li>
                     <li>
                         Point relais actif:  {{ pointRelais.nom }}
-                        <a href="{{ path("point_relais_set_index") }}"
-                           onclick="return confirm('Cette action supprimera le contenu de votre panier. Continuer ?' )">modifier</a>
+                        {% if app.user %}
+                            <a href="{{ path("point_relais_set_index") }}"
+                             onclick="return confirm('Cette action supprimera le contenu de votre panier. Continuer ?' )">modifier</a>
+                        {% else %}
+                            <a href="{{ path("point_relais_set_index") }}">modifier</a>
+                        {% endif %}
                     </li>
                     <li>
                         {{ form_widget(form.search, {attr: {class: "submitForm"}}) }}
