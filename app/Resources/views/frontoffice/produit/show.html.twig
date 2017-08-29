@@ -18,6 +18,10 @@
         <div class="row ficheProduit">
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" >
                 <img class="imgProduit" src="{{ asset('produits/' ~ produit.image ) }}" style="width:100%; height: 100%;">
+                {% if produit.prixGastronomique > 0 %}
+                    <img style="top:10px;" class="starGastro" src="{{ asset('img/star.svg') }}">
+                    <p style="top:12px" class="starText">Gastronomique</p>
+                {% endif %}
             </div>
 
             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 desc_prod">

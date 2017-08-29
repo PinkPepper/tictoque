@@ -2468,13 +2468,24 @@ body .container .recap-prix .livraison-total .prix-total {
     padding: 5px;
     border-radius: 50%;
     background-color:#f32063;
+    right:20px;
+    top:5px;
+    z-index: 100;
   }
 
-  .divGastro{
+  .starText{
     position: absolute;
-    width: 15px;
-    height:15px;
-    background-color:#f32063;
+    background-color: black;
+    color:white;
+    z-index:99;
+    top:7px;
+    height: 20px;
+    font-size: 12px;
+    right:30px;
+    padding-top: 2px;
+    padding-left: 10px;
+    padding-right: 20px;
+    border-radius: 25px;
   }
 
 @media (max-width: 767px) {
