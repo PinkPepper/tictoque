@@ -5,8 +5,8 @@
 
     <div style="color: #444444;font-weight: normal;">
         <div style="text-align: center;font-weight:600;font-size:26px;padding: 10px 0;border-bottom: solid 3px #eeeeee;">
-            <a href="http://81.67.208.32/web/app_dev.php"><img height="60px"
-                                                               src="http://81.67.208.32/tictoque/web/img/logo.png"></a>
+            <a href="{{ path('homepage') }}"><img height="60px"
+                                                               src="{{ asset('img/logo.svg') }}"></a>
         </div>
 
         <div style="clear:both"></div>
@@ -23,7 +23,7 @@
         {% for menu in menus %}
             {% if menu["quantite"] != 0 %}
                 <div style="padding-bottom:10px;font-size:14px;text-align:left; height:40px; display:block;">
-                    {% set url = "http://81.67.208.32/tictoque/web/img/menus/" %}
+                    {% set url = {{ asset('img/menus/') }} %}
                     {% if menu["type"] == 1 %}
                         {% set url = url ~ "menu1.jpg" %}
                     {% else %}
