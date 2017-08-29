@@ -83,9 +83,7 @@
                             lng = pos.coords.longitude;
                             if (lat == null) {
                                 alert("GPS not activated");
-                            }else{
-                            $('#lienMap').html('<a id="linkMap" href="https://www.google.fr/maps/dir/'+lat+','+lng+'/{% for pt in relais %}{{ pt.adresse }}/{% endfor %}'+lat+','+lng+'/">" + "Lancer l\'itinéraire sur mobile ! erfzrfqr</a>');
-                            }
+                            }else{}
                         });
                     })
                 </script>
@@ -136,7 +134,7 @@
                                 }
                             })
 
-                            $('#lienMap').html('<a id="linkMap" target="_blank" href="https://www.google.fr/maps/dir/'+lat+','+lng+'/{% for pt in relais %}{{ pt.adresse }}/{% endfor %}—'+lat+','+lng+'/">Lancer l\'itinéraire sur mobile</a>');
+                            $('#lienMap').html('<a id="linkMap" target="_blank" href="https://www.google.fr/maps/dir/'+lat+','+lng+'/{% for pt in relais %}{{ pt.adresse }}/{% endfor %}'+lat+','+lng+'/">Lancer l\'itinéraire sur mobile</a>');
                             $('#bodymovin').fadeOut(600,function(){
                                 $('.livraison').css({'overflow-y':'auto'});
                                 anim.destroy();
