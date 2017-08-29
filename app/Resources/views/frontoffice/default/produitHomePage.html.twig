@@ -1,0 +1,33 @@
+<div class="row plats_semaine" style="margin:0 auto">
+    <div class="col-lg-12 col-md-12 col-xs-12 showPlatSemaine">
+        <img class="center-block pictoHP" src="{{ asset('img/picto_fourchette.svg') }}">
+        <h2 class="text-center titleCat">De nouveaux plats chaque semaine</h2>
+        <p class="text-center subTitleCat">Commandez simplement sur L'amour Food !</p>
+        {% for produit in homepage %}
+            <div class="col-lg-4 col-md-4 col-sm-4">
+                <div class="showPlat">
+                    <div class="showImgPlat">
+                        <div class="pointLivraisonShow">
+                            <img class="imgPictoPosition" src="{{ asset('img/picto_position.svg') }}">
+                            <p>{% if produit.pointRelais.0.nom|length > 10 %}
+                                    {{ produit.pointRelais.0.nom|slice(0,10) }}...
+                                {% else %}
+                                    {{ produit.pointRelais.0.nom }}
+                                {% endif %}
+                            </p>
+                        </div>
+                        <img class="img-responsive imgPlat" src="{{ asset('produits/'~produit.image) }}">
+                    </div>
+                    <div class="showDescPlat">
+                        <p class="typeProduct">{{ produit.type|upper }}</p>
+                        <div class="row">
+                            <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produit.nom|upper }}</h4>
+                            <span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produit.prix|number_format(2, '.', ',')}}€</span>
+                            <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>

@@ -4,13 +4,38 @@
     Erreur 404
 {% endblock %}
 
+{% block javascripts %}
+    <script src="{{ asset('js/jquery-3.2.0.min.js') }}"></script>
+{% endblock %}
+
 {% block body %}
-<div class="container">
+<div class="container-fluid">
+    <div class="container">
     <div style="float: left;margin-top: 75px;">
         <h1 style="font-size: 130px;font-weight: bold;color:#4A4A4A;">Oops <span class="roseColor">!</span></h1>
         <h4>Nous n'avons pas trouvé la page rechercher.</h4>
         <p>Erreur 404</p>
     </div>
     <img style="float:right;margin-top: 75px;" src="{{ asset('img/404.jpg') }}">
+    </div>
+
+    <div class="showProduit404">
+
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            (function($) {
+                $(function() {
+                });
+            })(jQuery);
+
+            console.log($)
+            console.log(jQuery)
+
+            var url = '{{ path('produitHomePage') }}';
+            $('.showProduit404').load(url);
+        })
+    </script>
 </div>
 {% endblock %}
