@@ -68,7 +68,6 @@ class Produit
      * @var int
      *
      * @ORM\Column(name="quantite", type="integer")
-     * @Assert\NotBlank()
      */
     private $quantite;
 
@@ -428,6 +427,7 @@ class Produit
         $this->allergenes = new \Doctrine\Common\Collections\ArrayCollection();
         $this->pointRelais = new \Doctrine\Common\Collections\ArrayCollection();
         $this->prixGastronomique = 0;
+        $this->quantite = 0;
     }
 
     /**

@@ -12,9 +12,8 @@
                     <tr>
                         <td><strong>Id</strong></td>
                         <td><strong>Nom</strong></td>
-                        <td><strong>Prix</strong></td>
-                        <td><strong>Gastronomie</strong></td>
-                        <td><strong>Quantite</strong></td>
+                        <td><strong>Prix (€)</strong></td>
+                        <td><strong>Gastronomie (€)</strong></td>
                         <td><strong>Actions</strong></td>
                     </tr>
                     {% for produit in produits %}
@@ -23,7 +22,6 @@
                         <td>{{ produit.nom|length > 20 ? produit.nom|slice(0, 20) ~ '...' : produit.nom }}</td>
                         <td>{{ produit.prix }}</td>
                         <td>{{ produit.prixGastronomique }}</td>
-                        <td>{{ produit.quantite }}</td>
                         <td>
                             <ul>
                                 <li>

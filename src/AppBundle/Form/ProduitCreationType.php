@@ -34,7 +34,6 @@ class ProduitCreationType extends AbstractType
             )
             ->add('prix')
             ->add('prixGastronomique')
-            ->add('quantite')
             ->add('pr', EntityType::class, array(
                 'class' => 'AppBundle:PointRelais',
                 'choice_label' => 'nom',

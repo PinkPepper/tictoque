@@ -53,7 +53,6 @@ class ProduitType extends AbstractType
             ))
             ->add('prix')
             ->add('prixGastronomique')
-            ->add('quantite')
             ->add('file',  FileType::class,
                 array(
                 'required'  =>
