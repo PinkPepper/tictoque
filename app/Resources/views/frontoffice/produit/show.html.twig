@@ -210,28 +210,34 @@
     </div>
     <div class="row plats_semaine" style="margin:0 auto">
         <div class="col-lg-12 col-md-12 col-xs-12 showPlatSemaine">
-            {% for produitSup in autre|slice(0,3) if produitSup.quantite>0 %}
-                <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="showPlat">
-                        <div class="showImgPlat">
-                            <img class="img-responsive imgPlat" src="{{ asset('produits/'~produitSup.image) }}">
-                            {% if app.user is not null %}
-                                <a class="ajoutPanier addToCart" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_quantite_panier', {'produit': produitSup.id, 'nombre': 'nbquantite'}) }}" data-id="{{ produitSup.id }}" >Ajouter</a>
-                            {% else %}
-                                <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
-                            {% endif %}
+            {% for produitSup in autre if produitSup.quantite>0 %}
+                {% if loop.index0 < 3 %}
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="showPlat">
+                            <a href="{{ path("produit_show", {'id': produitSup.id}) }}">
+                                <div class="showImgPlat">
+                                    <img class="img-responsive imgPlat" src="{{ asset('produits/'~produitSup.image) }}">
+                                    {% if app.user is not null %}
+                                        <a class="ajoutPanier addToCart" data-toggle="modal" data-target="#myModal"  data-url="{{ path('ajout_quantite_panier', {'produit': produitSup.id, 'nombre': 'nbquantite'}) }}" data-id="{{ produitSup.id }}" >Ajouter</a>
+                                    {% else %}
+                                        <a class="addToCart" href="{{ path('fos_user_security_login') }}">Ajouter</a>
+                                    {% endif %}
 
-                        </div>
-                        <div class="showDescPlat">
-                            <p class="typeProduct">{{ produitSup.type|upper }}</p>
-                            <div class="row">
-                                <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produitSup.nom|upper }}</h4>
-                                <span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produitSup.prix|number_format(2, '.', ',') }}€</span>
-                                <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
-                            </div>
+                                </div>
+                            </a>
+                            <a href="{{ path("produit_show", {'id': produit.id}) }}">
+                                <div class="showDescPlat">
+                                    <p class="typeProduct">{{ produitSup.type|upper }}</p>
+                                    <div class="row">
+                                        <h4 class="titleProduct col-lg-8 col-md-12 col-sm-12 col-xs-12">{{ produitSup.nom|upper }}</h4>
+                                        <span class="prixProduct col-lg-3 col-md-6 col-md-6  col-xs-12 prix">{{ produitSup.prix|number_format(2, '.', ',') }}€</span>
+                                        <span class="descProduit col-lg-12 col-md-12 col-md-12 col-xs-12">{{ produit.description|raw|slice(0,100)|raw }}...</span>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>
